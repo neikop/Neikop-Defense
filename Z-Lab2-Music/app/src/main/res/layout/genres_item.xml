@@ -15,6 +15,7 @@
             android:id="@+id/image_media"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
             android:scaleType="centerCrop" />
 
         <View
@@ -23,7 +24,7 @@
             android:layout_alignBottom="@id/image_media"
             android:layout_alignLeft="@id/image_media"
             android:layout_marginBottom="0dp"
-            android:background="@drawable/gradient_drawable" />
+            android:background="@drawable/gradient_bottom" />
 
         <TextView
             android:id="@+id/text_media"

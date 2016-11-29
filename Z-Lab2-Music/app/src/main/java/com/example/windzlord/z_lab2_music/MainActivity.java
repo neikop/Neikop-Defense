@@ -1,85 +1,50 @@
 package com.example.windzlord.z_lab2_music;
 
-import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
-import com.example.windzlord.z_lab2_music.services.MediaDownloader;
+import com.example.windzlord.z_lab2_music.screens.GenresFragment;
 
-import butterknife.BindView;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-
-    @BindView(R.id.toolbar)
-    Toolbar myToolbar;
-
-    @BindView(R.id.tab_layout)
-    TabLayout myTabLayout;
-
-    @BindView(R.id.pager)
-    ViewPager myViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        settingThingsUp();
+    }
+
+    private void settingThingsUp() {
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
 
-        myToolbar.setTitle("Explore");
-        setSupportActionBar(myToolbar);
+        openFragment(new GenresFragment(), false);
+    }
 
-        myTabLayout.addTab(myTabLayout.newTab().setText("GENRES"));
-        myTabLayout.addTab(myTabLayout.newTab().setText("PLAYLIST"));
-        myTabLayout.addTab(myTabLayout.newTab().setText("OFFLINE"));
-        myTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    @Subscribe
+    public void onFragmentEvent(FragmentEvent fragmentEvent) {
+        openFragment(fragmentEvent.getFragment(),
+                fragmentEvent.isAddToBackStack()
+        );
+    }
 
-        final PagerAdapter adapter = new PagerAdapter(
-                getSupportFragmentManager(), myTabLayout.getTabCount());
-        myViewPager.setAdapter(adapter);
-        myViewPager.addOnPageChangeListener(
-                new TabLayout.TabLayoutOnPageChangeListener(myTabLayout));
-        myTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                myViewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+    private void openFragment(Fragment fragment, boolean addToBackStack) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_layout, fragment);
+        if (addToBackStack) fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_search) {
-            goSearch();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void goSearch() {
-
-    }
-
 }

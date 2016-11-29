@@ -1,32 +1,37 @@
 package com.example.windzlord.z_lab2_music.screens;
 
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.z_lab2_music.R;
-import com.example.windzlord.z_lab2_music.models.MediaType;
-import com.example.windzlord.z_lab2_music.recycler_view.MediaAdapter;
-import com.example.windzlord.z_lab2_music.services.MediaDownloader;
+import com.example.windzlord.z_lab2_music.adapters.PagerAdapter;
+import com.example.windzlord.z_lab2_music.managers.Constant;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class GenresFragment extends Fragment {
 
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar myToolbar;
+
+    @BindView(R.id.tab_layout)
+    TabLayout myTabLayout;
+
+    @BindView(R.id.pager)
+    ViewPager myViewPager;
 
     public GenresFragment() {
         // Required empty public constructor
@@ -38,22 +43,46 @@ public class GenresFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_genres, container, false);
-        ButterKnife.bind(this, view);
-
-        GridLayoutManager manager = new GridLayoutManager(
-                getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return position % 3 == 0 ? 2 : 1;
-            }
-        });
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(new MediaAdapter(getActivity()));
-
-        recyclerView.getAdapter().notifyDataSetChanged();
+        settingThingsUp(view);
 
         return view;
+    }
+
+    private void settingThingsUp(View view) {
+        ButterKnife.bind(this, view);
+
+        goTabLayout();
+    }
+
+    private void goTabLayout() {
+        myToolbar.setTitle(Constant.TITLE);
+        myToolbar.inflateMenu(R.menu.menu_main);
+
+        myTabLayout.addTab(myTabLayout.newTab().setText(Constant.GENRES));
+        myTabLayout.addTab(myTabLayout.newTab().setText(Constant.PLAYLIST));
+        myTabLayout.addTab(myTabLayout.newTab().setText(Constant.OFFLINE));
+        myTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        myViewPager.setAdapter(new PagerAdapter(
+                getFragmentManager(), myTabLayout.getTabCount()));
+        myViewPager.addOnPageChangeListener(
+                new TabLayout.TabLayoutOnPageChangeListener(myTabLayout));
+        myTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                myViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
 }
