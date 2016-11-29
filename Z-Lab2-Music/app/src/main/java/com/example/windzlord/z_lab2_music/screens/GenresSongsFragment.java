@@ -51,8 +51,6 @@ public class GenresSongsFragment extends Fragment {
         this.position = position;
     }
 
-    private MediaDaddy daddy;
-
     public GenresSongsFragment() {
         // Required empty public constructor
     }
@@ -98,9 +96,15 @@ public class GenresSongsFragment extends Fragment {
         ).enqueue(new Callback<MediaDaddy>() {
             @Override
             public void onResponse(Call<MediaDaddy> call, Response<MediaDaddy> response) {
+
+                LinearLayoutManager manager = new LinearLayoutManager(
+                        getActivity(), LinearLayoutManager.VERTICAL, false);
+                recyclerViewSongs.setLayoutManager(manager);
+
                 SongAdapter songAdapter = new SongAdapter(response.body().getTopSongList());
-                fillTopSongs(songAdapter);
-                getActivity().runOnUiThread(() -> songAdapter.notifyDataSetChanged());
+                recyclerViewSongs.setAdapter(songAdapter);
+
+                getActivity().runOnUiThread(songAdapter::notifyDataSetChanged);
             }
 
             @Override
@@ -108,13 +112,6 @@ public class GenresSongsFragment extends Fragment {
 
             }
         });
-    }
-
-    private void fillTopSongs(SongAdapter songAdapter) {
-        LinearLayoutManager manager = new LinearLayoutManager(
-                getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerViewSongs.setLayoutManager(manager);
-        recyclerViewSongs.setAdapter(songAdapter);
     }
 
 }

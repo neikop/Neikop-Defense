@@ -8,6 +8,8 @@ import com.example.windzlord.z_lab2_music.managers.RealmManager;
 import com.example.windzlord.z_lab2_music.models.MediaType;
 import com.example.windzlord.z_lab2_music.models.json_models.MediaTypeX;
 import com.example.windzlord.z_lab2_music.services.MediaService;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,6 +36,7 @@ public class MusicApplication extends Application {
     private void settingThingsUp() {
         NetworkManager.init(this);
         RealmManager.init(this);
+        ImageLoader.getInstance().init(new ImageLoaderConfiguration.Builder(this).build());
 
         if (NetworkManager.getInstance().isConnectedToInternet())
             if (RealmManager.getInstance().getMediaList().isEmpty())

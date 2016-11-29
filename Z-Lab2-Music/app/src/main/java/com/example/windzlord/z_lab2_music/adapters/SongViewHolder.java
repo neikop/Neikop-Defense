@@ -1,5 +1,7 @@
 package com.example.windzlord.z_lab2_music.adapters;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -7,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.windzlord.z_lab2_music.R;
 import com.example.windzlord.z_lab2_music.models.json_models.MediaDaddy;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,5 +37,7 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
     public void bind(MediaDaddy.FeedX.SongX song) {
         textSongName.setText(song.getName());
         textSongArtist.setText(song.getArtist());
+        String linkSmall = song.getImageList().get(1).getLinkImage();
+        ImageLoader.getInstance().displayImage(linkSmall, imageSongSmall);
     }
 }
