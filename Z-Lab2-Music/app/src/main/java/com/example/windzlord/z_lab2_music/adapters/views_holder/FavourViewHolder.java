@@ -47,6 +47,13 @@ public class FavourViewHolder extends RecyclerView.ViewHolder {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        textView.setText(item.getName().toUpperCase());
+        String name = item.getName().toUpperCase();
+        if (name.contains("'"))
+            name = name.substring(0, name.indexOf("'"));
+        else if (name.contains("/"))
+            name = name.substring(0, name.indexOf("/"));
+        else if (name.contains("&"))
+            name = name.substring(0, name.indexOf("&"));
+        textView.setText(name);
     }
 }

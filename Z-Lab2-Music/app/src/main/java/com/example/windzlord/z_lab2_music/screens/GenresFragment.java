@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.z_lab2_music.R;
-import com.example.windzlord.z_lab2_music.adapters.PagerAdapter;
+import com.example.windzlord.z_lab2_music.adapters.pager_adapter.MyPagerAdapter;
 import com.example.windzlord.z_lab2_music.managers.Constant;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,10 +59,12 @@ public class GenresFragment extends Fragment {
         myTabLayout.addTab(myTabLayout.newTab().setText(Constant.GENRES));
         myTabLayout.addTab(myTabLayout.newTab().setText(Constant.PLAYLIST));
         myTabLayout.addTab(myTabLayout.newTab().setText(Constant.OFFLINE));
+
         myTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        myViewPager.setAdapter(new PagerAdapter(
-                getFragmentManager(), myTabLayout.getTabCount()));
+        myViewPager.setAdapter(new MyPagerAdapter(
+                getChildFragmentManager(), myTabLayout.getTabCount()));
+
         myViewPager.addOnPageChangeListener(
                 new TabLayout.TabLayoutOnPageChangeListener(myTabLayout));
         myTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -75,12 +75,10 @@ public class GenresFragment extends Fragment {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }

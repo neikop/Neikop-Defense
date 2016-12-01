@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.z_lab2_music.R;
+import com.example.windzlord.z_lab2_music.adapters.views_holder.MediaViewHolder;
 import com.example.windzlord.z_lab2_music.managers.RealmManager;
 
 /**
@@ -19,7 +20,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaViewHolder> {
     @Override
     public MediaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.genres_item, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.item_genre, parent, false);
         return new MediaViewHolder(parent.getContext(), itemView);
     }
 

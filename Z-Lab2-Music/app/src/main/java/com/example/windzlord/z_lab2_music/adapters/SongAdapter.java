@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.z_lab2_music.R;
+import com.example.windzlord.z_lab2_music.adapters.views_holder.SongViewHolder;
+import com.example.windzlord.z_lab2_music.models.Song;
 import com.example.windzlord.z_lab2_music.models.json_models.MediaDaddy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by WindzLord on 11/29/2016.
@@ -17,16 +20,16 @@ import java.util.ArrayList;
 public class SongAdapter extends RecyclerView.Adapter<SongViewHolder> {
 
 
-    private ArrayList<MediaDaddy.FeedX.SongX> topSongList;
+    private List<Song> topSongList;
 
-    public SongAdapter(ArrayList<MediaDaddy.FeedX.SongX> topSongList) {
+    public SongAdapter(List<Song> topSongList) {
         this.topSongList = topSongList;
     }
 
     @Override
     public SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.songs_item, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.item_song, parent, false);
         return new SongViewHolder(itemView);
     }
 

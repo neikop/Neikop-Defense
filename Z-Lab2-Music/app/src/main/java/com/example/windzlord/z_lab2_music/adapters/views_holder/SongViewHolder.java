@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.windzlord.z_lab2_music.R;
+import com.example.windzlord.z_lab2_music.models.Song;
 import com.example.windzlord.z_lab2_music.models.json_models.MediaDaddy;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -32,10 +33,10 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(MediaDaddy.FeedX.SongX song) {
+    public void bind(Song song) {
         textSongName.setText(song.getName());
         textSongArtist.setText(song.getArtist());
-        String linkSmall = song.getImageList().get(1).getLinkImage();
+        String linkSmall = song.getImageSmall();
         ImageLoader.getInstance().displayImage(linkSmall, imageSongSmall);
     }
 }

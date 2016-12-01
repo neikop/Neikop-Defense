@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.windzlord.z_lab2_music.FragmentEvent;
+import com.example.windzlord.z_lab2_music.objects.event_bus.AdapterNotifierEvent;
+import com.example.windzlord.z_lab2_music.objects.event_bus.FragmentEvent;
 import com.example.windzlord.z_lab2_music.R;
 import com.example.windzlord.z_lab2_music.adapters.MediaAdapter;
 import com.example.windzlord.z_lab2_music.managers.listeners.RecyclerViewListener;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,11 +48,17 @@ public class GenresMediaFragment extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
 
         getContent();
+        goMedia();
     }
 
     private void getContent() {
+
+    }
+
+    private void goMedia() {
         GridLayoutManager manager = new GridLayoutManager(
                 getActivity(), 2, LinearLayoutManager.VERTICAL, false);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -68,7 +76,8 @@ public class GenresMediaFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 GenresSongsFragment songsFragment = new GenresSongsFragment();
                 songsFragment.setPosition(position);
-                EventBus.getDefault().post(new FragmentEvent(songsFragment, true, 1));
+                EventBus.getDefault().post(new FragmentEvent(
+                        GenresMediaFragment.this.getClass().getSimpleName(), songsFragment, true));
             }
 
             @Override
@@ -76,6 +85,18 @@ public class GenresMediaFragment extends Fragment {
 
             }
         }));
+    }
+
+    @Subscribe
+    public void updateMedia(AdapterNotifierEvent event) {
+        if (!this.getClass().getSimpleName().equals(event.getClassName())) return;
+        recyclerViewType.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
 }

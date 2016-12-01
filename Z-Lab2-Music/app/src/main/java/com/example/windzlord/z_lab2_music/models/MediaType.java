@@ -11,9 +11,6 @@ public class MediaType extends RealmObject {
     private String id;
     private String name;
 
-    public MediaType() {
-    }
-
     public static MediaType create(String id, String name) {
         MediaType media = new MediaType();
         media.id = id;

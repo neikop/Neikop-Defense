@@ -9,7 +9,7 @@
     card_view:cardElevation="0dp"
     card_view:cardPreventCornerOverlap="false">
 
-    <com.example.windzlord.z_lab2_music.RelativeLayoutSquare
+    <com.example.windzlord.z_lab2_music.objects.RelativeLayoutSquare
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark">
@@ -32,6 +32,6 @@
             android:textColor="@color/colorWhite"
             android:textSize="12sp" />
 
-    </com.example.windzlord.z_lab2_music.RelativeLayoutSquare>
+    </com.example.windzlord.z_lab2_music.objects.RelativeLayoutSquare>
 
 </android.support.v7.widget.CardView>

@@ -45,7 +45,7 @@ public class MediaViewHolder extends RecyclerView.ViewHolder {
             Drawable drawable = Drawable.createFromStream(stream, null);
             imageView.setImageDrawable(drawable);
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
         textView.setText(item.getName().toUpperCase());
     }

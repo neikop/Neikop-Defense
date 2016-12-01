@@ -22,12 +22,12 @@ public class FavourAdapter extends RecyclerView.Adapter<FavourViewHolder> {
 
     private static ArrayList<Integer> favourList = new ArrayList<>();
 
-    public static void clearFavourList() {
-        favourList.clear();
-    }
-
     public static ArrayList<Integer> getFavourList() {
         return favourList;
+    }
+
+    public static void clearFavourList() {
+        favourList.clear();
     }
 
     @Override
