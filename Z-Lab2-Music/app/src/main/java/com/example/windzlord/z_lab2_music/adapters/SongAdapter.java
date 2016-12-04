@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import com.example.windzlord.z_lab2_music.R;
 import com.example.windzlord.z_lab2_music.adapters.views_holder.SongViewHolder;
 import com.example.windzlord.z_lab2_music.models.Song;
-import com.example.windzlord.z_lab2_music.models.json_models.MediaDaddy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

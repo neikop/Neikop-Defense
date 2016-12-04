@@ -8,6 +8,7 @@ import io.realm.RealmObject;
 
 public class MediaType extends RealmObject {
 
+    private int index;
     private String id;
     private String name;
 
@@ -15,6 +16,7 @@ public class MediaType extends RealmObject {
         MediaType media = new MediaType();
         media.id = id;
         media.name = name;
+        media.index = -1;
         return media;
     }
 
@@ -24,5 +26,13 @@ public class MediaType extends RealmObject {
 
     public String getName() {
         return name;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

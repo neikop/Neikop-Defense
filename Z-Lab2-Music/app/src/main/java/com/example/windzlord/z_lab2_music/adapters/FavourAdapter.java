@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.example.windzlord.z_lab2_music.R;
 import com.example.windzlord.z_lab2_music.adapters.views_holder.FavourViewHolder;
 import com.example.windzlord.z_lab2_music.managers.RealmManager;
-import com.example.windzlord.z_lab2_music.models.MediaType;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.example.windzlord.z_lab2_music.R;
 import com.example.windzlord.z_lab2_music.models.Song;
-import com.example.windzlord.z_lab2_music.models.json_models.MediaDaddy;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;

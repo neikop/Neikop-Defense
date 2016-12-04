@@ -1,6 +1,5 @@
 package com.example.windzlord.z_lab2_music.managers;
 
-import android.app.ActivityManager;
 import android.content.Context;
 
 import com.example.windzlord.z_lab2_music.models.MediaType;
@@ -31,6 +30,12 @@ public class RealmManager {
     public void add(MediaType mediaType) {
         beginTransaction();
         getRealm().copyToRealm(mediaType);
+        commitTransaction();
+    }
+
+    public void setMediaIndex(MediaType media, int index) {
+        beginTransaction();
+        media.setIndex(index);
         commitTransaction();
     }
 

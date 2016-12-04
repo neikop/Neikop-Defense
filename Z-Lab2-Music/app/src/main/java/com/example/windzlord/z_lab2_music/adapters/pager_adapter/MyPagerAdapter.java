@@ -23,9 +23,9 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new GenresMediaFragment();
+                return new GenresFragment();
             case 1:
-                return new PlaylistFragment();
+                return new LikedFragment();
             case 2:
                 return new OfflineFragment();
             default:

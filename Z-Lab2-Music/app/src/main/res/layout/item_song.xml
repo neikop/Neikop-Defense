@@ -20,6 +20,7 @@
             android:id="@+id/image_song_small"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:src="@drawable/cd_demo"
             android:layout_marginRight="20dp" />
 
         <TextView

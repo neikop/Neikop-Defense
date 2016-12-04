@@ -15,4 +15,14 @@ public class Constant {
 
     public static String TOP_SONG_API = "https://iTunes.apple.com";
 
+    public static String GET_MP3_API = "http://api.mp3.zing.vn";
+
+    public static String toTime(int time) {
+
+        int min = time / 60;
+        int sec = time - min * 60;
+        return "" + (min < 10 ? ("0" + min) : ("" + min))
+                + ":" + (sec < 10 ? ("0" + sec) : ("" + sec));
+    }
+
 }
