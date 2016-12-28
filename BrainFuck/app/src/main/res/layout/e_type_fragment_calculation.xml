@@ -1,0 +1,91 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.example.windzlord.brainfuck.screens.type_fragment.FragmentCalculation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/cardview_dark_background"
+            android:orientation="horizontal">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_back"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_keyboard_arrow_left_white"
+                app:cb_color="@color/cardview_dark_background" />
+
+            <at.markushi.ui.CircleButton
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:padding="3dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_calculation"
+                app:cb_color="@color/colorWhite" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="CALCULATE GAMES"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <com.example.windzlord.brainfuck.objects.GameLayout
+            android:id="@+id/game_calcu_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="5dp"
+            app:exp_current="688"
+            app:exp_nextlvl="1000"
+            app:hiscore="58"
+            app:level="2"
+            app:name="@string/game_calcu_one"
+            app:unlocked="true" />
+
+        <com.example.windzlord.brainfuck.objects.GameLayout
+            android:id="@+id/game_calcu_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="5dp"
+            app:exp_current="0"
+            app:exp_nextlvl="500"
+            app:hiscore="0"
+            app:level="1"
+            app:name="@string/game_calcu_two"
+            app:unlocked="true" />
+
+        <com.example.windzlord.brainfuck.objects.GameLayout
+            android:id="@+id/game_calcu_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="5dp"
+            app:name="@string/game_calcu_three" />
+
+    </LinearLayout>
+
+</FrameLayout>

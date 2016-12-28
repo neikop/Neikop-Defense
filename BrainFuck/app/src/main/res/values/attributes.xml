@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GameLayout">
+        <attr name="name" format="string" />
+        <attr name="unlocked" format="boolean" />
+        <attr name="level" format="integer" />
+        <attr name="exp_current" format="integer" />
+        <attr name="exp_nextlvl" format="integer" />
+        <attr name="src" format="integer" />
+        <attr name="hiscore" format="integer"/>
+    </declare-styleable>
+</resources>

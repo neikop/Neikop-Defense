@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Brain Luck</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">HELLO</string>
+    <string name="game_calcu_one">Calculator King</string>
+    <string name="game_calcu_two">High or low</string>
+    <string name="game_calcu_three">Sequential calculation</string>
+    <string name="game_concen_one">Check direction</string>
+    <string name="game_concen_two">Track the ball</string>
+    <string name="game_concen_three">Color and meaning</string>
+    <string name="game_memory_one">Make a pair</string>
+    <string name="game_memory_two">Memorize order</string>
+    <string name="game_memory_three">Flip the card</string>
+    <string name="game_memory_four">Memorize and rotation</string>
+    <string name="game_observer_one">Check shape</string>
+    <string name="game_observer_two">Count card</string>
+    <string name="game_observer_three">Link cards</string>
+    <string name="game_observer_four">Count empty cube</string>
+    <string name="game_observer_five">Find different cube</string>
+    <string name="game_demo_name">Demo Game</string>
+</resources>
