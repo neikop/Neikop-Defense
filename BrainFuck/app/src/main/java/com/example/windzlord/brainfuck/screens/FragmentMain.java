@@ -88,12 +88,12 @@ public class FragmentMain extends Fragment {
                 Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
                 Animation.RELATIVE_TO_SELF, -0.5f, Animation.RELATIVE_TO_SELF, 0);
         goDown.setFillAfter(true);
-        goDown.setDuration(150);
+        goDown.setDuration(100);
         TranslateAnimation goUp = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
         goUp.setFillAfter(true);
-        goUp.setDuration(150);
+        goUp.setDuration(100);
         switch (position) {
             case 0:
                 view.findViewById(R.id.indicator_profile).setVisibility(View.VISIBLE);

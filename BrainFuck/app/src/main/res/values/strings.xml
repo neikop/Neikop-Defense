@@ -2,7 +2,7 @@
     <string name="app_name">Brain Luck</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">HELLO</string>
+    <string name="welcome">WELCOME</string>
     <string name="game_calcu_one">Calculator King</string>
     <string name="game_calcu_two">High or low</string>
     <string name="game_calcu_three">Sequential calculation</string>
@@ -19,4 +19,12 @@
     <string name="game_observer_four">Count empty cube</string>
     <string name="game_observer_five">Find different cube</string>
     <string name="game_demo_name">Demo Game</string>
+    <string name="feedback">FEEDBACK</string>
+    <string name="practice">PRACTICE</string>
+    <string name="profile">PROFILE</string>
+    <string name="ranking">RANKING</string>
+    <string name="memory">Memory</string>
+    <string name="concentration">Concentration</string>
+    <string name="calculation">Calculation</string>
+    <string name="observation">Observation</string>
 </resources>

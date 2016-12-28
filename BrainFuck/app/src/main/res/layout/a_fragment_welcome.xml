@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="WELCOME"
+        android:text="@string/welcome"
         android:textColor="@color/colorWhite"
         android:textSize="40sp" />
 
@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/textView_welcome"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>
