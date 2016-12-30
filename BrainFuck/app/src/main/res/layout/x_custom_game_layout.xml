@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?android:selectableItemBackground">
+    android:foreground="?android:selectableItemBackground"
+    tools:context=".layout.GameLayout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,19 +36,19 @@
                 android:textStyle="bold" />
 
             <RelativeLayout
-                android:id="@+id/progressBar_layout"
+                android:id="@+id/progressBar_game"
                 android:layout_width="120dp"
                 android:layout_height="16dp"
                 android:layout_alignParentBottom="true">
 
                 <ProgressBar
-                    android:id="@+id/progressBar"
+                    android:id="@+id/progressBar_level"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:max="1500"
                     android:progress="982"
-                    android:progressDrawable="@drawable/custom_progressbar_level" />
+                    android:progressDrawable="@drawable/custom_corner_progressbar" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -85,7 +87,7 @@
                 android:id="@+id/textView_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/progressBar_layout"
+                android:layout_above="@id/progressBar_game"
                 android:text="Exp. Lv. 3"
                 android:textColor="@color/colorBlackLight"
                 android:textSize="13sp" />

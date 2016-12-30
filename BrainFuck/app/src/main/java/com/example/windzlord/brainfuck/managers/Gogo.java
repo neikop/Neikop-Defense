@@ -1,5 +1,11 @@
 package com.example.windzlord.brainfuck.managers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by WindzLord on 12/27/2016.
  */
@@ -19,5 +25,27 @@ public class Gogo {
         int sec = time - min * 60;
         return "" + (min < 10 ? ("0" + min) : ("" + min))
                 + ":" + (sec < 10 ? ("0" + sec) : ("" + sec));
+    }
+
+    public static int getRandom(int max) {
+        return new Random().nextInt(max);
+    }
+
+    public static int[] getArrayMemoryOne(int max) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < max; i++) {
+            list.add(i);
+        }
+        Collections.shuffle(list);
+        int ret[] = new int[8];
+        for (int i = 0; i < 6; i++) {
+            ret[i] = list.get(i);
+        }
+        while (ret[6] == ret[7]) {
+            ret[6] = ret[new Random().nextInt(6)];
+            ret[7] = ret[new Random().nextInt(6)];
+        }
+        Collections.shuffle(Arrays.asList(ret));
+        return ret;
     }
 }

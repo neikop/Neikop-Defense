@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.windzlord.brainfuck.objects.even_bus.FragmentChanger;
+import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.FragmentMain;
 import com.example.windzlord.brainfuck.screens.FragmentWelcome;
 import com.example.windzlord.brainfuck.screens.type_fragment.FragmentCalculation;

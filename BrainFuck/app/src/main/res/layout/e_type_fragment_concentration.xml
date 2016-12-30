@@ -21,7 +21,7 @@
                 android:id="@+id/button_back"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_keyboard_arrow_left_white"
+                android:src="@drawable/ic_arrow_left_white"
                 app:cb_color="@color/cardview_dark_background" />
 
             <at.markushi.ui.CircleButton
@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.example.windzlord.brainfuck.objects.GameLayout
+                <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_concen_one"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                     app:name="@string/game_concen_one"
                     app:unlocked="true" />
 
-                <com.example.windzlord.brainfuck.objects.GameLayout
+                <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_concen_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                     android:layout_marginTop="5dp"
                     app:name="@string/game_concen_two" />
 
-                <com.example.windzlord.brainfuck.objects.GameLayout
+                <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_concen_three"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

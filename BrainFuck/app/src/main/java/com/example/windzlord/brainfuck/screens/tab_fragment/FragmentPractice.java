@@ -2,10 +2,8 @@ package com.example.windzlord.brainfuck.screens.tab_fragment;
 
 
 import android.annotation.TargetApi;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +13,10 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
-import com.example.windzlord.brainfuck.objects.even_bus.FragmentChanger;
+import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.type_fragment.FragmentCalculation;
 import com.example.windzlord.brainfuck.screens.type_fragment.FragmentConcentration;
 import com.example.windzlord.brainfuck.screens.type_fragment.FragmentMemory;
@@ -67,7 +64,7 @@ public class FragmentPractice extends Fragment {
         ArcLayout.LayoutParams params = new ArcLayout.LayoutParams(15, 15);
         while (spinerView.getChildCount() < 20) {
             ImageView child = new ImageView(getContext());
-            child.setBackground(getResources().getDrawable(R.drawable.custom_circle_view));
+            child.setBackground(getResources().getDrawable(R.drawable.custom_oval_view_10dp));
             spinerView.addView(child, params);
         }
         RotateAnimation rotate = new RotateAnimation(0, 360, 1, 0.5f, 1, 0.5f);

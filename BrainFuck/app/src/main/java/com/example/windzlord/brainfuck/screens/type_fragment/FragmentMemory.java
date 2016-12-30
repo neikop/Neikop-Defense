@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.objects.even_bus.FragmentChanger;
-import com.example.windzlord.brainfuck.screens.FragmentMain;
+import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.game_fragment.MemoryOne;
 import com.example.windzlord.brainfuck.screens.game_fragment.MemoryThree;
 import com.example.windzlord.brainfuck.screens.game_fragment.MemoryTwo;

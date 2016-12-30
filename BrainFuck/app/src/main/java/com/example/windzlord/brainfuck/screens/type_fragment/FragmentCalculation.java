@@ -6,16 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
-import android.widget.FrameLayout;
 
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.objects.even_bus.FragmentChanger;
-import com.example.windzlord.brainfuck.screens.FragmentMain;
+import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.game_fragment.CalcuOne;
 import com.example.windzlord.brainfuck.screens.game_fragment.CalcuThree;
 import com.example.windzlord.brainfuck.screens.game_fragment.CalcuTwo;

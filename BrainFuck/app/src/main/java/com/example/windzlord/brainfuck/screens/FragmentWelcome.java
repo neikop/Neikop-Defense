@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.objects.even_bus.FragmentChanger;
+import com.example.windzlord.brainfuck.objects.FragmentChanger;
 
 import org.greenrobot.eventbus.EventBus;
 
