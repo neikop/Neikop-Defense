@@ -8,13 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
+import com.example.windzlord.brainfuck.layout.GameLayout;
+import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
+import com.example.windzlord.brainfuck.screens.game_fragment.ObserverFive;
+import com.example.windzlord.brainfuck.screens.game_fragment.ObserverFour;
 import com.example.windzlord.brainfuck.screens.game_fragment.ObserverOne;
 import com.example.windzlord.brainfuck.screens.game_fragment.ObserverThree;
 import com.example.windzlord.brainfuck.screens.game_fragment.ObserverTwo;
 
 import org.greenrobot.eventbus.EventBus;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -22,6 +29,21 @@ import butterknife.OnClick;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentObservation extends Fragment {
+
+    @BindView(R.id.game_obser_one)
+    GameLayout gameObserOne;
+
+    @BindView(R.id.game_obser_two)
+    GameLayout gameObserTwo;
+
+    @BindView(R.id.game_obser_three)
+    GameLayout gameObserThree;
+
+    @BindView(R.id.game_obser_four)
+    GameLayout gameObserFour;
+
+    @BindView(R.id.game_obser_five)
+    GameLayout gameObserFive;
 
 
     public FragmentObservation() {
@@ -41,6 +63,23 @@ public class FragmentObservation extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
+
+        new CountDownTimerAdapter(10, 1) {
+            public void onFinish() {
+                getInfo();
+            }
+        }.start();
+    }
+
+    private void getInfo() {
+        GameLayout[] games = {gameObserOne, gameObserTwo, gameObserThree, gameObserFour, gameObserFive};
+        for (int i = 0; i < games.length; i++) {
+            games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.OBSERVATION, i + 1));
+            games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.OBSERVATION, i + 1));
+            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(Gogo.OBSERVATION, i + 1));
+            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.OBSERVATION, i + 1));
+            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.OBSERVATION, i + 1));
+        }
     }
 
     @OnClick(R.id.button_back)
@@ -50,27 +89,32 @@ public class FragmentObservation extends Fragment {
 
     @OnClick(R.id.game_obser_one)
     public void goGameObserOne() {
-        EventBus.getDefault().post(new FragmentChanger(new ObserverOne(), true));
+        if (gameObserOne.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new ObserverOne(), true));
     }
 
     @OnClick(R.id.game_obser_two)
     public void goGameObserTwo() {
-        EventBus.getDefault().post(new FragmentChanger(new ObserverTwo(), true));
+        if (gameObserTwo.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new ObserverTwo(), true));
     }
 
     @OnClick(R.id.game_obser_three)
     public void goGameObserThree() {
-        EventBus.getDefault().post(new FragmentChanger(new ObserverThree(), true));
+        if (gameObserThree.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new ObserverThree(), true));
     }
 
     @OnClick(R.id.game_obser_four)
     public void goGameObserFour() {
-
+        if (gameObserFour.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new ObserverFour(), true));
     }
 
     @OnClick(R.id.game_obser_five)
     public void goGameObserFive() {
-
+        if (gameObserFive.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new ObserverFive(), true));
     }
 
 }

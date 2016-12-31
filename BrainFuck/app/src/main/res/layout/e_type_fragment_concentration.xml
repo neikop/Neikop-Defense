@@ -65,12 +65,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:exp_current="100"
-                    app:exp_nextlvl="500"
-                    app:hiscore="100"
-                    app:level="1"
-                    app:name="@string/game_concen_one"
-                    app:unlocked="true" />
+                    app:name="@string/game_concen_one"/>
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_concen_two"

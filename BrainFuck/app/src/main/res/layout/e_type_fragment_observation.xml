@@ -65,12 +65,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:exp_current="0"
-                    app:exp_nextlvl="500"
-                    app:hiscore="0"
-                    app:level="1"
-                    app:name="@string/game_observer_one"
-                    app:unlocked="true" />
+                    app:name="@string/game_observer_one" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_obser_two"

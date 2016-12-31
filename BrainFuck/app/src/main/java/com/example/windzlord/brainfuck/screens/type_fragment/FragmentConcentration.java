@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
+import com.example.windzlord.brainfuck.layout.GameLayout;
+import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.game_fragment.ConcenOne;
 import com.example.windzlord.brainfuck.screens.game_fragment.ConcenThree;
@@ -15,6 +19,7 @@ import com.example.windzlord.brainfuck.screens.game_fragment.ConcenTwo;
 
 import org.greenrobot.eventbus.EventBus;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -22,6 +27,15 @@ import butterknife.OnClick;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentConcentration extends Fragment {
+
+    @BindView(R.id.game_concen_one)
+    GameLayout gameConcenOne;
+
+    @BindView(R.id.game_concen_two)
+    GameLayout gameConcenTwo;
+
+    @BindView(R.id.game_concen_three)
+    GameLayout gameConcenThree;
 
 
     public FragmentConcentration() {
@@ -41,6 +55,23 @@ public class FragmentConcentration extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
+
+        new CountDownTimerAdapter(10, 1) {
+            public void onFinish() {
+                getInfo();
+            }
+        }.start();
+    }
+
+    private void getInfo() {
+        GameLayout[] games = {gameConcenOne, gameConcenTwo, gameConcenThree};
+        for (int i = 0; i < games.length; i++) {
+            games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.CONCENTRATION, i + 1));
+            games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.CONCENTRATION, i + 1));
+            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(Gogo.CONCENTRATION, i + 1));
+            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.CONCENTRATION, i + 1));
+            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.CONCENTRATION, i + 1));
+        }
     }
 
     @OnClick(R.id.button_back)
@@ -50,17 +81,20 @@ public class FragmentConcentration extends Fragment {
 
     @OnClick(R.id.game_concen_one)
     public void goGameConcenOne() {
-        EventBus.getDefault().post(new FragmentChanger(new ConcenOne(), true));
+        if (gameConcenOne.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new ConcenOne(), true));
     }
 
     @OnClick(R.id.game_concen_two)
     public void goGameConcenTwo() {
-        EventBus.getDefault().post(new FragmentChanger(new ConcenTwo(), true));
+        if (gameConcenTwo.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new ConcenTwo(), true));
     }
 
     @OnClick(R.id.game_concen_three)
     public void goGameConcenThree() {
-        EventBus.getDefault().post(new FragmentChanger(new ConcenThree(), true));
+        if (gameConcenThree.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new ConcenThree(), true));
     }
 
 }

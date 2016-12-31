@@ -25,6 +25,7 @@
                 app:cb_color="@color/cardview_dark_background" />
 
             <at.markushi.ui.CircleButton
+                android:id="@+id/button_check"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -66,12 +67,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:exp_current="100"
-                    app:exp_nextlvl="500"
-                    app:hiscore="100"
-                    app:level="1"
-                    app:name="@string/game_memory_one"
-                    app:unlocked="true" />
+                    app:name="@string/game_memory_one" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_memory_two"

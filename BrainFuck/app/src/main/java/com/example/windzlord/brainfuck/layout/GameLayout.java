@@ -86,27 +86,18 @@ public class GameLayout extends FrameLayout {
         if (image == null) image = getResources().getDrawable(R.mipmap.ic_launcher);
         level = typedArray.getInteger(R.styleable.GameLayout_level, 1);
         expCurrent = typedArray.getInteger(R.styleable.GameLayout_exp_current, 0);
-        expNextLvl = typedArray.getInteger(R.styleable.GameLayout_exp_nextlvl, 500);
+        expNextLvl = typedArray.getInteger(R.styleable.GameLayout_exp_nextlvl, 300);
         score = typedArray.getInteger(R.styleable.GameLayout_hiscore, 0);
-
         unlocked = typedArray.getBoolean(R.styleable.GameLayout_unlocked, false);
-        if (!unlocked) {
-            level = 1;
-            expCurrent = 0;
-            expNextLvl = 500;
-            image = getResources().getDrawable(R.drawable.ic_locked);
-            layoutUnlocked.setVisibility(GONE);
-            layoutLocked.setVisibility(VISIBLE);
-        } else {
-            layoutUnlocked.setVisibility(VISIBLE);
-            layoutLocked.setVisibility(GONE);
-        }
         typedArray.recycle();
         updateValues();
     }
 
     private void updateValues() {
-        imageViewGame.setImageDrawable(image);
+        layoutUnlocked.setVisibility(unlocked ? VISIBLE : GONE);
+        layoutLocked.setVisibility(unlocked ? GONE : VISIBLE);
+        imageViewGame.setImageDrawable(unlocked ?
+                image : getResources().getDrawable(R.drawable.ic_locked));
         textViewGame.setText(name);
         textViewLevel.setText("Exp. Lv. " + level);
         progressBar_level.setMax(expNextLvl);
@@ -116,4 +107,36 @@ public class GameLayout extends FrameLayout {
         textViewHiScore.setText("" + score);
     }
 
+    public boolean isUnlocked() {
+        return unlocked;
+    }
+
+    public int getExpCurrent() {
+        return expCurrent;
+    }
+
+    public void setUnlocked(boolean unlocked) {
+        this.unlocked = unlocked;
+        updateValues();
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+        updateValues();
+    }
+
+    public void setExpCurrent(int expCurrent) {
+        this.expCurrent = expCurrent;
+        updateValues();
+    }
+
+    public void setExpNextLvl(int expNextLvl) {
+        this.expNextLvl = expNextLvl;
+        updateValues();
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+        updateValues();
+    }
 }

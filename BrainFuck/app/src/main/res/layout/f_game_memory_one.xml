@@ -8,7 +8,7 @@
     tools:context="com.example.windzlord.brainfuck.screens.game_fragment.MemoryOne">
 
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
-        android:id="@+id/game_status_layout"
+        android:id="@+id/layout_game_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:going_count="1"
@@ -25,6 +25,7 @@
         android:layout_marginTop="100dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView_score"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -55,6 +56,7 @@
         android:visibility="invisible" />
 
     <GridLayout
+        android:id="@+id/layout_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -192,6 +194,80 @@
             android:textColor="@color/colorBlackLight"
             android:textSize="80sp"
             android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_pause"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_marginTop="230dp"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/view_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorYellow" />
+
+            <View
+                android:id="@+id/view_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorYellow" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="PAUSE"
+            android:textColor="@color/colorAccent"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/button_back"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="80dp"
+            android:src="@drawable/ga_ic_pause_circle_outline"
+            app:cb_color="@color/colorCyanLight" />
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/button_resume"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="80dp"
+            android:src="@drawable/ga_ic_remain_circle_outline"
+            app:cb_color="@color/colorCyanLight" />
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/button_exit"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ga_ic_exit_circle_outline"
+            app:cb_color="@color/colorCyanLight" />
+
 
     </RelativeLayout>
 

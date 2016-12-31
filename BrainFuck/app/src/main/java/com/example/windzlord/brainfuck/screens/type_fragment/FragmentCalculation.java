@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
+import com.example.windzlord.brainfuck.layout.GameLayout;
+import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.game_fragment.CalcuOne;
 import com.example.windzlord.brainfuck.screens.game_fragment.CalcuThree;
@@ -25,13 +29,13 @@ import butterknife.OnClick;
 public class FragmentCalculation extends Fragment {
 
     @BindView(R.id.game_calcu_one)
-    View gameCalcuOne;
+    GameLayout gameCalcuOne;
 
     @BindView(R.id.game_calcu_two)
-    View gameCalcuTwo;
+    GameLayout gameCalcuTwo;
 
     @BindView(R.id.game_calcu_three)
-    View gameCalcuThree;
+    GameLayout gameCalcuThree;
 
 
     public FragmentCalculation() {
@@ -51,6 +55,23 @@ public class FragmentCalculation extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
+
+        new CountDownTimerAdapter(10, 1) {
+            public void onFinish() {
+                getInfo();
+            }
+        }.start();
+    }
+
+    private void getInfo() {
+        GameLayout[] games = {gameCalcuOne, gameCalcuTwo, gameCalcuThree};
+        for (int i = 0; i < games.length; i++) {
+            games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.CALCULATION, i + 1));
+            games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.CALCULATION, i + 1));
+            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(Gogo.CALCULATION, i + 1));
+            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.CALCULATION, i + 1));
+            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.CALCULATION, i + 1));
+        }
     }
 
     @OnClick(R.id.button_back)
@@ -60,17 +81,20 @@ public class FragmentCalculation extends Fragment {
 
     @OnClick(R.id.game_calcu_one)
     public void goGameMemoryOne() {
-        EventBus.getDefault().post(new FragmentChanger(new CalcuOne(), true));
+        if (gameCalcuOne.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new CalcuOne(), true));
     }
 
     @OnClick(R.id.game_calcu_two)
     public void goGameMemoryTwo() {
-        EventBus.getDefault().post(new FragmentChanger(new CalcuTwo(), true));
+        if (gameCalcuTwo.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new CalcuTwo(), true));
     }
 
     @OnClick(R.id.game_calcu_three)
     public void goGameMemoryThree() {
-        EventBus.getDefault().post(new FragmentChanger(new CalcuThree(), true));
+        if (gameCalcuThree.isUnlocked())
+            EventBus.getDefault().post(new FragmentChanger(new CalcuThree(), true));
     }
 
 }

@@ -11,8 +11,10 @@ public class ManagerPreference {
 
     private static final String KEY = "BrainFuck";
 
-    private static final String KEY_FAVOURITE_MEDIA = "favourite";
-
+    private static final String SCORE = "Score";
+    private static final String LEVEL = "Level";
+    private static final String EXP_CURRENT = "ExpCurr";
+    private static final String UNLOCK = "Unlock";
 
     private SharedPreferences sharedPreferences;
 
@@ -30,12 +32,40 @@ public class ManagerPreference {
         instance = new ManagerPreference(context);
     }
 
-    public void putStatusGene(int gen, boolean isActive) {
-        sharedPreferences.edit().putBoolean(KEY_FAVOURITE_MEDIA + gen, isActive).apply();
+    public void putScore(String type, int index, int score) {
+        sharedPreferences.edit().putInt(SCORE + type + index, score).apply();
     }
 
-    public boolean getFavourite(int gen) {
-        return sharedPreferences.getBoolean(KEY_FAVOURITE_MEDIA + gen, false);
+    public int getScore(String type, int index) {
+        return sharedPreferences.getInt(SCORE + type + index, 0);
+    }
+
+    public void putLevel(String type, int index, int level) {
+        sharedPreferences.edit().putInt(LEVEL + type + index, level).apply();
+    }
+
+    public int getLevel(String type, int index) {
+        return sharedPreferences.getInt(LEVEL + type + index, 1);
+    }
+
+    public int getExpNext(String type, int index) {
+        return getLevel(type, index) * 300;
+    }
+
+    public void putExpCurrent(String type, int index, int exp) {
+        sharedPreferences.edit().putInt(EXP_CURRENT + type + index, exp).apply();
+    }
+
+    public int getExpCurrent(String type, int index) {
+        return sharedPreferences.getInt(EXP_CURRENT + type + index, 0);
+    }
+
+    public boolean isUnlocked(String type, int index) {
+        return index == 1 || getLevel(type, index - 1) > 1;
+    }
+
+    public void clear() {
+        sharedPreferences.edit().clear().apply();
     }
 
 }

@@ -12,6 +12,13 @@ import java.util.Random;
 
 public class Gogo {
 
+    public final static int NUMBER_QUIZ = 4;
+
+    public final static String MEMORY = "Memory";
+    public final static String CALCULATION = "Calculation";
+    public final static String CONCENTRATION = "Concentration";
+    public final static String OBSERVATION = "Observation";
+
     public static String goFormatString(int integer) {
         if (integer < 1000) return "" + integer;
         String ret = integer / 1000 + ",";

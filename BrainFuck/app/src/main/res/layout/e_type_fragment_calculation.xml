@@ -65,12 +65,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:exp_current="688"
-                    app:exp_nextlvl="1000"
-                    app:hiscore="58"
-                    app:level="2"
-                    app:name="@string/game_calcu_one"
-                    app:unlocked="true" />
+                    app:name="@string/game_calcu_one"/>
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_calcu_two"
@@ -79,12 +74,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:exp_current="0"
-                    app:exp_nextlvl="500"
-                    app:hiscore="0"
-                    app:level="1"
-                    app:name="@string/game_calcu_two"
-                    app:unlocked="true" />
+                    app:name="@string/game_calcu_two"/>
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_calcu_three"
