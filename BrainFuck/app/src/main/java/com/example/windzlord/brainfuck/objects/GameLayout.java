@@ -30,9 +30,9 @@ public class GameLayout extends FrameLayout {
     TextView textViewGame;
 
     @BindView(R.id.textView_level)
-    TextView textViewLevel;
+    TextView textViewLevexl;
 
-    @BindView(R.id.progressBar)
+    @BindView(R.id.progressBar_level)
     ProgressBar progressBar_level;
 
     @BindView(R.id.textView_exp_current)
@@ -98,7 +98,7 @@ public class GameLayout extends FrameLayout {
         typedArray.recycle();
 
         textViewGame.setText(name);
-        textViewLevel.setText("Exp. Lv. " + level);
+        textViewLevexl.setText("Exp. Lv. " + level);
         progressBar_level.setMax(expNextLvl);
         progressBar_level.setProgress(expCurrent);
         textViewCurrentExp.setText(Gogo.goFormatString(expCurrent));
