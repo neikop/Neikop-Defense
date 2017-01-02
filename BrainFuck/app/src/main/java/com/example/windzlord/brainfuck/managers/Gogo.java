@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Gogo {
 
-    public final static int NUMBER_QUIZ = 4;
+    public final static int NUMBER_QUIZ = 5;
 
     public final static String MEMORY = "Memory";
     public final static String CALCULATION = "Calculation";
@@ -38,7 +38,19 @@ public class Gogo {
         return new Random().nextInt(max);
     }
 
-    public static int[] getArrayMemoryOne(int max) {
+    public static boolean[] getArrayObserOne(boolean[] core) {
+        boolean[] ret = new boolean[9];
+        for (int i = 0; i < 9; i++) ret[i] = getRandom(10) < 5;
+        if (core == null) return ret;
+        while (true) {
+            for (int i = 0; i < 9; i++) {
+                if (ret[i] ^ core[i]) return ret;
+            }
+            ret = getArrayObserOne(null);
+        }
+    }
+
+    public static int[] getArrayObserTwo(int max) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < max; i++) {
             list.add(i);

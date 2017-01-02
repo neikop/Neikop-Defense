@@ -36,7 +36,7 @@ public class FragmentMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout1 for this fragment
-        View view = inflater.inflate(R.layout.a_fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
         settingThingsUp(view);
 
         return view;
@@ -50,10 +50,10 @@ public class FragmentMain extends Fragment {
 
     private void goTabLayout(View view) {
 
-        myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.z_tab_view_profile));
-        myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.z_tab_view_practice));
-        myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.z_tab_view_ranking));
-        myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.z_tab_view_feedback));
+        myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.tab_view_profile));
+        myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.tab_view_practice));
+        myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.tab_view_ranking));
+        myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.tab_view_feedback));
 
         myTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         myTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

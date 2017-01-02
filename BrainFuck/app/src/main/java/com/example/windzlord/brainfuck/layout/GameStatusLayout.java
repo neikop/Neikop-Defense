@@ -61,7 +61,7 @@ public class GameStatusLayout extends FrameLayout {
     }
 
     private void initFromContext(Context context, AttributeSet attrs) {
-        View view = inflate(context, R.layout.x_custom_game_status_layout, this);
+        View view = inflate(context, R.layout.custom_game_status_layout, this);
         ButterKnife.bind(this, view);
 
         getValues(context.obtainStyledAttributes(attrs, R.styleable.GameStatusLayout));

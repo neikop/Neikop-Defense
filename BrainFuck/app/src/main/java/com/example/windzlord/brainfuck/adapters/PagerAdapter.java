@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.windzlord.brainfuck.screens.tab_fragment.FragmentFeedback;
-import com.example.windzlord.brainfuck.screens.tab_fragment.FragmentPractice;
-import com.example.windzlord.brainfuck.screens.tab_fragment.FragmentProfile;
-import com.example.windzlord.brainfuck.screens.tab_fragment.FragmentRanking;
+import com.example.windzlord.brainfuck.screens.tabs.FragmentFeedback;
+import com.example.windzlord.brainfuck.screens.tabs.FragmentPractice;
+import com.example.windzlord.brainfuck.screens.tabs.FragmentProfile;
+import com.example.windzlord.brainfuck.screens.tabs.FragmentRanking;
 
 /**
  * Created by WindzLord on 11/28/2016.

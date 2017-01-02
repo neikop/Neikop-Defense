@@ -6,14 +6,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.windzlord.brainfuck.managers.DBHelper;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.FragmentMain;
 import com.example.windzlord.brainfuck.screens.FragmentWelcome;
-import com.example.windzlord.brainfuck.screens.type_fragment.FragmentCalculation;
-import com.example.windzlord.brainfuck.screens.type_fragment.FragmentConcentration;
-import com.example.windzlord.brainfuck.screens.type_fragment.FragmentMemory;
-import com.example.windzlord.brainfuck.screens.type_fragment.FragmentObservation;
+import com.example.windzlord.brainfuck.screens.types.FragmentCalculation;
+import com.example.windzlord.brainfuck.screens.types.FragmentConcentration;
+import com.example.windzlord.brainfuck.screens.types.FragmentMemory;
+import com.example.windzlord.brainfuck.screens.types.FragmentObservation;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -25,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.a_activity_main);
+        setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        DBHelper.getInstance().init(this);
+
         settingThingsUp();
     }
 

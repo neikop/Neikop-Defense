@@ -74,7 +74,7 @@ public class GameLayout extends FrameLayout {
     }
 
     private void initFromContext(Context context, AttributeSet attrs) {
-        View view = inflate(context, R.layout.x_custom_game_layout, this);
+        View view = inflate(context, R.layout.custom_game_layout, this);
         ButterKnife.bind(this, view);
 
         getValues(context.obtainStyledAttributes(attrs, R.styleable.GameLayout));
@@ -83,7 +83,7 @@ public class GameLayout extends FrameLayout {
     private void getValues(TypedArray typedArray) {
         name = typedArray.getString(R.styleable.GameLayout_name);
         image = typedArray.getDrawable(R.styleable.GameLayout_src);
-        if (image == null) image = getResources().getDrawable(R.mipmap.ic_launcher);
+        if (image == null) image = getResources().getDrawable(R.drawable.ic_launcher);
         level = typedArray.getInteger(R.styleable.GameLayout_level, 1);
         expCurrent = typedArray.getInteger(R.styleable.GameLayout_exp_current, 0);
         expNextLvl = typedArray.getInteger(R.styleable.GameLayout_exp_nextlvl, 300);
@@ -97,7 +97,7 @@ public class GameLayout extends FrameLayout {
         layoutUnlocked.setVisibility(unlocked ? VISIBLE : GONE);
         layoutLocked.setVisibility(unlocked ? GONE : VISIBLE);
         imageViewGame.setImageDrawable(unlocked ?
-                image : getResources().getDrawable(R.drawable.ic_locked));
+                image : getResources().getDrawable(R.drawable.ic_launcher_locked));
         textViewGame.setText(name);
         textViewLevel.setText("Exp. Lv. " + level);
         progressBar_level.setMax(expNextLvl);
