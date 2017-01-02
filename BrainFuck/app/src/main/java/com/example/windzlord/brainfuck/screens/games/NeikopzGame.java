@@ -3,6 +3,8 @@ package com.example.windzlord.brainfuck.screens.games;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -398,8 +400,7 @@ public abstract class NeikopzGame extends Fragment {
                     scale.setDuration(300);
                     scale.setFillAfter(true);
                     layoutScore.startAnimation(scale);
-                    imageViewScore.setImageResource(R.color.colorCyanLight);
-                    textViewScore.setTextColor(Color.parseColor("#FFFFFF"));
+                    goHighScoreColor();
                 }
             }
         });
@@ -407,6 +408,11 @@ public abstract class NeikopzGame extends Fragment {
         goVisibility(View.INVISIBLE, textViewPause, buttonExit, buttonBack, buttonResume);
         viewPauseLeft.startAnimation(goRight);
         viewPauseRight.startAnimation(goLeft);
+    }
+
+    protected void goHighScoreColor() {
+        imageViewScore.setImageResource(R.color.colorCyanLight);
+        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
     }
 
     @OnClick(R.id.button_exit)
