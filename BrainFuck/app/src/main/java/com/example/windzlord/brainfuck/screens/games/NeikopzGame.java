@@ -28,7 +28,6 @@ import at.markushi.ui.CircleButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -114,13 +113,24 @@ public abstract class NeikopzGame extends Fragment {
     protected int score;
     protected final int NUMBER_QUIZ = Gogo.NUMBER_QUIZ;
 
-    protected abstract void settingThingsUp(View view);
+    protected View createView(View view) {
+        ButterKnife.bind(this, view);
+        startGame();
+        addListeners();
+
+        return view;
+    }
+
+    protected void startGame() {
+        gameStatusLayout.updateValues(100, 5000, 5000, 0, NUMBER_QUIZ, 0);
+        going = score = 0;
+
+        goStartAnimation();
+    }
 
     protected void addListeners() {
         gameStatusLayout.setPauseListener(v -> goPause());
     }
-
-    protected abstract void startGame();
 
     protected void goStartAnimation() {
         ScaleAnimation countOne = new ScaleAnimation(1, 1.3f, 1, 1.3f, 1, 0.5f, 1, 0.5f);
@@ -203,23 +213,23 @@ public abstract class NeikopzGame extends Fragment {
         new CountDownTimerAdapter(300, 1) {
             public void onFinish() {
                 imageViewNext.setImageResource(completed ?
-                        R.drawable.ga_ic_color_correct : R.drawable.ga_ic_color_cross);
+                        R.drawable.game_ic_color_correct : R.drawable.game_ic_color_cross);
                 layoutNext.setVisibility(View.VISIBLE);
-                ScaleAnimation scale = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
-                scale.setDuration(250);
-                layoutNext.startAnimation(scale);
+                ScaleAnimation scaleOne = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
+                scaleOne.setDuration(250);
+                layoutNext.startAnimation(scaleOne);
             }
         }.start();
         new CountDownTimerAdapter(1000, 1) {
             public void onFinish() {
-                ScaleAnimation scale = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
-                scale.setDuration(250);
-                scale.setAnimationListener(new AnimationAdapter() {
+                ScaleAnimation scaleTwo = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
+                scaleTwo.setDuration(250);
+                scaleTwo.setAnimationListener(new AnimationAdapter() {
                     public void onAnimationEnd(Animation animation) {
                         layoutNext.setVisibility(View.INVISIBLE);
                     }
                 });
-                layoutNext.startAnimation(scale);
+                layoutNext.startAnimation(scaleTwo);
             }
         }.start();
         nextQuiz(completed);

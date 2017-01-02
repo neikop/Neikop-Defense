@@ -20,11 +20,7 @@ import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,9 +36,6 @@ public class ObserverOne extends NeikopzGame {
     @BindView(R.id.layout_game_z)
     ViewGroup groupZ;
 
-    private ArrayList<CircleImageView> arrayX = new ArrayList<>();
-    private ArrayList<CircleImageView> arrayY = new ArrayList<>();
-    private ArrayList<CircleImageView> arrayZ = new ArrayList<>();
     private boolean[] coreArray;
     private boolean[] fakeArray;
 
@@ -55,41 +48,10 @@ public class ObserverOne extends NeikopzGame {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.game_observer_one, container, false);
-        settingThingsUp(view);
-
-        return view;
+        return createView(inflater.inflate(R.layout.game_observer_one, container, false));
     }
 
-    protected void settingThingsUp(View view) {
-        ButterKnife.bind(this, view);
-        addListeners();
-
-        startGame();
-    }
-
-    protected void startGame() {
-        gameStatusLayout.updateValues(100, 5000, 5000, 0, NUMBER_QUIZ, 0);
-        going = score = 0;
-
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(58, 58);
-        for (int i = 0; i < 27; i++) {
-            CircleImageView view = new CircleImageView(getContext());
-            view.setPadding(2, 2, 2, 2);
-            view.setImageResource(R.color.colorWhite);
-            goViewGroup(view, params, i % 9,
-                    i < 9 ? arrayX : i < 18 ? arrayY : arrayZ,
-                    i < 9 ? groupX : i < 18 ? groupY : groupZ);
-        }
-        goStartAnimation();
-    }
-
-    private void goViewGroup(View view, ViewGroup.LayoutParams params, int index,
-                             ArrayList array, ViewGroup group) {
-        group.addView(view, index, params);
-        array.add(view);
-    }
-
+    @Override
     protected void goPrepare() {
         TranslateAnimation goRight = new TranslateAnimation(1, 0, 1, 1, 1, 0, 1, 0);
         TranslateAnimation goLeft = new TranslateAnimation(1, 0, 1, -1, 1, 0, 1, 0);
@@ -119,6 +81,7 @@ public class ObserverOne extends NeikopzGame {
         }.start();
     }
 
+    @Override
     protected void prepareQuiz() {
         new CountDownTimerAdapter(500, 1) {
             public void onFinish() {
@@ -127,6 +90,7 @@ public class ObserverOne extends NeikopzGame {
         }.start();
     }
 
+    @Override
     protected void goShow() {
         coreArray = Gogo.getArrayObserOne(null);
         fakeArray = Gogo.getArrayObserOne(coreArray);
@@ -138,6 +102,7 @@ public class ObserverOne extends NeikopzGame {
             public void onAnimationStart(Animation animation) {
                 onShowing = true;
             }
+
             public void onAnimationEnd(Animation animation) {
                 for (int i = 0; i < 9; i++)
                     if (coreArray[i]) goImageResou(goChildGroup(groupY).get(i), R.color.colorWhite);
@@ -172,6 +137,7 @@ public class ObserverOne extends NeikopzGame {
         showQuiz();
     }
 
+    @Override
     protected void showQuiz() {
         goVisibility(View.VISIBLE, groupX, groupZ);
         boolean xxx = Gogo.getRandom(2) == 0;

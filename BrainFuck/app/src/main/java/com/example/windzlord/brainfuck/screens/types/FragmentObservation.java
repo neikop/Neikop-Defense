@@ -112,19 +112,19 @@ public class FragmentObservation extends Fragment {
 
     @OnClick(R.id.game_obser_four)
     public void goGameObserFour() {
-        if (gameObserThree.isUnlocked())
+        if (gameObserFour.isUnlocked())
             EventBus.getDefault().post(new FragmentChanger(new ObserverFour(), true));
     }
 
     @OnClick(R.id.game_obser_five)
     public void goGameObserFive() {
-        if (gameObserFour.isUnlocked())
+        if (gameObserFive.isUnlocked())
             EventBus.getDefault().post(new FragmentChanger(new ObserverFive(), true));
     }
 
     @OnClick(R.id.game_obser_six)
     public void goGameObserSix() {
-        if (gameObserFive.isUnlocked())
+        if (gameObserSix.isUnlocked())
             EventBus.getDefault().post(new FragmentChanger(new ObserverSix(), true));
     }
 

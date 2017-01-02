@@ -67,4 +67,28 @@ public class Gogo {
         Collections.shuffle(Arrays.asList(ret));
         return ret;
     }
+
+    public static boolean[] getArrayObserThree() {
+        boolean[] ret = new boolean[16];
+        int ok = 0;
+        for (int i = 0; i < 16; i++) {
+            ret[i] = getRandom(10) < 5;
+            if (ret[i]) ok++;
+        }
+        if (ok >= 6 | ok <= 10) return ret;
+        else return getArrayObserThree();
+    }
+
+    public static int[] getArrayObserThreeAnswer(int core) {
+        switch (getRandom(4)) {
+            case 0:
+                return new int[]{core, core + 1, core + 2, core + 3, 0};
+            case 1:
+                return new int[]{core - 1, core, core + 1, core + 2, 1};
+            case 2:
+                return new int[]{core - 2, core - 1, core, core + 1, 2};
+            default: // case 3
+                return new int[]{core - 3, core - 2, core - 1, core, 3};
+        }
+    }
 }

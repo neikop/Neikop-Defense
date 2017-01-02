@@ -15,7 +15,7 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:src="@drawable/ga_ic_pause_circle_outline"
+            android:src="@drawable/game_ic_pause_circle_outline"
             app:cb_color="@color/colorPrimary" />
 
         <RelativeLayout
@@ -41,7 +41,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/custom_oval_view_time_start"
-                android:src="@drawable/ga_ic_time_circle_outline" />
+                android:src="@drawable/game_ic_time_circle_outline" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="35dp"
@@ -87,7 +87,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/custom_oval_view_going_start"
-                android:src="@drawable/ga_ic_play_circle_outline" />
+                android:src="@drawable/game_ic_play_circle_outline" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="35dp"
