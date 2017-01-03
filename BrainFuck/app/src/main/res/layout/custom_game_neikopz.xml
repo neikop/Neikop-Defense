@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGame"
-    tools:context="com.example.windzlord.brainfuck.screens.games.NeikopzGame">
+    tools:context="com.example.windzlord.brainfuck.screens.games.observation.ObserverThree">
 
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
         android:id="@+id/layout_game_status"
@@ -34,6 +34,7 @@
             android:textColor="@color/colorBlackLight"
             android:textSize="40sp"
             android:textStyle="bold" />
+
     </RelativeLayout>
 
     <TextView
@@ -52,8 +53,8 @@
     <RelativeLayout
         android:id="@+id/layout_game"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="240dp">
+        android:layout_height="410dp"
+        android:layout_marginTop="120dp">
 
     </RelativeLayout>
 

@@ -172,13 +172,13 @@ public class ConcenOne extends NeikopzGame {
 
     private String getRandom() {
         switch (Gogo.getRandom(4)) {
-            case 0:
-                return VOWEL.charAt(Gogo.getRandom(VOWEL.length())) + " " + (Gogo.getRandom(10));
             case 1:
-                return (Gogo.getRandom(10) + "") + " " + VOWEL.charAt(Gogo.getRandom(VOWEL.length()));
+                return VOWEL.charAt(Gogo.getRandom(VOWEL.length())) + " " + (Gogo.getRandom(10));
             case 2:
+                return (Gogo.getRandom(10) + "") + " " + VOWEL.charAt(Gogo.getRandom(VOWEL.length()));
+            case 3:
                 return CONSONANT.charAt(Gogo.getRandom(CONSONANT.length())) + " " + (Gogo.getRandom(10) + "");
-            default: // case 3
+            default:
                 return (Gogo.getRandom(10) + "") + " " + CONSONANT.charAt(Gogo.getRandom(CONSONANT.length()));
         }
     }

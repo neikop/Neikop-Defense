@@ -25,7 +25,8 @@ public class MemoryTwo extends NeikopzGame {
     private int bgrChosen = R.drawable.custom_corner_background_outline_game;
     private int bgrNormal = R.drawable.custom_corner_background_outline;
 
-    private boolean[] isChosen = new boolean[12];
+    private int size = 16;
+    private boolean[] isChosen = new boolean[size];
     private boolean[] coreArray;
 
     public MemoryTwo() {
@@ -67,8 +68,7 @@ public class MemoryTwo extends NeikopzGame {
 
     @Override
     protected void prepareQuiz() {
-        layoutGame.clearAnimation();
-        for (int i = 0; i < 12; i++) isChosen[i] = false;
+        for (int i = 0; i < size; i++) isChosen[i] = false;
         new CountDownTimerAdapter(500, 1) {
             public void onFinish() {
                 goShow();
@@ -92,8 +92,8 @@ public class MemoryTwo extends NeikopzGame {
             }
 
             public void onAnimationEnd(Animation animation) {
-                coreArray = Gogo.getArrayConcenTwo();
-                for (int i = 0; i < 12; i++)
+                coreArray = Gogo.getArrayMemoryTwo();
+                for (int i = 0; i < size; i++)
                     layoutGame.getChildAt(i).setBackgroundResource(coreArray[i] ?
                             bgrChosen : bgrNormal);
                 for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleTwo);
@@ -110,7 +110,7 @@ public class MemoryTwo extends NeikopzGame {
         });
         scaleThree.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < size; i++)
                     layoutGame.getChildAt(i).setBackgroundResource(bgrNormal);
                 for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleFour);
 
@@ -145,7 +145,7 @@ public class MemoryTwo extends NeikopzGame {
         going++;
         gameStatusLayout.setGoingCount(going);
         gameStatusLayout.setGoingProgress(going);
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < size; i++) {
             int one = i;
             layoutGame.getChildAt(one).setOnClickListener(v -> {
                 if (!clickable) return;
@@ -156,7 +156,7 @@ public class MemoryTwo extends NeikopzGame {
                     goNext(false);
                 } else {
                     boolean ok = true;
-                    for (int c = 0; c < 12; c++)
+                    for (int c = 0; c < size; c++)
                         if (isChosen[c] != coreArray[c]) {
                             ok = false;
                             break;

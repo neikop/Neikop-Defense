@@ -73,27 +73,41 @@ public class Gogo {
         else return getArrayObserThree();
     }
 
-    public static boolean[] getArrayConcenTwo() {
-        boolean[] ret = new boolean[12];
+    public static int[] getArrayObserThreeAnswer(int core) {
+        switch (getRandom(4)) {
+            case 1:
+                return new int[]{core, core + 1, core + 2, core + 3, 0};
+            case 2:
+                return new int[]{core - 1, core, core + 1, core + 2, 1};
+            case 3:
+                return new int[]{core - 2, core - 1, core, core + 1, 2};
+            default:
+                return new int[]{core - 3, core - 2, core - 1, core, 3};
+        }
+    }
+
+    public static List<Integer> getArrayMemoryOne() {
+        List<Integer> ret = new ArrayList<>();
+        for (int i = 0; i < 12; i++) ret.add(i);
+        Collections.shuffle(ret);
+        switch (Gogo.getRandom(3)) {
+            case 1:
+                return ret.subList(0, 4);
+            case 2:
+                return ret.subList(0, 5);
+            default:
+                return ret.subList(0, 6);
+        }
+    }
+
+    public static boolean[] getArrayMemoryTwo() {
+        boolean[] ret = new boolean[16];
         int count = 0;
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 16; i++) {
             ret[i] = getRandom(10) < 5;
             if (ret[i]) count++;
         }
-        if (count > 3 & count < 9) return ret;
-        else return getArrayConcenTwo();
-    }
-
-    public static int[] getArrayObserThreeAnswer(int core) {
-        switch (getRandom(4)) {
-            case 0:
-                return new int[]{core, core + 1, core + 2, core + 3, 0};
-            case 1:
-                return new int[]{core - 1, core, core + 1, core + 2, 1};
-            case 2:
-                return new int[]{core - 2, core - 1, core, core + 1, 2};
-            default: // case 3
-                return new int[]{core - 3, core - 2, core - 1, core, 3};
-        }
+        if (count >= 6 & count <= 10) return ret;
+        else return getArrayMemoryTwo();
     }
 }

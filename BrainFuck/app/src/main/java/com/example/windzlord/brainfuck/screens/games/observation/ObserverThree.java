@@ -135,7 +135,7 @@ public class ObserverThree extends NeikopzGame {
 
     @Override
     protected void prepareQuiz() {
-        new CountDownTimerAdapter(1000, 1) {
+        new CountDownTimerAdapter(500, 1) {
             public void onFinish() {
                 goShow();
             }
