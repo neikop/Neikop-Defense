@@ -1,6 +1,7 @@
 package com.example.windzlord.brainfuck.screens.games;
 
 
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
@@ -33,65 +34,73 @@ import butterknife.OnClick;
  */
 public abstract class NeikopzGame extends Fragment {
 
+    protected
     @BindView(R.id.layout_welcome)
-    protected ViewGroup layoutWelcome;
+    ViewGroup layoutWelcome;
 
+    protected
     @BindView(R.id.textView_welcome)
-    protected TextView textViewWelcome;
+    TextView textViewWelcome;
 
-    @BindView(R.id.view_welcome_circle)
-    protected View viewWelcomeCircle;
-
-    @BindView(R.id.view_welcome_left)
-    protected View viewWelcomeLeft;
-
-    @BindView(R.id.view_welcome_right)
-    protected View viewWelcomeRight;
-
+    protected
     @BindView(R.id.layout_next)
-    protected ViewGroup layoutNext;
+    ViewGroup layoutNext;
 
+    protected
     @BindView(R.id.imageView_next)
-    protected ImageView imageViewNext;
+    ImageView imageViewNext;
 
+    protected
     @BindView(R.id.layout_pause)
-    protected ViewGroup layoutPause;
+    ViewGroup layoutPause;
 
+    protected
     @BindView(R.id.view_pause_right)
-    protected View viewPauseRight;
+    View viewPauseRight;
 
+    protected
     @BindView(R.id.view_pause_left)
-    protected View viewPauseLeft;
+    View viewPauseLeft;
 
+    protected
     @BindView(R.id.textView_pause)
-    protected TextView textViewPause;
+    TextView textViewPause;
 
+    protected
     @BindView(R.id.button_back)
-    protected CircleButton buttonBack;
+    CircleButton buttonBack;
 
+    protected
     @BindView(R.id.button_resume)
-    protected CircleButton buttonResume;
+    CircleButton buttonResume;
 
+    protected
     @BindView(R.id.button_exit)
-    protected CircleButton buttonExit;
+    CircleButton buttonExit;
 
+    protected
     @BindView(R.id.layout_game_status)
-    protected GameStatusLayout gameStatusLayout;
+    GameStatusLayout gameStatusLayout;
 
+    protected
     @BindView(R.id.layout_score)
-    protected ViewGroup layoutScore;
+    ViewGroup layoutScore;
 
+    protected
     @BindView(R.id.imageView_score)
-    protected ImageView imageViewScore;
+    ImageView imageViewScore;
 
+    protected
     @BindView(R.id.textView_score)
-    protected TextView textViewScore;
+    TextView textViewScore;
 
+    protected
     @BindView(R.id.textView_bonus)
-    protected TextView textViewBonus;
+    TextView textViewBonus;
 
+    protected
     @BindView(R.id.layout_game)
-    protected ViewGroup layoutGame;
+    ViewGroup layoutGame;
 
     protected boolean onShowing = false;
     protected boolean isPauseOnShowing;
@@ -103,7 +112,6 @@ public abstract class NeikopzGame extends Fragment {
     protected int going;
     protected int score;
     protected final int NUMBER_QUIZ = Gogo.NUMBER_QUIZ;
-    protected final int TIME = Gogo.TIME;
 
     protected View createView(View view) {
         ButterKnife.bind(this, view);
@@ -114,7 +122,7 @@ public abstract class NeikopzGame extends Fragment {
     }
 
     protected void startGame() {
-        gameStatusLayout.updateValues(100, TIME, TIME, 0, NUMBER_QUIZ, 0);
+        gameStatusLayout.updateValues(100, 5000, 5000, 0, NUMBER_QUIZ, 0);
         going = score = 0;
 
         goStartAnimation();
@@ -135,24 +143,15 @@ public abstract class NeikopzGame extends Fragment {
                 new CountDownTimerAdapter(800, 1) {
                     public void onFinish() {
                         ScaleAnimation scale = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
-                        scale.setDuration(400);
+                        scale.setDuration(250);
                         scale.setAnimationListener(new AnimationAdapter() {
                             public void onAnimationEnd(Animation animation) {
                                 layoutWelcome.setVisibility(View.INVISIBLE);
                                 canPause = true;
-                                goPrepare();
                             }
                         });
-                        viewWelcomeCircle.startAnimation(scale);
-
-                        TranslateAnimation goRight = new TranslateAnimation(1, 0, 1, 1, 1, 0, 1, 0);
-                        goRight.setDuration(250);
-                        goRight.setFillAfter(true);
-                        TranslateAnimation goLeft = new TranslateAnimation(1, 0, 1, -1, 1, 0, 1, 0);
-                        goLeft.setDuration(250);
-                        goLeft.setFillAfter(true);
-                        viewWelcomeLeft.startAnimation(goLeft);
-                        viewWelcomeRight.startAnimation(goRight);
+                        layoutWelcome.startAnimation(scale);
+                        goPrepare();
                     }
                 }.start();
             }
@@ -195,20 +194,7 @@ public abstract class NeikopzGame extends Fragment {
                     }
                 });
                 layoutWelcome.setVisibility(View.VISIBLE);
-                goVisibility(View.INVISIBLE, viewWelcomeLeft, viewWelcomeRight);
-                viewWelcomeCircle.startAnimation(scale);
-
-                TranslateAnimation goRight = new TranslateAnimation(1, -1, 1, 0, 1, 0, 1, 0);
-                goRight.setDuration(250);
-                TranslateAnimation goLeft = new TranslateAnimation(1, 1, 1, 0, 1, 0, 1, 0);
-                goLeft.setDuration(250);
-                new CountDownTimerAdapter(150, 1) {
-                    public void onFinish() {
-                        goVisibility(View.VISIBLE, viewWelcomeLeft, viewWelcomeRight);
-                        viewWelcomeLeft.startAnimation(goRight);
-                        viewWelcomeRight.startAnimation(goLeft);
-                    }
-                }.start();
+                layoutWelcome.startAnimation(scale);
             }
         }.start();
     }
@@ -412,7 +398,8 @@ public abstract class NeikopzGame extends Fragment {
                     scale.setDuration(300);
                     scale.setFillAfter(true);
                     layoutScore.startAnimation(scale);
-                    goHighScoreColor();
+                    imageViewScore.setImageResource(R.color.colorCyanLight);
+                    textViewScore.setTextColor(Color.parseColor("#FFFFFF"));
                 }
             }
         });
@@ -420,11 +407,6 @@ public abstract class NeikopzGame extends Fragment {
         goVisibility(View.INVISIBLE, textViewPause, buttonExit, buttonBack, buttonResume);
         viewPauseLeft.startAnimation(goRight);
         viewPauseRight.startAnimation(goLeft);
-    }
-
-    protected void goHighScoreColor() {
-        imageViewScore.setImageResource(R.color.colorCyanLight);
-        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
     }
 
     @OnClick(R.id.button_exit)

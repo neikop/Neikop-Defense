@@ -6,8 +6,8 @@
     <string name="game_calcu_one">Calculator King</string>
     <string name="game_calcu_two">High or low</string>
     <string name="game_calcu_three">Sequential calculation</string>
-    <string name="game_concen_one">Brain shift</string>
-    <string name="game_concen_two">Color match</string>
+    <string name="game_concen_one">Brain Shift</string>
+    <string name="game_concen_two">Color Match</string>
     <string name="game_concen_three">Color and meaning</string>
     <string name="game_memory_one">Memorize order</string>
     <string name="game_memory_two">Flip the card</string>

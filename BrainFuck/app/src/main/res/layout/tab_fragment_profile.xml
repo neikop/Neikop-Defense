@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".screens.tabs.FragmentProfile">
+    tools:context=".screens.tab_fragment.FragmentProfile">
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,11 +12,5 @@
         android:text="@string/profile"
         android:textColor="@color/colorWhite"
         android:textSize="25sp" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/c" />
 
 </RelativeLayout>

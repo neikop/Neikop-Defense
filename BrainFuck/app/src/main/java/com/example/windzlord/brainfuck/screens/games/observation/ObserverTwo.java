@@ -18,6 +18,8 @@ import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
 
+import butterknife.BindView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -109,7 +111,7 @@ public class ObserverTwo extends NeikopzGame {
             public void onAnimationEnd(Animation animation) {
                 onShowing = false;
                 clickable = true;
-                counter = new CountDownTimer(TIME, 1) {
+                counter = new CountDownTimer(5000, 1) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         remain = millisUntilFinished;

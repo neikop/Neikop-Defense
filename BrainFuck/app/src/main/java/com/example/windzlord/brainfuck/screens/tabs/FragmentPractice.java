@@ -64,7 +64,7 @@ public class FragmentPractice extends Fragment {
         ArcLayout.LayoutParams params = new ArcLayout.LayoutParams(15, 15);
         while (spinerView.getChildCount() < 20) {
             ImageView child = new ImageView(getContext());
-            child.setBackground(getResources().getDrawable(R.drawable.custom_oval_view_10dip_size));
+            child.setBackground(getResources().getDrawable(R.drawable.custom_oval_view_10dip));
             spinerView.addView(child, params);
         }
         RotateAnimation rotate = new RotateAnimation(0, 360, 1, 0.5f, 1, 0.5f);
