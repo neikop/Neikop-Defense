@@ -374,7 +374,6 @@ public abstract class NeikopzGame extends Fragment {
         canPause = false;
         layoutGame.setVisibility(View.INVISIBLE);
         layoutPause.setVisibility(View.VISIBLE);
-
         updateInfo(name, index);
     }
 
