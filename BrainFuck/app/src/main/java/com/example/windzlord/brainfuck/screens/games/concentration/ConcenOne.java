@@ -139,10 +139,9 @@ public class ConcenOne extends NeikopzGame {
                     break;
                 }
         }
-
-        boolean finalAnswer = answer;
-        answerYes.setOnClickListener(v -> goClick(finalAnswer));
-        answerNo.setOnClickListener(v -> goClick(!finalAnswer));
+        boolean completed = answer;
+        answerYes.setOnClickListener(v -> goClick(completed));
+        answerNo.setOnClickListener(v -> goClick(!completed));
     }
 
     private void goClick(boolean completed) {

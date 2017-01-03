@@ -18,8 +18,6 @@ import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
 
-import butterknife.BindView;
-
 /**
  * A simple {@link Fragment} subclass.
  */
