@@ -12,7 +12,8 @@ import java.util.Random;
 
 public class Gogo {
 
-    public final static int NUMBER_QUIZ = 5;
+    public static final int NUMBER_QUIZ = 5;
+    public static final int TIME = 5000;
 
     public final static String MEMORY = "Memory";
     public final static String CALCULATION = "Calculation";
@@ -25,13 +26,6 @@ public class Gogo {
         int z = integer % 1000;
         ret += z < 10 ? "00" + z : z < 100 ? "0" + z : "" + z;
         return ret;
-    }
-
-    public static String goFormatTime(int time) {
-        int min = time / 60;
-        int sec = time - min * 60;
-        return "" + (min < 10 ? ("0" + min) : ("" + min))
-                + ":" + (sec < 10 ? ("0" + sec) : ("" + sec));
     }
 
     public static int getRandom(int max) {
@@ -70,12 +64,12 @@ public class Gogo {
 
     public static boolean[] getArrayObserThree() {
         boolean[] ret = new boolean[16];
-        int ok = 0;
+        int count = 0;
         for (int i = 0; i < 16; i++) {
             ret[i] = getRandom(10) < 5;
-            if (ret[i]) ok++;
+            if (ret[i]) count++;
         }
-        if (ok >= 6 | ok <= 10) return ret;
+        if (count >= 6 & count <= 10) return ret;
         else return getArrayObserThree();
     }
 

@@ -103,6 +103,7 @@ public abstract class NeikopzGame extends Fragment {
     protected int going;
     protected int score;
     protected final int NUMBER_QUIZ = Gogo.NUMBER_QUIZ;
+    protected final int TIME = Gogo.TIME;
 
     protected View createView(View view) {
         ButterKnife.bind(this, view);
@@ -113,7 +114,7 @@ public abstract class NeikopzGame extends Fragment {
     }
 
     protected void startGame() {
-        gameStatusLayout.updateValues(100, 5000, 5000, 0, NUMBER_QUIZ, 0);
+        gameStatusLayout.updateValues(100, TIME, TIME, 0, NUMBER_QUIZ, 0);
         going = score = 0;
 
         goStartAnimation();

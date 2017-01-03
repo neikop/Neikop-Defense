@@ -109,7 +109,7 @@ public class ObserverTwo extends NeikopzGame {
             public void onAnimationEnd(Animation animation) {
                 onShowing = false;
                 clickable = true;
-                counter = new CountDownTimer(5000, 1) {
+                counter = new CountDownTimer(TIME, 1) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         remain = millisUntilFinished;
