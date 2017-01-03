@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
     <RelativeLayout
         android:id="@+id/layout_score"
         android:layout_width="80dp"
@@ -124,6 +123,7 @@
             android:text="   Right card - Letter 'Vowel'"
             android:textAlignment="viewStart"
             android:textColor="@color/colorBlackLight" />
+
     </LinearLayout>
 
     <LinearLayout

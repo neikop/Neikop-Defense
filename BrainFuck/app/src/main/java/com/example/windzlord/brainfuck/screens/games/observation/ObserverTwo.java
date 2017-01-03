@@ -81,7 +81,7 @@ public class ObserverTwo extends NeikopzGame {
     protected void prepareQuiz() {
         matched = 0;
         for (int i = 0; i < 8; i++) isChosen[i] = false;
-        new CountDownTimerAdapter(1000, 1) {
+        new CountDownTimerAdapter(500, 1) {
             public void onFinish() {
                 goShow();
             }

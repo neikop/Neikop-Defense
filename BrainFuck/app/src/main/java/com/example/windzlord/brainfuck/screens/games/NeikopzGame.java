@@ -443,6 +443,10 @@ public abstract class NeikopzGame extends Fragment {
         for (View view : views) view.setVisibility(visibility);
     }
 
+    protected void goVisibility(int visibility, List<View> views) {
+        for (View view : views) view.setVisibility(visibility);
+    }
+
     protected List<View> goChildGroup(ViewGroup group) {
         List<View> ret = new ArrayList<>();
         for (int i = 0; i < group.getChildCount(); i++) {
