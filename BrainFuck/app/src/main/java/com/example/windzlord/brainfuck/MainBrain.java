@@ -21,6 +21,5 @@ public class MainBrain extends Application {
     private void settingThingsUp() {
         ManagerNetwork.init(this);
         ManagerPreference.init(this);
-        ManagerPreference.getInstance().putScore(Gogo.OBSERVATION, 2, 30);
     }
 }

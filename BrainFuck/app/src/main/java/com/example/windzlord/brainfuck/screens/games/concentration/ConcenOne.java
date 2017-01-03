@@ -4,18 +4,11 @@ package com.example.windzlord.brainfuck.screens.games.concentration;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.R;
@@ -24,8 +17,6 @@ import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
 
-import java.util.Random;
-
 import butterknife.BindView;
 
 /**
@@ -33,44 +24,26 @@ import butterknife.BindView;
  */
 public class ConcenOne extends NeikopzGame {
 
-    private static final String TAG = ConcenOne.class.getSimpleName();
-    @BindView(R.id.rl_yes)
-    RelativeLayout rl_yes;
+    @BindView(R.id.answer_yes)
+    ViewGroup answerYes;
 
-    @BindView(R.id.rl_no)
-    RelativeLayout rl_no;
+    @BindView(R.id.answer_no)
+    ViewGroup answerNo;
 
-    @BindView(R.id.tv_left_card)
-    TextView tv_left_card;
+    @BindView(R.id.textView_left_card)
+    TextView textViewLeftCard;
 
-    @BindView(R.id.tv_right_card)
-    TextView tv_right_card;
+    @BindView(R.id.textView_right_card)
+    TextView textViewRightCard;
 
-    @BindView(R.id.rl_top)
-    RelativeLayout rl_top;
+    @BindView(R.id.layout_left_card)
+    ViewGroup layoutLeftCard;
 
-    @BindView(R.id.rl_bot)
-    RelativeLayout rl_bot;
+    @BindView(R.id.layout_right_card)
+    ViewGroup layoutRightCard;
 
-    String VOWEL = "AEIOUY";
-    String CONSONANT = "BCDFGHJKLMNPQRSTVWXZ";
-    String tmpText = "";
-
-
-    public String getRandom() {
-        switch (Gogo.getRandom(4)) {
-            case 0:
-                return VOWEL.charAt(Gogo.getRandom(VOWEL.length())) + (Gogo.getRandom(10) + "");
-            case 1:
-                return (Gogo.getRandom(10) + "") + VOWEL.charAt(Gogo.getRandom(VOWEL.length()));
-            case 2:
-                return CONSONANT.charAt(Gogo.getRandom(CONSONANT.length())) + (Gogo.getRandom(10) + "");
-            case 3:
-                return (Gogo.getRandom(10) + "") + CONSONANT.charAt(Gogo.getRandom(CONSONANT.length()));
-        }
-        return "";
-    }
-
+    private final String VOWEL = "AEIUY";
+    private final String CONSONANT = "BCDFGHJKLMNPQRSTVWXZ";
 
     public ConcenOne() {
         // Required empty public constructor
@@ -110,9 +83,9 @@ public class ConcenOne extends NeikopzGame {
             }
 
             public void onAnimationEnd(Animation animation) {
-                tv_right_card.setText("");
-                tv_left_card.setText("");
-                goStartAnimation(scaleTwo, rl_bot, rl_top);
+                textViewRightCard.setText("");
+                textViewLeftCard.setText("");
+                goStartAnimation(scaleTwo, layoutRightCard, layoutLeftCard);
             }
         });
         scaleTwo.setAnimationListener(new AnimationAdapter() {
@@ -120,7 +93,7 @@ public class ConcenOne extends NeikopzGame {
                 showQuiz();
                 onShowing = false;
                 clickable = true;
-                counter = new CountDownTimer(5000, 1) {
+                counter = new CountDownTimer(TIME, 1) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         remain = millisUntilFinished;
@@ -138,41 +111,36 @@ public class ConcenOne extends NeikopzGame {
                 gameStatusLayout.setGoingProgress(going);
             }
         });
-        goStartAnimation(scaleOne, rl_bot, rl_top);
+        goStartAnimation(scaleOne, layoutRightCard, layoutLeftCard);
         if (going >= NUMBER_QUIZ) goEndGame(Gogo.CONCENTRATION, 1);
 
     }
 
     @Override
     protected void showQuiz() {
-        tmpText = getRandom();
-        Log.d(TAG, "tmp Text: " + tmpText);
+        String quiz = getRandom();
         boolean left = Gogo.getRandom(2) == 0;
         boolean answer = false;
         if (left) {
-            tv_left_card.setText(tmpText);
-            tv_right_card.setText("");
-            for (int i = 0; i < tmpText.length(); i++) {
-                if (Character.isDigit(tmpText.charAt(i))) {
-                    answer = Integer.parseInt(tmpText.charAt(i) + "") % 2 == 0;
+            textViewLeftCard.setText(quiz);
+            textViewRightCard.setText("");
+            for (int i = 0; i < quiz.length(); i++)
+                if (Character.isDigit(quiz.charAt(i))) {
+                    answer = Integer.parseInt(quiz.charAt(i) + "") % 2 == 0;
                     break;
                 }
-            }
         } else {
-            tv_right_card.setText(tmpText);
-            tv_left_card.setText("");
-            for (int i = 0; i < tmpText.length(); i++) {
-                if (VOWEL.contains(tmpText.charAt(i) + "")) {
+            textViewRightCard.setText(quiz);
+            textViewLeftCard.setText("");
+            for (int i = 0; i < quiz.length(); i++)
+                if (VOWEL.contains(quiz.charAt(i) + "")) {
                     answer = true;
                     break;
                 }
-            }
         }
-
-        boolean finalAnswer = answer;
-        rl_yes.setOnClickListener(v -> goClick(finalAnswer));
-        rl_no.setOnClickListener(v -> goClick(!finalAnswer));
-
+        boolean completed = answer;
+        answerYes.setOnClickListener(v -> goClick(completed));
+        answerNo.setOnClickListener(v -> goClick(!completed));
     }
 
     private void goClick(boolean completed) {
@@ -180,4 +148,38 @@ public class ConcenOne extends NeikopzGame {
         goNext(completed);
     }
 
+    @Override
+    protected void goPause() {
+        super.goPause();
+        clickable = false;
+    }
+
+    @Override
+    protected void onButtonResume() {
+        super.onButtonResume();
+        new CountDownTimerAdapter(450, 1) {
+            public void onFinish() {
+                clickable = true;
+            }
+        }.start();
+    }
+
+    @Override
+    protected void goHighScoreColor() {
+        imageViewScore.setImageResource(R.color.colorOrangeLight);
+        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
+    private String getRandom() {
+        switch (Gogo.getRandom(4)) {
+            case 0:
+                return VOWEL.charAt(Gogo.getRandom(VOWEL.length())) + " " + (Gogo.getRandom(10));
+            case 1:
+                return (Gogo.getRandom(10) + "") + " " + VOWEL.charAt(Gogo.getRandom(VOWEL.length()));
+            case 2:
+                return CONSONANT.charAt(Gogo.getRandom(CONSONANT.length())) + " " + (Gogo.getRandom(10) + "");
+            default: // case 3
+                return (Gogo.getRandom(10) + "") + " " + CONSONANT.charAt(Gogo.getRandom(CONSONANT.length()));
+        }
+    }
 }
