@@ -62,7 +62,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_outline_game_2">
+            android:background="@drawable/custom_corner_background_outline_game_chosen">
 
             <TextView
                 android:id="@+id/textView_left_card"
@@ -80,7 +80,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_outline_game_2">
+            android:background="@drawable/custom_corner_background_outline_game_chosen">
 
             <TextView
                 android:id="@+id/textView_right_card"
