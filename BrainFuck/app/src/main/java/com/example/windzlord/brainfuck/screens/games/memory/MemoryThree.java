@@ -21,8 +21,6 @@ import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
 
 import java.util.List;
 
-import butterknife.OnClick;
-
 /**
  * A simple {@link Fragment} subclass.
  */
