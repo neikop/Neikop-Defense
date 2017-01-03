@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
+import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 

@@ -55,7 +55,7 @@ public class FragmentObservation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.game_ztype_observation, container, false);
+        View view = inflater.inflate(R.layout.game_zipe_observation, container, false);
         settingThingsUp(view);
 
         return view;

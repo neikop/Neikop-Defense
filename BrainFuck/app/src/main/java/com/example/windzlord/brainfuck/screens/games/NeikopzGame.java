@@ -102,6 +102,7 @@ public abstract class NeikopzGame extends Fragment {
     protected boolean clickable = false;
     protected int going;
     protected int score;
+    protected final int RATE = 1;
     protected final int NUMBER_QUIZ = Gogo.NUMBER_QUIZ;
     protected final int TIME = Gogo.TIME;
 
@@ -343,7 +344,7 @@ public abstract class NeikopzGame extends Fragment {
             public void onTick(long millisUntilFinished) {
                 remain = millisUntilFinished;
                 gameStatusLayout.setTimeProgress((int) millisUntilFinished);
-                gameStatusLayout.setTimeCount((int) (millisUntilFinished / 50));
+                gameStatusLayout.setTimeCount((int) (millisUntilFinished / (50 * RATE)));
             }
 
             @Override
