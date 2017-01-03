@@ -13,7 +13,6 @@ import com.example.windzlord.brainfuck.layout.GameLayout;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
-import com.example.windzlord.brainfuck.screens.games.observation.ObserverSix;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverFive;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverOne;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverFour;
@@ -46,9 +45,6 @@ public class FragmentObservation extends Fragment {
     @BindView(R.id.game_obser_five)
     GameLayout gameObserFive;
 
-    @BindView(R.id.game_obser_six)
-    GameLayout gameObserSix;
-
 
     public FragmentObservation() {
         // Required empty public constructor
@@ -77,7 +73,7 @@ public class FragmentObservation extends Fragment {
 
     private void getInfo() {
         GameLayout[] games = {gameObserOne, gameObserTwo, gameObserThree,
-                gameObserFour, gameObserFive, gameObserSix};
+                gameObserFour, gameObserFive};
         for (int i = 0; i < games.length; i++) {
             games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.OBSERVATION, i + 1));
             games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.OBSERVATION, i + 1));
@@ -120,12 +116,6 @@ public class FragmentObservation extends Fragment {
     public void goGameObserFive() {
         if (gameObserFive.isUnlocked())
             EventBus.getDefault().post(new FragmentChanger(new ObserverFive(), true));
-    }
-
-    @OnClick(R.id.game_obser_six)
-    public void goGameObserSix() {
-        if (gameObserSix.isUnlocked())
-            EventBus.getDefault().post(new FragmentChanger(new ObserverSix(), true));
     }
 
 }

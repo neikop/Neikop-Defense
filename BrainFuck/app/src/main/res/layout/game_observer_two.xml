@@ -51,8 +51,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="240dp">
+        android:layout_height="410dp"
+        android:layout_marginTop="120dp">
 
         <GridLayout
             android:id="@+id/layout_game"

@@ -9,13 +9,7 @@
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
         android:id="@+id/layout_game_status"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:going_count="1"
-        app:going_max="10"
-        app:going_progress="1"
-        app:time_count="100"
-        app:time_max="5000"
-        app:time_progress="5000" />
+        android:layout_height="wrap_content" />
 
 
     <RelativeLayout
