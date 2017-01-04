@@ -401,7 +401,7 @@ public abstract class NeikopzGame extends Fragment {
         //update Highscore in Online Database
         if(!userID.equals("")){
             try {
-                DBContextSV.getInstance().updateHighScore(userID, name, index,
+                DBContextSV.getInstance().updateHighScore(name, index,
                         expCurrent,
                         level,
                         Math.max(score, ManagerPreference.getInstance().getScore(name, index)));

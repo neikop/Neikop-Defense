@@ -109,7 +109,7 @@ public class DBContextSV {
 
     }
 
-    public void updateHighScore(String userID, String type, int positon, int nExp, int nLvl, int nHighScore) throws ExecutionException, InterruptedException {
+    public void updateHighScore(String type, int positon, int nExp, int nLvl, int nHighScore) throws ExecutionException, InterruptedException {
         Log.d(TAG, "begin Update");
         for(HighScore highScore:tmpListHighScore){
             if(highScore.getType().equals(type) && highScore.getPosition() == positon){

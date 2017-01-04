@@ -158,24 +158,6 @@ public class CalcuOne extends NeikopzGame {
         random();
     }
 
-    protected void updateInfo(String name, int index) {
-        goEndAnimation(score > ManagerPreference.getInstance().getScore(name, index));
-
-        int level = ManagerPreference.getInstance().getLevel(name, index);
-        int expNext = ManagerPreference.getInstance().getExpNext(name, index);
-        int expCurrent = ManagerPreference.getInstance().getExpCurrent(name, index);
-
-        expCurrent += score;
-        if (expCurrent >= expNext) {
-            expCurrent = expCurrent - expNext;
-            level++;
-        }
-
-        ManagerPreference.getInstance().putLevel(name, index, level);
-        ManagerPreference.getInstance().putExpCurrent(name, index, expCurrent);
-        ManagerPreference.getInstance().putScore(name, index,
-                Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
-    }
 
     private void goClick(boolean completed) {
         if (!clickable) return;

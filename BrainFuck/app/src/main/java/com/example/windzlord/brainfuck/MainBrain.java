@@ -20,10 +20,10 @@ public class MainBrain extends Application {
         super.onCreate();
         settingThingsUp();
         ManagerPreference managerPreference = new ManagerPreference(getBaseContext());
-        managerPreference.putLevel(Gogo.CALCULATION,2,2);
+//        managerPreference.putLevel(Gogo.CALCULATION,2,2);
 
         ManagerPreference.getInstance().putUserID("daicahai");
-        String userID = ManagerPreference.getInstance().getUserID();
+//        String userID = ManagerPreference.getInstance().getUserID();
         DBContextSV.getInstance().settingThingsUp("daicahai");
     }
 
