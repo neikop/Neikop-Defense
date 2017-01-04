@@ -15,6 +15,7 @@ public class ManagerPreference {
     private static final String LEVEL = "Level";
     private static final String EXP_CURRENT = "ExpCurr";
     private static final String UNLOCK = "Unlock";
+    private static final String USER_ID = "UserID";
 
     private SharedPreferences sharedPreferences;
 
@@ -62,6 +63,14 @@ public class ManagerPreference {
 
     public boolean isUnlocked(String type, int index) {
         return index == 1 || getLevel(type, index - 1) > 1;
+    }
+
+    public void putUserID(String userID) {
+        sharedPreferences.edit().putString(USER_ID, userID).apply();
+    }
+
+    public String getUserID() {
+        return sharedPreferences.getString(USER_ID, "");
     }
 
     public void clear() {

@@ -17,11 +17,13 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameStatusLayout;
+import com.example.windzlord.brainfuck.managers.DBContextSV;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import at.markushi.ui.CircleButton;
 import butterknife.BindView;
@@ -383,6 +385,7 @@ public abstract class NeikopzGame extends Fragment {
         int level = ManagerPreference.getInstance().getLevel(name, index);
         int expNext = ManagerPreference.getInstance().getExpNext(name, index);
         int expCurrent = ManagerPreference.getInstance().getExpCurrent(name, index);
+        String userID = ManagerPreference.getInstance().getUserID();
 
         expCurrent += score;
         if (expCurrent >= expNext) {
@@ -394,6 +397,20 @@ public abstract class NeikopzGame extends Fragment {
         ManagerPreference.getInstance().putExpCurrent(name, index, expCurrent);
         ManagerPreference.getInstance().putScore(name, index,
                 Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
+
+        //update Highscore in Online Database
+        if(!userID.equals("")){
+            try {
+                DBContextSV.getInstance().updateHighScore(userID, name, index,
+                        expCurrent,
+                        level,
+                        Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     protected void goEndAnimation(boolean getHigh) {
