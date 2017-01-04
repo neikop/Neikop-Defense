@@ -19,7 +19,7 @@ public class MainBrain extends Application {
         super.onCreate();
         settingThingsUp();
         ManagerPreference managerPreference = new ManagerPreference(getBaseContext());
-        managerPreference.putLevel(Gogo.CALCULATION,1,2);
+        managerPreference.putLevel(Gogo.CALCULATION,2,2);
 
     }
 

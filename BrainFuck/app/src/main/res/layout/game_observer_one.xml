@@ -6,6 +6,16 @@
     android:background="@color/colorGame"
     tools:context="com.example.windzlord.brainfuck.screens.games.observation.ObserverOne">
 
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bbbbbbbbbbbb"
+            android:id="@+id/gifImageView" />
+    </RelativeLayout>
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
         android:id="@+id/layout_game_status"
         android:layout_width="match_parent"

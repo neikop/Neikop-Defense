@@ -162,7 +162,7 @@
         android:layout_height="150dp"
         android:layout_below="@+id/layout_score"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView

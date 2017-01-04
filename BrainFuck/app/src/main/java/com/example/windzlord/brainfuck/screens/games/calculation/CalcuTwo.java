@@ -32,11 +32,7 @@ public class CalcuTwo extends NeikopzGame {
 
     @Override
     protected void goPrepare() {
-        new CountDownTimerAdapter(500, 1) {
-            public void onFinish() {
-                goShow();
-            }
-        }.start();
+       prepareQuiz();
     }
 
     @Override
