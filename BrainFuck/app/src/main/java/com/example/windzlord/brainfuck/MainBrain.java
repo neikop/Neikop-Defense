@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
+import com.example.windzlord.brainfuck.managers.DBContextSV;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
@@ -21,11 +22,14 @@ public class MainBrain extends Application {
         ManagerPreference managerPreference = new ManagerPreference(getBaseContext());
         managerPreference.putLevel(Gogo.CALCULATION,1,2);
 
+        ManagerPreference.getInstance().putUserID("daicahai");
+        String userID = ManagerPreference.getInstance().getUserID();
+        DBContextSV.getInstance().settingThingsUp("daicahai");
     }
 
     private void settingThingsUp() {
         ManagerNetwork.init(this);
         ManagerPreference.init(this);
-
+        DBContextSV.init(this);
     }
 }

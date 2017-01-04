@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameLayout;
+import com.example.windzlord.brainfuck.managers.DBContextSV;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
+import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverFive;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverOne;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverFour;
@@ -20,6 +22,9 @@ import com.example.windzlord.brainfuck.screens.games.observation.ObserverThree;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverTwo;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,6 +79,7 @@ public class FragmentObservation extends Fragment {
     private void getInfo() {
         GameLayout[] games = {gameObserOne, gameObserTwo, gameObserThree,
                 gameObserFour, gameObserFive};
+
         for (int i = 0; i < games.length; i++) {
             games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.OBSERVATION, i + 1));
             games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.OBSERVATION, i + 1));
@@ -81,6 +87,7 @@ public class FragmentObservation extends Fragment {
             games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.OBSERVATION, i + 1));
             games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.OBSERVATION, i + 1));
         }
+
     }
 
     @OnClick(R.id.button_back)
