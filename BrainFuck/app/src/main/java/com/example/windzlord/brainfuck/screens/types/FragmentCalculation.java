@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck.screens.types;
 
 
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,7 @@ public class FragmentCalculation extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.game_ztype_calculation, container, false);
+
         settingThingsUp(view);
 
         return view;

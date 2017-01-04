@@ -43,4 +43,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }

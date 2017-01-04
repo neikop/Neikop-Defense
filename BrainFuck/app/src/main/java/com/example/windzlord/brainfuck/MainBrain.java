@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
+import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.screens.games.calculation.CalcuOne;
@@ -17,6 +18,9 @@ public class MainBrain extends Application {
     public void onCreate() {
         super.onCreate();
         settingThingsUp();
+        ManagerPreference managerPreference = new ManagerPreference(getBaseContext());
+        managerPreference.putLevel(Gogo.CALCULATION,1,2);
+
     }
 
     private void settingThingsUp() {
