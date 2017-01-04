@@ -164,7 +164,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
-<<<<<<< HEAD
+
         <TextView
             android:layout_marginTop="5dp"
             android:id="@+id/tv_cal"
@@ -180,34 +180,6 @@
             android:background="@drawable/back"
             android:layout_width="60dp"
             android:layout_height="50dp">
-=======
-
-        <RelativeLayout
-            android:id="@+id/layout_left_card"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_outline_game_chosen">
-
-            <TextView
-                android:id="@+id/textView_left_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/colorCyanDark"
-                android:textSize="34sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_right_card"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_outline_game_chosen">
->>>>>>> d510d394b0337359f2a03c9c34fd339aeba20f38
 
             <TextView
                 android:text=""
@@ -219,7 +191,6 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
-
     </LinearLayout>
 
     <RelativeLayout
