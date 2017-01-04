@@ -19,17 +19,17 @@ public class MainBrain extends Application {
     public void onCreate() {
         super.onCreate();
         settingThingsUp();
-        ManagerPreference managerPreference = new ManagerPreference(getBaseContext());
-//        managerPreference.putLevel(Gogo.CALCULATION,2,2);
-
-        ManagerPreference.getInstance().putUserID("daicahai");
-//        String userID = ManagerPreference.getInstance().getUserID();
-        DBContextSV.getInstance().settingThingsUp("daicahai");
     }
 
     private void settingThingsUp() {
         ManagerNetwork.init(this);
         ManagerPreference.init(this);
         DBContextSV.init(this);
+
+
+        //Test
+        ManagerPreference.getInstance().putUserID("daicahai");
+//        String userID = ManagerPreference.getInstance().getUserID();
+        DBContextSV.getInstance().settingThingsUp("daicahai");
     }
 }
