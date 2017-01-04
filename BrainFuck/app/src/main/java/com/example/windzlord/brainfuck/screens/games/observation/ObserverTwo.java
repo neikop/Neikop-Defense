@@ -36,8 +36,8 @@ public class ObserverTwo extends NeikopzGame {
             R.drawable.game_iz_resouce_23, R.drawable.game_iz_resouce_24, R.drawable.game_iz_resouce_25};
 
     private boolean isChosen[] = new boolean[8];
-    private int matched;
     private int[] coreArray;
+    private int matched;
 
     public ObserverTwo() {
         // Required empty public constructor
@@ -98,6 +98,7 @@ public class ObserverTwo extends NeikopzGame {
             public void onAnimationStart(Animation animation) {
                 onShowing = true;
             }
+
             public void onAnimationEnd(Animation animation) {
                 coreArray = Gogo.getArrayObserTwo(imageResources.length);
                 for (int i = 0; i < 8; i++)

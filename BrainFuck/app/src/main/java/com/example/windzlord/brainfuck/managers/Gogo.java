@@ -44,9 +44,9 @@ public class Gogo {
         }
     }
 
-    public static int[] getArrayObserTwo(int max) {
+    public static int[] getArrayObserTwo(int size) {
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < max; i++) {
+        for (int i = 0; i < size; i++) {
             list.add(i);
         }
         Collections.shuffle(list);
@@ -109,5 +109,12 @@ public class Gogo {
         }
         if (count >= 6 & count <= 10) return ret;
         else return getArrayMemoryTwo();
+    }
+
+    public static List<Integer> getArrayMemoryThree() {
+        List<Integer> ret = new ArrayList<>();
+        for (int i = 0; i < 20; i++) ret.add(i / 2);
+        Collections.shuffle(ret);
+        return ret;
     }
 }

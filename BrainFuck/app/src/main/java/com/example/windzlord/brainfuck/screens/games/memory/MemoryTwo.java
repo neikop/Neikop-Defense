@@ -52,7 +52,6 @@ public class MemoryTwo extends NeikopzGame {
                 for (View view : goChildGroup(layoutGame)) {
                     ((ImageView) view).setImageResource(R.color.colorFaded);
                     view.setBackgroundResource(bgrNormal);
-                    view.setVisibility(View.VISIBLE);
                 }
                 for (View view : goChildGroup(layoutGame))
                     view.startAnimation(scaleTwo);
