@@ -54,30 +54,30 @@
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_below="@+id/layout_score"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="80dp"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="170dp"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:id="@+id/cal_1"
+            android:layout_width="250dp"
             android:layout_height="60dp"
             android:background="@drawable/back" />
 
         <TextView
-            android:layout_marginTop="50dp"
-            android:layout_width="170dp"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:id="@+id/cal_2"
+            android:layout_marginTop="70dp"
+            android:layout_width="250dp"
             android:layout_height="60dp"
             android:background="@drawable/back" />
 
 
     </LinearLayout>
-    <Button
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/back"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        />
+
     <RelativeLayout
         android:id="@+id/layout_welcome"
         android:layout_width="match_parent"
@@ -228,6 +228,25 @@
             android:src="@drawable/game_ic_remove_circle_outline"
             app:cb_color="@color/colorCyanLight" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WHAT CALCULATION IS GREATER?"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="67dp"
+            android:id="@+id/textView"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -193,7 +193,7 @@ public class CalcuOne extends NeikopzGame {
     }
 
     private void setCalculation(CalculationOne cal) {
-        tv_cal.setText(cal.getCalculation());
+        tv_cal.setText(cal.getCalculation()+"=");
         boolean answer =false;
         btn_equals.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,7 +208,7 @@ public class CalcuOne extends NeikopzGame {
                     mediaPlayer.start();
                     tv_result.setText("");
                     results = "";
-                     goClick(true);
+                    goClick(true);
                 } else {
                     mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong_sound);
                     mediaPlayer.start();

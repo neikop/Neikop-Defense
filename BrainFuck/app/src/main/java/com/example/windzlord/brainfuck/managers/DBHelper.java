@@ -15,6 +15,7 @@ public class DBHelper extends SQLiteAssetHelper {
     private final static String DB_NAME = "db_cal.db";
     private final static int DB_VERSION = 1;
     private static final String QUOTE_TABLE_NAME = "cal_king";
+    private static final String QUOTE_TABLE_NAME_2 ="cal_2";
     private static final String QUOTE_COLUMN_ID = "id";
     private static final String QUOTE_COLUMN_CALCULATION = "calculation";
     private static final String QUOTE_COLUMN_RESULTS = "results";
@@ -35,6 +36,22 @@ public class DBHelper extends SQLiteAssetHelper {
     public CalculationOne getrandomCalculation(int levels) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.query(QUOTE_TABLE_NAME,
+                QUOTE_COLUMNS,
+                QUOTE_COLUMN_LEVELS +"=?",
+                new String[]{String.valueOf(levels)},
+                null,
+                null,
+                "RANDOM()",
+                "1");
+
+        if (cursor.moveToNext()){
+            return create(cursor);
+        }
+        return null;
+    }
+    public CalculationOne getrandomCalculation2(int levels) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.query(QUOTE_TABLE_NAME_2,
                 QUOTE_COLUMNS,
                 QUOTE_COLUMN_LEVELS +"=?",
                 new String[]{String.valueOf(levels)},
