@@ -1,6 +1,7 @@
 package com.example.windzlord.brainfuck.screens;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -24,7 +25,7 @@ public class FragmentWelcome extends Fragment {
 
     @BindView(R.id.progressBar_welcome)
     SeekBar progressBarWelcome;
-
+    MediaPlayer mediaPlayer = new MediaPlayer();
     public FragmentWelcome() {
         // Required empty public constructor
     }
@@ -47,6 +48,8 @@ public class FragmentWelcome extends Fragment {
     }
 
     private void getContent() {
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.welcome);
+        mediaPlayer.start();
         progressBarWelcome.setMax(3000);
         progressBarWelcome.setProgress(0);
         new CountDownTimer(3500, 1) {
