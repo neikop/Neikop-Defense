@@ -27,7 +27,7 @@ public class MainBrain extends Application {
         DBContextSV.init(this);
 
 
-        //Test
+        //Test default UserID
         ManagerPreference.getInstance().putUserID("daicahai");
 //        String userID = ManagerPreference.getInstance().getUserID();
         DBContextSV.getInstance().settingThingsUp("daicahai");
