@@ -26,10 +26,16 @@ public class MainBrain extends Application {
         ManagerNetwork.init(this);
         ManagerPreference.init(this);
         DBContextSV.init(this);
+
         //Test
 //        ManagerPreference.getInstance().putUserID("daicahai");
 ////        String userID = ManagerPreference.getInstance().getUserID();
 //        DBContextSV.getInstance().settingThingsUp("daicahai");
         ManagerPreference.getInstance().putLevel(Gogo.CALCULATION,1,2);
+        //Test default UserID
+        ManagerPreference.getInstance().putUserID("daicahai");
+//        String userID = ManagerPreference.getInstance().getUserID();
+        DBContextSV.getInstance().settingThingsUp("daicahai");
+
     }
 }

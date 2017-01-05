@@ -38,8 +38,8 @@ public class DBContextSV {
                 @Override
                 public OkHttpClient createOkHttpClient() {
                     OkHttpClient client = new OkHttpClient();
-                    client.setReadTimeout(20, TimeUnit.SECONDS);
-                    client.setWriteTimeout(20, TimeUnit.SECONDS);
+                    client.setReadTimeout(5, TimeUnit.SECONDS);
+                    client.setWriteTimeout(5, TimeUnit.SECONDS);
                     return client;
                 }
             });
@@ -47,6 +47,7 @@ public class DBContextSV {
             this.mServiceTable = mClient.getTable(HighScore.class);
         } catch (MalformedURLException e) {
             Log.d(TAG, "can't connect");
+            ManagerPreference.getInstance().putUserID("");
         }
     }
 
@@ -95,9 +96,9 @@ public class DBContextSV {
 
                     }
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    ManagerPreference.getInstance().putUserID("");
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    ManagerPreference.getInstance().putUserID("");
                 }
 
                 return null;
