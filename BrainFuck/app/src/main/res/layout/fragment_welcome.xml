@@ -2,24 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/welcome"
     tools:context=".screens.tabs.FragmentRanking">
 
-    <TextView
-        android:id="@+id/textView_welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/welcome"
-        android:textColor="@color/colorWhite"
-        android:textSize="40sp" />
-
     <SeekBar
+
+        android:layout_alignParentBottom="true"
         android:id="@+id/progressBar_welcome"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/textView_welcome"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
+
+    <RelativeLayout
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/brain_master"
+            android:id="@+id/gifImageView" />
+    </RelativeLayout>
 
 </RelativeLayout>
