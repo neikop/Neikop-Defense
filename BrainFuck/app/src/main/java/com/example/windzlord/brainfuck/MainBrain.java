@@ -32,6 +32,7 @@ public class MainBrain extends Application {
         //Test default UserID
 //        ManagerPreference.getInstance().putUserID("daicahai");
 //        String userID = ManagerPreference.getInstance().getUserID();
+
 //        DBContextSV.getInstance().settingStartApp("daicahai");
 
         if(ManagerNetwork.getInstance().isConnectedToInternet()){
@@ -40,6 +41,9 @@ public class MainBrain extends Application {
                 DBContextSV.getInstance().settingStartApp(userID);
             }
         }
+
+//        DBContextSV.getInstance().settingThingsUp("daicahai");
+
 
     }
 }

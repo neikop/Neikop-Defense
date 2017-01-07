@@ -2,7 +2,6 @@ package com.example.windzlord.brainfuck.screens.types;
 
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +10,14 @@ import android.view.ViewGroup;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameLayout;
-import com.example.windzlord.brainfuck.managers.DBContextSV;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
-import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.example.windzlord.brainfuck.screens.games.calculation.CalcuOne;
 import com.example.windzlord.brainfuck.screens.games.calculation.CalcuThree;
 import com.example.windzlord.brainfuck.screens.games.calculation.CalcuTwo;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorCyanLight"
-    tools:context="com.example.windzlord.brainfuck.screens.games.concentration.ConcenOne">
+    tools:context="com.example.windzlord.brainfuck.screens.games.calculation.CalcuTwo">
 
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
         android:id="@+id/layout_game_status"
@@ -49,34 +49,43 @@
         android:textStyle="bold"
         android:visibility="invisible" />
 
-    <LinearLayout
-        android:id="@+id/layout_game"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:layout_below="@+id/layout_score"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:layout_marginTop="170dp">
 
-        <TextView
-            android:textSize="30dp"
-            android:textAlignment="center"
-            android:id="@+id/cal_1"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:background="@drawable/back" />
+        <LinearLayout
+            android:id="@+id/layout_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:textSize="30dp"
-            android:textAlignment="center"
-            android:id="@+id/cal_2"
-            android:layout_marginTop="70dp"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:background="@drawable/back" />
+            <TextView
+                android:id="@+id/textView_game_top"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_corner_background_outline_game_chosen"
+                android:paddingTop="7dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorRed"
+                android:textSize="30dp" />
 
+            <TextView
+                android:id="@+id/textView_game_bottom"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/custom_corner_background_outline_game_chosen"
+                android:paddingTop="7dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorRed"
+                android:textSize="30dp" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layout_welcome"
@@ -233,20 +242,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="67dp"
             android:text="WHAT CALCULATION IS GREATER?"
             android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="67dp"
-            android:id="@+id/textView"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </RelativeLayout>

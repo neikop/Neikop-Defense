@@ -4,19 +4,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="welcome">WELCOME</string>
     <string name="game_calcu_one">Calculator King</string>
-    <string name="game_calcu_two">Calculator 2</string>
-    <string name="game_calcu_three">Calculator 3</string>
+    <string name="game_calcu_two">High or low</string>
+    <string name="game_calcu_three">Sequential calculator </string>
     <string name="game_concen_one">Brain shift</string>
-    <string name="game_concen_two">Concentration 2</string>
-    <string name="game_concen_three">Concentration 3</string>
+    <string name="game_concen_two">Color and meaning</string>
+    <string name="game_concen_three">Track color</string>
     <string name="game_memory_one">Memorize order</string>
     <string name="game_memory_two">Flip the card</string>
     <string name="game_memory_three">Flip and remember</string>
     <string name="game_observer_one">Check shape</string>
     <string name="game_observer_two">Make a pair</string>
     <string name="game_observer_three">Count card</string>
-    <string name="game_observer_four">Observer 4</string>
-    <string name="game_observer_five">Observer 5</string>
     <string name="game_demo_name">Demo Game</string>
     <string name="feedback">FEEDBACK</string>
     <string name="practice">PRACTICE</string>
@@ -26,7 +24,7 @@
     <string name="concentration">Concentration</string>
     <string name="calculation">Calculation</string>
     <string name="observation">Observation</string>
-
+    <string name="facebook_app_id">397853117225646</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

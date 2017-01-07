@@ -76,7 +76,6 @@ public class GameLayout extends FrameLayout {
     private void initFromContext(Context context, AttributeSet attrs) {
         View view = inflate(context, R.layout.custom_game_layout, this);
         ButterKnife.bind(this, view);
-
         getValues(context.obtainStyledAttributes(attrs, R.styleable.GameLayout));
     }
 
