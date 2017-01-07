@@ -65,7 +65,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:name="@string/game_observer_one" />
+                    app:name="@string/game_observer_one"
+                    app:src="@drawable/ic_cover_game_obser_1" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_obser_two"
@@ -74,7 +75,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:name="@string/game_observer_two" />
+                    app:name="@string/game_observer_two"
+                    app:src="@drawable/ic_cover_game_obser_2" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_obser_three"

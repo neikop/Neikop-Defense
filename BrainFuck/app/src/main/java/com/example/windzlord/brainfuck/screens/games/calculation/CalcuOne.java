@@ -25,7 +25,7 @@ public class CalcuOne extends NeikopzGame {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return createView(createView(inflater.inflate(R.layout.game_calcu_one, container, false)));
+        return inflater.inflate(R.layout.game_calcu_one, container, false);
     }
 
     @Override

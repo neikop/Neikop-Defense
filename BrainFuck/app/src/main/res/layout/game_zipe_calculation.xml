@@ -65,7 +65,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:name="@string/game_calcu_one"/>
+                    app:name="@string/game_calcu_one"
+                    app:src="@drawable/ic_cover_game_calcu_1" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_calcu_two"
@@ -74,7 +75,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:name="@string/game_calcu_two"/>
+                    app:name="@string/game_calcu_two"
+                    app:src="@drawable/ic_cover_game_calcu_2" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_calcu_three"

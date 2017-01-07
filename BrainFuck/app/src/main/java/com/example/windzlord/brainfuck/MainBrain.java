@@ -26,32 +26,15 @@ public class MainBrain extends Application {
 
         ManagerPreference.getInstance().putUserID("");
 
-        for (int i = 1; i < 4; i++) {
-            ManagerPreference.getInstance().putLevel(Gogo.OBSERVATION, i, 2);
-            ManagerPreference.getInstance().putLevel(Gogo.CALCULATION, i, 2);
-            ManagerPreference.getInstance().putLevel(Gogo.MEMORY, i, 2);
-            ManagerPreference.getInstance().putLevel(Gogo.CONCENTRATION, i, 2);
-        }
+        for (int i = 1; i < 4; i++)
+            for (String game : Gogo.GAME_LIST)
+                ManagerPreference.getInstance().putLevel(game, i, 2);
 
-        //Test
-//        ManagerPreference.getInstance().putUserID("daicahai");
-////        String userID = ManagerPreference.getInstance().getUserID();
-//        DBContextSV.getInstance().settingStartApp("daicahai");
-//        ManagerPreference.getInstance().putLevel(Gogo.CALCULATION,1,2);
-        //Test default UserID
-//        ManagerPreference.getInstance().putUserID("daicahai");
-//        String userID = ManagerPreference.getInstance().getUserID();
-
-//        DBContextSV.getInstance().settingStartApp("daicahai");
-
-        if(ManagerNetwork.getInstance().isConnectedToInternet()){
+        if (ManagerNetwork.getInstance().isConnectedToInternet()) {
             String userID = ManagerPreference.getInstance().getUserID();
-            if(!userID.equals("")){
+            if (!userID.equals(""))
                 DBContextSV.getInstance().settingStartApp(userID);
-            }
         }
-
-//        DBContextSV.getInstance().settingThingsUp("daicahai");
 
     }
 }
