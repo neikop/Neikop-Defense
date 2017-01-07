@@ -4,20 +4,19 @@ package com.example.windzlord.brainfuck.objects.models;
  * Created by Ha San~ on 12/31/2016.
  */
 
-public class CalculationOne {
+public class Calculation {
     private int id;
     private String calculation;
     private int results;
-    private int levels;
 
-    public CalculationOne(int id, String calculation, int results, int levels) {
+    public Calculation(int id, String calculation, int results, int levels) {
         this.id = id;
         this.calculation = calculation;
         this.results = results;
-        this.levels = levels;
     }
 
-    public CalculationOne() {
+    public Calculation() {
+
     }
 
     public int getId() {
@@ -38,17 +37,5 @@ public class CalculationOne {
 
     public int getResults() {
         return results;
-    }
-
-    public void setResults(int results) {
-        this.results = results;
-    }
-
-    public int getLevels() {
-        return levels;
-    }
-
-    public void setLevels(int levels) {
-        this.levels = levels;
     }
 }

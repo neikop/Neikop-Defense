@@ -10,15 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.DBHelper;
+import com.example.windzlord.brainfuck.managers.ManagerDatabaseGame;
 import com.example.windzlord.brainfuck.managers.Gogo;
-import com.example.windzlord.brainfuck.objects.models.CalculationOne;
+import com.example.windzlord.brainfuck.objects.models.Calculation;
 import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
 
 import butterknife.BindView;
@@ -28,19 +27,16 @@ import butterknife.BindView;
  */
 public class CalcuTwo extends NeikopzGame {
 
-    @BindView(R.id.cal_1)
-    TextView tv_cal1;
-    @BindView(R.id.cal_2)
-    TextView tv_cal2;
+    @BindView(R.id.textView_game_top)
+    TextView textViewTop;
 
-    @BindView(R.id.layout_welcome)
-    RelativeLayout layoutWelcome;
+    @BindView(R.id.textView_game_bottom)
+    TextView textViewBottom;
 
-    @BindView(R.id.textView_welcome)
-    TextView textViewWelcome;
     MediaPlayer mediaPlayer = new MediaPlayer();
-    int result_cal1 = 0;
-    int result_cal2 = 0;
+
+    int resultCalTop = 0;
+    int resultCalBottom = 0;
 
     public CalcuTwo() {
         // Required empty public constructor
@@ -51,8 +47,7 @@ public class CalcuTwo extends NeikopzGame {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = createView(inflater.inflate(R.layout.game_calcu_two, container, false));
-        return v;
+        return createView(createView(inflater.inflate(R.layout.game_calcu_two, container, false)));
     }
 
     @Override
@@ -82,7 +77,7 @@ public class CalcuTwo extends NeikopzGame {
 
             public void onAnimationEnd(Animation animation) {
                 random();
-                goStartAnimation(scaleTwo, tv_cal1, tv_cal2);
+                goStartAnimation(scaleTwo, textViewTop, textViewBottom);
             }
         });
         scaleTwo.setAnimationListener(new AnimationAdapter() {
@@ -107,7 +102,7 @@ public class CalcuTwo extends NeikopzGame {
                 gameStatusLayout.setGoingProgress(going);
             }
         });
-        goStartAnimation(scaleOne, tv_cal1, tv_cal2);
+        goStartAnimation(scaleOne, textViewTop, textViewBottom);
         if (going >= NUMBER_QUIZ) goEndGame(Gogo.CALCULATION, 2);
     }
 
@@ -117,45 +112,38 @@ public class CalcuTwo extends NeikopzGame {
     }
 
     private void random() {
-        CalculationOne cal1 = new CalculationOne();
-        cal1 = DBHelper.getInstance().getrandomCalculation2(2);
-        CalculationOne cal2 = new CalculationOne();
-        cal2 = DBHelper.getInstance().getrandomCalculation2(2);
-        setCalculation(cal1, cal2);
+        Calculation calcuOne = ManagerDatabaseGame.getInstance().getRandomCalculation(2);
+        Calculation calcuTwo = ManagerDatabaseGame.getInstance().getRandomCalculation(2);
+        setCalculation(calcuOne, calcuTwo);
     }
 
-    private void setCalculation(CalculationOne cal1, CalculationOne cal2) {
-        tv_cal1.setText(cal1.getCalculation());
-        tv_cal2.setText(cal2.getCalculation());
-        result_cal1 = cal1.getResults();
-        result_cal2 = cal2.getResults();
+    private void setCalculation(Calculation calcuOne, Calculation calcuTwo) {
+        textViewTop.setText(calcuOne.getCalculation());
+        textViewBottom.setText(calcuTwo.getCalculation());
+        resultCalTop = calcuOne.getResults();
+        resultCalBottom = calcuTwo.getResults();
 
-        tv_cal1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (result_cal1 > result_cal2) {
-                    mediaPlayer = MediaPlayer.create(getContext(), R.raw.true_sound);
-                    mediaPlayer.start();
-                    goClick(true);
-                } else {
-                    mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong_sound);
-                    mediaPlayer.start();
-                    goClick(false);
-                }
+        textViewTop.setOnClickListener(view -> {
+            if (resultCalTop > resultCalBottom) {
+//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.true_sound);
+//                mediaPlayer.start();
+                goClick(true);
+            } else {
+//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong_sound);
+//                mediaPlayer.start();
+                goClick(false);
             }
         });
-        tv_cal2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (result_cal1 < result_cal2) {
-                    mediaPlayer = MediaPlayer.create(getContext(), R.raw.true_sound);
-                    mediaPlayer.start();
-                    goClick(true);
-                } else {
-                    mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong_sound);
-                    mediaPlayer.start();
-                    goClick(false);
-                }
+
+        textViewBottom.setOnClickListener(view -> {
+            if (resultCalTop < resultCalBottom) {
+//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.true_sound);
+//                mediaPlayer.start();
+                goClick(true);
+            } else {
+//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong_sound);
+//                mediaPlayer.start();
+                goClick(false);
             }
         });
 

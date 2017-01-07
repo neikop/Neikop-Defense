@@ -10,21 +10,14 @@ import android.view.ViewGroup;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameLayout;
-import com.example.windzlord.brainfuck.managers.DBContextSV;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
-import com.example.windzlord.brainfuck.objects.models.HighScore;
-import com.example.windzlord.brainfuck.screens.games.observation.ObserverFive;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverOne;
-import com.example.windzlord.brainfuck.screens.games.observation.ObserverFour;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverThree;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverTwo;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,12 +36,6 @@ public class FragmentObservation extends Fragment {
 
     @BindView(R.id.game_obser_three)
     GameLayout gameObserThree;
-
-    @BindView(R.id.game_obser_four)
-    GameLayout gameObserFour;
-
-    @BindView(R.id.game_obser_five)
-    GameLayout gameObserFive;
 
 
     public FragmentObservation() {
@@ -77,8 +64,7 @@ public class FragmentObservation extends Fragment {
     }
 
     private void getInfo() {
-        GameLayout[] games = {gameObserOne, gameObserTwo, gameObserThree,
-                gameObserFour, gameObserFive};
+        GameLayout[] games = {gameObserOne, gameObserTwo, gameObserThree};
 
         for (int i = 0; i < games.length; i++) {
             games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.OBSERVATION, i + 1));
@@ -111,18 +97,6 @@ public class FragmentObservation extends Fragment {
     public void goGameObserThree() {
         if (gameObserThree.isUnlocked())
             EventBus.getDefault().post(new FragmentChanger(new ObserverThree(), true));
-    }
-
-    @OnClick(R.id.game_obser_four)
-    public void goGameObserFour() {
-        if (gameObserFour.isUnlocked())
-            EventBus.getDefault().post(new FragmentChanger(new ObserverFour(), true));
-    }
-
-    @OnClick(R.id.game_obser_five)
-    public void goGameObserFive() {
-        if (gameObserFive.isUnlocked())
-            EventBus.getDefault().post(new FragmentChanger(new ObserverFive(), true));
     }
 
 }

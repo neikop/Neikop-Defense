@@ -82,7 +82,7 @@ public class GameLayout extends FrameLayout {
     private void getValues(TypedArray typedArray) {
         name = typedArray.getString(R.styleable.GameLayout_name);
         image = typedArray.getDrawable(R.styleable.GameLayout_src);
-        if (image == null) image = getResources().getDrawable(R.drawable.checkshape);
+        if (image == null) image = getResources().getDrawable(R.drawable.ic_launcher);
         level = typedArray.getInteger(R.styleable.GameLayout_level, 1);
         expCurrent = typedArray.getInteger(R.styleable.GameLayout_exp_current, 0);
         expNextLvl = typedArray.getInteger(R.styleable.GameLayout_exp_nextlvl, 300);

@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
     tools:context=".screens.tabs.FragmentPractice">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/z_background_practice" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,13 +22,14 @@
             android:layout_marginTop="10dp"
             android:text="@string/practice"
             android:textColor="@color/colorWhite"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_centerInParent="true"
-            android:background="@drawable/custom_oval_background_outline" />
+            android:background="@drawable/custom_oval_background_outline_practice" />
 
         <com.ogaclejapan.arclayout.ArcLayout
             android:id="@+id/spin_layout"

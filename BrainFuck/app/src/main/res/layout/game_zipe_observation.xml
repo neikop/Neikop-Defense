@@ -85,24 +85,6 @@
                     android:layout_marginTop="5dp"
                     app:name="@string/game_observer_three" />
 
-                <com.example.windzlord.brainfuck.layout.GameLayout
-                    android:id="@+id/game_obser_four"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginTop="5dp"
-                    app:name="@string/game_observer_four" />
-
-                <com.example.windzlord.brainfuck.layout.GameLayout
-                    android:id="@+id/game_obser_five"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginTop="5dp"
-                    app:name="@string/game_observer_five" />
-
             </LinearLayout>
 
         </ScrollView>

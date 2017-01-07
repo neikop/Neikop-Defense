@@ -296,9 +296,9 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
             android:src="@drawable/game_ic_pause_circle_outline"
             app:cb_color="@color/colorCyanLight" />
 
@@ -307,9 +307,9 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
             android:src="@drawable/game_ic_play_circle_outline"
             app:cb_color="@color/colorCyanLight" />
 
