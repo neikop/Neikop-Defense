@@ -14,7 +14,6 @@ public class ManagerPreference {
     private static final String SCORE = "Score";
     private static final String LEVEL = "Level";
     private static final String EXP_CURRENT = "ExpCurr";
-    private static final String UNLOCK = "Unlock";
     private static final String USER_ID = "UserID";
 
     private SharedPreferences sharedPreferences;

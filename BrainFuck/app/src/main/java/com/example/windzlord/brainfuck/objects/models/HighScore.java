@@ -12,9 +12,6 @@ public class HighScore {
     @com.google.gson.annotations.SerializedName("userId")
     public String userId;
 
-    @com.google.gson.annotations.SerializedName("date")
-    public String date;
-
     @com.google.gson.annotations.SerializedName("type")
     public String type;
 
@@ -30,6 +27,11 @@ public class HighScore {
     @com.google.gson.annotations.SerializedName("highscore")
     public int highscore;
 
+    public HighScore(String userId, String type, int position) {
+        this.userId = userId;
+        this.type = type;
+        this.position = position;
+    }
 
     public void setLevel(int level) {
         this.level = level;
@@ -70,7 +72,6 @@ public class HighScore {
         return "HighScore{" +
                 "id=" + id +
                 ", userId='" + userId + '\'' +
-                ", date='" + date + '\'' +
                 ", type='" + type + '\'' +
                 ", position=" + position +
                 ", level=" + level +

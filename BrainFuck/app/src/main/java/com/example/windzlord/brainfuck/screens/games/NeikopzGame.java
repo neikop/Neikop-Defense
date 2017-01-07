@@ -398,19 +398,7 @@ public abstract class NeikopzGame extends Fragment {
         ManagerPreference.getInstance().putScore(name, index,
                 Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
 
-        //update Highscore in Online Database
-        if(!userID.equals("")){
-            try {
-                DBContextSV.getInstance().updateHighScore(name, index,
-                        expCurrent,
-                        level,
-                        Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
     protected void goEndAnimation(boolean getHigh) {

@@ -32,5 +32,26 @@ public class MainBrain extends Application {
             ManagerPreference.getInstance().putLevel(Gogo.MEMORY, i, 2);
             ManagerPreference.getInstance().putLevel(Gogo.CONCENTRATION, i, 2);
         }
+
+        //Test
+//        ManagerPreference.getInstance().putUserID("daicahai");
+////        String userID = ManagerPreference.getInstance().getUserID();
+//        DBContextSV.getInstance().settingStartApp("daicahai");
+//        ManagerPreference.getInstance().putLevel(Gogo.CALCULATION,1,2);
+        //Test default UserID
+//        ManagerPreference.getInstance().putUserID("daicahai");
+//        String userID = ManagerPreference.getInstance().getUserID();
+
+//        DBContextSV.getInstance().settingStartApp("daicahai");
+
+        if(ManagerNetwork.getInstance().isConnectedToInternet()){
+            String userID = ManagerPreference.getInstance().getUserID();
+            if(!userID.equals("")){
+                DBContextSV.getInstance().settingStartApp(userID);
+            }
+        }
+
+//        DBContextSV.getInstance().settingThingsUp("daicahai");
+
     }
 }

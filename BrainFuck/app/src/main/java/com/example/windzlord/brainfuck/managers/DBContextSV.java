@@ -21,11 +21,12 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class DBContextSV {
     private static final String TAG = DBContextSV.class.getSimpleName();
     private MobileServiceTable<HighScore> mServiceTable;
-    private List<HighScore>tmpListHighScore;
+    private List<HighScore> tmpListHighScore;
 
     public DBContextSV(Context context) {
         try {
@@ -79,22 +80,21 @@ public class DBContextSV {
                 eq(userID).execute().get();
     }
 
-    public void settingThingsUp(String userID) {
-        Log.d(TAG, "beginSetting1");
+
+
+    //When App Start got 1 user logged alr
+    public void settingStartApp(String userID) {
+        Log.d(TAG, "begin settingStartApp");
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
                     final List<HighScore> highScore = getHighscorebyUserID(userID);
+//                    final List<HighScore> detailHighScoresInfo = getHighscorebyInfo("daicahai", "Memory", 1);
+//                    Log.d(TAG, detailHighScoresInfo.get(0).toString());
                     tmpListHighScore = highScore;
                     Log.d(TAG, "beginSetting2");
-                    for (HighScore tmpHighScore : highScore) {
-//                        Log.d(TAG, tmpHighScore.toString());
-                        ManagerPreference.getInstance().putLevel(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getLevel());
-                        ManagerPreference.getInstance().putExpCurrent(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getExpCurrent());
-                        ManagerPreference.getInstance().putScore(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getHighscore());
-
-                    }
+                    uploadData();
                 } catch (ExecutionException e) {
                     ManagerPreference.getInstance().putUserID("");
                 } catch (InterruptedException e) {
@@ -105,15 +105,15 @@ public class DBContextSV {
             }
         };
 
-        runAsyncTask(task);
 
+        runAsyncTask(task);
 
     }
 
-    public void updateHighScore(String type, int positon, int nExp, int nLvl, int nHighScore) throws ExecutionException, InterruptedException {
+    public void updateHighScore(String type, int position, int nExp, int nLvl, int nHighScore) throws ExecutionException, InterruptedException {
         Log.d(TAG, "begin Update");
-        for(HighScore highScore:tmpListHighScore){
-            if(highScore.getType().equals(type) && highScore.getPosition() == positon){
+        for (HighScore highScore : tmpListHighScore) {
+            if (highScore.getType().equals(type) && highScore.getPosition() == position) {
                 highScore.setExpCurrent(nExp);
                 highScore.setHighscore(nHighScore);
                 highScore.setLevel(nLvl);
@@ -134,9 +134,64 @@ public class DBContextSV {
                 };
 
                 runAsyncTask(task);
-
+                break;
             }
         }
+
+    }
+
+
+    public void uploadData() {
+        Log.d(TAG, "begin Upload Data");
+        for (int i = 0 ; i< Gogo.GAME_LIST.length ; i++){
+            for(int j = 1; j < 4; j++){
+                try {
+                    updateHighScore(Gogo.GAME_LIST[i], j,
+                            ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], j),
+                            ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], j),
+                            ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], j)
+                            );
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    //When User Login
+    public void updateData(String userID){
+        Log.d(TAG, "begin updateData");
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    final List<HighScore> highScore = getHighscorebyUserID(userID);
+//                    final List<HighScore> detailHighScoresInfo = getHighscorebyInfo("daicahai", "Memory", 1);
+//                    Log.d(TAG, detailHighScoresInfo.get(0).toString());
+                    tmpListHighScore = highScore;
+                    Log.d(TAG, "begin updateData Local");
+                    for (HighScore tmpHighScore : tmpListHighScore) {
+//                        Log.d(TAG, tmpHighScore.toString());
+                        ManagerPreference.getInstance().putLevel(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getLevel());
+                        ManagerPreference.getInstance().putExpCurrent(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getExpCurrent());
+                        ManagerPreference.getInstance().putScore(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getHighscore());
+                    }
+                    uploadData();
+                } catch (ExecutionException e) {
+                    ManagerPreference.getInstance().putUserID("");
+                } catch (InterruptedException e) {
+                    ManagerPreference.getInstance().putUserID("");
+                }
+
+                return null;
+            }
+        };
+
+
+        runAsyncTask(task);
 
     }
 
@@ -145,6 +200,20 @@ public class DBContextSV {
             return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
             return task.execute();
+        }
+    }
+
+    public void createNewUser(String userId){
+        Log.d(TAG, "begin Create new User");
+        for (int i = 0 ; i< Gogo.GAME_LIST.length ; i++){
+            for(int j = 1; j < 4; j++){
+                    addNewHighScore(new HighScore(
+                            userId,
+                            Gogo.GAME_LIST[i],
+                            j
+                    ));
+                    //String userId, String type, int position, int level, int expCurrent, int highscore
+            }
         }
     }
 }

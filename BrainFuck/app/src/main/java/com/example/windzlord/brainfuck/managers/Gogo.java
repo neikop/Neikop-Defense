@@ -20,6 +20,13 @@ public class Gogo {
     public final static String CONCENTRATION = "Concentration";
     public final static String OBSERVATION = "Observation";
 
+    public final static String[] GAME_LIST = {
+            MEMORY,
+            CALCULATION,
+            CONCENTRATION,
+            OBSERVATION
+    };
+
     public static String goFormatString(int integer) {
         if (integer < 1000) return "" + integer;
         String ret = integer / 1000 + ",";
