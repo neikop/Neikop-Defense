@@ -59,6 +59,8 @@
         android:orientation="vertical">
 
         <TextView
+            android:paddingTop="7dp"
+            android:textColor="@color/colorRed"
             android:textSize="30dp"
             android:textAlignment="center"
             android:id="@+id/cal_1"
@@ -67,6 +69,8 @@
             android:background="@drawable/back" />
 
         <TextView
+            android:paddingTop="7dp"
+            android:textColor="@color/colorRed"
             android:textSize="30dp"
             android:textAlignment="center"
             android:id="@+id/cal_2"

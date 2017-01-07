@@ -1,5 +1,6 @@
 package com.example.windzlord.brainfuck;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -83,5 +84,9 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.feedback_layout);
+        fragment.onActivityResult(requestCode, resultCode, data);
+    }
 }

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'android-apt'
 
 android {
     buildToolsVersion "25.0.0"
@@ -51,5 +51,6 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile (group: 'com.microsoft.azure', name: 'azure-notifications-handler', version: '1.0.1', ext: 'jar')
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
 }
