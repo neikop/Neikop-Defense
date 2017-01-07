@@ -17,7 +17,6 @@ public class MainBrain extends Application {
     public void onCreate() {
         super.onCreate();
         settingThingsUp();
-
     }
 
     private void settingThingsUp() {
@@ -25,15 +24,13 @@ public class MainBrain extends Application {
         ManagerPreference.init(this);
         DBContextSV.init(this);
 
-        //Test
-//        ManagerPreference.getInstance().putUserID("daicahai");
-////        String userID = ManagerPreference.getInstance().getUserID();
-//        DBContextSV.getInstance().settingThingsUp("daicahai");
-        ManagerPreference.getInstance().putLevel(Gogo.CALCULATION,1,2);
-        //Test default UserID
-        ManagerPreference.getInstance().putUserID("daicahai");
-//        String userID = ManagerPreference.getInstance().getUserID();
-//        DBContextSV.getInstance().settingThingsUp("daicahai");
+        ManagerPreference.getInstance().putUserID("");
 
+        for (int i = 1; i < 4; i++) {
+            ManagerPreference.getInstance().putLevel(Gogo.OBSERVATION, i, 2);
+            ManagerPreference.getInstance().putLevel(Gogo.CALCULATION, i, 2);
+            ManagerPreference.getInstance().putLevel(Gogo.MEMORY, i, 2);
+            ManagerPreference.getInstance().putLevel(Gogo.CONCENTRATION, i, 2);
+        }
     }
 }
