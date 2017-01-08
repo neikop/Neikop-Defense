@@ -60,11 +60,12 @@ public class FragmentFeedback extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
         loginFacebook();
+
+        textView.setText(ManagerPreference.getInstance().getUserID());
     }
 
 
     public void loginFacebook() {
-        Log.d(TAG, "loginFacebook");
         AppEventsLogger.activateApp(getContext());
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
