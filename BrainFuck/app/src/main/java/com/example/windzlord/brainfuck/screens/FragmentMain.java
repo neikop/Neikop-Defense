@@ -13,6 +13,7 @@ import android.view.animation.TranslateAnimation;
 
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.PagerAdapter;
+import com.facebook.login.LoginManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +45,6 @@ public class FragmentMain extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
-
         goTabLayout(view);
     }
 
