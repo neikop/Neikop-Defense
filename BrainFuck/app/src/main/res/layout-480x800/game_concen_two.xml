@@ -1,0 +1,17 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorCyanLight"
+    tools:context="com.example.windzlord.brainfuck.screens.games.concentration.ConcenTwo">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="200dp"
+        android:text="@string/game_concen_two"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="40sp" />
+
+</FrameLayout>

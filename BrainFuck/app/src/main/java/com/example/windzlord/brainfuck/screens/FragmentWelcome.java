@@ -51,7 +51,7 @@ public class FragmentWelcome extends Fragment {
     private void getContent() {
 //        mediaPlayer = MediaPlayer.create(getContext(), R.raw.welcome);
 //        mediaPlayer.start();
-        progressBarWelcome.setMax(3000);
+        progressBarWelcome.setMax(3200);
         progressBarWelcome.setProgress(0);
         new CountDownTimer(3500, 1) {
 

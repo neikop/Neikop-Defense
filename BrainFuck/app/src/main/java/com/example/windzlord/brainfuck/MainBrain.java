@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.windzlord.brainfuck.managers.DBContextSV;
 import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerDatabaseGame;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 
@@ -23,6 +24,7 @@ public class MainBrain extends Application {
         ManagerNetwork.init(this);
         ManagerPreference.init(this);
         DBContextSV.init(this);
+        ManagerDatabaseGame.init(this);
 
         ManagerPreference.getInstance().putUserID("");
 
