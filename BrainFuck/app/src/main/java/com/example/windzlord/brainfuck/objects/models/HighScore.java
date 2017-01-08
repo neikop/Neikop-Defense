@@ -87,17 +87,4 @@ public class HighScore {
     public int getHighscore() {
         return highscore;
     }
-
-    @Override
-    public String toString() {
-        return "HighScore{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
-                ", type='" + type + '\'' +
-                ", position=" + position +
-                ", level=" + level +
-                ", expCurrent=" + expCurrent +
-                ", highscore=" + highscore +
-                '}';
-    }
 }

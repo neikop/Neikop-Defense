@@ -4,105 +4,112 @@
     android:layout_height="match_parent"
     android:background="#ff9933cc"
     android:orientation="vertical"
-    tools:context="com.example.windzlord.brainfuck.screens.tabs.FragmentSettings">
+    tools:context="com.example.windzlord.brainfuck.screens.tabs.FragmentSetting">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="100dp">
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/icon_back_settings"/>
+            android:src="@drawable/icon_back_setting" />
+
         <TextView
-            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:text="SETTINGS"
             android:textColor="#ffffff"
-            android:textSize="50dp"/>
+            android:textSize="50dp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/icon_playmusic"
-                />
+                android:src="@drawable/icon_music_on" />
+
             <TextView
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="30dp"
-                android:textColor="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SOUND EFFECT"/>
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="SOUND EFFECT"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/icon_sound_on"
-                />
+                android:src="@drawable/icon_sound_on" />
+
             <TextView
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="30dp"
-                android:textColor="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PLAY SOUND"/>
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="PLAY SOUND"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp" />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/icon_play_game_off"
-                />
+                android:src="@drawable/icon_game" />
+
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="30dp"
 
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" />
         </LinearLayout>
     </LinearLayout>
 

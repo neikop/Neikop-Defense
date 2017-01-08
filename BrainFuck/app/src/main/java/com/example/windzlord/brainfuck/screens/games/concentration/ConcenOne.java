@@ -164,12 +164,6 @@ public class ConcenOne extends NeikopzGame {
         }.start();
     }
 
-    @Override
-    protected void goHighScoreColor() {
-        imageViewScore.setImageResource(R.color.colorOrangeLight);
-        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
-    }
-
     private String getRandom() {
         switch (Gogo.getRandom(4)) {
             case 1:

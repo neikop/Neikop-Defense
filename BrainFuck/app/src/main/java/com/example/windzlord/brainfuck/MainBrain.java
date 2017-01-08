@@ -25,7 +25,7 @@ public class MainBrain extends Application {
         ManagerNetwork.init(this);
         ManagerServer.init(this);
 
-        String userID = ManagerPreference.getInstance().getUserID();
-        ManagerServer.getInstance().gameStart(userID);
+        ManagerServer.getInstance().gameUpload(
+                ManagerPreference.getInstance().getUserID());
     }
 }

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.facebook.FacebookCallback;
@@ -61,7 +60,8 @@ public class FragmentFeedback extends Fragment {
         ButterKnife.bind(this, view);
         loginFacebook();
 
-        textView.setText(ManagerPreference.getInstance().getUserID());
+        textView.setText(ManagerPreference.getInstance().getUserName()
+                + "\n" + ManagerPreference.getInstance().getUserID());
     }
 
 
@@ -74,24 +74,14 @@ public class FragmentFeedback extends Fragment {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "onSuccess");
-                ProfileTracker profileTracker = new ProfileTracker() {
+                new ProfileTracker() {
                     @Override
                     protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                         System.out.println("onCurrentProfileChanged");
-                        if (currentProfile != null) {
-                            System.out.println("Current " + currentProfile.getName());
-                            textView.setText(currentProfile.getFirstName() + " " + currentProfile.getLastName() + "\n" + currentProfile.getId());
-                            ManagerServer.getInstance().gameLogin(currentProfile.getId());
-                            Gogo.NAME = currentProfile.getFirstName() + " " + currentProfile.getLastName();
-                        }
-                        if (oldProfile != null) {
-                            System.out.println("Old " + oldProfile.getName());
-                            String userID = ManagerPreference.getInstance().getUserID();
-                            ManagerServer.getInstance().gameStart(userID);
-                        }
+                        if (currentProfile != null) login(currentProfile);
+                        if (oldProfile != null) logout(oldProfile);
                     }
-                };
-                profileTracker.startTracking();
+                }.startTracking();
             }
 
             @Override
@@ -104,5 +94,19 @@ public class FragmentFeedback extends Fragment {
                 Log.d(TAG, "onError");
             }
         });
+    }
+
+    private void login(Profile profile) {
+        System.out.println("LOGIN = " + profile.getName());
+        textView.setText(profile.getName() + "\n" + profile.getId());
+        ManagerServer.getInstance().gameLogin(profile);
+    }
+
+    private void logout(Profile profile) {
+        System.out.println("LOGOUT = " + profile.getName() + profile.getId());
+        String userID = ManagerPreference.getInstance().getUserID();
+        ManagerServer.getInstance().gameUpload(userID);
+        ManagerPreference.getInstance().putUserID("");
+        ManagerPreference.getInstance().putUserName("Guest");
     }
 }

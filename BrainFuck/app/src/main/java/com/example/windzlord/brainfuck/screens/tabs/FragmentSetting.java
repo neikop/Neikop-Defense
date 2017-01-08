@@ -13,10 +13,10 @@ import com.example.windzlord.brainfuck.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentSettings extends Fragment {
+public class FragmentSetting extends Fragment {
 
 
-    public FragmentSettings() {
+    public FragmentSetting() {
         // Required empty public constructor
     }
 
@@ -25,7 +25,7 @@ public class FragmentSettings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_settings, container, false);
+        return inflater.inflate(R.layout.tab_fragment_setting, container, false);
     }
 
 }

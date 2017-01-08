@@ -19,6 +19,7 @@ import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameStatusLayout;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.ManagerServer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -383,7 +384,6 @@ public abstract class NeikopzGame extends Fragment {
         int level = ManagerPreference.getInstance().getLevel(name, index);
         int expNext = ManagerPreference.getInstance().getExpNext(name, index);
         int expCurrent = ManagerPreference.getInstance().getExpCurrent(name, index);
-        String userID = ManagerPreference.getInstance().getUserID();
 
         expCurrent += score;
         if (expCurrent >= expNext) {
@@ -391,12 +391,12 @@ public abstract class NeikopzGame extends Fragment {
             level++;
         }
 
+        ManagerServer.getInstance().gameUpload(
+                ManagerPreference.getInstance().getUserID());
         ManagerPreference.getInstance().putLevel(name, index, level);
         ManagerPreference.getInstance().putExpCurrent(name, index, expCurrent);
         ManagerPreference.getInstance().putScore(name, index,
                 Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
-
-
     }
 
     protected void goEndAnimation(boolean getHigh) {
@@ -426,8 +426,8 @@ public abstract class NeikopzGame extends Fragment {
     }
 
     protected void goHighScoreColor() {
-        imageViewScore.setImageResource(R.color.colorCyanLight);
-        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
+        imageViewScore.setImageResource(R.color.colorOrangeLight);
+        textViewScore.setTextColor(getResources().getColor(R.color.colorCyanLight));
     }
 
     @OnClick(R.id.button_exit)

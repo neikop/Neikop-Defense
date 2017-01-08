@@ -18,9 +18,11 @@
     <color name="colorCyanLight">#3399FF</color>
     <color name="colorCyanDark">#004C99</color>
     <color name="colorYellow">#FFFF00</color>
+
     <color name="custom_progress_red_header">#ffcc0000</color>
     <color name="custom_progress_red_progress">#ffff4444</color>
     <color name="custom_progress_red_progress_half">#7fff4444</color>
+
     <color name="custom_progress_green_header">#ff99cc00</color>
     <color name="custom_progress_green_progress">#ff669900</color>
     <color name="custom_progress_green_progress_half">#7f669900</color>

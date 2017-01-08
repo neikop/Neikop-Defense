@@ -227,10 +227,4 @@ public class MemoryThree extends NeikopzGame {
             }
         }.start();
     }
-
-    @Override
-    protected void goHighScoreColor() {
-        imageViewScore.setImageResource(R.color.colorOrangeLight);
-        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
-    }
 }
