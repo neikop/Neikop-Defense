@@ -1,7 +1,6 @@
 package com.example.windzlord.brainfuck;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
@@ -12,8 +11,6 @@ import com.example.windzlord.brainfuck.managers.ManagerPreference;
  */
 
 public class MainBrain extends Application {
-
-    private static final String TAG = MainBrain.class.getSimpleName();
 
     @Override
     public void onCreate() {

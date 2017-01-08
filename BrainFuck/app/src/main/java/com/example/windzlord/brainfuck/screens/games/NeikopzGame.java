@@ -102,9 +102,9 @@ public abstract class NeikopzGame extends Fragment {
     protected boolean clickable = false;
     protected int going;
     protected int score;
-    protected final int RATE = 1;
+    protected int RATE = 1;
+    protected int TIME = Gogo.TIME * RATE;
     protected final int NUMBER_QUIZ = Gogo.NUMBER_QUIZ;
-    protected final int TIME = Gogo.TIME;
 
     protected View createView(View view) {
         ButterKnife.bind(this, view);

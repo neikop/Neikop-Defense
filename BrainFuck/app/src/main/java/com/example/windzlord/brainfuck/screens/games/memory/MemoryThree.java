@@ -42,9 +42,7 @@ public class MemoryThree extends NeikopzGame {
     private List<Integer> coreArray;
     private int matched;
 
-    protected final int RATE = 24;
     protected final int NUMBER_QUIZ = 1;
-    protected final int TIME = Gogo.TIME * RATE;
 
     public MemoryThree() {
         // Required empty public constructor
@@ -59,6 +57,8 @@ public class MemoryThree extends NeikopzGame {
     }
 
     protected void startGame() {
+        RATE = 24;
+        TIME = TIME * RATE;
         gameStatusLayout.updateValues(100, TIME, TIME, 0, NUMBER_QUIZ, 0);
         going = score = 0;
 
