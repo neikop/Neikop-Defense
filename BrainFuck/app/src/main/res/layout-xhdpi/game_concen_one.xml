@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGreenLight"
-    tools:context="com.example.windzlord.brainfuck.screens.games.memory.MemoryOne">
+    android:background="@color/colorCyanLight"
+    tools:context="com.example.windzlord.brainfuck.screens.games.concentration.ConcenOne">
 
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
         android:id="@+id/layout_game_status"
@@ -34,7 +34,6 @@
             android:textColor="@color/colorBlackLight"
             android:textSize="40sp"
             android:textStyle="bold" />
-
     </RelativeLayout>
 
     <TextView
@@ -50,119 +49,129 @@
         android:textStyle="bold"
         android:visibility="invisible" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/layout_game"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/layout_score"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/layout_left_card"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="50"
+            android:background="@drawable/custom_corner_background_outline_game_chosen">
+
+            <TextView
+                android:id="@+id/textView_left_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorCyanDark"
+                android:textSize="34sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_right_card"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="50"
+            android:background="@drawable/custom_corner_background_outline_game_chosen">
+
+            <TextView
+                android:id="@+id/textView_right_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorCyanDark"
+                android:textSize="34sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="410dp"
-        android:layout_marginTop="120dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_game"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_corner_background_outline_game_chosen"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-        <GridLayout
-            android:id="@+id/layout_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/custom_corner_background_outline"
-            android:columnCount="4"
-            android:padding="4dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Left card - Number 'Even'   "
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorBlackLight" />
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="   Right card - Letter 'Vowel'"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorBlackLight" />
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+    </LinearLayout>
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+    <LinearLayout
+        android:id="@+id/layout_answer"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+        <RelativeLayout
+            android:id="@+id/answer_no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="50"
+            android:background="@drawable/custom_corner_background_answer_no">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="NO"
+                android:textColor="@color/colorWhite"
+                android:textSize="34sp" />
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+        </RelativeLayout>
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+        <RelativeLayout
+            android:id="@+id/answer_yes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="50"
+            android:background="@drawable/custom_corner_background_answer_yes">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="YES"
+                android:textColor="@color/colorWhite"
+                android:textSize="34sp" />
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
+        </RelativeLayout>
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-        </GridLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/layout_welcome"
@@ -287,9 +296,9 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
             android:src="@drawable/game_ic_pause_circle_outline"
             app:cb_color="@color/colorCyanLight" />
 
@@ -298,9 +307,9 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
             android:src="@drawable/game_ic_play_circle_outline"
             app:cb_color="@color/colorCyanLight" />
 

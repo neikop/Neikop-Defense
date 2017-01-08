@@ -2,8 +2,8 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
-import com.example.windzlord.brainfuck.managers.DBContextSV;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerDatabaseGame;
+import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 
@@ -20,21 +20,12 @@ public class MainBrain extends Application {
     }
 
     private void settingThingsUp() {
-        ManagerNetwork.init(this);
         ManagerPreference.init(this);
-        DBContextSV.init(this);
+        ManagerDatabaseGame.init(this);
+        ManagerNetwork.init(this);
+        ManagerServer.init(this);
 
-        ManagerPreference.getInstance().putUserID("");
-
-        for (int i = 1; i < 4; i++)
-            for (String game : Gogo.GAME_LIST)
-                ManagerPreference.getInstance().putLevel(game, i, 2);
-
-        if (ManagerNetwork.getInstance().isConnectedToInternet()) {
-            String userID = ManagerPreference.getInstance().getUserID();
-            if (!userID.equals(""))
-                DBContextSV.getInstance().settingStartApp(userID);
-        }
-
+        String userID = ManagerPreference.getInstance().getUserID();
+        ManagerServer.getInstance().gameStart(userID);
     }
 }

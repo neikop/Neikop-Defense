@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGreenLight"
-    tools:context="com.example.windzlord.brainfuck.screens.games.memory.MemoryOne">
+    android:background="@color/colorGame"
+    tools:context="com.example.windzlord.brainfuck.screens.games.observation.ObserverThree">
 
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
         android:id="@+id/layout_game_status"
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:src="@color/colorWhite" />
+            android:src="@color/colorGray" />
 
         <TextView
             android:id="@+id/textView_score"
@@ -51,116 +51,10 @@
         android:visibility="invisible" />
 
     <RelativeLayout
+        android:id="@+id/layout_game"
         android:layout_width="match_parent"
         android:layout_height="410dp"
         android:layout_marginTop="120dp">
-
-        <GridLayout
-            android:id="@+id/layout_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/custom_corner_background_outline"
-            android:columnCount="4"
-            android:padding="4dp">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-        </GridLayout>
 
     </RelativeLayout>
 

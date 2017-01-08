@@ -1,0 +1,115 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".layout.GameStatusLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorGameDark">
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/button_pause"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:src="@drawable/game_ic_pause_circle_outline"
+            app:cb_color="@color/colorPrimary" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1">
+
+            <ProgressBar
+                android:id="@+id/progressBar_time"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="35dp"
+                android:max="5000"
+                android:progress="5000"
+                android:progressDrawable="@drawable/custom_corner_progressbar_time" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/custom_oval_view_time_start"
+                android:src="@drawable/game_ic_time_circle_outline" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/custom_oval_view_time_end" />
+
+            <TextView
+                android:id="@+id/textView_time"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="100"
+                android:textAlignment="center"
+                android:textColor="#00FFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1">
+
+            <ProgressBar
+                android:id="@+id/progressBar_going"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="35dp"
+                android:max="10"
+                android:progress="6"
+                android:progressDrawable="@drawable/custom_corner_progressbar_going" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/custom_oval_view_going_start"
+                android:src="@drawable/game_ic_play_circle_outline" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/custom_oval_view_going_end" />
+
+            <TextView
+                android:id="@+id/textView_going"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="6"
+                android:textAlignment="center"
+                android:textColor="#FF8000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

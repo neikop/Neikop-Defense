@@ -7,29 +7,50 @@ package com.example.windzlord.brainfuck.objects.models;
 public class HighScore {
 
     @com.google.gson.annotations.SerializedName("id")
-    public int id;
+    private String id;
 
     @com.google.gson.annotations.SerializedName("userId")
-    public String userId;
+    private String userId;
 
     @com.google.gson.annotations.SerializedName("type")
-    public String type;
+    private String type;
 
     @com.google.gson.annotations.SerializedName("position")
-    public int position;
+    private int position;
 
     @com.google.gson.annotations.SerializedName("level")
-    public int level;
+    private int level;
 
     @com.google.gson.annotations.SerializedName("expCurrent")
-    public int expCurrent;
+    private int expCurrent;
 
     @com.google.gson.annotations.SerializedName("highscore")
-    public int highscore;
+    private int highscore;
 
-    public HighScore(String userId, String type, int position) {
+    public HighScore() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public void setPosition(int position) {
         this.position = position;
     }
 
