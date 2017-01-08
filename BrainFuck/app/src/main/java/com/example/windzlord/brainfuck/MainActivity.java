@@ -15,6 +15,7 @@ import com.example.windzlord.brainfuck.screens.types.FragmentCalculation;
 import com.example.windzlord.brainfuck.screens.types.FragmentConcentration;
 import com.example.windzlord.brainfuck.screens.types.FragmentMemory;
 import com.example.windzlord.brainfuck.screens.types.FragmentObservation;
+import com.facebook.CallbackManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -23,10 +24,13 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    public CallbackManager callbackManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        callbackManager = CallbackManager.Factory.create();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ManagerDatabaseGame.getInstance().init(this);
         settingThingsUp();
@@ -84,9 +88,14 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.feedback_layout);
-        fragment.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public CallbackManager getCallbackManager(){
+        return callbackManager;
     }
 }

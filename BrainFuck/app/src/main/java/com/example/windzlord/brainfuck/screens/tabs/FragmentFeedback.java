@@ -1,7 +1,6 @@
 package com.example.windzlord.brainfuck.screens.tabs;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -9,16 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.windzlord.brainfuck.MainActivity;
-import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
-import com.facebook.CallbackManager;
+import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.managers.ManagerNetwork;
+import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.example.windzlord.brainfuck.R;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
@@ -36,11 +34,12 @@ import butterknife.ButterKnife;
 public class FragmentFeedback extends Fragment {
 
     private static final String TAG = FragmentFeedback.class.getSimpleName();
-    private CallbackManager callbackManager;
+
     @BindView(R.id.login_button)
     LoginButton loginButton;
-    @BindView(R.id.tv_ad)
-    TextView ad;
+
+    @BindView(R.id.textView_feedback)
+    TextView textView;
 
     public FragmentFeedback() {
         // Required empty public constructor
@@ -52,40 +51,49 @@ public class FragmentFeedback extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FacebookSdk.sdkInitialize(getContext());
-        View v = inflater.inflate(R.layout.tab_fragment_feedback, container, false);
-        ButterKnife.bind(this, v);
-        loginfacebook();
-        return v;
+        View view = inflater.inflate(R.layout.tab_fragment_feedback, container, false);
+        settingThingsUp(view);
+
+        return view;
     }
 
-    public void loginfacebook() {
+    private void settingThingsUp(View view) {
+        ButterKnife.bind(this, view);
+        loginFacebook();
+    }
+
+
+    public void loginFacebook() {
+        Log.d(TAG, "loginFacebook");
         AppEventsLogger.activateApp(getContext());
-        callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
-        Log.d(TAG,"abc");
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        loginButton.registerCallback(((MainActivity) getActivity()).getCallbackManager(), new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG,"onSuccess");
-                AccessToken accessToken = loginResult.getAccessToken();
-                AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-                    @Override
-                    protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-
-                    }
-                };
-                accessTokenTracker.startTracking();
-
+                Log.d(TAG, "onSuccess");
                 ProfileTracker profileTracker = new ProfileTracker() {
                     @Override
                     protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                         if (currentProfile != null) {
-                            ad.setText(currentProfile.getFirstName() + " " + currentProfile.getLastName() + "" + currentProfile.getId());
-//                            String url = currentProfile.getProfilePictureUri(700, 700).toString();
+                            textView.setText(currentProfile.getFirstName() + " " + currentProfile.getLastName() + "\n" + currentProfile.getId());
+                            ManagerServer.getInstance().createNewUser(currentProfile.getId());
+                            ManagerPreference.getInstance().putUserID(currentProfile.getId());
+                            String userID = ManagerPreference.getInstance().getUserID();
+                            System.out.println(userID.isEmpty());
+                            System.out.println(userID);
                         }
-                        Toast.makeText(getActivity(), "Successful", Toast.LENGTH_LONG).show();
+                        if (oldProfile != null) {
+                            String userID = ManagerPreference.getInstance().getUserID();
+                            System.out.println(userID.isEmpty());
+                            if (ManagerNetwork.getInstance().isConnectedToInternet()) {
+                                System.out.println(userID);
+                                if (!userID.equals("")) {
+                                    ManagerServer.getInstance().settingStartApp(userID);
+                                }
+                            }
+                        }
                     }
                 };
                 profileTracker.startTracking();
@@ -93,19 +101,13 @@ public class FragmentFeedback extends Fragment {
 
             @Override
             public void onCancel() {
-                Log.d(TAG,"onCancel");
-
+                Log.d(TAG, "onCancel");
             }
 
             @Override
             public void onError(FacebookException error) {
-                Log.d(TAG,"onError");
-
+                Log.d(TAG, "onError");
             }
         });
-
     }
-
-
-
 }

@@ -16,7 +16,7 @@
         android:layout_marginBottom="30dp" />
 
     <TextView
-        android:id="@+id/tv_ad"
+        android:id="@+id/textView_feedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/feedback"
