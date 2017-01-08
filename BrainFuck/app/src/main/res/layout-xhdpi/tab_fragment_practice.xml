@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.tabs.FragmentPractice">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/z_background_practice" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="480dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/practice"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/custom_oval_background_outline_practice" />
+
+        <com.ogaclejapan.arclayout.ArcLayout
+            android:id="@+id/spin_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:arc_axisRadius="117dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/view_center"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_centerInParent="true" />
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_concen"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="70dp"
+                android:layout_toRightOf="@id/view_center"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_type_concentration"
+                app:cb_color="@color/colorGreenLight" />
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_calcu"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/view_center"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:paddingTop="3dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_type_calculation"
+                app:cb_color="@color/colorWhite" />
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_obser"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="70dp"
+                android:layout_toLeftOf="@id/view_center"
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_type_observation"
+                app:cb_color="@color/colorOrangeLight" />
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_memory"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_above="@id/view_center"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="70dp"
+                android:clickable="true"
+                android:padding="15dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_type_memory"
+                app:cb_color="@color/colorCyanLight" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/button_memory"
+                android:layout_centerHorizontal="true"
+                android:text="@string/memory"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/button_concen"
+                android:layout_alignLeft="@id/button_concen"
+                android:layout_marginLeft="-15dp"
+                android:text="@string/concentration"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/button_calcu"
+                android:layout_centerHorizontal="true"
+                android:text="@string/calculation"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/button_concen"
+                android:layout_alignRight="@id/button_obser"
+                android:layout_marginRight="-5dp"
+                android:text="@string/observation"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

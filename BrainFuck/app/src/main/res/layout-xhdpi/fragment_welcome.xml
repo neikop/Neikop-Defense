@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/z_background_welcome_text"
+    tools:context=".screens.FragmentWelcome">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:src="@drawable/z_background_welcome_image"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="30dp"
+        android:layout_height="400dp"/>
+
+    <SeekBar
+        android:id="@+id/progressBar_welcome"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textView_welcome"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
+
+</RelativeLayout>
