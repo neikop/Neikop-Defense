@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.example.windzlord.brainfuck.R;
@@ -25,6 +26,10 @@ public class FragmentWelcome extends Fragment {
 
     @BindView(R.id.progressBar_welcome)
     SeekBar progressBarWelcome;
+
+    @BindView(R.id.imageView_welcome)
+    ImageView imageViewWelcome;
+
     MediaPlayer mediaPlayer = new MediaPlayer();
 
     public FragmentWelcome() {
@@ -51,7 +56,7 @@ public class FragmentWelcome extends Fragment {
     private void getContent() {
 //        mediaPlayer = MediaPlayer.create(getContext(), R.raw.welcome);
 //        mediaPlayer.start();
-        progressBarWelcome.setMax(3200);
+        progressBarWelcome.setMax(3000);
         progressBarWelcome.setProgress(0);
         new CountDownTimer(3500, 1) {
 
@@ -62,6 +67,7 @@ public class FragmentWelcome extends Fragment {
 
             @Override
             public void onFinish() {
+                imageViewWelcome.setVisibility(View.INVISIBLE);
                 EventBus.getDefault().post(new FragmentChanger(new FragmentMain(), false));
             }
         }.start();

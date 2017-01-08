@@ -99,7 +99,7 @@
                         android:layout_height="wrap_content"
                         app:rcBackgroundColor="@color/cardview_dark_background"
                         app:rcIconBackgroundColor="@color/custom_progress_red_header"
-                        app:rcIconPadding="2dp"
+                        app:rcIconPadding="0dp"
                         app:rcIconSize="40dp"
                         app:rcIconSrc="@drawable/ic_z_calculator"
                         app:rcMax="100"
