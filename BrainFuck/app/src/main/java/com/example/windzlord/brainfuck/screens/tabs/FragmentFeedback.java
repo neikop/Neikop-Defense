@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.facebook.FacebookCallback;
@@ -81,6 +82,7 @@ public class FragmentFeedback extends Fragment {
                             System.out.println("Current " + currentProfile.getName());
                             textView.setText(currentProfile.getFirstName() + " " + currentProfile.getLastName() + "\n" + currentProfile.getId());
                             ManagerServer.getInstance().gameLogin(currentProfile.getId());
+                            Gogo.NAME = currentProfile.getFirstName() + " " + currentProfile.getLastName();
                         }
                         if (oldProfile != null) {
                             System.out.println("Old " + oldProfile.getName());

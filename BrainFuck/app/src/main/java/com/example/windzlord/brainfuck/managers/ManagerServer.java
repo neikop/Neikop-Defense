@@ -15,6 +15,8 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.okhttp.OkHttpClient;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,10 +64,10 @@ public class ManagerServer {
         return mServiceTable.where().field("userId").eq(userID).execute().get();
     }
 
-    public void gameStart(String userId) {
+    public void gameStart(String userID) {
         if (ManagerNetwork.getInstance().isConnectedToInternet())
-            if (!userId.isEmpty())
-                uploadData(userId);
+            if (!userID.isEmpty())
+                uploadData(userID);
     }
 
     public void gameLogin(String userID) {
@@ -110,12 +112,14 @@ public class ManagerServer {
                         public void onFinish() {
                             updateData(userID);
                             ManagerPreference.getInstance().putUserID(userID);
+                            EventBus.getDefault().post("abc");
 
                         }
                     }.start();
                 } else {
                     updateData(userID);
                     ManagerPreference.getInstance().putUserID(userID);
+                            EventBus.getDefault().post("abc");
                 }
             }
         }.start();
