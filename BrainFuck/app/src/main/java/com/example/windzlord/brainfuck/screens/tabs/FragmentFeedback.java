@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.facebook.FacebookCallback;
@@ -77,23 +76,16 @@ public class FragmentFeedback extends Fragment {
                 ProfileTracker profileTracker = new ProfileTracker() {
                     @Override
                     protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                        System.out.println("onCurrentProfileChanged");
                         if (currentProfile != null) {
+                            System.out.println("Current " + currentProfile.getName());
                             textView.setText(currentProfile.getFirstName() + " " + currentProfile.getLastName() + "\n" + currentProfile.getId());
-                            ManagerServer.getInstance().createNewUser(currentProfile.getId());
-                            ManagerPreference.getInstance().putUserID(currentProfile.getId());
-                            String userID = ManagerPreference.getInstance().getUserID();
-                            System.out.println(userID.isEmpty());
-                            System.out.println(userID);
+                            ManagerServer.getInstance().gameLogin(currentProfile.getId());
                         }
                         if (oldProfile != null) {
+                            System.out.println("Old " + oldProfile.getName());
                             String userID = ManagerPreference.getInstance().getUserID();
-                            System.out.println(userID.isEmpty());
-                            if (ManagerNetwork.getInstance().isConnectedToInternet()) {
-                                System.out.println(userID);
-                                if (!userID.equals("")) {
-                                    ManagerServer.getInstance().settingStartApp(userID);
-                                }
-                            }
+                            ManagerServer.getInstance().gameStart(userID);
                         }
                     }
                 };

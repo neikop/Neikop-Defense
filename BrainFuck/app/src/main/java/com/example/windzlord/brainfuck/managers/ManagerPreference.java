@@ -15,10 +15,11 @@ public class ManagerPreference {
     private static final String LEVEL = "Level";
     private static final String EXP_CURRENT = "ExpCurr";
     private static final String USER_ID = "UserID";
+    private static final String USER_NAME = "UserName";
 
     private SharedPreferences sharedPreferences;
 
-    public ManagerPreference(Context context) {
+    private ManagerPreference(Context context) {
         sharedPreferences = context.getSharedPreferences(KEY, Context.MODE_PRIVATE);
     }
 
@@ -70,6 +71,14 @@ public class ManagerPreference {
 
     public String getUserID() {
         return sharedPreferences.getString(USER_ID, "");
+    }
+
+    public void putUserName(String userName) {
+        sharedPreferences.edit().putString(USER_NAME, userName).apply();
+    }
+
+    public String getUserName() {
+        return sharedPreferences.getString(USER_NAME, "");
     }
 
     public void clear() {
