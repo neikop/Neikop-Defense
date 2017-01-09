@@ -84,10 +84,8 @@ public class FragmentFeedback extends Fragment {
                             String userID = ManagerPreference.getInstance().getUserID();
                             System.out.println(userID.isEmpty());
                             System.out.println(userID);
-                        }
-                        if (oldProfile != null) {
-                            String userID = ManagerPreference.getInstance().getUserID();
-                            System.out.println(userID.isEmpty());
+                        }else {
+                            ManagerPreference.getInstance().putUserID("");
                             if (ManagerNetwork.getInstance().isConnectedToInternet()) {
                                 System.out.println(userID);
                                 if (!userID.equals("")) {

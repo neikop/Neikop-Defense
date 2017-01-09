@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.SQLiteDBHelper;
 
 /**
  * Created by WindzLord on 12/27/2016.
@@ -22,14 +23,12 @@ public class MainBrain extends Application {
         ManagerPreference.init(this);
         ManagerNetwork.init(this);
         ManagerServer.init(this);
+        SQLiteDBHelper.init(this);
 
         String userID = ManagerPreference.getInstance().getUserID();
         System.out.println(userID.isEmpty());
         if (ManagerNetwork.getInstance().isConnectedToInternet()) {
-            System.out.println(userID);
-            if (!userID.equals("")) {
-                ManagerServer.getInstance().settingStartApp(userID);
-            }
+            ManagerServer.getInstance().settingStartApp(userID);
         }
     }
 }

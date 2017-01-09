@@ -30,6 +30,16 @@ public class HighScore {
     public HighScore() {
     }
 
+    public HighScore(String id, String userId, String type, int position, int level, int expCurrent, int highscore) {
+        this.id = id;
+        this.userId = userId;
+        this.type = type;
+        this.position = position;
+        this.level = level;
+        this.expCurrent = expCurrent;
+        this.highscore = highscore;
+    }
+
     public String getId() {
         return id;
     }

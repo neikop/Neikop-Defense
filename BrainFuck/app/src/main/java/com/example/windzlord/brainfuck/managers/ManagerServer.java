@@ -12,6 +12,7 @@ import android.util.Log;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -57,66 +58,97 @@ public class ManagerServer {
     }
 
     public void createNewUser(String userId) {
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    listHighScore = getHighScoreByUserID(userId);
-                } catch (ExecutionException | InterruptedException ignored) {
-                }
-                return null;
-            }
-        };
-        runAsyncTask(task);
+        listHighScore = SQLiteDBHelper.getInstance().getAllHighscoreByUserId(userId);
 
-        new CountDownTimerAdapter(5000, 1) {
-            public void onFinish() {
-                if (listHighScore.isEmpty()) {
+
+        if (listHighScore.isEmpty()) {
+            for (int i = 0; i < Gogo.GAME_LIST.length; i++) {
+                for (int k = 1; k < 4; k++) {
+                    HighScore score = new HighScore();
+                    score.setUserId(userId);
+                    score.setType(Gogo.GAME_LIST[i]);
+                    score.setPosition(k);
+                    score.setLevel(1);
+                    Log.d(TAG, score.toString());
                     AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
                         @Override
                         protected Void doInBackground(Void... params) {
                             try {
-                                for (int i = 0; i < Gogo.GAME_LIST.length; i++) {
-                                    for (int k = 1; k < 4; k++) {
-                                        HighScore score = new HighScore();
-                                        score.setUserId(userId);
-                                        score.setType(Gogo.GAME_LIST[i]);
-                                        score.setPosition(k);
-                                        score.setLevel(1);
-                                        Log.d(TAG, score.toString());
-                                        mServiceTable.insert(score).get();
-                                    }
-                                }
+
+                                mServiceTable.insert(score).get();
+
                             } catch (Exception ignored) {
                             }
                             return null;
                         }
                     };
                     runAsyncTask(task);
-                    new CountDownTimerAdapter(5000, 1) {
-                        public void onFinish() {
-                            updateData(userId);
-                        }
-                    }.start();
-                } else {
-                    updateData(userId);
                 }
             }
-        }.start();
+
+            AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    try {
+                        List<HighScore> result = getAllHighscore();
+
+                        Log.d(TAG, result.size() + "");
+
+                        SQLiteDBHelper.getInstance().resetDB(result);
+                        updateData(userId);
+                        Log.d(TAG, SQLiteDBHelper.getInstance().getAllHighscore().size() + "");
+                    } catch (ExecutionException | InterruptedException | MobileServiceException ignored) {
+                    }
+                    return null;
+                }
+            };
+            runAsyncTask(task);
+        } else {
+            updateData(userId);
+        }
     }
 
-    private List<HighScore> getHighScoreByUserID(String userID) throws ExecutionException, InterruptedException {
-        return mServiceTable.where().field("userId").eq(userID).execute().get();
+    private void updateData(String userID) {
+
+        listHighScore = SQLiteDBHelper.getInstance().getAllHighscoreByUserId(userID);
+
+
+        for (HighScore tmpHighScore : listHighScore) {
+            Log.d(TAG, tmpHighScore.getLevel() + "---" + tmpHighScore.getExpCurrent() + "---" + tmpHighScore.getHighscore());
+            ManagerPreference.getInstance().putLevel(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getLevel());
+            ManagerPreference.getInstance().putExpCurrent(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getExpCurrent());
+            ManagerPreference.getInstance().putScore(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getHighscore());
+        }
+
+    }
+
+
+    private List<HighScore> getAllHighscore() throws ExecutionException, InterruptedException, MobileServiceException {
+        return mServiceTable.execute().get();
     }
 
     //When App Start got 1 user logged already
     public void settingStartApp(String userID) {
+        //upload local to Server
+        List<HighScore> results = SQLiteDBHelper.getInstance().getAllHighscoreByUserId(userID);
+        if(!results.isEmpty()){
+            for (HighScore score : results) {
+                updateSingleHighscore(score);
+            }
+        }
+
+        Log.d(TAG, "Begin sync");
+        syncDown();
+
+    }
+
+    public void updateSingleHighscore(HighScore score){
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
-                    listHighScore = getHighScoreByUserID(userID);
-                    uploadData();
+                    mServiceTable.update(score).get();
+                    Log.d(TAG, "updated");
                 } catch (ExecutionException | InterruptedException ignored) {
                 }
                 return null;
@@ -125,68 +157,30 @@ public class ManagerServer {
         runAsyncTask(task);
     }
 
-    private void uploadData() {
-        for (int i = 0; i < Gogo.GAME_LIST.length; i++) {
-            for (int j = 1; j < 4; j++) {
+    //Sync From Server to SQLite local
+    private void syncDown() {
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
                 try {
-                    updateHighScore(Gogo.GAME_LIST[i], j,
-                            ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], j),
-                            ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], j),
-                            ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], j)
-                    );
-                } catch (ExecutionException | InterruptedException ignored) {
+                    List<HighScore> result = getAllHighscore();
+
+                    Log.d(TAG, result.size() + "");
+
+                    SQLiteDBHelper.getInstance().resetDB(result);
+
+                    Log.d(TAG, SQLiteDBHelper.getInstance().getAllHighscore().size() + "");
+                } catch (ExecutionException | InterruptedException | MobileServiceException ignored) {
                 }
+                return null;
             }
-        }
+        };
+        runAsyncTask(task);
     }
 
-    private void updateHighScore(String type, int position, int nExp, int nLvl, int nHighScore) throws ExecutionException, InterruptedException {
-        for (HighScore score : listHighScore) {
-            if (score.getType().equals(type) && score.getPosition() == position) {
-                score.setExpCurrent(nExp);
-                score.setHighscore(nHighScore);
-                score.setLevel(nLvl);
-                AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        try {
-                            mServiceTable.update(score).get();
-                        } catch (ExecutionException | InterruptedException ignored) {
-                        }
-                        return null;
-                    }
-                };
-                runAsyncTask(task);
-                break;
-            }
-        }
-    }
 
     //When User Login
-    private void updateData(String userID) {
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    listHighScore = getHighScoreByUserID(userID);
-                } catch (ExecutionException | InterruptedException ignored) {
-                }
-                return null;
-            }
-        };
-        runAsyncTask(task);
 
-        new CountDownTimerAdapter(5000, 1) {
-            public void onFinish() {
-                for (HighScore tmpHighScore : listHighScore) {
-                    Log.d(TAG, tmpHighScore.getLevel() + "---" + tmpHighScore.getExpCurrent() + "---" + tmpHighScore.getHighscore());
-                    ManagerPreference.getInstance().putLevel(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getLevel());
-                    ManagerPreference.getInstance().putExpCurrent(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getExpCurrent());
-                    ManagerPreference.getInstance().putScore(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getHighscore());
-                }
-            }
-        }.start();
-    }
 
     private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

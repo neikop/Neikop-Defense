@@ -18,7 +18,10 @@ import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameStatusLayout;
 import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.ManagerServer;
+import com.example.windzlord.brainfuck.managers.SQLiteDBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -395,6 +398,22 @@ public abstract class NeikopzGame extends Fragment {
         ManagerPreference.getInstance().putExpCurrent(name, index, expCurrent);
         ManagerPreference.getInstance().putScore(name, index,
                 Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
+
+        SQLiteDBHelper.getInstance().updateHighscore(
+                userID,
+                name,
+                index,
+                level,
+                expCurrent,
+                ManagerPreference.getInstance().getScore(name, index)
+        );
+
+        if(ManagerNetwork.getInstance().isConnectedToInternet()){
+            ManagerServer.getInstance().updateSingleHighscore(SQLiteDBHelper.getInstance().getHighscoreByInfo(
+                    userID, name, index
+            ));
+        }
+
 
 
     }
