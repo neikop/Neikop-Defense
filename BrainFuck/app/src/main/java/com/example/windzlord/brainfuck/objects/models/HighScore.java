@@ -24,8 +24,8 @@ public class HighScore {
     @com.google.gson.annotations.SerializedName("expCurrent")
     private int expCurrent;
 
-    @com.google.gson.annotations.SerializedName("highscore")
-    private int highscore;
+    @com.google.gson.annotations.SerializedName("score")
+    private int score;
 
     public HighScore() {
     }
@@ -58,13 +58,12 @@ public class HighScore {
         this.level = level;
     }
 
-
     public void setExpCurrent(int expCurrent) {
         this.expCurrent = expCurrent;
     }
 
-    public void setHighscore(int highscore) {
-        this.highscore = highscore;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getType() {
@@ -79,12 +78,12 @@ public class HighScore {
         return level;
     }
 
-
     public int getExpCurrent() {
         return expCurrent;
     }
 
-    public int getHighscore() {
-        return highscore;
+    public int getScore() {
+        return score;
     }
+
 }

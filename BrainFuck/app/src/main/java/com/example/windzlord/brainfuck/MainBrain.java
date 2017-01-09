@@ -2,7 +2,7 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
-import com.example.windzlord.brainfuck.managers.ManagerDatabaseGame;
+import com.example.windzlord.brainfuck.managers.ManagerDatabase;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
@@ -21,7 +21,7 @@ public class MainBrain extends Application {
 
     private void settingThingsUp() {
         ManagerPreference.init(this);
-        ManagerDatabaseGame.init(this);
+        ManagerDatabase.init(this);
         ManagerNetwork.init(this);
         ManagerServer.init(this);
 

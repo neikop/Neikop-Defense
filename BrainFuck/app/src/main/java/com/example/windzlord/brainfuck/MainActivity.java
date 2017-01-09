@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.windzlord.brainfuck.managers.ManagerDatabaseGame;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.FragmentMain;
 import com.example.windzlord.brainfuck.screens.FragmentWelcome;

@@ -1,5 +1,6 @@
 package com.example.windzlord.brainfuck.managers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +12,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
  * Created by Ha San~ on 12/31/2016.
  */
 
-public class ManagerDatabaseGame extends SQLiteAssetHelper {
+public class ManagerDatabase extends SQLiteAssetHelper {
 
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "database.db";
@@ -29,7 +30,7 @@ public class ManagerDatabaseGame extends SQLiteAssetHelper {
             QUOTE_COLUMN_LEVELS
     };
 
-    private ManagerDatabaseGame(Context context) {
+    private ManagerDatabase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -43,11 +44,8 @@ public class ManagerDatabaseGame extends SQLiteAssetHelper {
                 null,
                 "RANDOM()",
                 "1");
-
-        if (cursor.moveToNext()) {
-            return create(cursor);
-        }
-        return null;
+        if (cursor.moveToNext()) return create(cursor);
+        else return null;
     }
 
     private Calculation create(Cursor cursor) {
@@ -58,14 +56,15 @@ public class ManagerDatabaseGame extends SQLiteAssetHelper {
         return new Calculation(id, name, results, levels);
     }
 
-    private static ManagerDatabaseGame instance;
+    @SuppressLint("StaticFieldLeak")
+    private static ManagerDatabase instance;
 
-    public static ManagerDatabaseGame getInstance() {
+    public static ManagerDatabase getInstance() {
         return instance;
     }
 
     public static void init(Context context) {
-        instance = new ManagerDatabaseGame(context);
+        instance = new ManagerDatabase(context);
     }
 
 }

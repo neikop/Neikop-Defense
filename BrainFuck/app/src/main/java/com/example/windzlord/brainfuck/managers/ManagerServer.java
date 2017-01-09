@@ -7,7 +7,6 @@ package com.example.windzlord.brainfuck.managers;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
 
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
@@ -15,8 +14,6 @@ import com.facebook.Profile;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.okhttp.OkHttpClient;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -38,13 +35,14 @@ public class ManagerServer {
 
             mClient.setAndroidHttpClientFactory(() -> {
                 OkHttpClient client = new OkHttpClient();
-                client.setReadTimeout(5, TimeUnit.SECONDS);
-                client.setWriteTimeout(5, TimeUnit.SECONDS);
+                client.setReadTimeout(3, TimeUnit.SECONDS);
+                client.setWriteTimeout(3, TimeUnit.SECONDS);
                 return client;
             });
             mServiceTable = mClient.getTable(HighScore.class);
             scores = new ArrayList<>();
-        } catch (MalformedURLException ignored) {
+        } catch (Exception goAgain) {
+            init(context);
         }
     }
 
@@ -93,9 +91,9 @@ public class ManagerServer {
         for (HighScore score : scores) {
             if (score.getType().equals(type) & score.getPosition() == position) {
                 score.setExpCurrent(nExp);
-                score.setHighscore(nHighScore);
+                score.setScore(nHighScore);
                 score.setLevel(nLvl);
-                System.out.println(score.getLevel() + "---" + score.getExpCurrent() + "---" + score.getHighscore());
+                System.out.println(score.getLevel() + "---" + score.getExpCurrent() + "---" + score.getScore());
                 runAsyncTask(new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
@@ -145,17 +143,17 @@ public class ManagerServer {
                     });
                     new CountDownTimerAdapter(TIME, 1) {
                         public void onFinish() {
-                            updateData(userID, userName);
+                            updateData(userID);
                         }
                     }.start();
                 } else {
-                    updateData(userID, userName);
+                    updateData(userID);
                 }
             }
         }.start();
     }
 
-    private void updateData(String userID, String userName) {
+    private void updateData(String userID) {
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -166,15 +164,13 @@ public class ManagerServer {
         new CountDownTimerAdapter(TIME, 1) {
             public void onFinish() {
                 for (HighScore score : scores) {
-                    System.out.println(score.getLevel() + "---" + score.getExpCurrent() + "---" + score.getHighscore());
-                    ManagerPreference.getInstance().putUserID(userID);
-                    ManagerPreference.getInstance().putUserName(userName);
+                    System.out.println(score.getLevel() + "---" + score.getExpCurrent() + "---" + score.getScore());
                     ManagerPreference.getInstance().putLevel(score.getType(), score.getPosition(),
                             score.getLevel());
                     ManagerPreference.getInstance().putExpCurrent(score.getType(), score.getPosition(),
                             score.getExpCurrent());
                     ManagerPreference.getInstance().putScore(score.getType(), score.getPosition(),
-                            score.getHighscore());
+                            score.getScore());
                 }
             }
         }.start();

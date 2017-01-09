@@ -100,10 +100,12 @@ public class FragmentFeedback extends Fragment {
         System.out.println("LOGIN = " + profile.getName());
         textView.setText(profile.getName() + "\n" + profile.getId());
         ManagerServer.getInstance().gameLogin(profile);
+        ManagerPreference.getInstance().putUserID(profile.getId());
+        ManagerPreference.getInstance().putUserName(profile.getName());
     }
 
     private void logout(Profile profile) {
-        System.out.println("LOGOUT = " + profile.getName() + profile.getId());
+        System.out.println("LOGOUT = " + profile.getName() + " " + profile.getId());
         String userID = ManagerPreference.getInstance().getUserID();
         ManagerServer.getInstance().gameUpload(userID);
         ManagerPreference.getInstance().putUserID("");
