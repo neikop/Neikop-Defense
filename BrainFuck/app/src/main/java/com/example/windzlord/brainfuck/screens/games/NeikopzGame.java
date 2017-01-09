@@ -23,6 +23,7 @@ import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.SQLiteDBHelper;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -388,16 +389,19 @@ public abstract class NeikopzGame extends Fragment {
         int expCurrent = ManagerPreference.getInstance().getExpCurrent(name, index);
         String userID = ManagerPreference.getInstance().getUserID();
 
+
         expCurrent += score;
         if (expCurrent >= expNext) {
             expCurrent = expCurrent - expNext;
             level++;
         }
 
+
         ManagerPreference.getInstance().putLevel(name, index, level);
         ManagerPreference.getInstance().putExpCurrent(name, index, expCurrent);
         ManagerPreference.getInstance().putScore(name, index,
                 Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
+
 
         SQLiteDBHelper.getInstance().updateHighscore(
                 userID,
@@ -413,8 +417,6 @@ public abstract class NeikopzGame extends Fragment {
                     userID, name, index
             ));
         }
-
-
 
     }
 
@@ -445,8 +447,8 @@ public abstract class NeikopzGame extends Fragment {
     }
 
     protected void goHighScoreColor() {
-        imageViewScore.setImageResource(R.color.colorCyanLight);
-        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
+        imageViewScore.setImageResource(R.color.colorOrangeLight);
+        textViewScore.setTextColor(getResources().getColor(R.color.colorCyanLight));
     }
 
     @OnClick(R.id.button_exit)

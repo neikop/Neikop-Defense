@@ -25,7 +25,7 @@ public class HighScore {
     private int expCurrent;
 
     @com.google.gson.annotations.SerializedName("highscore")
-    private int highscore;
+    private int score;
 
     public HighScore() {
     }
@@ -37,8 +37,10 @@ public class HighScore {
         this.position = position;
         this.level = level;
         this.expCurrent = expCurrent;
-        this.highscore = highscore;
+        this.score = highscore;
     }
+
+
 
     public String getId() {
         return id;
@@ -68,13 +70,12 @@ public class HighScore {
         this.level = level;
     }
 
-
     public void setExpCurrent(int expCurrent) {
         this.expCurrent = expCurrent;
     }
 
-    public void setHighscore(int highscore) {
-        this.highscore = highscore;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getType() {
@@ -89,25 +90,24 @@ public class HighScore {
         return level;
     }
 
-
     public int getExpCurrent() {
         return expCurrent;
     }
 
-    public int getHighscore() {
-        return highscore;
+    public int getScore() {
+        return score;
     }
 
     @Override
     public String toString() {
         return "HighScore{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", userId='" + userId + '\'' +
                 ", type='" + type + '\'' +
                 ", position=" + position +
                 ", level=" + level +
                 ", expCurrent=" + expCurrent +
-                ", highscore=" + highscore +
+                ", score=" + score +
                 '}';
     }
 }

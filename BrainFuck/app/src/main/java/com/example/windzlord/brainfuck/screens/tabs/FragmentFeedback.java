@@ -61,7 +61,8 @@ public class FragmentFeedback extends Fragment {
         ButterKnife.bind(this, view);
         loginFacebook();
 
-        textView.setText(ManagerPreference.getInstance().getUserID());
+        textView.setText(ManagerPreference.getInstance().getUserName()
+                + "\n" + ManagerPreference.getInstance().getUserID());
     }
 
 
@@ -74,9 +75,10 @@ public class FragmentFeedback extends Fragment {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "onSuccess");
-                ProfileTracker profileTracker = new ProfileTracker() {
+                new ProfileTracker() {
                     @Override
                     protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+
                         if (currentProfile != null) {
                             textView.setText(currentProfile.getFirstName() + " " + currentProfile.getLastName() + "\n" + currentProfile.getId());
                             ManagerServer.getInstance().createNewUser(currentProfile.getId());
@@ -86,16 +88,10 @@ public class FragmentFeedback extends Fragment {
                             System.out.println(userID);
                         }else {
                             ManagerPreference.getInstance().putUserID("");
-                            if (ManagerNetwork.getInstance().isConnectedToInternet()) {
-                                System.out.println(userID);
-                                if (!userID.equals("")) {
-                                    ManagerServer.getInstance().settingStartApp(userID);
-                                }
-                            }
                         }
+
                     }
-                };
-                profileTracker.startTracking();
+                }.startTracking();
             }
 
             @Override

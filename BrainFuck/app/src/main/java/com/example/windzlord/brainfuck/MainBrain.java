@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
+import com.example.windzlord.brainfuck.managers.ManagerDatabase;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
@@ -21,14 +22,17 @@ public class MainBrain extends Application {
 
     private void settingThingsUp() {
         ManagerPreference.init(this);
+        ManagerDatabase.init(this);
         ManagerNetwork.init(this);
         ManagerServer.init(this);
         SQLiteDBHelper.init(this);
+
 
         String userID = ManagerPreference.getInstance().getUserID();
         System.out.println(userID.isEmpty());
         if (ManagerNetwork.getInstance().isConnectedToInternet()) {
             ManagerServer.getInstance().settingStartApp(userID);
         }
+
     }
 }

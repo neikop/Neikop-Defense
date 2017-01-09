@@ -47,7 +47,7 @@ public class SQLiteDBHelper extends SQLiteAssetHelper {
         contentValues.put(COLUMN_POSITION, highScore.getPosition());
         contentValues.put(COLUMN_LEVEL, highScore.getLevel());
         contentValues.put(COLUMN_EXP_CURRENT, highScore.getExpCurrent());
-        contentValues.put(COLUMN_HIGHSCORE, highScore.getHighscore());
+        contentValues.put(COLUMN_HIGHSCORE, highScore.getScore());
         writableDatabase.insert(TABLE_NAME, null, contentValues);
         writableDatabase.close();
     }

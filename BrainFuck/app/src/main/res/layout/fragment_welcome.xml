@@ -6,11 +6,12 @@
     tools:context=".screens.FragmentWelcome">
 
     <pl.droidsonroids.gif.GifImageView
-        android:src="@drawable/z_background_welcome_image"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/imageView_welcome"
         android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:layout_height="400dp"/>
+        android:src="@drawable/z_background_welcome_image" />
 
     <SeekBar
         android:id="@+id/progressBar_welcome"

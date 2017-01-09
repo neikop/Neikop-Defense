@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.windzlord.brainfuck.managers.ManagerDatabaseGame;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.FragmentMain;
 import com.example.windzlord.brainfuck.screens.FragmentWelcome;
+import com.example.windzlord.brainfuck.screens.tabs.FragmentSetting;
 import com.example.windzlord.brainfuck.screens.types.FragmentCalculation;
 import com.example.windzlord.brainfuck.screens.types.FragmentConcentration;
 import com.example.windzlord.brainfuck.screens.types.FragmentMemory;
@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 | name.equals(FragmentObservation.class.getSimpleName())) {
             fragmentTransaction.setCustomAnimations(R.anim.go_right_in, R.anim.nothing,
                     R.anim.nothing, R.anim.go_left_out);
+        } else if (name.equals(FragmentSetting.class.getSimpleName())) {
+
         } else {
             fragmentTransaction.setCustomAnimations(R.anim.zoom_in, R.anim.nothing,
                     R.anim.nothing, R.anim.zoom_out);
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    public CallbackManager getCallbackManager(){
+    public CallbackManager getCallbackManager() {
         return callbackManager;
     }
 }

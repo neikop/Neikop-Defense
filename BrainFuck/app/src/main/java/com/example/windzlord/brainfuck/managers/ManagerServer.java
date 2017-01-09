@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
+import com.facebook.Profile;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
@@ -62,47 +63,41 @@ public class ManagerServer {
 
 
         if (listHighScore.isEmpty()) {
-            for (int i = 0; i < Gogo.GAME_LIST.length; i++) {
-                for (int k = 1; k < 4; k++) {
-                    HighScore score = new HighScore();
-                    score.setUserId(userId);
-                    score.setType(Gogo.GAME_LIST[i]);
-                    score.setPosition(k);
-                    score.setLevel(1);
-                    Log.d(TAG, score.toString());
-                    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-
-                                mServiceTable.insert(score).get();
-
-                            } catch (Exception ignored) {
-                            }
-                            return null;
-                        }
-                    };
-                    runAsyncTask(task);
-                }
-            }
 
             AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... params) {
                     try {
-                        List<HighScore> result = getAllHighscore();
+                        for (int i = 0; i < Gogo.GAME_LIST.length; i++) {
+                            for (int k = 1; k < 4; k++) {
+                                HighScore score = new HighScore();
+                                score.setUserId(userId);
+                                score.setType(Gogo.GAME_LIST[i]);
+                                score.setPosition(k);
+                                score.setLevel(1);
+                                Log.d(TAG, score.toString());
+                                mServiceTable.insert(score).get();
+                                Log.d(TAG, "Inserted");
+                            }
+                        }
+                        Log.d(TAG, "Insert Done");
 
+
+                        List<HighScore> result = getAllHighscore();
                         Log.d(TAG, result.size() + "");
 
                         SQLiteDBHelper.getInstance().resetDB(result);
                         updateData(userId);
                         Log.d(TAG, SQLiteDBHelper.getInstance().getAllHighscore().size() + "");
-                    } catch (ExecutionException | InterruptedException | MobileServiceException ignored) {
+
+                    } catch (Exception ignored) {
                     }
                     return null;
                 }
             };
             runAsyncTask(task);
+
+
         } else {
             updateData(userId);
         }
@@ -114,10 +109,10 @@ public class ManagerServer {
 
 
         for (HighScore tmpHighScore : listHighScore) {
-            Log.d(TAG, tmpHighScore.getLevel() + "---" + tmpHighScore.getExpCurrent() + "---" + tmpHighScore.getHighscore());
+            Log.d(TAG, tmpHighScore.getLevel() + "---" + tmpHighScore.getExpCurrent() + "---" + tmpHighScore.getScore());
             ManagerPreference.getInstance().putLevel(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getLevel());
             ManagerPreference.getInstance().putExpCurrent(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getExpCurrent());
-            ManagerPreference.getInstance().putScore(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getHighscore());
+            ManagerPreference.getInstance().putScore(tmpHighScore.getType(), tmpHighScore.getPosition(), tmpHighScore.getScore());
         }
 
     }
@@ -131,7 +126,7 @@ public class ManagerServer {
     public void settingStartApp(String userID) {
         //upload local to Server
         List<HighScore> results = SQLiteDBHelper.getInstance().getAllHighscoreByUserId(userID);
-        if(!results.isEmpty()){
+        if (!results.isEmpty()) {
             for (HighScore score : results) {
                 updateSingleHighscore(score);
             }
@@ -142,7 +137,7 @@ public class ManagerServer {
 
     }
 
-    public void updateSingleHighscore(HighScore score){
+    public void updateSingleHighscore(HighScore score) {
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {

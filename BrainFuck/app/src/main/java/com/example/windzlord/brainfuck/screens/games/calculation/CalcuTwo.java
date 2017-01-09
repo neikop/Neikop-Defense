@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.ManagerDatabaseGame;
+import com.example.windzlord.brainfuck.managers.ManagerDatabase;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.objects.models.Calculation;
 import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
@@ -112,8 +112,8 @@ public class CalcuTwo extends NeikopzGame {
     }
 
     private void random() {
-        Calculation calcuOne = ManagerDatabaseGame.getInstance().getRandomCalculation(2);
-        Calculation calcuTwo = ManagerDatabaseGame.getInstance().getRandomCalculation(2);
+        Calculation calcuOne = ManagerDatabase.getInstance().getRandomCalculation(2);
+        Calculation calcuTwo = ManagerDatabase.getInstance().getRandomCalculation(2);
         setCalculation(calcuOne, calcuTwo);
     }
 
@@ -168,12 +168,6 @@ public class CalcuTwo extends NeikopzGame {
                 clickable = true;
             }
         }.start();
-    }
-
-    @Override
-    protected void goHighScoreColor() {
-        imageViewScore.setImageResource(R.color.colorOrangeLight);
-        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
     }
 
 }
