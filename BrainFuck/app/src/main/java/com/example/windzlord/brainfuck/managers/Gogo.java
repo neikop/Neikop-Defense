@@ -39,9 +39,8 @@ public class Gogo {
         for (int i = 0; i < 9; i++) ret[i] = getRandom(10) < 5;
         if (core == null) return ret;
         while (true) {
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 9; i++)
                 if (ret[i] ^ core[i]) return ret;
-            }
             ret = getArrayObserOne(null);
         }
     }
@@ -92,10 +91,8 @@ public class Gogo {
         List<Integer> ret = new ArrayList<>();
         for (int i = 0; i < 12; i++) ret.add(i);
         Collections.shuffle(ret);
-        switch (Gogo.getRandom(3)) {
+        switch (Gogo.getRandom(2)) {
             case 1:
-                return ret.subList(0, 4);
-            case 2:
                 return ret.subList(0, 5);
             default:
                 return ret.subList(0, 6);

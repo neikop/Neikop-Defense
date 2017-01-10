@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.facebook.FacebookCallback;
@@ -78,18 +77,18 @@ public class FragmentFeedback extends Fragment {
                 new ProfileTracker() {
                     @Override
                     protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-
                         if (currentProfile != null) {
-                            textView.setText(currentProfile.getFirstName() + " " + currentProfile.getLastName() + "\n" + currentProfile.getId());
-                            ManagerServer.getInstance().createNewUser(currentProfile.getId());
-                            ManagerPreference.getInstance().putUserID(currentProfile.getId());
-                            String userID = ManagerPreference.getInstance().getUserID();
-                            System.out.println(userID.isEmpty());
-                            System.out.println(userID);
-                        }else {
-                            ManagerPreference.getInstance().putUserID("");
-                        }
+                            textView.setText(currentProfile.getName() + "\n" + currentProfile.getId());
 
+                            ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
+                            ManagerPreference.getInstance().putUserID(currentProfile.getId());
+                            ManagerPreference.getInstance().putUserName(currentProfile.getName());
+                        } else {
+                            ManagerServer.getInstance().uploadLocalToServer(
+                                    ManagerPreference.getInstance().getUserID());
+                            ManagerPreference.getInstance().putUserID("");
+                            ManagerPreference.getInstance().putUserName("Guest");
+                        }
                     }
                 }.startTracking();
             }

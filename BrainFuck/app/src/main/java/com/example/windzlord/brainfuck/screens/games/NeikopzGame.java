@@ -21,7 +21,7 @@ import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
-import com.example.windzlord.brainfuck.managers.SQLiteDBHelper;
+import com.example.windzlord.brainfuck.managers.ManagerUserData;
 
 
 import java.util.ArrayList;
@@ -389,35 +389,29 @@ public abstract class NeikopzGame extends Fragment {
         int expCurrent = ManagerPreference.getInstance().getExpCurrent(name, index);
         String userID = ManagerPreference.getInstance().getUserID();
 
-
         expCurrent += score;
         if (expCurrent >= expNext) {
             expCurrent = expCurrent - expNext;
             level++;
         }
 
-
         ManagerPreference.getInstance().putLevel(name, index, level);
         ManagerPreference.getInstance().putExpCurrent(name, index, expCurrent);
         ManagerPreference.getInstance().putScore(name, index,
                 Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
 
-
-        SQLiteDBHelper.getInstance().updateHighscore(
+        ManagerUserData.getInstance().updateScore(
                 userID,
                 name,
                 index,
                 level,
                 expCurrent,
-                ManagerPreference.getInstance().getScore(name, index)
-        );
+                ManagerPreference.getInstance().getScore(name, index));
 
-        if(ManagerNetwork.getInstance().isConnectedToInternet()){
-            ManagerServer.getInstance().updateSingleHighscore(SQLiteDBHelper.getInstance().getHighscoreByInfo(
-                    userID, name, index
-            ));
+        if (ManagerNetwork.getInstance().isConnectedToInternet()) {
+            ManagerServer.getInstance().uploadSingleScore(
+                    ManagerUserData.getInstance().getScoreByInfo(userID, name, index));
         }
-
     }
 
     protected void goEndAnimation(boolean getHigh) {
@@ -448,7 +442,7 @@ public abstract class NeikopzGame extends Fragment {
 
     protected void goHighScoreColor() {
         imageViewScore.setImageResource(R.color.colorOrangeLight);
-        textViewScore.setTextColor(getResources().getColor(R.color.colorCyanLight));
+        textViewScore.setTextColor(getResources().getColor(R.color.colorWhite));
     }
 
     @OnClick(R.id.button_exit)

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.ManagerDatabase;
+import com.example.windzlord.brainfuck.managers.ManagerGameData;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.objects.models.Calculation;
 import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
@@ -112,8 +112,8 @@ public class CalcuTwo extends NeikopzGame {
     }
 
     private void random() {
-        Calculation calcuOne = ManagerDatabase.getInstance().getRandomCalculation(2);
-        Calculation calcuTwo = ManagerDatabase.getInstance().getRandomCalculation(2);
+        Calculation calcuOne = ManagerGameData.getInstance().getRandomCalculation(2);
+        Calculation calcuTwo = ManagerGameData.getInstance().getRandomCalculation(2);
         setCalculation(calcuOne, calcuTwo);
     }
 

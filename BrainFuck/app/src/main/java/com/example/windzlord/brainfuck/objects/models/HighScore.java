@@ -40,8 +40,6 @@ public class HighScore {
         this.score = highscore;
     }
 
-
-
     public String getId() {
         return id;
     }
@@ -70,14 +68,6 @@ public class HighScore {
         this.level = level;
     }
 
-    public void setExpCurrent(int expCurrent) {
-        this.expCurrent = expCurrent;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public String getType() {
         return type;
     }
@@ -98,16 +88,4 @@ public class HighScore {
         return score;
     }
 
-    @Override
-    public String toString() {
-        return "HighScore{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", type='" + type + '\'' +
-                ", position=" + position +
-                ", level=" + level +
-                ", expCurrent=" + expCurrent +
-                ", score=" + score +
-                '}';
-    }
 }

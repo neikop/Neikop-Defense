@@ -12,7 +12,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
  * Created by Ha San~ on 12/31/2016.
  */
 
-public class ManagerDatabase extends SQLiteAssetHelper {
+public class ManagerGameData extends SQLiteAssetHelper {
 
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "database.db";
@@ -30,7 +30,7 @@ public class ManagerDatabase extends SQLiteAssetHelper {
             QUOTE_COLUMN_LEVELS
     };
 
-    private ManagerDatabase(Context context) {
+    private ManagerGameData(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -44,11 +44,11 @@ public class ManagerDatabase extends SQLiteAssetHelper {
                 null,
                 "RANDOM()",
                 "1");
-        if (cursor.moveToNext()) return create(cursor);
+        if (cursor.moveToNext()) return createCalculation(cursor);
         else return null;
     }
 
-    private Calculation create(Cursor cursor) {
+    private Calculation createCalculation(Cursor cursor) {
         int id = cursor.getInt(cursor.getColumnIndex(QUOTE_COLUMN_ID));
         String name = cursor.getString(cursor.getColumnIndex(QUOTE_COLUMN_CALCULATION));
         int results = cursor.getInt(cursor.getColumnIndex(QUOTE_COLUMN_RESULTS));
@@ -57,14 +57,14 @@ public class ManagerDatabase extends SQLiteAssetHelper {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private static ManagerDatabase instance;
+    private static ManagerGameData instance;
 
-    public static ManagerDatabase getInstance() {
+    public static ManagerGameData getInstance() {
         return instance;
     }
 
     public static void init(Context context) {
-        instance = new ManagerDatabase(context);
+        instance = new ManagerGameData(context);
     }
 
 }
