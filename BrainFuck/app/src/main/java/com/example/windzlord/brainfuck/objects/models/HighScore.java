@@ -88,4 +88,11 @@ public class HighScore {
         return score;
     }
 
+    public void setExpCurrent(int expCurrent) {
+        this.expCurrent = expCurrent;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }

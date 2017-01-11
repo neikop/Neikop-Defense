@@ -150,7 +150,9 @@ public class ManagerServer {
                             score.setUserId(userId);
                             score.setType(Gogo.GAME_LIST[i]);
                             score.setPosition(k);
-                            score.setLevel(1);
+                            score.setLevel(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
+                            score.setExpCurrent(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
+                            score.setScore(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
                             mServiceTable.insert(score).get();
                             Log.d(TAG, "Inserted");
                         }
