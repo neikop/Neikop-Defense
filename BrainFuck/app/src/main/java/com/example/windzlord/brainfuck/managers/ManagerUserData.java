@@ -61,7 +61,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
     public boolean isExistedUser(String userId) {
-        return getScoreByUserId(userId).isEmpty();
+        return !getScoreByUserId(userId).isEmpty();
     }
 
     public HighScore getScoreByInfo(String userId, String type, int position) {
