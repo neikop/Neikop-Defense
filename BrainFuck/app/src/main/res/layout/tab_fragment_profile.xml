@@ -95,8 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:paddingTop="20dp"
-            android:background="#4B4060">
+            android:background="#4B4060"
+            android:paddingTop="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                         android:id="@+id/progressbar_calculation"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
-                        app:rcBackgroundColor="@color/cardview_dark_background"
+                        app:rcBackgroundColor="@color/colorDark"
                         app:rcIconBackgroundColor="@color/custom_progress_red_header"
                         app:rcIconPadding="0dp"
                         app:rcIconSize="40dp"
@@ -151,7 +151,7 @@
                         android:id="@+id/progressbar_concen"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
-                        app:rcBackgroundColor="@color/cardview_dark_background"
+                        app:rcBackgroundColor="@color/colorDark"
                         app:rcIconBackgroundColor="@color/custom_progress_green_progress"
                         app:rcIconPadding="3dp"
                         app:rcIconSize="40dp"
@@ -185,7 +185,7 @@
                         android:id="@+id/progressbar_memory"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
-                        app:rcBackgroundColor="@color/cardview_dark_background"
+                        app:rcBackgroundColor="@color/colorDark"
                         app:rcIconBackgroundColor="@color/custom_progress_orange_progress"
                         app:rcIconPadding="5dp"
                         app:rcIconSize="40dp"
@@ -218,7 +218,7 @@
                         android:id="@+id/progressbar_observation"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
-                        app:rcBackgroundColor="@color/cardview_dark_background"
+                        app:rcBackgroundColor="@color/colorDark"
                         app:rcIconBackgroundColor="@color/custom_progress_blue_progress"
                         app:rcIconPadding="5dp"
                         app:rcIconSize="40dp"
