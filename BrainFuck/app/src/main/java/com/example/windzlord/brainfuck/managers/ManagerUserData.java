@@ -132,4 +132,5 @@ public class ManagerUserData extends SQLiteAssetHelper {
         instance = new ManagerUserData(context);
     }
 
+
 }

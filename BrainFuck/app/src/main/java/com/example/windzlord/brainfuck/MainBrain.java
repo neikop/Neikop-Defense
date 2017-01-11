@@ -3,11 +3,10 @@ package com.example.windzlord.brainfuck;
 import android.app.Application;
 
 import com.example.windzlord.brainfuck.managers.FileManager;
-import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
-import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -23,7 +22,9 @@ public class MainBrain extends Application {
     public void onCreate() {
         super.onCreate();
         settingThingsUp();
+
     }
+
 
     private void settingThingsUp() {
         ManagerPreference.init(this);
@@ -33,6 +34,8 @@ public class MainBrain extends Application {
         ManagerUserData.init(this);
         FileManager.init(this);
         initImageLoader();
+
+
 
 //
 //        for (int i = 1; i < 3; i++) {
