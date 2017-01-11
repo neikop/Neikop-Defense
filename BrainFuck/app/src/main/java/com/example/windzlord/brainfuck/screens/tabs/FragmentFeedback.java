@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
@@ -43,9 +42,6 @@ public class FragmentFeedback extends Fragment {
     @BindView(R.id.login_button)
     LoginButton loginButton;
 
-    @BindView(R.id.textView_feedback)
-    TextView textView;
-
     public FragmentFeedback() {
         // Required empty public constructor
     }
@@ -64,13 +60,11 @@ public class FragmentFeedback extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
-        loginFacebook();
-
-        getTextField();
+        settingFacebook();
     }
 
 
-    public void loginFacebook() {
+    public void settingFacebook() {
         AppEventsLogger.activateApp(getContext());
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
@@ -97,8 +91,6 @@ public class FragmentFeedback extends Fragment {
                                     ManagerPreference.getInstance().putUserID("");
                                     ManagerPreference.getInstance().putUserName("Guest");
                                 }
-
-                                getTextField();
                             }
                         }.startTracking();
                     }
@@ -113,11 +105,6 @@ public class FragmentFeedback extends Fragment {
                         Log.d(TAG, "onError");
                     }
                 });
-    }
-
-    private void getTextField() {
-        textView.setText(ManagerPreference.getInstance().getUserName()
-                + "\n" + ManagerPreference.getInstance().getUserID());
     }
 
     private class DownloadImage extends AsyncTask<Object, Void, Bitmap> {

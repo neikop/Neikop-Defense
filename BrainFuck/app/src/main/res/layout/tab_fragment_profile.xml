@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="#BB77FF">
+            android:background="#AA66CC">
 
             <ImageButton
                 android:layout_width="40dp"
@@ -28,9 +28,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:fontFamily="serif-monospace"
                 android:text="@string/profile"
-                android:textColor="#ffffff"
-                android:textSize="20dp"
+                android:textColor="@color/colorBlackLight"
+                android:textSize="30dp"
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -46,18 +47,18 @@
                     android:src="@color/colorWhite" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/image_user"
+                    android:id="@+id/imageView_user_avatar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/custom_oval_background_outline_profile"
                     android:src="@drawable/z_character_guest" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="130dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_toRightOf="@id/layout_avatar">
 
@@ -65,23 +66,26 @@
                     android:id="@+id/textView_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="Guest"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/colorWhite"
-                    android:textSize="30sp" />
+                    android:textSize="28sp" />
 
                 <TextView
-                    android:id="@+id/tv_high_score"
+                    android:id="@+id/textView_high_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="20sp"
-                    android:text="High Score: "
-                    android:layout_below="@+id/textView_user_name"
+                    android:layout_alignEnd="@+id/textView_user_name"
                     android:layout_alignRight="@+id/textView_user_name"
-                    android:layout_alignEnd="@+id/textView_user_name" />
+                    android:layout_below="@+id/textView_user_name"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="casual"
+                    android:text="Neuron: 0"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -91,7 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:background="#4A5B6C">
+            android:paddingTop="20dp"
+            android:background="#4B4060">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,13 +113,13 @@
                     android:orientation="horizontal">
 
                     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+                        android:id="@+id/progressbar_calculation"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         app:rcBackgroundColor="@color/cardview_dark_background"
                         app:rcIconBackgroundColor="@color/custom_progress_red_header"
                         app:rcIconPadding="0dp"
                         app:rcIconSize="40dp"
-                        android:id="@+id/progressbar_calculation"
                         app:rcIconSrc="@drawable/ic_z_calculator"
                         app:rcMax="1500"
 
@@ -127,7 +132,7 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/tv_calcu_score"
+                        android:id="@+id/textView_calcu_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -143,13 +148,13 @@
                     android:orientation="horizontal">
 
                     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+                        android:id="@+id/progressbar_concen"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         app:rcBackgroundColor="@color/cardview_dark_background"
                         app:rcIconBackgroundColor="@color/custom_progress_green_progress"
                         app:rcIconPadding="3dp"
                         app:rcIconSize="40dp"
-                        android:id="@+id/progressbar_concen"
                         app:rcIconSrc="@drawable/ic_z_concentration"
                         app:rcMax="1500"
                         app:rcProgressColor="@color/custom_progress_green_header"
@@ -161,11 +166,11 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/textView_concen_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="30"
-                        android:id="@+id/tv_concen_score"
                         android:textColor="@color/colorWhite"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -177,13 +182,13 @@
                     android:orientation="horizontal">
 
                     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+                        android:id="@+id/progressbar_memory"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         app:rcBackgroundColor="@color/cardview_dark_background"
                         app:rcIconBackgroundColor="@color/custom_progress_orange_progress"
                         app:rcIconPadding="5dp"
                         app:rcIconSize="40dp"
-                        android:id="@+id/progressbar_memory"
                         app:rcIconSrc="@drawable/ic_z_memory"
                         app:rcMax="1500"
                         app:rcProgressColor="@color/custom_progress_orange_header"
@@ -195,11 +200,11 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/textView_memory_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="80"
-                        android:id="@+id/tv_memory_score"
                         android:textColor="@color/colorWhite"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -210,13 +215,13 @@
                     android:orientation="horizontal">
 
                     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+                        android:id="@+id/progressbar_observation"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         app:rcBackgroundColor="@color/cardview_dark_background"
                         app:rcIconBackgroundColor="@color/custom_progress_blue_progress"
                         app:rcIconPadding="5dp"
                         app:rcIconSize="40dp"
-                        android:id="@+id/progressbar_observation"
                         app:rcIconSrc="@drawable/ic_z_observation"
                         app:rcMax="1500"
                         app:rcProgressColor="@color/custom_progress_blue_header"
@@ -228,11 +233,11 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/textView_observer_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="50"
-                        android:id="@+id/tv_observer_score"
                         android:textColor="@color/colorWhite"
                         android:textSize="18sp" />
                 </LinearLayout>
