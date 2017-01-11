@@ -64,7 +64,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_outline_game_chosen">
+            android:background="@drawable/custom_corner_background_outline_game">
 
             <TextView
                 android:id="@+id/textView_left_card"
@@ -82,7 +82,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_outline_game_chosen">
+            android:background="@drawable/custom_corner_background_outline_game">
 
             <TextView
                 android:id="@+id/textView_right_card"
@@ -104,7 +104,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/custom_corner_background_outline_game_chosen"
+        android:background="@drawable/custom_corner_background_outline_game"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -141,7 +141,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_answer_no">
+            android:background="@drawable/custom_corner_background_4_answer_no">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_answer_yes">
+            android:background="@drawable/custom_corner_background_4_answer_yes">
 
             <TextView
                 android:layout_width="wrap_content"

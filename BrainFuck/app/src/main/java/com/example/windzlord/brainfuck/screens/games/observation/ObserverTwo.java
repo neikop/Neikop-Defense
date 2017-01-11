@@ -24,8 +24,8 @@ import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
 public class ObserverTwo extends NeikopzGame {
 
     private int srcHided = R.drawable.game_iz_resouce_0x;
-    private int bgrNormal = R.drawable.custom_corner_background_outline;
-    private int bgrChosen = R.drawable.custom_corner_background_outline_chosen;
+    private int bgrNormal = R.drawable.custom_corner_background_5_outline;
+    private int bgrChosen = R.drawable.custom_corner_background_5_outline_chosen;
 
     @DrawableRes
     int imageResources[] = {R.drawable.game_iz_resouce_10,

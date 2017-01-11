@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/custom_corner_background_outline_game"
+                android:background="@drawable/custom_corner_background_7_outline"
                 android:columnCount="3"
                 android:padding="5dp">
 
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/custom_corner_background_outline_game"
+                android:background="@drawable/custom_corner_background_7_outline"
                 android:columnCount="3"
                 android:padding="5dp">
 
@@ -206,7 +206,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/custom_corner_background_outline_game"
+                android:background="@drawable/custom_corner_background_7_outline"
                 android:columnCount="3"
                 android:padding="5dp">
 

@@ -84,10 +84,14 @@ public class FragmentFeedback extends Fragment {
                             ManagerPreference.getInstance().putUserID(currentProfile.getId());
                             ManagerPreference.getInstance().putUserName(currentProfile.getName());
                         } else {
+                            System.out.println("LOGOUT a hai");
                             ManagerServer.getInstance().uploadLocalToServer(
                                     ManagerPreference.getInstance().getUserID());
                             ManagerPreference.getInstance().putUserID("");
                             ManagerPreference.getInstance().putUserName("Guest");
+                        }
+                        if (oldProfile != null) {
+                            System.out.println("LOGOUT kien");
                         }
                     }
                 }.startTracking();
