@@ -35,62 +35,72 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="1" />
+                app:number="1"
+                app:src_ranking="@drawable/ic_ranking_diamond" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="2" />
+                app:number="2"
+                app:src_ranking="@drawable/ic_ranking_premium" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="3" />
+                app:number="3"
+                app:src_ranking="@drawable/ic_ranking_gold" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="4" />
+                app:number="4"
+                app:src_ranking="@drawable/ic_ranking_silver" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="5" />
+                app:number="5"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="6" />
+                app:number="6"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="7" />
+                app:number="7"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="8" />
+                app:number="8"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="9" />
+                app:number="9"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
-                app:number="10" />
+                app:number="10"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
 
         </LinearLayout>
 
