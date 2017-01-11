@@ -65,6 +65,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
+                    app:src="@drawable/ic_cover_game_concen_1"
                     app:name="@string/game_concen_one"/>
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
