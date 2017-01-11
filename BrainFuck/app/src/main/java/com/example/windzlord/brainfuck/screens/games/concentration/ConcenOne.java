@@ -42,6 +42,12 @@ public class ConcenOne extends NeikopzGame {
     @BindView(R.id.layout_right_card)
     ViewGroup layoutRightCard;
 
+    @BindView(R.id.layout_left_hint)
+    View layoutLeftHint;
+
+    @BindView(R.id.layout_right_hint)
+    View layoutRightHint;
+
     private int bgrYesChosen = R.drawable.custom_corner_background_4_answer_yes_chosen;
     private int bgrYesNormal = R.drawable.custom_corner_background_4_answer_yes;
     private int bgrNoChosen = R.drawable.custom_corner_background_4_answer_no_chosen;
@@ -90,6 +96,7 @@ public class ConcenOne extends NeikopzGame {
             }
 
             public void onAnimationEnd(Animation animation) {
+                goVisibility(View.INVISIBLE, layoutLeftHint, layoutRightHint);
                 textViewRightCard.setText("");
                 textViewLeftCard.setText("");
                 goStartAnimation(scaleTwo, layoutRightCard, layoutLeftCard);
@@ -118,6 +125,10 @@ public class ConcenOne extends NeikopzGame {
                 gameStatusLayout.setGoingProgress(going);
             }
         });
+        if (layoutLeftHint.getVisibility() == View.VISIBLE)
+            layoutLeftHint.startAnimation(scaleOne);
+        if (layoutRightHint.getVisibility() == View.VISIBLE)
+            layoutRightHint.startAnimation(scaleOne);
         goStartAnimation(scaleOne, layoutRightCard, layoutLeftCard);
         if (going >= NUMBER_QUIZ) goEndGame(Gogo.CONCENTRATION, 1);
 
@@ -129,6 +140,7 @@ public class ConcenOne extends NeikopzGame {
         boolean left = Gogo.getRandom(2) == 0;
         boolean answer = false;
         if (left) {
+            layoutLeftHint.setVisibility(View.VISIBLE);
             textViewLeftCard.setText(quiz);
             textViewRightCard.setText("");
             for (int i = 0; i < quiz.length(); i++)
@@ -137,6 +149,7 @@ public class ConcenOne extends NeikopzGame {
                     break;
                 }
         } else {
+            layoutRightHint.setVisibility(View.VISIBLE);
             textViewRightCard.setText(quiz);
             textViewLeftCard.setText("");
             for (int i = 0; i < quiz.length(); i++)

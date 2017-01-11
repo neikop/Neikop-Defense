@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/demo5"
+    android:background="@drawable/demo_background_game"
     tools:context="com.example.windzlord.brainfuck.screens.games.observation.ObserverTwo">
 
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:src="@color/colorGray" />
+            android:src="@color/colorLight" />
 
         <TextView
             android:id="@+id/textView_score"
@@ -59,7 +59,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:columnCount="4">
+            android:background="@drawable/custom_corner_background_outline_game_2"
+            android:columnCount="4"
+            android:padding="3dp">
 
             <ImageView
                 android:layout_width="75dp"

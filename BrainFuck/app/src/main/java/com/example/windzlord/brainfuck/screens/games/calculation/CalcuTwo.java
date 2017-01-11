@@ -1,7 +1,6 @@
 package com.example.windzlord.brainfuck.screens.games.calculation;
 
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -33,8 +32,8 @@ public class CalcuTwo extends NeikopzGame {
     @BindView(R.id.textView_game_bottom)
     TextView textViewBottom;
 
-    private int bgrChosen = R.drawable.custom_corner_background_8_outline_chosen;
-    private int bgrNormal = R.drawable.custom_corner_background_8_outline;
+    private int bgrChosen = R.drawable.custom_corner_background_6_outline_chosen;
+    private int bgrNormal = R.drawable.custom_corner_background_6_outline;
 
     private int resultCalTop = 0;
     private int resultCalBottom = 0;

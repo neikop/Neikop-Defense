@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:src="@color/colorWhite" />
+            android:src="@color/colorLightDark" />
 
         <TextView
             android:id="@+id/textView_score"
@@ -64,15 +64,15 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_outline_game">
+            android:background="@drawable/custom_corner_background_outline_game_2">
 
             <TextView
                 android:id="@+id/textView_left_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textColor="@color/colorCyanDark"
-                android:textSize="34sp" />
+                android:textColor="@color/colorWhite"
+                android:textSize="40sp" />
 
         </RelativeLayout>
 
@@ -82,15 +82,15 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:background="@drawable/custom_corner_background_outline_game">
+            android:background="@drawable/custom_corner_background_outline_game_2">
 
             <TextView
                 android:id="@+id/textView_right_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textColor="@color/colorCyanDark"
-                android:textSize="34sp" />
+                android:textColor="@color/colorWhite"
+                android:textSize="40sp" />
 
         </RelativeLayout>
 
@@ -100,29 +100,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_game"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/custom_corner_background_outline_game"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:orientation="horizontal">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Left card - Number 'Even'   "
-            android:textAlignment="viewEnd"
-            android:textColor="@color/colorBlackLight" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-        <TextView
+            <TextView
+                android:id="@+id/layout_left_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/custom_corner_background_outline_game"
+                android:padding="5dp"
+                android:text="  Number - Even  "
+                android:textColor="@color/colorBlackLight"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="   Right card - Letter 'Vowel'"
-            android:textAlignment="viewStart"
-            android:textColor="@color/colorBlackLight" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/layout_right_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/custom_corner_background_outline_game"
+                android:padding="5dp"
+                android:text="   Letter - Vowel   "
+                android:textColor="@color/colorBlackLight"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -9,28 +9,25 @@ import com.sromku.simple.storage.Storage;
 
 import java.io.File;
 
-/**
- * Created by tungb on 10/14/2016.
- */
+public class ManagerFile {
 
-public class FileManager {
-    private static final String TAG = FileManager.class.getSimpleName();
+    private static final String TAG = ManagerFile.class.getSimpleName();
     private Storage storage;
     private static final String IMAGE_DIR = "images";
     private static final String IMAGE_TYPE = ".png";
 
-    private FileManager(Context context) {
+    private ManagerFile(Context context) {
         storage = SimpleStorage.getInternalStorage(context);
     }
 
-    private static FileManager instance;
+    private static ManagerFile instance;
 
-    public static FileManager getInstance() {
+    public static ManagerFile getInstance() {
         return instance;
     }
 
     public static void init(Context context) {
-        instance = new FileManager(context);
+        instance = new ManagerFile(context);
     }
 
     public void createImage(Bitmap bitmap, String userId) {
@@ -38,7 +35,6 @@ public class FileManager {
             Log.d(TAG, "bitmap null");
         storage.createFile(IMAGE_DIR, userId + IMAGE_TYPE, bitmap);
     }
-
 
     public File loadImage(String userId) {
         return storage.getFile(IMAGE_DIR, userId + IMAGE_TYPE);

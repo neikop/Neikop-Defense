@@ -2,7 +2,7 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
-import com.example.windzlord.brainfuck.managers.FileManager;
+import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
@@ -32,18 +32,8 @@ public class MainBrain extends Application {
         ManagerNetwork.init(this);
         ManagerServer.init(this);
         ManagerUserData.init(this);
-        FileManager.init(this);
+        ManagerFile.init(this);
         initImageLoader();
-
-
-
-//
-//        for (int i = 1; i < 3; i++) {
-//            ManagerPreference.getInstance().putLevel(Gogo.MEMORY, i, 2);
-//            ManagerPreference.getInstance().putLevel(Gogo.CALCULATION, i, 2);
-//            ManagerPreference.getInstance().putLevel(Gogo.CONCENTRATION, i, 2);
-//            ManagerPreference.getInstance().putLevel(Gogo.OBSERVATION, i, 2);
-//        }
 
         String userID = ManagerPreference.getInstance().getUserID();
 
