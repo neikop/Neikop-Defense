@@ -37,6 +37,17 @@ public class ManagerUserData extends SQLiteAssetHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    public List<HighScore> getListPlayer() {
+        ArrayList<HighScore> scores = new ArrayList<>();
+        SQLiteDatabase database = getWritableDatabase();
+        Cursor cursor = database.query(TABLE_NAME, COLUMNS,
+                null, null, "userId", null, null, null);
+        while (cursor.moveToNext()) scores.add(createScore(cursor));
+        cursor.close();
+        database.close();
+        return scores;
+    }
+
     public List<HighScore> getListScore() {
         ArrayList<HighScore> scores = new ArrayList<>();
         SQLiteDatabase database = getWritableDatabase();
@@ -58,6 +69,27 @@ public class ManagerUserData extends SQLiteAssetHelper {
         cursor.close();
         database.close();
         return scores;
+    }
+
+    public int getSumScore(String userId) {
+        int sum = 0;
+        SQLiteDatabase database = getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT SUM("
+                + COLUMN_HIGH_SCORE + ") as Total FROM "
+                + TABLE_NAME + " WHERE userId LIKE '"
+                + userId + "'", null);
+        if (cursor.moveToFirst()) sum = cursor.getInt(cursor.getColumnIndex("Total"));
+        cursor.close();
+        database.close();
+        return sum;
+    }
+
+    public int getExperience(String userId) {
+        int sum = 0;
+        List<HighScore> scores = getScoreByUserId(userId);
+        for (HighScore score : scores)
+            sum += (score.getLevel() * (score.getLevel() - 1) / 2) * 300 + score.getExpCurrent();
+        return sum;
     }
 
     public boolean isExistedUser(String userId) {
@@ -132,30 +164,4 @@ public class ManagerUserData extends SQLiteAssetHelper {
         instance = new ManagerUserData(context);
     }
 
-
-    public String totalHighScore (String userId) {
-
-        int total = 0;
-        SQLiteDatabase database = getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT SUM(" + COLUMN_HIGH_SCORE + ") as Total FROM " + TABLE_NAME +" WHERE userId LIKE '" + userId + "'", null);
-
-        if (cursor.moveToFirst()) {
-            total = cursor.getInt(cursor.getColumnIndex("Total"));// get final total
-        }
-        cursor.close();
-        database.close();
-
-        return "High Score: " + total;
-    }
-
-    public String totalExpByUserId(String userId) {
-        int total = 0;
-        List<HighScore> scores = getScoreByUserId(userId);
-        for (HighScore score : scores) {
-            total += (score.getLevel() * (score.getLevel() - 1) / 2) * 300 + score.getExpCurrent();
-        }
-        
-
-        return "High Score: " + total;
-    }
 }

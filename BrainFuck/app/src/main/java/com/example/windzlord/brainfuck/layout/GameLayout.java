@@ -86,7 +86,7 @@ public class GameLayout extends FrameLayout {
         level = typedArray.getInteger(R.styleable.GameLayout_level, 1);
         expCurrent = typedArray.getInteger(R.styleable.GameLayout_exp_current, 0);
         expNextLvl = typedArray.getInteger(R.styleable.GameLayout_exp_nextlvl, 300);
-        score = typedArray.getInteger(R.styleable.GameLayout_hiscore, 0);
+        score = typedArray.getInteger(R.styleable.GameLayout_score, 0);
         unlocked = typedArray.getBoolean(R.styleable.GameLayout_unlocked, false);
         typedArray.recycle();
         updateValues();

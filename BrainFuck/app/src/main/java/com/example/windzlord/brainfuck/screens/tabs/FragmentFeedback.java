@@ -72,16 +72,7 @@ public class FragmentFeedback extends Fragment {
         AppEventsLogger.activateApp(getContext());
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
-
-        if (AccessToken.getCurrentAccessToken() == null){
-            ManagerServer.getInstance().uploadLocalToServer(
-                    ManagerPreference.getInstance().getUserID());
-            ManagerPreference.getInstance().putUserID("");
-            ManagerPreference.getInstance().putUserName("Guest");
-        }
-
-
-
+        
         loginButton.registerCallback(
                 ((MainActivity) getActivity()).getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
@@ -98,6 +89,11 @@ public class FragmentFeedback extends Fragment {
                                     //load Image
                                     String url = currentProfile.getProfilePictureUri(300, 300).toString();
                                     new DownloadImage().execute(url);
+                                } else {
+                                    ManagerServer.getInstance().uploadLocalToServer(
+                                            ManagerPreference.getInstance().getUserID());
+                                    ManagerPreference.getInstance().putUserID("");
+                                    ManagerPreference.getInstance().putUserName("Guest");
                                 }
                             }
                         }.startTracking();

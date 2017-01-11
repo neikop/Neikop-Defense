@@ -8,7 +8,7 @@
         <attr name="exp_current" format="integer" />
         <attr name="exp_nextlvl" format="integer" />
         <attr name="src" format="integer" />
-        <attr name="hiscore" format="integer" />
+        <attr name="score" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="GameStatusLayout">
@@ -18,6 +18,13 @@
         <attr name="going_count" format="integer" />
         <attr name="going_max" format="integer" />
         <attr name="going_progress" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="GameRankingLayout">
+        <attr name="name_ranking" format="string" />
+        <attr name="number" format="integer" />
+        <attr name="score_ranking" format="integer" />
+        <attr name="src_ranking" format="integer" />
     </declare-styleable>
 
 </resources>
