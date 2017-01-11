@@ -97,6 +97,7 @@ public class FragmentFeedback extends Fragment {
                                     ManagerPreference.getInstance().putUserID("");
                                     ManagerPreference.getInstance().putUserName("Guest");
                                 }
+
                                 getTextField();
                             }
                         }.startTracking();
