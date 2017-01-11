@@ -67,6 +67,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
+                    app:src="@drawable/ic_cover_game_memory_1"
                     app:name="@string/game_memory_one" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
@@ -85,6 +86,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
+                    app:src="@drawable/ic_cover_game_memory_3"
                     app:name="@string/game_memory_three" />
 
             </LinearLayout>
