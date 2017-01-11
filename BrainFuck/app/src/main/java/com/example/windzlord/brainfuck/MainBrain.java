@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
+import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
@@ -27,12 +28,20 @@ public class MainBrain extends Application {
         ManagerServer.init(this);
         ManagerUserData.init(this);
 
-        String userID = ManagerPreference.getInstance().getUserID();
-        if (userID.isEmpty()) System.out.println("User = NULL");
-        else System.out.println("User = " + userID);
+        for (int i = 1; i < 3; i++) {
+            ManagerPreference.getInstance().putLevel(Gogo.MEMORY, i, 2);
+            ManagerPreference.getInstance().putLevel(Gogo.CALCULATION, i, 2);
+            ManagerPreference.getInstance().putLevel(Gogo.CONCENTRATION, i, 2);
+            ManagerPreference.getInstance().putLevel(Gogo.OBSERVATION, i, 2);
+        }
 
-        if (ManagerNetwork.getInstance().isConnectedToInternet())
-            ManagerServer.getInstance().uploadLocalToServer(userID);
+        String userID = ManagerPreference.getInstance().getUserID();
+        if (userID.isEmpty()) {
+            System.out.println("User = NULL");
+        } else System.out.println("User = " + userID);
+
+//        if (ManagerNetwork.getInstance().isConnectedToInternet())
+//            ManagerServer.getInstance().uploadLocalToServer(userID);
 
     }
 }

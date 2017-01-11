@@ -42,6 +42,11 @@ public class ConcenOne extends NeikopzGame {
     @BindView(R.id.layout_right_card)
     ViewGroup layoutRightCard;
 
+    private int bgrYesChosen = R.drawable.custom_corner_background_4_answer_yes_chosen;
+    private int bgrYesNormal = R.drawable.custom_corner_background_4_answer_yes;
+    private int bgrNoChosen = R.drawable.custom_corner_background_4_answer_no_chosen;
+    private int bgrNoNormal = R.drawable.custom_corner_background_4_answer_no;
+
     private final String VOWEL = "AEIUY";
     private final String CONSONANT = "BCDFGHJKLMNPQRSTVWXZ";
 
@@ -59,6 +64,8 @@ public class ConcenOne extends NeikopzGame {
 
     @Override
     protected void goPrepare() {
+        answerYes.setBackgroundResource(bgrYesNormal);
+        answerNo.setBackgroundResource(bgrNoNormal);
         prepareQuiz();
     }
 
@@ -103,7 +110,7 @@ public class ConcenOne extends NeikopzGame {
 
                     @Override
                     public void onFinish() {
-                        goClick(false);
+                        goNext(false);
                     }
                 }.start();
                 going++;
@@ -139,12 +146,19 @@ public class ConcenOne extends NeikopzGame {
                 }
         }
         boolean completed = answer;
-        answerYes.setOnClickListener(v -> goClick(completed));
-        answerNo.setOnClickListener(v -> goClick(!completed));
+        answerYes.setOnClickListener(v -> goClickYes(completed));
+        answerNo.setOnClickListener(v -> goClickNo(!completed));
     }
 
-    private void goClick(boolean completed) {
+    private void goClickYes(boolean completed) {
         if (!clickable) return;
+        answerYes.setBackgroundResource(bgrYesChosen);
+        goNext(completed);
+    }
+
+    private void goClickNo(boolean completed) {
+        if (!clickable) return;
+        answerNo.setBackgroundResource(bgrNoChosen);
         goNext(completed);
     }
 

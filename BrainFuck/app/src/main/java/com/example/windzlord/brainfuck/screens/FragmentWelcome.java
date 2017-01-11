@@ -30,8 +30,6 @@ public class FragmentWelcome extends Fragment {
     @BindView(R.id.imageView_welcome)
     ImageView imageViewWelcome;
 
-    MediaPlayer mediaPlayer = new MediaPlayer();
-
     public FragmentWelcome() {
         // Required empty public constructor
     }
@@ -54,15 +52,14 @@ public class FragmentWelcome extends Fragment {
     }
 
     private void getContent() {
-//        mediaPlayer = MediaPlayer.create(getContext(), R.raw.welcome);
-//        mediaPlayer.start();
-        progressBarWelcome.setMax(3000);
+//        MediaPlayer.create(getContext(), R.raw.welcome).start();
+        progressBarWelcome.setMax(2800);
         progressBarWelcome.setProgress(0);
-        new CountDownTimer(3500, 1) {
+        new CountDownTimer(3000, 1) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                progressBarWelcome.setProgress((int) (3200 - millisUntilFinished));
+                progressBarWelcome.setProgress((int) (2800 - millisUntilFinished));
             }
 
             @Override

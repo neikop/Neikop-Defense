@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/custom_corner_background_outline_game"
+            android:background="@drawable/custom_corner_background_7_outline"
             android:columnCount="4"
             android:padding="5dp">
 

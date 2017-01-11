@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/custom_corner_background_outline_2"
+            android:background="@drawable/custom_corner_background_6_outline"
             android:columnCount="4"
             android:padding="4dp">
 
@@ -68,7 +68,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -84,7 +84,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -92,7 +92,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -100,7 +100,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -108,7 +108,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -116,7 +116,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -124,7 +124,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -132,7 +132,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -140,7 +140,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -148,7 +148,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -156,7 +156,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -164,7 +164,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -172,7 +172,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -180,7 +180,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -188,7 +188,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -196,7 +196,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -204,7 +204,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -212,7 +212,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 
@@ -220,7 +220,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_outline"
+                android:background="@drawable/custom_corner_background_5_outline"
                 android:padding="5dp"
                 android:src="@drawable/game_iz_resource_0z" />
 

@@ -36,6 +36,9 @@ public class ObserverOne extends NeikopzGame {
     @BindView(R.id.layout_game_z)
     ViewGroup groupZ;
 
+    private int bgrChosen = R.drawable.custom_corner_background_7_outline_chosen;
+    private int bgrNormal = R.drawable.custom_corner_background_7_outline;
+
     private boolean[] coreArray;
     private boolean[] fakeArray;
 
@@ -67,6 +70,8 @@ public class ObserverOne extends NeikopzGame {
         setY.addAnimation(goHide);
         setX.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
+                groupX.setBackgroundResource(bgrNormal);
+                groupZ.setBackgroundResource(bgrNormal);
                 goVisibility(View.INVISIBLE, groupX, groupZ);
                 for (View view : goChildGroup(groupY))
                     goImageResou(view, R.color.colorWhite);
@@ -124,7 +129,7 @@ public class ObserverOne extends NeikopzGame {
 
                     @Override
                     public void onFinish() {
-                        goClick(false);
+                        goNext(false);
                     }
                 }.start();
                 going++;
@@ -140,9 +145,10 @@ public class ObserverOne extends NeikopzGame {
     @Override
     protected void showQuiz() {
         goVisibility(View.VISIBLE, groupX, groupZ);
-        boolean xxx = Gogo.getRandom(2) == 0;
+        boolean x = Gogo.getRandom(2) == 0;
+        boolean z = !x;
         for (int i = 0; i < 9; i++)
-            if (xxx) {
+            if (x) {
                 ((ImageView) groupX.getChildAt(i)).setImageResource(coreArray[i] ?
                         R.color.colorWhite : R.color.colorBlackLight);
                 ((ImageView) groupZ.getChildAt(i)).setImageResource(fakeArray[i] ?
@@ -153,8 +159,8 @@ public class ObserverOne extends NeikopzGame {
                 ((ImageView) groupX.getChildAt(i)).setImageResource(fakeArray[i] ?
                         R.color.colorWhite : R.color.colorBlackLight);
             }
-        groupX.setOnClickListener(v -> goClick(xxx));
-        groupZ.setOnClickListener(v -> goClick(!xxx));
+        groupX.setOnClickListener(v -> goClickGroupX(x));
+        groupZ.setOnClickListener(v -> goClickGroupZ(z));
 
         TranslateAnimation goRight = new TranslateAnimation(1, -1, 1, 0, 1, 0, 1, 0);
         TranslateAnimation goLeft = new TranslateAnimation(1, 1, 1, 0, 1, 0, 1, 0);
@@ -172,8 +178,15 @@ public class ObserverOne extends NeikopzGame {
         groupZ.startAnimation(setY);
     }
 
-    private void goClick(boolean completed) {
+    private void goClickGroupX(boolean completed) {
         if (!clickable) return;
+        groupX.setBackgroundResource(bgrChosen);
+        goNext(completed);
+    }
+
+    private void goClickGroupZ(boolean completed) {
+        if (!clickable) return;
+        groupZ.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
 

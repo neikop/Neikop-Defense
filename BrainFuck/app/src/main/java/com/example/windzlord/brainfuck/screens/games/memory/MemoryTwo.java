@@ -22,8 +22,8 @@ import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
  */
 public class MemoryTwo extends NeikopzGame {
 
-    private int bgrChosen = R.drawable.custom_corner_background_outline_game;
-    private int bgrNormal = R.drawable.custom_corner_background_outline;
+    private int bgrChosen = R.drawable.custom_corner_background_7_outline;
+    private int bgrNormal = R.drawable.custom_corner_background_5_outline;
 
     private int size = 16;
     private boolean[] isChosen = new boolean[size];

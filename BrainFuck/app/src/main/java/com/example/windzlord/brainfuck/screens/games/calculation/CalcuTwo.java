@@ -33,10 +33,11 @@ public class CalcuTwo extends NeikopzGame {
     @BindView(R.id.textView_game_bottom)
     TextView textViewBottom;
 
-    MediaPlayer mediaPlayer = new MediaPlayer();
+    private int bgrChosen = R.drawable.custom_corner_background_8_outline_chosen;
+    private int bgrNormal = R.drawable.custom_corner_background_8_outline;
 
-    int resultCalTop = 0;
-    int resultCalBottom = 0;
+    private int resultCalTop = 0;
+    private int resultCalBottom = 0;
 
     public CalcuTwo() {
         // Required empty public constructor
@@ -52,6 +53,8 @@ public class CalcuTwo extends NeikopzGame {
 
     @Override
     protected void goPrepare() {
+        textViewTop.setBackgroundResource(bgrNormal);
+        textViewBottom.setBackgroundResource(bgrNormal);
         prepareQuiz();
     }
 
@@ -94,7 +97,7 @@ public class CalcuTwo extends NeikopzGame {
 
                     @Override
                     public void onFinish() {
-                        goClick(false);
+                        goNext(false);
                     }
                 }.start();
                 going++;
@@ -123,34 +126,19 @@ public class CalcuTwo extends NeikopzGame {
         resultCalTop = calcuOne.getResults();
         resultCalBottom = calcuTwo.getResults();
 
-        textViewTop.setOnClickListener(view -> {
-            if (resultCalTop > resultCalBottom) {
-//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.true_sound);
-//                mediaPlayer.start();
-                goClick(true);
-            } else {
-//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong_sound);
-//                mediaPlayer.start();
-                goClick(false);
-            }
-        });
-
-        textViewBottom.setOnClickListener(view -> {
-            if (resultCalTop < resultCalBottom) {
-//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.true_sound);
-//                mediaPlayer.start();
-                goClick(true);
-            } else {
-//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong_sound);
-//                mediaPlayer.start();
-                goClick(false);
-            }
-        });
-
+        textViewTop.setOnClickListener(view -> goClickTop(resultCalTop > resultCalBottom));
+        textViewBottom.setOnClickListener(view -> goClickBottom(resultCalTop < resultCalBottom));
     }
 
-    private void goClick(boolean completed) {
+    private void goClickTop(boolean completed) {
         if (!clickable) return;
+        textViewTop.setBackgroundResource(bgrChosen);
+        goNext(completed);
+    }
+
+    private void goClickBottom(boolean completed) {
+        if (!clickable) return;
+        textViewBottom.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
 
