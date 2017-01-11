@@ -15,7 +15,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 public class ManagerGameData extends SQLiteAssetHelper {
 
     private static final int DB_VERSION = 1;
-    private static final String DB_NAME = "database.db";
+    private static final String DB_NAME = "calculation.db";
     private static final String QUOTE_TABLE_NAME_1 = "calcu_game1";
     private static final String QUOTE_TABLE_NAME_2 = "calcu_game2";
     private static final String QUOTE_COLUMN_ID = "id";
