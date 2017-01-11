@@ -34,6 +34,13 @@ public class MainBrain extends Application {
         FileManager.init(this);
         initImageLoader();
 
+//
+//        for (int i = 1; i < 3; i++) {
+//            ManagerPreference.getInstance().putLevel(Gogo.MEMORY, i, 2);
+//            ManagerPreference.getInstance().putLevel(Gogo.CALCULATION, i, 2);
+//            ManagerPreference.getInstance().putLevel(Gogo.CONCENTRATION, i, 2);
+//            ManagerPreference.getInstance().putLevel(Gogo.OBSERVATION, i, 2);
+//        }
 
         String userID = ManagerPreference.getInstance().getUserID();
 

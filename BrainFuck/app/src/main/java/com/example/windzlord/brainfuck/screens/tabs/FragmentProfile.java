@@ -3,6 +3,7 @@ package com.example.windzlord.brainfuck.screens.tabs;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.FileManager;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
@@ -24,6 +26,15 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentProfile extends Fragment {
+    @BindView(R.id.progressbar_calculation)
+    IconRoundCornerProgressBar progressbar_calculation;
+    @BindView(R.id.progressbar_concen)
+    IconRoundCornerProgressBar progressbar_concen;
+    @BindView(R.id.progressbar_memory)
+    IconRoundCornerProgressBar progressbar_memory;
+    @BindView(R.id.progressbar_observation)
+    IconRoundCornerProgressBar progressbar_observation;
+
 
     @BindView(R.id.textView_user_name)
     TextView user_name;
@@ -47,14 +58,33 @@ public class FragmentProfile extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
-
         setupUI();
+        getProgressbar();
     }
+
+    public void getProgressbar() {
+
+        new CountDownTimer(1600, 1) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                progressbar_calculation.setProgress((int) (1000 - millisUntilFinished));
+                progressbar_concen.setProgress((int) (300 - millisUntilFinished));
+                progressbar_memory.setProgress((int) (800 - millisUntilFinished));
+                progressbar_observation.setProgress((int) (500 - millisUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+    }
+
 
     public void setupUI() {
         user_name.setText(ManagerPreference.getInstance().getUserName());
         String userID = ManagerPreference.getInstance().getUserID();
-        if(!userID.equals("")){
+        if (!userID.equals("")) {
             File file = FileManager.getInstance().loadImage(userID);
             ImageLoader.getInstance().displayImage(
                     Uri.fromFile(file).toString(),
