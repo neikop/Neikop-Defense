@@ -28,20 +28,11 @@ public class MainBrain extends Application {
         ManagerServer.init(this);
         ManagerUserData.init(this);
 
-        for (int i = 1; i < 3; i++) {
-            ManagerPreference.getInstance().putLevel(Gogo.MEMORY, i, 2);
-            ManagerPreference.getInstance().putLevel(Gogo.CALCULATION, i, 2);
-            ManagerPreference.getInstance().putLevel(Gogo.CONCENTRATION, i, 2);
-            ManagerPreference.getInstance().putLevel(Gogo.OBSERVATION, i, 2);
-        }
 
         String userID = ManagerPreference.getInstance().getUserID();
-        if (userID.isEmpty()) {
-            System.out.println("User = NULL");
-        } else System.out.println("User = " + userID);
 
-//        if (ManagerNetwork.getInstance().isConnectedToInternet())
-//            ManagerServer.getInstance().uploadLocalToServer(userID);
+        if (ManagerNetwork.getInstance().isConnectedToInternet())
+            ManagerServer.getInstance().uploadLocalToServer(userID);
 
     }
 }
