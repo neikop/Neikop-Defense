@@ -101,9 +101,10 @@
                         app:rcIconBackgroundColor="@color/custom_progress_red_header"
                         app:rcIconPadding="0dp"
                         app:rcIconSize="40dp"
+                        android:id="@+id/progressbar_calculation"
                         app:rcIconSrc="@drawable/ic_z_calculator"
-                        app:rcMax="100"
-                        app:rcProgress="100"
+                        app:rcMax="1000"
+
                         app:rcProgressColor="@color/custom_progress_red_progress"
                         app:rcRadius="5dp" />
 
@@ -113,6 +114,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/tv_calcu_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -134,9 +136,9 @@
                         app:rcIconBackgroundColor="@color/custom_progress_green_progress"
                         app:rcIconPadding="3dp"
                         app:rcIconSize="40dp"
+                        android:id="@+id/progressbar_concen"
                         app:rcIconSrc="@drawable/ic_z_concentration"
-                        app:rcMax="100"
-                        app:rcProgress="30"
+                        app:rcMax="1000"
                         app:rcProgressColor="@color/custom_progress_green_header"
                         app:rcRadius="5dp" />
 
@@ -150,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="30"
+                        android:id="@+id/tv_concen_score"
                         android:textColor="@color/colorWhite"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -167,9 +170,9 @@
                         app:rcIconBackgroundColor="@color/custom_progress_orange_progress"
                         app:rcIconPadding="5dp"
                         app:rcIconSize="40dp"
+                        android:id="@+id/progressbar_memory"
                         app:rcIconSrc="@drawable/ic_z_memory"
-                        app:rcMax="100"
-                        app:rcProgress="80"
+                        app:rcMax="1000"
                         app:rcProgressColor="@color/custom_progress_orange_header"
                         app:rcRadius="5dp" />
 
@@ -183,6 +186,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="80"
+                        android:id="@+id/tv_memory_score"
                         android:textColor="@color/colorWhite"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -199,9 +203,9 @@
                         app:rcIconBackgroundColor="@color/custom_progress_blue_progress"
                         app:rcIconPadding="5dp"
                         app:rcIconSize="40dp"
+                        android:id="@+id/progressbar_observation"
                         app:rcIconSrc="@drawable/ic_z_observation"
-                        app:rcMax="100"
-                        app:rcProgress="50"
+                        app:rcMax="1000"
                         app:rcProgressColor="@color/custom_progress_blue_header"
                         app:rcRadius="5dp" />
 
@@ -215,6 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="50"
+                        android:id="@+id/tv_observer_score"
                         android:textColor="@color/colorWhite"
                         android:textSize="18sp" />
                 </LinearLayout>
