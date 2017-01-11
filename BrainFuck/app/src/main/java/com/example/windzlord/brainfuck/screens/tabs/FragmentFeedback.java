@@ -16,6 +16,9 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
@@ -36,6 +39,7 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentFeedback extends Fragment {
+
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -69,6 +73,15 @@ public class FragmentFeedback extends Fragment {
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
 
+        if (AccessToken.getCurrentAccessToken() == null){
+            ManagerServer.getInstance().uploadLocalToServer(
+                    ManagerPreference.getInstance().getUserID());
+            ManagerPreference.getInstance().putUserID("");
+            ManagerPreference.getInstance().putUserName("Guest");
+        }
+
+
+
         loginButton.registerCallback(
                 ((MainActivity) getActivity()).getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
@@ -85,11 +98,6 @@ public class FragmentFeedback extends Fragment {
                                     //load Image
                                     String url = currentProfile.getProfilePictureUri(300, 300).toString();
                                     new DownloadImage().execute(url);
-                                } else {
-                                    ManagerServer.getInstance().uploadLocalToServer(
-                                            ManagerPreference.getInstance().getUserID());
-                                    ManagerPreference.getInstance().putUserID("");
-                                    ManagerPreference.getInstance().putUserName("Guest");
                                 }
                             }
                         }.startTracking();

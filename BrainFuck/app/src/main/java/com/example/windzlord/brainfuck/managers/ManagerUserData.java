@@ -133,4 +133,29 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
 
+    public String totalHighScore (String userId) {
+
+        int total = 0;
+        SQLiteDatabase database = getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT SUM(" + COLUMN_HIGH_SCORE + ") as Total FROM " + TABLE_NAME +" WHERE userId LIKE '" + userId + "'", null);
+
+        if (cursor.moveToFirst()) {
+            total = cursor.getInt(cursor.getColumnIndex("Total"));// get final total
+        }
+        cursor.close();
+        database.close();
+
+        return "High Score: " + total;
+    }
+
+    public String totalExpByUserId(String userId) {
+        int total = 0;
+        List<HighScore> scores = getScoreByUserId(userId);
+        for (HighScore score : scores) {
+            total += (score.getLevel() * (score.getLevel() - 1) / 2) * 300 + score.getExpCurrent();
+        }
+        
+
+        return "High Score: " + total;
+    }
 }
