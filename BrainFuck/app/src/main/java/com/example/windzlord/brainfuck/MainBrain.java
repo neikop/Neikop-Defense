@@ -27,6 +27,7 @@ public class MainBrain extends Application {
         ManagerNetwork.init(this);
         ManagerServer.init(this);
         ManagerUserData.init(this);
+
 //
 //        for (int i = 1; i < 3; i++) {
 //            ManagerPreference.getInstance().putLevel(Gogo.MEMORY, i, 2);
@@ -36,9 +37,6 @@ public class MainBrain extends Application {
 //        }
 
         String userID = ManagerPreference.getInstance().getUserID();
-        if (userID.isEmpty()) {
-            System.out.println("User = NULL");
-        } else System.out.println("User = " + userID);
 
         if (ManagerNetwork.getInstance().isConnectedToInternet())
             ManagerServer.getInstance().uploadLocalToServer(userID);
