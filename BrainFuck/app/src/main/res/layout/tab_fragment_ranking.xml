@@ -1,9 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="vertical">
+    android:background="@color/colorPrimaryMain"
+    android:orientation="vertical"
+    tools:context=".screens.tabs.FragmentRanking">
 
     <TextView
         android:id="@+id/textView_feedback"
@@ -16,5 +18,82 @@
         android:textColor="@color/colorWhite"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="140dp"
+        android:layout_marginTop="60dp">
+
+        <LinearLayout
+            android:id="@+id/layout_player_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="1" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="2" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="3" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="4" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="5" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="6" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="7" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="8" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number="9" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                app:number="10" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

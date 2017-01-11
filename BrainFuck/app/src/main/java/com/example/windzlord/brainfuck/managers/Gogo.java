@@ -1,5 +1,7 @@
 package com.example.windzlord.brainfuck.managers;
 
+import com.example.windzlord.brainfuck.objects.models.HighScore;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

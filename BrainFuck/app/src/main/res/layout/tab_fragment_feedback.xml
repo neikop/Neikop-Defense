@@ -3,7 +3,7 @@
     android:id="@+id/feedback_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryMain"
     tools:context=".screens.tabs.FragmentFeedback">
 
     <com.facebook.login.widget.LoginButton

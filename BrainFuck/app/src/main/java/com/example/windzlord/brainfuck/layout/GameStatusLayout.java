@@ -6,7 +6,6 @@ import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -61,7 +60,7 @@ public class GameStatusLayout extends FrameLayout {
     }
 
     private void initFromContext(Context context, AttributeSet attrs) {
-        View view = inflate(context, R.layout.custom_game_status_layout, this);
+        View view = inflate(context, R.layout.custom_game_layout_status, this);
         ButterKnife.bind(this, view);
 
         getValues(context.obtainStyledAttributes(attrs, R.styleable.GameStatusLayout));

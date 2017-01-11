@@ -4,7 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGame"
-    tools:context="com.example.windzlord.brainfuck.screens.games.observation.ObserverThree">
+    tools:context="com.example.windzlord.brainfuck.screens.games.NeikopzGame">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
         android:id="@+id/layout_game_status"
@@ -51,10 +62,18 @@
         android:visibility="invisible" />
 
     <RelativeLayout
-        android:id="@+id/layout_game"
         android:layout_width="match_parent"
         android:layout_height="410dp"
         android:layout_marginTop="120dp">
+
+        <GridLayout
+            android:id="@+id/layout_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:columnCount="1">
+
+        </GridLayout>
 
     </RelativeLayout>
 

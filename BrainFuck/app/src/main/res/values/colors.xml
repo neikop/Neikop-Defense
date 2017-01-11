@@ -2,6 +2,7 @@
 <resources>
     <color name="colorFaded">#00000000</color>
     <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryMain">#4B4060</color>
     <color name="colorGame">#606060</color>
     <color name="colorDark">#66606060</color>
     <color name="colorPrimaryDark">#303F9F</color>
