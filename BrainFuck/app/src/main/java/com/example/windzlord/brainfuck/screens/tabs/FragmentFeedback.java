@@ -38,7 +38,7 @@ import butterknife.ButterKnife;
  */
 public class FragmentFeedback extends Fragment {
 
-    private static final String TAG = FragmentFeedback.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     @BindView(R.id.login_button)
     LoginButton loginButton;
@@ -65,6 +65,8 @@ public class FragmentFeedback extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
         loginFacebook();
+
+        getTextField();
     }
 
 
@@ -73,42 +75,48 @@ public class FragmentFeedback extends Fragment {
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
 
-        loginButton.registerCallback(((MainActivity) getActivity()).getCallbackManager(), new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "onSuccess");
-                new ProfileTracker() {
+        loginButton.registerCallback(
+                ((MainActivity) getActivity()).getCallbackManager(),
+                new FacebookCallback<LoginResult>() {
                     @Override
-                    protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                        if (currentProfile != null) {
-                            ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
-                            ManagerPreference.getInstance().putUserID(currentProfile.getId());
-                            ManagerPreference.getInstance().putUserName(currentProfile.getName());
-                            //load Image
-                            String url = currentProfile.getProfilePictureUri(300, 300).toString();
-                            new DownloadImage().execute(url);
-                        } else {
-                            ManagerServer.getInstance().uploadLocalToServer(
-                                    ManagerPreference.getInstance().getUserID());
-                            ManagerPreference.getInstance().putUserID("");
-                            ManagerPreference.getInstance().putUserName("Guest");
-                        }
-                        textView.setText(ManagerPreference.getInstance().getUserName()
-                                + "\n" + ManagerPreference.getInstance().getUserID());
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d(TAG, "onSuccess");
+                        new ProfileTracker() {
+                            @Override
+                            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                                if (currentProfile != null) {
+                                    ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
+                                    ManagerPreference.getInstance().putUserID(currentProfile.getId());
+                                    ManagerPreference.getInstance().putUserName(currentProfile.getName());
+                                    //load Image
+                                    String url = currentProfile.getProfilePictureUri(300, 300).toString();
+                                    new DownloadImage().execute(url);
+                                } else {
+                                    ManagerServer.getInstance().uploadLocalToServer(
+                                            ManagerPreference.getInstance().getUserID());
+                                    ManagerPreference.getInstance().putUserID("");
+                                    ManagerPreference.getInstance().putUserName("Guest");
+                                }
+                                getTextField();
+                            }
+                        }.startTracking();
                     }
-                }.startTracking();
-            }
 
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "onCancel");
-            }
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "onCancel");
+                    }
 
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "onError");
-            }
-        });
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d(TAG, "onError");
+                    }
+                });
+    }
+
+    private void getTextField() {
+        textView.setText(ManagerPreference.getInstance().getUserName()
+                + "\n" + ManagerPreference.getInstance().getUserID());
     }
 
     private class DownloadImage extends AsyncTask<Object, Void, Bitmap> {

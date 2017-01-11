@@ -65,10 +65,23 @@
                     android:id="@+id/textView_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
                     android:text="Guest"
-                    android:textColor="@color/colorGameDark"
-                    android:textSize="20sp" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tv_high_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:text="High Score: "
+                    android:layout_below="@+id/textView_user_name"
+                    android:layout_alignRight="@+id/textView_user_name"
+                    android:layout_alignEnd="@+id/textView_user_name" />
 
             </RelativeLayout>
 
@@ -103,7 +116,7 @@
                         app:rcIconSize="40dp"
                         android:id="@+id/progressbar_calculation"
                         app:rcIconSrc="@drawable/ic_z_calculator"
-                        app:rcMax="1000"
+                        app:rcMax="1500"
 
                         app:rcProgressColor="@color/custom_progress_red_progress"
                         app:rcRadius="5dp" />
@@ -138,7 +151,7 @@
                         app:rcIconSize="40dp"
                         android:id="@+id/progressbar_concen"
                         app:rcIconSrc="@drawable/ic_z_concentration"
-                        app:rcMax="1000"
+                        app:rcMax="1500"
                         app:rcProgressColor="@color/custom_progress_green_header"
                         app:rcRadius="5dp" />
 
@@ -172,7 +185,7 @@
                         app:rcIconSize="40dp"
                         android:id="@+id/progressbar_memory"
                         app:rcIconSrc="@drawable/ic_z_memory"
-                        app:rcMax="1000"
+                        app:rcMax="1500"
                         app:rcProgressColor="@color/custom_progress_orange_header"
                         app:rcRadius="5dp" />
 
@@ -205,7 +218,7 @@
                         app:rcIconSize="40dp"
                         android:id="@+id/progressbar_observation"
                         app:rcIconSrc="@drawable/ic_z_observation"
-                        app:rcMax="1000"
+                        app:rcMax="1500"
                         app:rcProgressColor="@color/custom_progress_blue_header"
                         app:rcRadius="5dp" />
 

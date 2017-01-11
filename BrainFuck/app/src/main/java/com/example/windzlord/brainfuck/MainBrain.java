@@ -4,9 +4,9 @@ import android.app.Application;
 
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
-import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -22,7 +22,9 @@ public class MainBrain extends Application {
     public void onCreate() {
         super.onCreate();
         settingThingsUp();
+
     }
+
 
     private void settingThingsUp() {
         ManagerPreference.init(this);
