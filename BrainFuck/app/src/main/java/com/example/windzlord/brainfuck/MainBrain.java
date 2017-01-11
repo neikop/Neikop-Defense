@@ -22,9 +22,7 @@ public class MainBrain extends Application {
     public void onCreate() {
         super.onCreate();
         settingThingsUp();
-
     }
-
 
     private void settingThingsUp() {
         ManagerPreference.init(this);

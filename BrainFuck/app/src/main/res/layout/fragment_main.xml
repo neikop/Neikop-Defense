@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBlackLight"
     tools:context="com.example.windzlord.brainfuck.screens.FragmentMain">
 
     <RelativeLayout
@@ -14,13 +15,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="55dp"
+            android:background="@drawable/custom_corner_background_0_gradient_top" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/custom_corner_background_0_gradient_bot" />
+
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
-            android:background="@color/colorPrimary"
             app:tabIndicatorHeight="0dp" />
 
         <LinearLayout
