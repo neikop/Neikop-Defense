@@ -57,14 +57,33 @@ public class ManagerServer {
         if (ManagerUserData.getInstance().isExistedUser(userID)) {
             System.out.println("uploadLocalToServer");
             List<HighScore> scores = ManagerUserData.getInstance().getScoreByUserId(userID);
-            for (HighScore score : scores) uploadSingleScore(score);
+            uploadScores(scores);
         }
         downloadServerToLocal();
     }
 
+    public void uploadScores(List<HighScore> scores) {
+        System.out.println("uploadScores");
+        if (scores.isEmpty()) return;
+        runAsyncTask(new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    for (HighScore score : scores) {
+                        mServiceTable.update(score).get();
+                    }
+                    Log.d(TAG, "Update Done");
+                } catch (ExecutionException | InterruptedException ignored) {
+                }
+                return null;
+            }
+        });
+    }
+
+
     // When End Game
     public void uploadSingleScore(HighScore score) {
-        System.out.println("uploadSingleScore");
+        System.out.println("uploadScores");
         if (score == null) return;
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
