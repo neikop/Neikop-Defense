@@ -16,14 +16,14 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="100dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView_score"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:src="@color/colorWhite" />
+            android:src="@color/colorLightDark" />
 
         <TextView
             android:id="@+id/textView_score"
@@ -66,10 +66,10 @@
                 android:id="@+id/textView_game_top"
                 android:layout_width="250dp"
                 android:layout_height="60dp"
-                android:background="@drawable/custom_corner_background_8_outline"
+                android:background="@drawable/custom_corner_background_6_outline"
                 android:paddingTop="7dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/colorWhite"
                 android:textSize="30dp" />
 
             <TextView
@@ -77,10 +77,10 @@
                 android:layout_width="250dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="70dp"
-                android:background="@drawable/custom_corner_background_8_outline"
+                android:background="@drawable/custom_corner_background_6_outline"
                 android:paddingTop="7dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/colorWhite"
                 android:textSize="30dp" />
 
         </LinearLayout>
@@ -239,24 +239,16 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="67dp"
-            android:text="WHAT CALCULATION IS GREATER?"
-            android:textColor="@color/colorBlackLight"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="67dp"
+        android:text="WHAT CALCULATION IS GREATER?"
+        android:textColor="@color/colorBlackLight"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

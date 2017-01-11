@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.managers.FileManager;
+import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -85,7 +85,7 @@ public class FragmentProfile extends Fragment {
         user_name.setText(ManagerPreference.getInstance().getUserName());
         String userID = ManagerPreference.getInstance().getUserID();
         if (!userID.equals("")) {
-            File file = FileManager.getInstance().loadImage(userID);
+            File file = ManagerFile.getInstance().loadImage(userID);
             ImageLoader.getInstance().displayImage(
                     Uri.fromFile(file).toString(),
                     image_user

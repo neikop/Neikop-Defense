@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.managers.FileManager;
+import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.facebook.FacebookCallback;
@@ -65,9 +65,6 @@ public class FragmentFeedback extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
         loginFacebook();
-
-        textView.setText(ManagerPreference.getInstance().getUserName()
-                + "\n" + ManagerPreference.getInstance().getUserID());
     }
 
 
@@ -84,8 +81,6 @@ public class FragmentFeedback extends Fragment {
                     @Override
                     protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                         if (currentProfile != null) {
-                            textView.setText(currentProfile.getName() + "\n" + currentProfile.getId());
-
                             ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
                             ManagerPreference.getInstance().putUserID(currentProfile.getId());
                             ManagerPreference.getInstance().putUserName(currentProfile.getName());
@@ -93,12 +88,13 @@ public class FragmentFeedback extends Fragment {
                             String url = currentProfile.getProfilePictureUri(300, 300).toString();
                             new DownloadImage().execute(url);
                         } else {
-                            System.out.println("LOGOUT a hai");
                             ManagerServer.getInstance().uploadLocalToServer(
                                     ManagerPreference.getInstance().getUserID());
                             ManagerPreference.getInstance().putUserID("");
                             ManagerPreference.getInstance().putUserName("Guest");
                         }
+                        textView.setText(ManagerPreference.getInstance().getUserName()
+                                + "\n" + ManagerPreference.getInstance().getUserID());
                     }
                 }.startTracking();
             }
@@ -114,7 +110,6 @@ public class FragmentFeedback extends Fragment {
             }
         });
     }
-
 
     private class DownloadImage extends AsyncTask<Object, Void, Bitmap> {
 
@@ -133,7 +128,7 @@ public class FragmentFeedback extends Fragment {
 
         @Override
         protected void onPostExecute(Bitmap result) {
-            FileManager.getInstance().createImage(result, ManagerPreference.getInstance().getUserID());
+            ManagerFile.getInstance().createImage(result, ManagerPreference.getInstance().getUserID());
         }
     }
 }
