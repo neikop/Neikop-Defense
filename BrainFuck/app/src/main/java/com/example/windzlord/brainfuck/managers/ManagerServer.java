@@ -104,7 +104,7 @@ public class ManagerServer {
     // When Login
     public void checkExistedUser(String userId) {
         System.out.println("checkExistedUser");
-        if (!ManagerUserData.getInstance().isExistedUser(userId))
+        if (ManagerUserData.getInstance().isExistedUser(userId))
             updateData(userId);
         else createNewUser(userId);
     }
