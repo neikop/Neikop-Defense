@@ -1,6 +1,8 @@
 package com.example.windzlord.brainfuck.screens.games;
 
 
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
@@ -24,6 +27,7 @@ import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,6 +141,7 @@ public abstract class NeikopzGame extends Fragment {
         countThree.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
                 textViewWelcome.setText("1");
+                startSound("sounds/couttime_sound.wav", false);
                 new CountDownTimerAdapter(800, 1) {
                     public void onFinish() {
                         ScaleAnimation scale = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
@@ -166,6 +171,7 @@ public abstract class NeikopzGame extends Fragment {
         countTwo.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
                 textViewWelcome.setText("2");
+                startSound("sounds/couttime_sound.wav", false);
                 new CountDownTimerAdapter(800, 1) {
                     public void onFinish() {
                         textViewWelcome.startAnimation(countThree);
@@ -177,6 +183,7 @@ public abstract class NeikopzGame extends Fragment {
         countOne.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
                 textViewWelcome.setText("3");
+                startSound("sounds/couttime_sound.wav", false);
                 new CountDownTimerAdapter(800, 1) {
                     public void onFinish() {
                         textViewWelcome.startAnimation(countTwo);
@@ -234,6 +241,9 @@ public abstract class NeikopzGame extends Fragment {
                 imageViewNext.setImageResource(completed ?
                         R.drawable.game_ic_color_correct : R.drawable.game_ic_color_cross);
                 layoutNext.setVisibility(View.VISIBLE);
+                if (completed) startSound("sounds/true_sound.wav", false);
+                    else startSound("sounds/wrong_sound.mp3", false);
+
                 ScaleAnimation scaleOne = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
                 scaleOne.setDuration(250);
                 layoutNext.startAnimation(scaleOne);
@@ -474,4 +484,18 @@ public abstract class NeikopzGame extends Fragment {
         ((ImageView) view).setImageResource(res);
     }
 
+    public void startSound(String filename, boolean loop) {
+        AssetFileDescriptor afd = null;
+        try {
+            afd = getActivity().getAssets().openFd(filename);
+            MediaPlayer player = new MediaPlayer();
+            player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            player.prepare();
+            player.setLooping(loop);
+            player.start();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+
+    }
 }

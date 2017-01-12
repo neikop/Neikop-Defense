@@ -114,12 +114,16 @@ public class FragmentProfile extends Fragment {
         textViewScore.setText("Neuron " + score);
     }
 
-    private int scoreCalcu = 0;
-    private int scoreConcen = 0;
-    private int scoreMemo = 0;
-    private int scoreObser = 0;
+    private int scoreCalcu;
+    private int scoreConcen;
+    private int scoreMemo;
+    private int scoreObser;
 
     public void getProgressbar() {
+        scoreCalcu = 0;
+        scoreConcen = 0;
+        scoreMemo = 0;
+        scoreObser = 0;
         for (String game : Gogo.GAME_LIST)
             for (int i = 1; i <= 3; i++) {
                 scoreCalcu += game.equals(Gogo.CALCULATION) ?

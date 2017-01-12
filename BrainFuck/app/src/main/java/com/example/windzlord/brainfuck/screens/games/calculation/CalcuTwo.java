@@ -38,7 +38,6 @@ public class CalcuTwo extends NeikopzGame {
 
     private int resultCalTop = 0;
     private int resultCalBottom = 0;
-    private boolean sound = false;
 
     public CalcuTwo() {
         // Required empty public constructor
@@ -133,18 +132,12 @@ public class CalcuTwo extends NeikopzGame {
 
     private void goClickTop(boolean completed) {
         if (!clickable) return;
-        if (sound)
-            if (completed) MediaPlayer.create(getContext(), R.raw.true_sound).start();
-            else MediaPlayer.create(getContext(), R.raw.wrong_sound).start();
         textViewTop.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
 
     private void goClickBottom(boolean completed) {
         if (!clickable) return;
-        if (sound)
-            if (completed) MediaPlayer.create(getContext(), R.raw.true_sound).start();
-            else MediaPlayer.create(getContext(), R.raw.wrong_sound).start();
         textViewBottom.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
