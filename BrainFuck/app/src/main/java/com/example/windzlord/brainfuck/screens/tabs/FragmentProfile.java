@@ -87,7 +87,12 @@ public class FragmentProfile extends Fragment {
     public void setupUI() {
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/BreeSerif.otf");
         textViewUser.setTypeface(font);
-        textViewUser.setText(ManagerPreference.getInstance().getUserName());
+        String userName = ManagerPreference.getInstance().getUserName();
+        if(userName.contains("N'")){
+            textViewUser.setText(userName.substring(2,userName.length() - 1));
+        } else {
+            textViewUser.setText(userName);
+        }
         String userID = ManagerPreference.getInstance().getUserID();
         if (!userID.equals("")) {
             File file = ManagerFile.getInstance().loadImage(userID);
