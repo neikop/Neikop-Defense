@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck.screens.tabs;
 
 
 import android.annotation.TargetApi;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -62,5 +63,4 @@ public class FragmentRanking extends Fragment {
                     .setScore(listPlayer.get(i).getScore());
         }
     }
-
 }
