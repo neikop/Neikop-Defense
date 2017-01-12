@@ -156,8 +156,19 @@ public class ManagerUserData extends SQLiteAssetHelper {
             return;
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL("delete from " + TABLE_NAME);
+        for (HighScore score : scores){
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_ID, score.getId());
+            values.put(COLUMN_USER_ID, score.getUserId());
+            values.put(COLUMN_USER_NAME, score.getUserName());
+            values.put(COLUMN_TYPE, score.getType());
+            values.put(COLUMN_POSITION, score.getPosition());
+            values.put(COLUMN_LEVEL, score.getLevel());
+            values.put(COLUMN_EXP_CURRENT, score.getExpCurrent());
+            values.put(COLUMN_HIGH_SCORE, score.getScore());
+            database.insert(TABLE_NAME, null, values);
+        }
         database.close();
-        for (HighScore score : scores) insertScore(score);
     }
 
     private void insertScore(HighScore score) {
@@ -171,10 +182,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         values.put(COLUMN_LEVEL, score.getLevel());
         values.put(COLUMN_EXP_CURRENT, score.getExpCurrent());
         values.put(COLUMN_HIGH_SCORE, score.getScore());
-        try {
-            writableDatabase.insert(TABLE_NAME, null, values);
-        } catch (Exception ignored) {
-        }
+        writableDatabase.insert(TABLE_NAME, null, values);
         writableDatabase.close();
     }
 
