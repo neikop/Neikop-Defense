@@ -7,8 +7,9 @@ package com.example.windzlord.brainfuck.managers;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
+import android.widget.Toast;
 
+import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceException;
@@ -79,7 +80,6 @@ public class ManagerServer {
         });
     }
 
-
     // When End Game
     public void uploadSingleScore(HighScore score) {
         System.out.println("uploadScores");
@@ -103,7 +103,7 @@ public class ManagerServer {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
-                    List<HighScore> scores = getListScore();
+                    List<HighScore> scores = getListScoreServer();
                     System.out.println("Scores on server: " + scores.size());
                     System.out.println("Scores on local before: "
                             + ManagerUserData.getInstance().getListScore().size());
@@ -111,13 +111,17 @@ public class ManagerServer {
                     System.out.println("Scores on local after: "
                             + ManagerUserData.getInstance().getListScore().size());
                 } catch (ExecutionException | InterruptedException | MobileServiceException ignored) {
+                    System.out.println(TAG + " " + ignored);
+                    System.out.println("Server down cmnr :v");
                 }
                 return null;
             }
         });
     }
 
-    private List<HighScore> getListScore() throws ExecutionException, InterruptedException, MobileServiceException {
+    private List<HighScore> getListScoreServer()
+            throws ExecutionException, InterruptedException, MobileServiceException {
+        System.out.println("getListScoreServer");
         return mServiceTable.execute().get();
     }
 
@@ -154,15 +158,14 @@ public class ManagerServer {
                         score.setLevel(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
                         score.setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], k));
                         score.setScore(ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], k));
-
                         try {
                             mServiceTable.insert(score).get();
-                            downloadServerToLocal();
-//                            ManagerUserData.getInstance().insertScore(score);
+                            System.out.println("insert score: " + score.getUserName() + Gogo.GAME_LIST[i] + k);
                         } catch (InterruptedException | ExecutionException ignored) {
                         }
                     }
                 }
+                downloadServerToLocal();
                 updateDataReference(userId);
                 return null;
             }

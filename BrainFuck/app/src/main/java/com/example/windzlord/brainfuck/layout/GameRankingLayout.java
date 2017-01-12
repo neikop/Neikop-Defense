@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck.layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -55,6 +56,8 @@ public class GameRankingLayout extends FrameLayout {
     private void initFromContext(Context context, AttributeSet attrs) {
         View view = inflate(context, R.layout.custom_game_layout_ranking, this);
         ButterKnife.bind(this, view);
+        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/BreeSerif.otf");
+        textViewName.setTypeface(font);
         getValues(context.obtainStyledAttributes(attrs, R.styleable.GameRankingLayout));
     }
 
@@ -73,7 +76,7 @@ public class GameRankingLayout extends FrameLayout {
         textViewNumber.setText(number + "");
         imageViewAvatar.setImageDrawable(image);
         textViewName.setText(name);
-        textViewScore.setText("Neuron: " + score);
+        textViewScore.setText("Neuron " + score);
     }
 
     public GameRankingLayout setNumber(int number) {

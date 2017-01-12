@@ -63,25 +63,32 @@
                 android:layout_marginRight="20dp"
                 android:layout_toRightOf="@id/layout_avatar">
 
-                <TextView
-                    android:id="@+id/textView_user_name"
+                <HorizontalScrollView
+                    android:id="@+id/scrollView_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
-                    android:text="Guest"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="28sp" />
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/textView_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Guest"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="28sp" />
+                </HorizontalScrollView>
 
                 <TextView
                     android:id="@+id/textView_high_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/textView_user_name"
-                    android:layout_alignRight="@+id/textView_user_name"
-                    android:layout_below="@+id/textView_user_name"
+                    android:layout_alignEnd="@+id/scrollView_user_name"
+                    android:layout_alignRight="@+id/scrollView_user_name"
+                    android:layout_below="@+id/scrollView_user_name"
                     android:layout_marginTop="10dp"
                     android:fontFamily="casual"
                     android:text="Neuron: 0"

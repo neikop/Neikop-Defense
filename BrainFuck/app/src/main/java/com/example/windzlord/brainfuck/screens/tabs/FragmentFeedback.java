@@ -83,9 +83,10 @@ public class FragmentFeedback extends Fragment {
                             @Override
                             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                                 if (currentProfile != null) {
-                                    ManagerPreference.getInstance().putUserName("N'"+currentProfile.getName()+"'");
-                                    ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
                                     ManagerPreference.getInstance().putUserID(currentProfile.getId());
+                                    ManagerPreference.getInstance().putUserName("N'" + currentProfile.getName() + "'");
+
+                                    ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
                                     //load Image
                                     String url = currentProfile.getProfilePictureUri(300, 300).toString();
                                     new DownloadImage().execute(url);
@@ -93,7 +94,7 @@ public class FragmentFeedback extends Fragment {
                                     ManagerServer.getInstance().uploadLocalToServer(
                                             ManagerPreference.getInstance().getUserID());
                                     ManagerPreference.getInstance().putUserID("");
-                                    ManagerPreference.getInstance().putUserName("Guest");
+                                    ManagerPreference.getInstance().putUserName("N'Guest'");
                                 }
                             }
                         }.startTracking();
