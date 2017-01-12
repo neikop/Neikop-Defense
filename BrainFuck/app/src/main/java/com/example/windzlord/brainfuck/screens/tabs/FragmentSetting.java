@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.example.windzlord.brainfuck.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -29,6 +30,7 @@ public class FragmentSetting extends Fragment {
     Button btn_sound_background;
     @BindView(R.id.btn_sound_effect)
     Button btn_sound_effect;
+
     Boolean sound_effect = true;
     Boolean sound_background = true;
     public FragmentSetting() {
@@ -41,16 +43,21 @@ public class FragmentSetting extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.tab_fragment_setting, container, false);
+        ButterKnife.bind(this,v);
+        addListener();
         return v;
     }
     public void addListener(){
+
         btn_sound_effect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(sound_effect){
                     ic_sound_effect.setImageResource(R.drawable.icon_music);
                     btn_sound_effect.setText("SOUND EFFECT ON");
+                    sound_effect =false;
                 }else{
+                    sound_effect =true;
                     ic_sound_effect.setImageResource(R.drawable.icon_music_on);
                     btn_sound_effect.setText("SOUND EFFECT OFF");
                 }
@@ -61,8 +68,10 @@ public class FragmentSetting extends Fragment {
             public void onClick(View view) {
                 if(sound_background){
                     ic_sound_background.setImageResource(R.drawable.icon_sound);
+                    sound_background =false;
                 }else{
                     ic_sound_background.setImageResource(R.drawable.icon_sound_on);
+                    sound_background =true;
                 }
             }
         });

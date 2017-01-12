@@ -160,6 +160,7 @@ public class FragmentProfile extends Fragment {
     private void addListener() {
         btn_settings.setOnClickListener(view -> {
             EventBus.getDefault().post(new FragmentChanger(new FragmentSetting(), true));
+
         });
     }
 }
