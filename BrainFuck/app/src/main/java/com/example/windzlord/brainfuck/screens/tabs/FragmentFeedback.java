@@ -83,7 +83,7 @@ public class FragmentFeedback extends Fragment {
                             @Override
                             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                                 if (currentProfile != null) {
-                                    ManagerPreference.getInstance().putUserName(currentProfile.getName());
+                                    ManagerPreference.getInstance().putUserName("N'"+currentProfile.getName()+"'");
                                     ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
                                     ManagerPreference.getInstance().putUserID(currentProfile.getId());
                                     //load Image
