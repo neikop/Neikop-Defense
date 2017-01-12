@@ -67,7 +67,7 @@ public class FragmentProfile extends Fragment {
     TextView textViewMemory;
 
     @BindView(R.id.btn_setting)
-    Button btn_setting;
+    ImageView btn_settings;
 
     public FragmentProfile() {
         // Required empty public constructor
@@ -158,7 +158,7 @@ public class FragmentProfile extends Fragment {
     }
 
     private void addListener() {
-        btn_setting.setOnClickListener(view -> {
+        btn_settings.setOnClickListener(view -> {
             EventBus.getDefault().post(new FragmentChanger(new FragmentSetting(), true));
         });
     }
