@@ -78,7 +78,7 @@ public class ManagerPreference {
     }
 
     public String getUserName() {
-        return sharedPreferences.getString(USER_NAME, "Guest");
+        return sharedPreferences.getString(USER_NAME, "N'Guest'");
     }
 
     public void clear() {

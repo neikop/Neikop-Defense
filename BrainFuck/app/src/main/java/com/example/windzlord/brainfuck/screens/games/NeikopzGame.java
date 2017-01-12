@@ -404,10 +404,10 @@ public abstract class NeikopzGame extends Fragment {
                 userID, name, index, level, expCurrent,
                 ManagerPreference.getInstance().getScore(name, index));
 
-        if (ManagerNetwork.getInstance().isConnectedToInternet()) {
-            ManagerServer.getInstance().uploadSingleScore(
-                    ManagerUserData.getInstance().getScoreByInfo(userID, name, index));
-        }
+        if (ManagerNetwork.getInstance().isConnectedToInternet())
+            if (!ManagerPreference.getInstance().getUserID().isEmpty())
+                ManagerServer.getInstance().uploadSingleScore(
+                        ManagerUserData.getInstance().getScoreByInfo(userID, name, index));
     }
 
     protected void goEndAnimation(boolean getHigh) {

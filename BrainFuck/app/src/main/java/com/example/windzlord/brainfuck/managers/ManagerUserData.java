@@ -43,10 +43,9 @@ public class ManagerUserData extends SQLiteAssetHelper {
     public List<HighScore> getListPlayer() {
         ArrayList<HighScore> players = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS,
-                null, null, "userId", null, null, null);
+                null, null, COLUMN_USER_ID, null, null, null);
         while (cursor.moveToNext()) players.add(createScore(cursor));
-//        cursor.close();
-//        sqLiteDatabase.close();
+
         return players;
     }
 
@@ -56,19 +55,18 @@ public class ManagerUserData extends SQLiteAssetHelper {
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS,
                 null, null, null, null, null, null);
         while (cursor.moveToNext()) scores.add(createScore(cursor));
-//        cursor.close();
-//        sqLiteDatabase.close();
+
         return scores;
     }
 
     public List<HighScore> getScoreByUserId(String userId) {
         System.out.println("getScoreByUserId ID = " + userId);
         ArrayList<HighScore> scores = new ArrayList<>();
-        String WHERE = "userId LIKE '" + userId + "'";
+        String WHERE = String.format("%s LIKE '%s'", COLUMN_USER_ID, userId);
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS, WHERE,
                 null, null, null, null, null);
         while (cursor.moveToNext()) scores.add(createScore(cursor));
-//        cursor.close();
+
         return scores;
     }
 
@@ -88,12 +86,12 @@ public class ManagerUserData extends SQLiteAssetHelper {
     public HighScore getScoreByInfo(String userId, String type, int position) {
         System.out.println("End game: getScoreByInfo " + userId + " " + type + " " + position);
         ArrayList<HighScore> scores = new ArrayList<>();
-        String WHERE = "userId LIKE '" + userId + "' AND type LIKE '" + type + "' AND position = " + position;
+        String WHERE = String.format("%s LIKE '%s' AND %s LIKE '%s' AND %s = %s",
+                COLUMN_USER_ID, userId, COLUMN_TYPE, type, COLUMN_POSITION, position);
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS, WHERE,
                 null, null, null, null, null);
         while (cursor.moveToNext()) scores.add(createScore(cursor));
-//        cursor.close();
-//        sqLiteDatabase.close();
+
         if (scores.isEmpty()) return null;
         return scores.get(0);
     }
@@ -115,9 +113,9 @@ public class ManagerUserData extends SQLiteAssetHelper {
         values.put(COLUMN_LEVEL, level);
         values.put(COLUMN_EXP_CURRENT, exp);
         values.put(COLUMN_HIGH_SCORE, score);
-        String WHERE = "userId LIKE '" + userId + "' AND type LIKE '" + type + "' AND position = " + position;
+        String WHERE = String.format("%s LIKE '%s' AND %s LIKE '%s' AND %s = %s",
+                COLUMN_USER_ID, userId, COLUMN_TYPE, type, COLUMN_POSITION, position);
         return sqLiteDatabase.update(TABLE_NAME, values, WHERE, null);
-//        sqLiteDatabase.close();
     }
 
 
@@ -126,7 +124,6 @@ public class ManagerUserData extends SQLiteAssetHelper {
         for (HighScore score : scores)
             if (updateScore(score) == 0)
                 insertScore(score);
-//        sqLiteDatabase.close();
     }
 
     private int updateScore(HighScore score) {

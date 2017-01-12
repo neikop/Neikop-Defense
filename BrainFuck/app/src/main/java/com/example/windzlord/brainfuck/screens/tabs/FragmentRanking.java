@@ -53,13 +53,15 @@ public class FragmentRanking extends Fragment {
 
     private void getPlayerRanking() {
         List<HighScore> listPlayer = ManagerUserData.getInstance().getListPlayer();
-        for (HighScore player : listPlayer) {
+        for (HighScore player : listPlayer)
             player.setScore(ManagerUserData.getInstance().getExperience(player.getUserId()));
-        }
-        Collections.sort(listPlayer, (player1, player2) -> player2.getScore() - player1.getScore());
+
+        Collections.sort(listPlayer, (player1, player2) -> player2.getScore() == player1.getScore() ?
+                player2.getUserName().compareTo(player1.getUserName()) : player2.getScore() - player1.getScore());
         for (int i = 0; i < listPlayer.size(); i++) {
             ((GameRankingLayout) layoutPlayerRanking.getChildAt(i))
-                    .setName(listPlayer.get(i).getUserName())
+                    .setName(listPlayer.get(i).getUserName()
+                            .substring(2, listPlayer.get(i).getUserName().length() - 1))
                     .setScore(listPlayer.get(i).getScore());
         }
     }

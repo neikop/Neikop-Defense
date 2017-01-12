@@ -17,7 +17,10 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 
@@ -62,6 +65,9 @@ public class FragmentProfile extends Fragment {
     @BindView(R.id.textView_memory_score)
     TextView textViewMemory;
 
+    @BindView(R.id.button_setting)
+    ImageView buttonSetting;
+
     public FragmentProfile() {
         // Required empty public constructor
     }
@@ -80,6 +86,7 @@ public class FragmentProfile extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
 
+        addListener();
         setupUI();
         getProgressbar();
     }
@@ -88,9 +95,7 @@ public class FragmentProfile extends Fragment {
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/BreeSerif.otf");
         textViewUser.setTypeface(font);
         String userName = ManagerPreference.getInstance().getUserName();
-        if (userName.contains("N'"))
-            textViewUser.setText(userName.substring(2, userName.length() - 1));
-        else textViewUser.setText(userName);
+        textViewUser.setText(userName.substring(2, userName.length() - 1));
 
         String userID = ManagerPreference.getInstance().getUserID();
         if (!userID.equals("")) {
@@ -106,7 +111,7 @@ public class FragmentProfile extends Fragment {
                 score += (level * (level - 1) / 2) * 300 + exp;
             }
         }
-        textViewScore.setText("Neuron: " + score);
+        textViewScore.setText("Neuron " + score);
     }
 
     private int scoreCalcu = 0;
@@ -148,4 +153,9 @@ public class FragmentProfile extends Fragment {
         }.start();
     }
 
+    private void addListener() {
+        buttonSetting.setOnClickListener(view -> {
+            EventBus.getDefault().post(new FragmentChanger(new FragmentSetting(), true));
+        });
+    }
 }
