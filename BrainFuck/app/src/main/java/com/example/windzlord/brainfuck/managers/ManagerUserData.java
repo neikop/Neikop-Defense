@@ -76,11 +76,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         String WHERE = "userId LIKE '" + userId + "'";
         Cursor cursor = database.query(TABLE_NAME, COLUMNS, WHERE,
                 null, null, null, null, null);
-        try {
-            while (cursor.moveToNext())
-                scores.add(createScore(cursor));
-        } catch (Exception ignored) {
-        }
+        scores.add(createScore(cursor));
         cursor.close();
         database.close();
         return scores;
@@ -117,11 +113,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         String WHERE = "userId LIKE '" + userId + "' AND type LIKE '" + type + "' AND position = " + position;
         Cursor cursor = database.query(TABLE_NAME, COLUMNS, WHERE,
                 null, null, null, null, null);
-        try {
-            while (cursor.moveToNext())
-                scores.add(createScore(cursor));
-        } catch (Exception ignored) {
-        }
+        scores.add(createScore(cursor));
         cursor.close();
         database.close();
         if (scores.isEmpty()) return null;
@@ -171,10 +163,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         values.put(COLUMN_LEVEL, score.getLevel());
         values.put(COLUMN_EXP_CURRENT, score.getExpCurrent());
         values.put(COLUMN_HIGH_SCORE, score.getScore());
-        try {
-            writableDatabase.insert(TABLE_NAME, null, values);
-        } catch (Exception ignored) {
-        }
+        writableDatabase.insert(TABLE_NAME, null, values);
         writableDatabase.close();
     }
 
