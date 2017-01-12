@@ -70,7 +70,7 @@ public class ObserverThree extends NeikopzGame {
     private ViewGroup[] layouts;
 
     private int srcHided = R.drawable.ic_type_concentration;
-    private int srcMarked = R.drawable.game_iz_resource_0z;
+    private int srcMarked = R.drawable.game_iz_resouce_0z;
     private int srcNormal = R.color.colorFaded;
     private int bgrCorrect = R.drawable.custom_oval_background_outline_correct;
     private int bgrWrong = R.drawable.custom_oval_background_outline_wrong;

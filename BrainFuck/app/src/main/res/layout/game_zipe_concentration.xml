@@ -55,7 +55,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
@@ -65,8 +65,9 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
+                    app:name="@string/game_concen_one"
                     app:src="@drawable/ic_cover_game_concen_1"
-                    app:name="@string/game_concen_one"/>
+                    app:unlocked="true" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_concen_two"
@@ -75,7 +76,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:name="@string/game_concen_two" />
+                    app:name="@string/game_concen_two"
+                    app:unlocked="true" />
 
                 <com.example.windzlord.brainfuck.layout.GameLayout
                     android:id="@+id/game_concen_three"
@@ -84,7 +86,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:name="@string/game_concen_three" />
+                    app:name="@string/game_concen_three"
+                    app:unlocked="true" />
 
             </LinearLayout>
 
