@@ -10,7 +10,6 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
 public class ManagerUserData extends SQLiteAssetHelper {
@@ -38,64 +37,43 @@ public class ManagerUserData extends SQLiteAssetHelper {
 
     private ManagerUserData(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        sqLiteDatabase = getWritableDatabase();
     }
 
     public List<HighScore> getListPlayer() {
-        ArrayList<HighScore> scores = new ArrayList<>();
-        SQLiteDatabase database = getWritableDatabase();
-        Cursor cursor = database.query(TABLE_NAME, COLUMNS,
+        ArrayList<HighScore> players = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS,
                 null, null, "userId", null, null, null);
-        try {
-            while (cursor.moveToNext())
-                scores.add(createScore(cursor));
-        } catch (Exception ignored) {
-        }
-        cursor.close();
-        database.close();
-        return scores;
+        while (cursor.moveToNext()) players.add(createScore(cursor));
+//        cursor.close();
+//        sqLiteDatabase.close();
+        return players;
     }
 
     public List<HighScore> getListScore() {
+        System.out.println("getListScore");
         ArrayList<HighScore> scores = new ArrayList<>();
-        SQLiteDatabase database = getWritableDatabase();
-        Cursor cursor = database.query(TABLE_NAME, COLUMNS,
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS,
                 null, null, null, null, null, null);
-        try {
-            while (cursor.moveToNext())
-                scores.add(createScore(cursor));
-        } catch (Exception ignored) {
-        }
-        cursor.close();
-        database.close();
+        while (cursor.moveToNext()) scores.add(createScore(cursor));
+//        cursor.close();
+//        sqLiteDatabase.close();
         return scores;
     }
 
     public List<HighScore> getScoreByUserId(String userId) {
+        System.out.println("getScoreByUserId ID = " + userId);
         ArrayList<HighScore> scores = new ArrayList<>();
-        SQLiteDatabase database = getWritableDatabase();
         String WHERE = "userId LIKE '" + userId + "'";
-        Cursor cursor = database.query(TABLE_NAME, COLUMNS, WHERE,
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS, WHERE,
                 null, null, null, null, null);
-        scores.add(createScore(cursor));
-        cursor.close();
-        database.close();
+        while (cursor.moveToNext()) scores.add(createScore(cursor));
+//        cursor.close();
         return scores;
     }
 
-    public int getSumScore(String userId) {
-        int sum = 0;
-        SQLiteDatabase database = getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT SUM("
-                + COLUMN_HIGH_SCORE + ") as Total FROM "
-                + TABLE_NAME + " WHERE userId LIKE '"
-                + userId + "'", null);
-        if (cursor.moveToFirst()) sum = cursor.getInt(cursor.getColumnIndex("Total"));
-        cursor.close();
-        database.close();
-        return sum;
-    }
-
     public int getExperience(String userId) {
+        System.out.println("getExperience on Ranking ID = " + userId);
         int sum = 0;
         List<HighScore> scores = getScoreByUserId(userId);
         for (HighScore score : scores)
@@ -108,14 +86,14 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
     public HighScore getScoreByInfo(String userId, String type, int position) {
+        System.out.println("End game: getScoreByInfo " + userId + " " + type + " " + position);
         ArrayList<HighScore> scores = new ArrayList<>();
-        SQLiteDatabase database = getWritableDatabase();
         String WHERE = "userId LIKE '" + userId + "' AND type LIKE '" + type + "' AND position = " + position;
-        Cursor cursor = database.query(TABLE_NAME, COLUMNS, WHERE,
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS, WHERE,
                 null, null, null, null, null);
-        scores.add(createScore(cursor));
-        cursor.close();
-        database.close();
+        while (cursor.moveToNext()) scores.add(createScore(cursor));
+//        cursor.close();
+//        sqLiteDatabase.close();
         if (scores.isEmpty()) return null;
         return scores.get(0);
     }
@@ -132,39 +110,33 @@ public class ManagerUserData extends SQLiteAssetHelper {
         return new HighScore(id, userId, userName, type, position, level, exp, score);
     }
 
-    public void updateScore(String userId, String type, int position, int level, int exp, int score) {
-        SQLiteDatabase database = getWritableDatabase();
+    public int updateScore(String userId, String type, int position, int level, int exp, int score) {
         ContentValues values = new ContentValues();
-        values.put("level", level); //These Fields should be your String values of actual column names
-        values.put("expCurrent", exp);
-        values.put("highscore", score);
+        values.put(COLUMN_LEVEL, level);
+        values.put(COLUMN_EXP_CURRENT, exp);
+        values.put(COLUMN_HIGH_SCORE, score);
         String WHERE = "userId LIKE '" + userId + "' AND type LIKE '" + type + "' AND position = " + position;
-        database.update(TABLE_NAME, values, WHERE, null);
-        database.close();
+        return sqLiteDatabase.update(TABLE_NAME, values, WHERE, null);
+//        sqLiteDatabase.close();
     }
 
-    void resetDatabase(List<HighScore> scores) {
-        if (!ManagerNetwork.getInstance().isConnectedToInternet())
-            return;
-        SQLiteDatabase database = getWritableDatabase();
-        database.execSQL("delete from " + TABLE_NAME);
-        for (HighScore score : scores){
-            ContentValues values = new ContentValues();
-            values.put(COLUMN_ID, score.getId());
-            values.put(COLUMN_USER_ID, score.getUserId());
-            values.put(COLUMN_USER_NAME, score.getUserName());
-            values.put(COLUMN_TYPE, score.getType());
-            values.put(COLUMN_POSITION, score.getPosition());
-            values.put(COLUMN_LEVEL, score.getLevel());
-            values.put(COLUMN_EXP_CURRENT, score.getExpCurrent());
-            values.put(COLUMN_HIGH_SCORE, score.getScore());
-            database.insert(TABLE_NAME, null, values);
-        }
-        database.close();
+
+    void updateDatabase(List<HighScore> scores) {
+        System.out.println("updateDatabase");
+        for (HighScore score : scores)
+            if (updateScore(score) == 0)
+                insertScore(score);
+//        sqLiteDatabase.close();
     }
 
-    private void insertScore(HighScore score) {
-        SQLiteDatabase writableDatabase = getWritableDatabase();
+    private int updateScore(HighScore score) {
+        System.out.println("updateScore " + score);
+        return updateScore(score.getUserId(), score.getType(), score.getPosition(),
+                score.getLevel(), score.getExpCurrent(), score.getScore());
+    }
+
+    public void insertScore(HighScore score) {
+        System.out.println("insertScore " + score);
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, score.getId());
         values.put(COLUMN_USER_ID, score.getUserId());
@@ -174,9 +146,10 @@ public class ManagerUserData extends SQLiteAssetHelper {
         values.put(COLUMN_LEVEL, score.getLevel());
         values.put(COLUMN_EXP_CURRENT, score.getExpCurrent());
         values.put(COLUMN_HIGH_SCORE, score.getScore());
-        writableDatabase.insert(TABLE_NAME, null, values);
-        writableDatabase.close();
+        sqLiteDatabase.insert(TABLE_NAME, null, values);
     }
+
+    private SQLiteDatabase sqLiteDatabase;
 
     private static ManagerUserData instance;
 

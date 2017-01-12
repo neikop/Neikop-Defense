@@ -401,11 +401,7 @@ public abstract class NeikopzGame extends Fragment {
                 Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
 
         ManagerUserData.getInstance().updateScore(
-                userID,
-                name,
-                index,
-                level,
-                expCurrent,
+                userID, name, index, level, expCurrent,
                 ManagerPreference.getInstance().getScore(name, index));
 
         if (ManagerNetwork.getInstance().isConnectedToInternet()) {
