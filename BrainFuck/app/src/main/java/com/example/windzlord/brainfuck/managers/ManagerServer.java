@@ -55,6 +55,7 @@ public class ManagerServer {
     // When Start Game and Logout
     public void uploadLocalToServer(String userID) {
         if (!userID.isEmpty()) {
+            System.out.println("uploadLocalToServer");
             List<HighScore> scores = ManagerUserData.getInstance().getScoreByUserId(userID);
             uploadScores(scores);
         }

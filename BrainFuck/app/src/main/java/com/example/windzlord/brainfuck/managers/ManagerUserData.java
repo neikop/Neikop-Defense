@@ -120,6 +120,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
 //        sqLiteDatabase.close();
     }
 
+
     void updateDatabase(List<HighScore> scores) {
         System.out.println("updateDatabase");
         for (HighScore score : scores)
