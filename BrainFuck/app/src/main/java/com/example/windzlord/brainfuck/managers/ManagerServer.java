@@ -149,6 +149,7 @@ public class ManagerServer {
                             HighScore score = new HighScore();
                             score.setUserId(userId);
                             score.setType(Gogo.GAME_LIST[i]);
+                            score.setUserName(ManagerPreference.getInstance().getUserName());
                             score.setPosition(k);
                             score.setLevel(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
                             score.setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], k));

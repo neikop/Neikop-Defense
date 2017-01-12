@@ -72,7 +72,7 @@ public class FragmentFeedback extends Fragment {
         AppEventsLogger.activateApp(getContext());
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
-        
+
         loginButton.registerCallback(
                 ((MainActivity) getActivity()).getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
@@ -83,9 +83,9 @@ public class FragmentFeedback extends Fragment {
                             @Override
                             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                                 if (currentProfile != null) {
+                                    ManagerPreference.getInstance().putUserName(currentProfile.getName());
                                     ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
                                     ManagerPreference.getInstance().putUserID(currentProfile.getId());
-                                    ManagerPreference.getInstance().putUserName(currentProfile.getName());
                                     //load Image
                                     String url = currentProfile.getProfilePictureUri(300, 300).toString();
                                     new DownloadImage().execute(url);

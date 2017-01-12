@@ -58,7 +58,7 @@ public class FragmentRanking extends Fragment {
         Collections.sort(listPlayer, (player1, player2) -> player2.getScore() - player1.getScore());
         for (int i = 0; i < listPlayer.size(); i++) {
             ((GameRankingLayout) layoutPlayerRanking.getChildAt(i))
-                    .setName(listPlayer.get(i).getId().substring(0, 10))
+                    .setName(listPlayer.get(i).getUserName())
                     .setScore(listPlayer.get(i).getScore());
         }
     }

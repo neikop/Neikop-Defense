@@ -10,6 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class ManagerUserData extends SQLiteAssetHelper {
@@ -24,9 +25,11 @@ public class ManagerUserData extends SQLiteAssetHelper {
     private static final String COLUMN_LEVEL = "level";
     private static final String COLUMN_EXP_CURRENT = "expCurrent";
     private static final String COLUMN_HIGH_SCORE = "highscore";
+    private static final String COLUMN_USER_NAME = "userName";
     private static final String[] COLUMNS = new String[]{
             COLUMN_ID,
             COLUMN_USER_ID,
+            COLUMN_USER_NAME,
             COLUMN_TYPE,
             COLUMN_POSITION,
             COLUMN_LEVEL,
@@ -128,12 +131,13 @@ public class ManagerUserData extends SQLiteAssetHelper {
     private HighScore createScore(Cursor cursor) {
         String id = cursor.getString(cursor.getColumnIndex(COLUMN_ID));
         String userId = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID));
+        String userName = cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME));
         String type = cursor.getString(cursor.getColumnIndex(COLUMN_TYPE));
         int position = cursor.getInt(cursor.getColumnIndex(COLUMN_POSITION));
         int level = cursor.getInt(cursor.getColumnIndex(COLUMN_LEVEL));
         int exp = cursor.getInt(cursor.getColumnIndex(COLUMN_EXP_CURRENT));
         int score = cursor.getInt(cursor.getColumnIndex(COLUMN_HIGH_SCORE));
-        return new HighScore(id, userId, type, position, level, exp, score);
+        return new HighScore(id, userId, userName, type, position, level, exp, score);
     }
 
     public void updateScore(String userId, String type, int position, int level, int exp, int score) {
@@ -161,6 +165,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, score.getId());
         values.put(COLUMN_USER_ID, score.getUserId());
+        values.put(COLUMN_USER_NAME, score.getUserName());
         values.put(COLUMN_TYPE, score.getType());
         values.put(COLUMN_POSITION, score.getPosition());
         values.put(COLUMN_LEVEL, score.getLevel());
