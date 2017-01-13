@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CalcuOne extends NeikopzGame {
+public class CalcuOne extends GameDaddy {
 
 
     public CalcuOne() {

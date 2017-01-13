@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameCoverLayout;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.games.calculation.CalcuOne;
@@ -66,11 +66,11 @@ public class FragmentCalculation extends Fragment {
     private void getInfo() {
         GameCoverLayout[] games = {gameCalcuOne, gameCalcuTwo, gameCalcuThree};
         for (int i = 0; i < games.length; i++) {
-            games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.CALCULATION, i + 1));
-            games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.CALCULATION, i + 1));
-            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(Gogo.CALCULATION, i + 1));
-            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.CALCULATION, i + 1));
-            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.CALCULATION, i + 1));
+            games[i].setScore(ManagerPreference.getInstance().getScore(ManagerBrain.CALCULATION, i + 1));
+            games[i].setLevel(ManagerPreference.getInstance().getLevel(ManagerBrain.CALCULATION, i + 1));
+            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(ManagerBrain.CALCULATION, i + 1));
+            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(ManagerBrain.CALCULATION, i + 1));
+            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(ManagerBrain.CALCULATION, i + 1));
         }
     }
 

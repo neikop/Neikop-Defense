@@ -16,15 +16,17 @@ import android.widget.ImageView;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.Gogo;
-import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MemoryThree extends NeikopzGame {
+public class MemoryThree extends GameDaddy {
 
     private int srcHided = R.drawable.game_iz_resource_0x;
     private int bgrNormal = R.drawable.custom_corner_background_5_outline;
@@ -42,8 +44,6 @@ public class MemoryThree extends NeikopzGame {
     private List<Integer> coreArray;
     private int matched;
 
-    protected final int NUMBER_QUIZ = 1;
-
     public MemoryThree() {
         // Required empty public constructor
     }
@@ -59,7 +59,8 @@ public class MemoryThree extends NeikopzGame {
     protected void startGame() {
         RATE = 24;
         TIME = TIME * RATE;
-        gameStatusLayout.updateValues(100, TIME, TIME, 0, NUMBER_QUIZ, 0);
+        QUIZ = 1;
+        gameStatusLayout.updateValues(100, TIME, TIME, 0, QUIZ, 0);
         going = score = 0;
 
         goStartAnimation();
@@ -112,7 +113,7 @@ public class MemoryThree extends NeikopzGame {
             }
 
             public void onAnimationEnd(Animation animation) {
-                coreArray = Gogo.getArrayMemoryThree();
+                coreArray = getCoreArray();
                 for (int i = 0; i < size; i++)
                     ((ImageView) layoutGame.getChildAt(i)).setImageResource(srcHided);
                 for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleTwo);
@@ -138,7 +139,7 @@ public class MemoryThree extends NeikopzGame {
                 showQuiz();
             }
         });
-        if (going >= NUMBER_QUIZ) goEndGame(Gogo.MEMORY, 3);
+        if (going >= QUIZ) goEndGame(ManagerBrain.MEMORY, 3);
         else for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleOne);
     }
 
@@ -226,5 +227,12 @@ public class MemoryThree extends NeikopzGame {
                 goPrepare();
             }
         }.start();
+    }
+
+    private List<Integer> getCoreArray() {
+        List<Integer> ret = new ArrayList<>();
+        for (int i = 0; i < 20; i++) ret.add(i / 2);
+        Collections.shuffle(ret);
+        return ret;
     }
 }

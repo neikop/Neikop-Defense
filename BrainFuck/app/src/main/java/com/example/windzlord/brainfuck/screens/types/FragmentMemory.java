@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameCoverLayout;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.games.memory.MemoryThree;
-import com.example.windzlord.brainfuck.screens.games.memory.MemoryTwo;
 import com.example.windzlord.brainfuck.screens.games.memory.MemoryOne;
+import com.example.windzlord.brainfuck.screens.games.memory.MemoryTwo;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -66,11 +66,11 @@ public class FragmentMemory extends Fragment {
     private void getInfo() {
         GameCoverLayout[] games = {gameMemoryOne, gameMemoryTwo, gameMemoryThree};
         for (int i = 0; i < games.length; i++) {
-            games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.MEMORY, i + 1));
-            games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.MEMORY, i + 1));
-            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(Gogo.MEMORY, i + 1));
-            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.MEMORY, i + 1));
-            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.MEMORY, i + 1));
+            games[i].setScore(ManagerPreference.getInstance().getScore(ManagerBrain.MEMORY, i + 1));
+            games[i].setLevel(ManagerPreference.getInstance().getLevel(ManagerBrain.MEMORY, i + 1));
+            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(ManagerBrain.MEMORY, i + 1));
+            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(ManagerBrain.MEMORY, i + 1));
+            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(ManagerBrain.MEMORY, i + 1));
         }
     }
 

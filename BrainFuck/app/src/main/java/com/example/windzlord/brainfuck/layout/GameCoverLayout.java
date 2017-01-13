@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,8 +101,8 @@ public class GameCoverLayout extends FrameLayout {
         textViewLevel.setText("Exp. Lv. " + level);
         progressBar_level.setMax(expNextLvl);
         progressBar_level.setProgress(expCurrent);
-        textViewCurrentExp.setText(Gogo.goFormatString(expCurrent));
-        textViewNextLvlExp.setText(Gogo.goFormatString(expNextLvl));
+        textViewCurrentExp.setText(ManagerBrain.goFormatString(expCurrent));
+        textViewNextLvlExp.setText(ManagerBrain.goFormatString(expNextLvl));
         textViewHiScore.setText("" + score);
     }
 

@@ -15,16 +15,16 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.objects.models.Calculator;
-import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
 
 import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CalcuTwo extends NeikopzGame {
+public class CalcuTwo extends GameDaddy {
 
     @BindView(R.id.textView_game_top)
     TextView textViewTop;
@@ -105,7 +105,7 @@ public class CalcuTwo extends NeikopzGame {
             }
         });
         goStartAnimation(scaleOne, textViewTop, textViewBottom);
-        if (going >= NUMBER_QUIZ) goEndGame(Gogo.CALCULATION, 2);
+        if (going >= QUIZ) goEndGame(ManagerBrain.CALCULATION, 2);
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.example.windzlord.brainfuck.screens;
 
 
-import android.content.res.AssetFileDescriptor;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -13,13 +11,11 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,7 +54,7 @@ public class FragmentWelcome extends Fragment {
 
     private void getContent() {
         if (ManagerPreference.getInstance().getMusic())
-            Gogo.goSound(getActivity(), Gogo.SOUND_WELCOME, false);
+            ManagerBrain.goMusic(getActivity(), ManagerBrain.SOUND_WELCOME, false);
         progressBarWelcome.setMax(3000);
         progressBarWelcome.setMax(2800);
         progressBarWelcome.setProgress(0);

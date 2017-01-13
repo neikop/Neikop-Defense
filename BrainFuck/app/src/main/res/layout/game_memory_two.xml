@@ -52,8 +52,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="310dp"
-        android:layout_marginTop="234dp">
+        android:layout_height="410dp"
+        android:layout_marginTop="120dp">
 
         <GridLayout
             android:id="@+id/layout_game"
@@ -63,38 +63,6 @@
             android:background="@drawable/custom_corner_background_outline_game_2"
             android:columnCount="4"
             android:padding="4dp">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_5_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_5_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_5_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_corner_background_5_outline"
-                android:padding="5dp"
-                android:src="@drawable/game_iz_resource_0z" />
 
             <ImageView
                 android:layout_width="60dp"

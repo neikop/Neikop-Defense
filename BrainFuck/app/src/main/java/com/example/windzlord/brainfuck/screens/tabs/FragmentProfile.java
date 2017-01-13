@@ -14,12 +14,10 @@ import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
-import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
-import com.example.windzlord.brainfuck.objects.MessageManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.greenrobot.eventbus.EventBus;
@@ -106,7 +104,7 @@ public class FragmentProfile extends Fragment {
         } else imageViewUser.setImageResource(R.drawable.z_character_guest);
 
         int score = 0;
-        for (String game : Gogo.GAME_LIST) {
+        for (String game : ManagerBrain.GAME_LIST) {
             for (int i = 1; i < 4; i++) {
                 int level = ManagerPreference.getInstance().getLevel(game, i);
                 int exp = ManagerPreference.getInstance().getExpCurrent(game, i);
@@ -126,15 +124,15 @@ public class FragmentProfile extends Fragment {
         scoreConcen = 0;
         scoreMemo = 0;
         scoreObser = 0;
-        for (String game : Gogo.GAME_LIST)
+        for (String game : ManagerBrain.GAME_LIST)
             for (int i = 1; i <= 3; i++) {
-                scoreCalcu += game.equals(Gogo.CALCULATION) ?
+                scoreCalcu += game.equals(ManagerBrain.CALCULATION) ?
                         ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreConcen += game.equals(Gogo.CONCENTRATION) ?
+                scoreConcen += game.equals(ManagerBrain.CONCENTRATION) ?
                         ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreMemo += game.equals(Gogo.MEMORY) ?
+                scoreMemo += game.equals(ManagerBrain.MEMORY) ?
                         ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreObser += game.equals(Gogo.OBSERVATION) ?
+                scoreObser += game.equals(ManagerBrain.OBSERVATION) ?
                         ManagerPreference.getInstance().getScore(game, i) : 0;
             }
         textViewCalcu.setText(scoreCalcu + "");

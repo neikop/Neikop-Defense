@@ -15,13 +15,19 @@ import android.widget.ImageView;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.Gogo;
-import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ObserverTwo extends NeikopzGame {
+public class ObserverTwo extends GameDaddy {
 
     private int srcHided = R.drawable.game_iz_resource_0x;
     private int bgrNormal = R.drawable.custom_corner_background_5_outline;
@@ -100,7 +106,7 @@ public class ObserverTwo extends NeikopzGame {
             }
 
             public void onAnimationEnd(Animation animation) {
-                coreArray = Gogo.getArrayObserTwo(imageResources.length);
+                coreArray = getCoreArray(imageResources.length);
                 for (int i = 0; i < 8; i++)
                     ((ImageView) layoutGame.getChildAt(i)).setImageResource(imageResources[coreArray[i]]);
                 for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleTwo);
@@ -126,7 +132,7 @@ public class ObserverTwo extends NeikopzGame {
                 showQuiz();
             }
         });
-        if (going >= NUMBER_QUIZ) goEndGame(Gogo.OBSERVATION, 2);
+        if (going >= QUIZ) goEndGame(ManagerBrain.OBSERVATION, 2);
         else for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleOne);
     }
 
@@ -178,5 +184,19 @@ public class ObserverTwo extends NeikopzGame {
                 }
             });
         }
+    }
+
+    private int[] getCoreArray(int size) {
+        List<Integer> number = new ArrayList<>();
+        for (int i = 0; i < size; i++) number.add(i);
+        Collections.shuffle(number);
+        int ret[] = new int[8];
+        for (int i = 0; i < 6; i++) ret[i] = number.get(i);
+        while (ret[6] == ret[7]) {
+            ret[6] = ret[new Random().nextInt(6)];
+            ret[7] = ret[new Random().nextInt(6)];
+        }
+        Collections.shuffle(Arrays.asList(ret));
+        return ret;
     }
 }

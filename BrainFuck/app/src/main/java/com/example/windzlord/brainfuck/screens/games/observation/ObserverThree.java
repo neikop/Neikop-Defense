@@ -16,8 +16,10 @@ import android.widget.TextView;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.Gogo;
-import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
+
+import java.util.Random;
 
 import at.markushi.ui.CircleButton;
 import butterknife.BindView;
@@ -25,7 +27,7 @@ import butterknife.BindView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ObserverThree extends NeikopzGame {
+public class ObserverThree extends GameDaddy {
 
     @BindView(R.id.layout_answer)
     ViewGroup layoutAnswer;
@@ -77,7 +79,7 @@ public class ObserverThree extends NeikopzGame {
     private int bgrNormal = R.drawable.custom_oval_background_outline;
 
     private boolean[] coreArray;
-    private int core;
+    private int answer;
     private int[] coreArrayAnswer;
 
     public ObserverThree() {
@@ -157,9 +159,9 @@ public class ObserverThree extends NeikopzGame {
                 layoutAnswer.setVisibility(View.VISIBLE);
                 for (ViewGroup group : layouts) group.startAnimation(scaleTwo);
 
-                coreArray = Gogo.getArrayObserThree();
-                core = countTrue(coreArray);
-                coreArrayAnswer = Gogo.getArrayObserThreeAnswer(core);
+                coreArray = getCoreArray();
+                answer = countTrue(coreArray);
+                coreArrayAnswer = getAnswerArray(answer);
 
                 answerA.setText("" + coreArrayAnswer[0]);
                 answerB.setText("" + coreArrayAnswer[1]);
@@ -192,7 +194,7 @@ public class ObserverThree extends NeikopzGame {
                 showQuiz();
             }
         });
-        if (going >= NUMBER_QUIZ) goEndGame(Gogo.OBSERVATION, 3);
+        if (going >= QUIZ) goEndGame(ManagerBrain.OBSERVATION, 3);
         else for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleOne);
     }
 
@@ -206,7 +208,7 @@ public class ObserverThree extends NeikopzGame {
     private void goNext(int clicked) {
         if (!clickable) return;
         clickable = false;
-        boolean completed = core == coreArrayAnswer[clicked];
+        boolean completed = answer == coreArrayAnswer[clicked];
         if (clicked < 4) buttons[clicked].setBackgroundResource(bgrWrong);
         buttons[coreArrayAnswer[4]].setBackgroundResource(bgrCorrect);
         new CountDownTimerAdapter(1000) {
@@ -250,5 +252,26 @@ public class ObserverThree extends NeikopzGame {
         int ret = 0;
         for (boolean bool : array) if (bool) ret++;
         return ret;
+    }
+
+    private boolean[] getCoreArray() {
+        boolean[] ret = new boolean[16];
+        int count = 0;
+        for (int i = 0; i < 16; i++) if (ret[i] = new Random().nextBoolean()) count++;
+        if (count < 6 | count > 10) return getCoreArray();
+        return ret;
+    }
+
+    private int[] getAnswerArray(int x) {
+        switch (new Random().nextInt(4)) {
+            case 1:
+                return new int[]{x, x + 1, x + 2, x + 3, 0};
+            case 2:
+                return new int[]{x - 1, x, x + 1, x + 2, 1};
+            case 3:
+                return new int[]{x - 2, x - 1, x, x + 1, 2};
+            default:
+                return new int[]{x - 3, x - 2, x - 1, x, 3};
+        }
     }
 }

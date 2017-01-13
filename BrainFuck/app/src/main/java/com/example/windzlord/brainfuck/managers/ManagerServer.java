@@ -108,7 +108,7 @@ public class ManagerServer {
             protected Void doInBackground(Void... params) {
                 try {
                     List<HighScore> scores = getListScoreServer();
-                    if (!Gogo.GAME_LOOPER_SYNC)
+                    if (!ManagerBrain.GAME_LOOPER_SYNC)
                         EventBus.getDefault().post(new MessageManager("", "Server good"));
 
                     Log.d(TAG, "Scores on server: " + scores.size());
@@ -119,7 +119,7 @@ public class ManagerServer {
                     Log.d(TAG, "Scores on local after: "
                             + ManagerUserData.getInstance().getListScore().size());
                 } catch (ExecutionException | InterruptedException | MobileServiceException serverException) {
-                    if (!Gogo.GAME_LOOPER_SYNC)
+                    if (!ManagerBrain.GAME_LOOPER_SYNC)
                         EventBus.getDefault().post(new MessageManager("Warning", "Server down"));
                     Log.d(TAG, "Server Down! " + serverException.toString());
                 }
@@ -157,19 +157,19 @@ public class ManagerServer {
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                for (int i = 0; i < Gogo.GAME_LIST.length; i++) {
+                for (int i = 0; i < ManagerBrain.GAME_LIST.length; i++) {
                     for (int k = 1; k < 4; k++) {
                         HighScore score = new HighScore();
                         score.setUserId(userID);
-                        score.setType(Gogo.GAME_LIST[i]);
+                        score.setType(ManagerBrain.GAME_LIST[i]);
                         score.setUserName(ManagerPreference.getInstance().getUserName());
                         score.setPosition(k);
-                        score.setLevel(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
-                        score.setExp(ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], k));
-                        score.setScore(ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], k));
+                        score.setLevel(ManagerPreference.getInstance().getLevel(ManagerBrain.GAME_LIST[i], k));
+                        score.setExp(ManagerPreference.getInstance().getExpCurrent(ManagerBrain.GAME_LIST[i], k));
+                        score.setScore(ManagerPreference.getInstance().getScore(ManagerBrain.GAME_LIST[i], k));
                         try {
                             mServiceTable.insert(score).get();
-                            Log.d(TAG, "insert score: " + score.getUserName() + Gogo.GAME_LIST[i] + k);
+                            Log.d(TAG, "insert score: " + score.getUserName() + ManagerBrain.GAME_LIST[i] + k);
                         } catch (InterruptedException | ExecutionException ignored) {
                         }
                     }

@@ -56,12 +56,12 @@ public class FragmentRanking extends Fragment {
         Collections.sort(players, (o, s) -> s.getScore() == o.getScore() ?
                 s.getUserName().compareTo(o.getUserName()) : s.getScore() - o.getScore());
         for (int i = 0; i < players.size(); i++) {
-            GameRankingLayout layout = ((GameRankingLayout) layoutPlayerRanking.getChildAt(i))
-                    .setName(players.get(i).getUserName()
-                            .substring(2, players.get(i).getUserName().length() - 1))
-                    .setScore(players.get(i).getScore());
             boolean chosen = ManagerPreference.getInstance().getUserID()
                     .equals(players.get(i).getUserId());
+            GameRankingLayout layout = ((GameRankingLayout) layoutPlayerRanking.getChildAt(i));
+            layout.setName(players.get(i).getUserName()
+                    .substring(2, players.get(i).getUserName().length() - 1));
+            layout.setScore(players.get(i).getScore());
             layout.setImageBackground(getResources().getDrawable(chosen
                     ? R.drawable.custom_oval_background_outline_profile_chosen
                     : R.drawable.custom_oval_background_outline_profile));

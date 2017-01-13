@@ -9,8 +9,8 @@
     <string name="game_concen_one">Brain shift</string>
     <string name="game_concen_two">Color and meaning</string>
     <string name="game_concen_three">Track color</string>
-    <string name="game_memory_one">Memorize order</string>
-    <string name="game_memory_two">Flip the card</string>
+    <string name="game_memory_one">Flip the card</string>
+    <string name="game_memory_two">Memorize order</string>
     <string name="game_memory_three">Flip and remember</string>
     <string name="game_observer_one">Check shape</string>
     <string name="game_observer_two">Make a pair</string>

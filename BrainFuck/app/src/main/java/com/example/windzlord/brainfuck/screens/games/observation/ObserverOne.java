@@ -17,15 +17,17 @@ import android.widget.ImageView;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.Gogo;
-import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
+
+import java.util.Random;
 
 import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ObserverOne extends NeikopzGame {
+public class ObserverOne extends GameDaddy {
 
     @BindView(R.id.layout_game_x)
     ViewGroup groupX;
@@ -97,8 +99,8 @@ public class ObserverOne extends NeikopzGame {
 
     @Override
     protected void goShow() {
-        coreArray = Gogo.getArrayObserOne(null);
-        fakeArray = Gogo.getArrayObserOne(coreArray);
+        coreArray = getCoreArray(null);
+        fakeArray = getCoreArray(coreArray);
         ScaleAnimation scaleOne = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
         scaleOne.setDuration(250);
         ScaleAnimation scaleTwo = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
@@ -139,14 +141,14 @@ public class ObserverOne extends NeikopzGame {
             }
         });
         goStartAnimation(scaleOne, goChildGroup(groupY));
-        if (going >= NUMBER_QUIZ) goEndGame(Gogo.OBSERVATION, 1);
+        if (going >= QUIZ) goEndGame(ManagerBrain.OBSERVATION, 1);
         showQuiz();
     }
 
     @Override
     protected void showQuiz() {
         goVisibility(View.VISIBLE, groupX, groupZ);
-        boolean x = Gogo.getRandom(2) == 0;
+        boolean x = new Random().nextBoolean();
         boolean z = !x;
         for (int i = 0; i < 9; i++)
             if (x) {
@@ -189,6 +191,19 @@ public class ObserverOne extends NeikopzGame {
         if (!clickable) return;
         groupZ.setBackgroundResource(bgrChosen);
         goNext(completed);
+    }
+
+    private boolean[] getCoreArray(boolean[] core) {
+        boolean[] ret = new boolean[9];
+        int count = 0;
+        for (int i = 0; i < 9; i++) if (ret[i] = new Random().nextBoolean()) count++;
+        if (count <= 3 | count > 6) return getCoreArray(core);
+        if (core == null) return ret;
+        while (true) {
+            for (int i = 0; i < 9; i++)
+                if (ret[i] ^ core[i]) return ret;
+            ret = getCoreArray(null);
+        }
     }
 
 }

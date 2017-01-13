@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameCoverLayout;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 import com.example.windzlord.brainfuck.screens.games.observation.ObserverOne;
@@ -66,11 +66,11 @@ public class FragmentObservation extends Fragment {
     private void getInfo() {
         GameCoverLayout[] games = {gameObserOne, gameObserTwo, gameObserThree};
         for (int i = 0; i < games.length; i++) {
-            games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.OBSERVATION, i + 1));
-            games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.OBSERVATION, i + 1));
-            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(Gogo.OBSERVATION, i + 1));
-            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.OBSERVATION, i + 1));
-            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.OBSERVATION, i + 1));
+            games[i].setScore(ManagerPreference.getInstance().getScore(ManagerBrain.OBSERVATION, i + 1));
+            games[i].setLevel(ManagerPreference.getInstance().getLevel(ManagerBrain.OBSERVATION, i + 1));
+            games[i].setExpNextLvl(ManagerPreference.getInstance().getExpNext(ManagerBrain.OBSERVATION, i + 1));
+            games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(ManagerBrain.OBSERVATION, i + 1));
+            games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(ManagerBrain.OBSERVATION, i + 1));
         }
     }
 

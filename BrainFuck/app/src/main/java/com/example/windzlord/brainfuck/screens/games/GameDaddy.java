@@ -17,7 +17,7 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameStatusLayout;
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class NeikopzGame extends Fragment {
+public abstract class GameDaddy extends Fragment {
 
     @BindView(R.id.layout_welcome)
     protected ViewGroup layoutWelcome;
@@ -103,12 +103,13 @@ public abstract class NeikopzGame extends Fragment {
     protected CountDownTimer counter;
     protected long remain;
     protected boolean canPause = false;
+    protected boolean canResume = false;
     protected boolean clickable = false;
     protected int going;
     protected int score;
     protected int RATE = 1;
-    protected int TIME = Gogo.TIME * RATE;
-    protected final int NUMBER_QUIZ = Gogo.NUMBER_QUIZ;
+    protected int TIME = ManagerBrain.TIME * RATE;
+    protected int QUIZ = ManagerBrain.QUIZ;
 
     protected View createView(View view) {
         ButterKnife.bind(this, view);
@@ -119,7 +120,7 @@ public abstract class NeikopzGame extends Fragment {
     }
 
     protected void startGame() {
-        gameStatusLayout.updateValues(100, TIME, TIME, 0, NUMBER_QUIZ, 0);
+        gameStatusLayout.updateValues(100, TIME, TIME, 0, QUIZ, 0);
         going = score = 0;
 
         goStartAnimation();
@@ -240,8 +241,9 @@ public abstract class NeikopzGame extends Fragment {
                 layoutNext.startAnimation(scaleOne);
 
                 if (ManagerPreference.getInstance().getSound())
-                    if (completed) Gogo.goSound(getActivity(), Gogo.SOUND_CORRECT, false);
-                    else Gogo.goSound(getActivity(), Gogo.SOUND_WRONG, false);
+                    if (completed)
+                        ManagerBrain.goMusic(getActivity(), ManagerBrain.SOUND_CORRECT, false);
+                    else ManagerBrain.goMusic(getActivity(), ManagerBrain.SOUND_WRONG, false);
             }
         }.start();
         new CountDownTimerAdapter(1000) {
@@ -285,6 +287,7 @@ public abstract class NeikopzGame extends Fragment {
         if (!canPause) return;
         boolean isPausing = layoutPause.getVisibility() == View.VISIBLE;
         if (isPausing) return;
+        canResume = true;
         isPauseOnShowing = onShowing;
         layoutGame.setVisibility(View.INVISIBLE);
         layoutPause.setVisibility(View.VISIBLE);
@@ -317,6 +320,8 @@ public abstract class NeikopzGame extends Fragment {
 
     @OnClick(R.id.button_resume)
     protected void onButtonResume() {
+        if (!canResume) return;
+        canResume = false;
         TranslateAnimation goLeft = new TranslateAnimation(1, 0, 1, -1, 1, 0, 1, 0);
         goLeft.setDuration(150);
         TranslateAnimation goRight = new TranslateAnimation(1, 0, 1, 1, 1, 0, 1, 0);

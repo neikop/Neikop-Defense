@@ -14,20 +14,26 @@ import android.widget.ImageView;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.Gogo;
-import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Stack;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MemoryTwo extends NeikopzGame {
+public class MemoryTwo extends GameDaddy {
 
     private int bgrChosen = R.drawable.custom_corner_background_7_outline;
     private int bgrNormal = R.drawable.custom_corner_background_5_outline;
 
-    private int size = 16;
+    private int size = 12;
     private boolean[] isChosen = new boolean[size];
-    private boolean[] coreArray;
+    private List<Integer> coreArray;
 
     public MemoryTwo() {
         // Required empty public constructor
@@ -52,6 +58,7 @@ public class MemoryTwo extends NeikopzGame {
                 for (View view : goChildGroup(layoutGame)) {
                     ((ImageView) view).setImageResource(R.color.colorFaded);
                     view.setBackgroundResource(bgrNormal);
+                    view.setVisibility(View.VISIBLE);
                 }
                 for (View view : goChildGroup(layoutGame))
                     view.startAnimation(scaleTwo);
@@ -77,45 +84,59 @@ public class MemoryTwo extends NeikopzGame {
 
     @Override
     protected void goShow() {
+        coreArray = getCoreArray();
+        Stack<View> stack = new Stack<>();
+        for (int i = coreArray.size() - 1; i >= 0; i--)
+            stack.push(layoutGame.getChildAt(coreArray.get(i)));
+        if (going >= QUIZ) goEndGame(ManagerBrain.MEMORY, 2);
+        else goNext(stack);
+    }
+
+    private void goNext(Stack<View> views) {
+        View view = views.pop();
         ScaleAnimation scaleOne = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
-        scaleOne.setDuration(250);
+        scaleOne.setDuration(200);
         ScaleAnimation scaleTwo = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
-        scaleTwo.setDuration(250);
-        ScaleAnimation scaleThree = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
-        scaleThree.setDuration(250);
-        ScaleAnimation scaleFour = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
-        scaleFour.setDuration(250);
+        scaleTwo.setDuration(200);
+        scaleOne.setAnimationListener(new AnimationAdapter() {
+            public void onAnimationEnd(Animation animation) {
+                view.setBackgroundResource(bgrChosen);
+                view.startAnimation(scaleTwo);
+            }
+        });
+        scaleTwo.setAnimationListener(new AnimationAdapter() {
+            public void onAnimationEnd(Animation animation) {
+                if (views.isEmpty()) {
+                    new CountDownTimerAdapter(1000) {
+                        public void onFinish() {
+                            goShow2();
+                        }
+                    }.start();
+                } else goNext((views));
+            }
+        });
+        view.setVisibility(View.VISIBLE);
+        view.startAnimation(scaleOne);
+    }
+
+    private void goShow2() {
+        ScaleAnimation scaleOne = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
+        scaleOne.setDuration(200);
+        ScaleAnimation scaleTwo = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
+        scaleTwo.setDuration(200);
         scaleOne.setAnimationListener(new AnimationAdapter() {
             public void onAnimationStart(Animation animation) {
                 onShowing = true;
             }
 
             public void onAnimationEnd(Animation animation) {
-                coreArray = Gogo.getArrayMemoryTwo();
-                for (int i = 0; i < size; i++)
-                    layoutGame.getChildAt(i).setBackgroundResource(coreArray[i] ?
-                            bgrChosen : bgrNormal);
-                for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleTwo);
+                for (View view : goChildGroup(layoutGame)) {
+                    view.setBackgroundResource(bgrNormal);
+                    view.startAnimation(scaleTwo);
+                }
             }
         });
         scaleTwo.setAnimationListener(new AnimationAdapter() {
-            public void onAnimationEnd(Animation animation) {
-                new CountDownTimerAdapter(1500) {
-                    public void onFinish() {
-                        for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleThree);
-                    }
-                }.start();
-            }
-        });
-        scaleThree.setAnimationListener(new AnimationAdapter() {
-            public void onAnimationEnd(Animation animation) {
-                for (int i = 0; i < size; i++)
-                    layoutGame.getChildAt(i).setBackgroundResource(bgrNormal);
-                for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleFour);
-
-            }
-        });
-        scaleFour.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
                 onShowing = false;
                 clickable = true;
@@ -135,8 +156,7 @@ public class MemoryTwo extends NeikopzGame {
                 showQuiz();
             }
         });
-        if (going >= NUMBER_QUIZ) goEndGame(Gogo.MEMORY, 2);
-        else for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleOne);
+        goStartAnimation(scaleOne, goChildGroup(layoutGame));
     }
 
     @Override
@@ -144,6 +164,7 @@ public class MemoryTwo extends NeikopzGame {
         going++;
         gameStatusLayout.setGoingCount(going);
         gameStatusLayout.setGoingProgress(going);
+        Stack<Integer> clicks = new Stack<>();
         for (int i = 0; i < size; i++) {
             int one = i;
             layoutGame.getChildAt(one).setOnClickListener(v -> {
@@ -151,19 +172,20 @@ public class MemoryTwo extends NeikopzGame {
                 if (isChosen[one]) return;
                 isChosen[one] = true;
                 layoutGame.getChildAt(one).setBackgroundResource(bgrChosen);
-                if (!coreArray[one]) {
-                    goNext(false);
-                } else {
-                    boolean ok = true;
-                    for (int c = 0; c < size; c++)
-                        if (isChosen[c] != coreArray[c]) {
-                            ok = false;
-                            break;
-                        }
-                    if (ok) goNext(true);
-                }
+
+                clicks.push(one);
+                if (one != coreArray.get(clicks.size() - 1)) goNext(false);
+                else if (clicks.size() == coreArray.size()) goNext(true);
             });
         }
+    }
+
+    private List<Integer> getCoreArray() {
+        List<Integer> ret = new ArrayList<>();
+        for (int i = 0; i < 12; i++) ret.add(i);
+        Collections.shuffle(ret);
+        if (new Random().nextBoolean()) return ret.subList(0, 5);
+        return ret.subList(0, 6);
     }
 
 }

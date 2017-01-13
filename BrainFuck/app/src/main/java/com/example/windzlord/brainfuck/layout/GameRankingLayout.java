@@ -84,33 +84,28 @@ public class GameRankingLayout extends FrameLayout {
         textViewScore.setText("Neuron " + score);
     }
 
-    public GameRankingLayout setNumber(int number) {
+    public void setNumber(int number) {
         this.number = number;
         updateValues();
-        return this;
     }
 
-    public GameRankingLayout setImage(Drawable image) {
+    public void setImage(Drawable image) {
         this.image = image;
         updateValues();
-        return this;
     }
 
-    public GameRankingLayout setImageBackground(Drawable background) {
+    public void setImageBackground(Drawable background) {
         this.background = background;
         updateValues();
-        return this;
     }
 
-    public GameRankingLayout setName(String name) {
+    public void setName(String name) {
         this.name = name;
         updateValues();
-        return this;
     }
 
-    public GameRankingLayout setScore(int score) {
+    public void setScore(int score) {
         this.score = score;
         updateValues();
-        return this;
     }
 }

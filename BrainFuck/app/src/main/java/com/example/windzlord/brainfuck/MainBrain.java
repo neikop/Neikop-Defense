@@ -4,7 +4,7 @@ import android.app.Application;
 import android.os.CountDownTimer;
 import android.util.Log;
 
-import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
@@ -43,14 +43,14 @@ public class MainBrain extends Application {
         String userID = ManagerPreference.getInstance().getUserID();
         ManagerServer.getInstance().uploadLocalToServer(userID);
 
-        goLoopSync(Gogo.GAME_LOOPER_SYNC);
+        goLoopSync(ManagerBrain.GAME_LOOPER_SYNC);
     }
 
     private void goLoopSync(boolean loop) {
-        new CountDownTimer(60000, 1000) {
+        new CountDownTimer(60200, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d(TAG, (60900 - l) / 1000 + 1 + "");
+                Log.d(TAG, l / 1000 + "");
             }
 
             @Override

@@ -14,15 +14,17 @@ import android.widget.TextView;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.Gogo;
-import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
+
+import java.util.Random;
 
 import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConcenOne extends NeikopzGame {
+public class ConcenOne extends GameDaddy {
 
     @BindView(R.id.answer_yes)
     ViewGroup answerYes;
@@ -130,14 +132,14 @@ public class ConcenOne extends NeikopzGame {
         if (layoutRightHint.getVisibility() == View.VISIBLE)
             layoutRightHint.startAnimation(scaleOne);
         goStartAnimation(scaleOne, layoutRightCard, layoutLeftCard);
-        if (going >= NUMBER_QUIZ) goEndGame(Gogo.CONCENTRATION, 1);
+        if (going >= QUIZ) goEndGame(ManagerBrain.CONCENTRATION, 1);
 
     }
 
     @Override
     protected void showQuiz() {
         String quiz = getRandom();
-        boolean left = Gogo.getRandom(2) == 0;
+        boolean left = new Random().nextBoolean();
         boolean answer = false;
         if (left) {
             layoutLeftHint.setVisibility(View.VISIBLE);
@@ -192,15 +194,15 @@ public class ConcenOne extends NeikopzGame {
     }
 
     private String getRandom() {
-        switch (Gogo.getRandom(4)) {
+        switch (new Random().nextInt(4)) {
             case 1:
-                return VOWEL.charAt(Gogo.getRandom(VOWEL.length())) + " " + (Gogo.getRandom(10));
+                return VOWEL.charAt(new Random().nextInt(VOWEL.length())) + " " + (new Random().nextInt(10));
             case 2:
-                return (Gogo.getRandom(10) + "") + " " + VOWEL.charAt(Gogo.getRandom(VOWEL.length()));
+                return (new Random().nextInt(10) + "") + " " + VOWEL.charAt(new Random().nextInt(VOWEL.length()));
             case 3:
-                return CONSONANT.charAt(Gogo.getRandom(CONSONANT.length())) + " " + (Gogo.getRandom(10) + "");
+                return CONSONANT.charAt(new Random().nextInt(CONSONANT.length())) + " " + (new Random().nextInt(10) + "");
             default:
-                return (Gogo.getRandom(10) + "") + " " + CONSONANT.charAt(Gogo.getRandom(CONSONANT.length()));
+                return (new Random().nextInt(10) + "") + " " + CONSONANT.charAt(new Random().nextInt(CONSONANT.length()));
         }
     }
 }
