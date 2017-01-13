@@ -71,7 +71,6 @@ public class ManagerServer {
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-
                 for (HighScore score : scores) {
                     try {
                         mServiceTable.update(score).get();
@@ -83,10 +82,9 @@ public class ManagerServer {
                 return null;
             }
         });
-
-
     }
 
+    // When end game
     public void uploadSingleScore(HighScore score) {
         Log.d(TAG, "Begin uploadScore - " + score);
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
