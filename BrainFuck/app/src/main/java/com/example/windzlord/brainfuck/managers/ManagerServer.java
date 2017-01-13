@@ -68,9 +68,23 @@ public class ManagerServer {
     public void uploadScores(List<HighScore> scores) {
         if (scores.isEmpty()) return;
         Log.d(TAG, "Begin uploadScores  " + scores.get(0).getUserName());
-        for (HighScore score : scores) uploadSingleScore(score);
+        runAsyncTask(new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                for (HighScore score : scores) {
+                    try {
+                        mServiceTable.update(score).get();
+                        Log.d(TAG, "Done uploadScore: " + score);
+                    } catch (ExecutionException | InterruptedException ignored) {
+                        Log.d(TAG, "Fail uploadScore: " + score);
+                    }
+                }
+                return null;
+            }
+        });
     }
 
+    // When end game
     public void uploadSingleScore(HighScore score) {
         Log.d(TAG, "Begin uploadScore - " + score);
         runAsyncTask(new AsyncTask<Void, Void, Void>() {

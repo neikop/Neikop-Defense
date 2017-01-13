@@ -47,10 +47,10 @@ public class MainBrain extends Application {
     }
 
     private void goLoopSync(boolean loop) {
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(100000, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d(TAG, (30900 - l) / 1000 + 1 + "");
+                Log.d(TAG, (100900 - l) / 1000 + 1 + "");
             }
 
             @Override
