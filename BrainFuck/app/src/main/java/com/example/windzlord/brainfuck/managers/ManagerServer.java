@@ -7,10 +7,7 @@ package com.example.windzlord.brainfuck.managers;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.widget.Toast;
 
-import com.example.windzlord.brainfuck.MainActivity;
-import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.objects.MessageManager;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
@@ -146,7 +143,7 @@ public class ManagerServer {
         for (HighScore score : scores) {
             ManagerPreference.getInstance().putLevel(score.getType(), score.getPosition(), score.getLevel());
             ManagerPreference.getInstance().putExpCurrent(score.getType(), score.getPosition(), score.getExpCurrent());
-            ManagerPreference.getInstance().putScore(score.getType(), score.getPosition(), score.getScore());
+            ManagerPreference.getInstance().putScore(score.getType(), score.getPosition(), score.getHighscore());
         }
     }
 
@@ -164,7 +161,7 @@ public class ManagerServer {
                         score.setPosition(k);
                         score.setLevel(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
                         score.setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], k));
-                        score.setScore(ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], k));
+                        score.setHighscore(ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], k));
                         try {
                             mServiceTable.insert(score).get();
                             System.out.println("insert score: " + score.getUserName() + Gogo.GAME_LIST[i] + k);

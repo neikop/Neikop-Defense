@@ -1,13 +1,5 @@
 package com.example.windzlord.brainfuck.managers;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-
-import com.example.windzlord.brainfuck.objects.models.HighScore;
-
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,27 +22,6 @@ public class Gogo {
     public final static String OBSERVATION = "Observation";
 
     public final static String[] GAME_LIST = {MEMORY, CALCULATION, CONCENTRATION, OBSERVATION};
-
-    public class DownloadImage extends AsyncTask<Object, Void, Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(Object... object) {
-            String sURL = (String) object[0];
-            try {
-                InputStream in = (InputStream) new URL(sURL).getContent();
-                Bitmap bitmap = BitmapFactory.decodeStream(in);
-                in.close();
-                return bitmap;
-            } catch (Exception e) {
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            ManagerFile.getInstance().createImage(result, ManagerPreference.getInstance().getUserID());
-        }
-    }
 
     public static String goFormatString(int integer) {
         if (integer < 1000) return "" + integer;
@@ -146,4 +117,6 @@ public class Gogo {
         Collections.shuffle(ret);
         return ret;
     }
+
+
 }
