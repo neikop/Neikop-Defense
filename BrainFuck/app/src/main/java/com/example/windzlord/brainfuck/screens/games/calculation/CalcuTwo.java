@@ -130,11 +130,13 @@ public class CalcuTwo extends NeikopzGame {
         textViewBottom.setOnClickListener(view -> goClickBottom(resultCalTop < resultCalBottom));
     }
 
+
     private void goClickTop(boolean completed) {
         if (!clickable) return;
         textViewTop.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
+
 
     private void goClickBottom(boolean completed) {
         if (!clickable) return;
