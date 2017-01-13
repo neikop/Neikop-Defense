@@ -110,6 +110,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
 
     public int updateScore(String userId, String type, int position, int level, int exp, int score) {
         ContentValues values = new ContentValues();
+
         values.put(COLUMN_LEVEL, level);
         values.put(COLUMN_EXP_CURRENT, exp);
         values.put(COLUMN_HIGH_SCORE, score);
@@ -117,7 +118,6 @@ public class ManagerUserData extends SQLiteAssetHelper {
                 COLUMN_USER_ID, userId, COLUMN_TYPE, type, COLUMN_POSITION, position);
         return sqLiteDatabase.update(TABLE_NAME, values, WHERE, null);
     }
-
 
     void updateDatabase(List<HighScore> scores) {
         Log.d(TAG, "updateDatabase");
