@@ -90,7 +90,7 @@ public class FragmentSetting extends Fragment {
                 R.drawable.icon_sound_on : R.drawable.icon_sound_off);
         buttonMusic.setText(ManagerPreference.getInstance().getMusic() ?
                 "STOP MUSIC" : "PLAY MUSIC");
-        imageViewMusic.setImageResource(ManagerPreference.getInstance().getSound() ?
+        imageViewMusic.setImageResource(ManagerPreference.getInstance().getMusic() ?
                 R.drawable.icon_music_on : R.drawable.icon_music_off);
     }
 

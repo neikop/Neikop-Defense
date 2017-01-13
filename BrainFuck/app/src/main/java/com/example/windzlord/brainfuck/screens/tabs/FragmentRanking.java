@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.layout.GameRankingLayout;
+import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 
@@ -48,17 +49,22 @@ public class FragmentRanking extends Fragment {
     }
 
     private void getPlayerRanking() {
-        List<HighScore> listPlayer = ManagerUserData.getInstance().getListPlayer();
-        for (HighScore player : listPlayer)
-            player.setHighscore(ManagerUserData.getInstance().getExperience(player.getUserId()));
+        List<HighScore> players = ManagerUserData.getInstance().getListPlayer();
+        for (HighScore player : players)
+            player.setScore(ManagerUserData.getInstance().getExperience(player.getUserId()));
 
-        Collections.sort(listPlayer, (player1, player2) -> player2.getHighscore() == player1.getHighscore() ?
-                player2.getUserName().compareTo(player1.getUserName()) : player2.getHighscore() - player1.getHighscore());
-        for (int i = 0; i < listPlayer.size(); i++) {
-            ((GameRankingLayout) layoutPlayerRanking.getChildAt(i))
-                    .setName(listPlayer.get(i).getUserName()
-                            .substring(2, listPlayer.get(i).getUserName().length() - 1))
-                    .setScore(listPlayer.get(i).getHighscore());
+        Collections.sort(players, (o, s) -> s.getScore() == o.getScore() ?
+                s.getUserName().compareTo(o.getUserName()) : s.getScore() - o.getScore());
+        for (int i = 0; i < players.size(); i++) {
+            GameRankingLayout layout = ((GameRankingLayout) layoutPlayerRanking.getChildAt(i))
+                    .setName(players.get(i).getUserName()
+                            .substring(2, players.get(i).getUserName().length() - 1))
+                    .setScore(players.get(i).getScore());
+            boolean chosen = ManagerPreference.getInstance().getUserID()
+                    .equals(players.get(i).getUserId());
+            layout.setImageBackground(getResources().getDrawable(chosen
+                    ? R.drawable.custom_oval_background_outline_profile_chosen
+                    : R.drawable.custom_oval_background_outline_profile));
         }
     }
 }

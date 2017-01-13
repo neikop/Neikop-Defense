@@ -35,6 +35,7 @@ public class GameRankingLayout extends FrameLayout {
 
     private int number;
     private Drawable image;
+    private Drawable background;
     private String name;
     private int score;
 
@@ -68,6 +69,9 @@ public class GameRankingLayout extends FrameLayout {
         score = typedArray.getInt(R.styleable.GameRankingLayout_score_ranking, 0);
         image = typedArray.getDrawable(R.styleable.GameRankingLayout_src_ranking);
         if (image == null) image = getResources().getDrawable(R.drawable.z_character_guest);
+        background = typedArray.getDrawable(R.styleable.GameRankingLayout_bgr_ranking);
+        if (background == null) background = getResources().getDrawable(
+                R.drawable.custom_oval_background_outline_profile);
         typedArray.recycle();
         updateValues();
     }
@@ -75,6 +79,7 @@ public class GameRankingLayout extends FrameLayout {
     private void updateValues() {
         textViewNumber.setText(number + "");
         imageViewAvatar.setImageDrawable(image);
+        imageViewAvatar.setBackgroundDrawable(background);
         textViewName.setText(name);
         textViewScore.setText("Neuron " + score);
     }
@@ -87,6 +92,12 @@ public class GameRankingLayout extends FrameLayout {
 
     public GameRankingLayout setImage(Drawable image) {
         this.image = image;
+        updateValues();
+        return this;
+    }
+
+    public GameRankingLayout setImageBackground(Drawable background) {
+        this.background = background;
         updateValues();
         return this;
     }

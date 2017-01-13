@@ -38,20 +38,18 @@ public class MainBrain extends Application {
         initImageLoader();
 
         String userID = ManagerPreference.getInstance().getUserID();
+        ManagerServer.getInstance().uploadLocalToServer(userID);
 
-        if (ManagerNetwork.getInstance().isConnectedToInternet())
-            ManagerServer.getInstance().uploadLocalToServer(userID);
-
-        if (!Gogo.ACTIVE_NOTIFY) goLoopUpdate();
+        goLoopSync(!Gogo.ACTIVE_NOTIFY);
     }
 
-    private void goLoopUpdate() {
-        new CountDownTimerAdapter(20000) {
+    private void goLoopSync(boolean loop) {
+        new CountDownTimerAdapter(30000) {
             @Override
             public void onFinish() {
-                if (ManagerNetwork.getInstance().isConnectedToInternet())
-                    ManagerServer.getInstance().downloadServerToLocal();
-                goLoopUpdate();
+                String userID = ManagerPreference.getInstance().getUserID();
+                ManagerServer.getInstance().uploadLocalToServer(userID);
+                if (loop) goLoopSync(loop);
             }
         }.start();
     }

@@ -30,13 +30,14 @@ public class HighScore {
     private int expCurrent;
 
     @SerializedName("highscore")
-    private int highscore;
+    private int score;
 
 
     public HighScore() {
     }
 
-    public HighScore(String id, String userId, String userName, String type, int position, int level, int expCurrent, int highscore) {
+    public HighScore(String id, String userId, String userName,
+                     String type, int position, int level, int expCurrent, int score) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;
@@ -44,7 +45,7 @@ public class HighScore {
         this.position = position;
         this.level = level;
         this.expCurrent = expCurrent;
-        this.highscore = highscore;
+        this.score = score;
     }
 
     public String getUserName() {
@@ -99,20 +100,20 @@ public class HighScore {
         return expCurrent;
     }
 
-    public int getHighscore() {
-        return highscore;
+    public int getScore() {
+        return score;
     }
 
     public void setExpCurrent(int expCurrent) {
         this.expCurrent = expCurrent;
     }
 
-    public void setHighscore(int highscore) {
-        this.highscore = highscore;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     @Override
     public String toString() {
-        return String.format("%s %s %s = %s", userName, type, position, highscore);
+        return String.format("%s %s %s = %s", userName, type, position, score);
     }
 }

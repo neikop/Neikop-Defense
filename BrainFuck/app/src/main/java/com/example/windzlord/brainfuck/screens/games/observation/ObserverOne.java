@@ -74,7 +74,7 @@ public class ObserverOne extends NeikopzGame {
                 groupZ.setBackgroundResource(bgrNormal);
                 goVisibility(View.INVISIBLE, groupX, groupZ);
                 for (View view : goChildGroup(groupY))
-                    goImageResou(view, R.color.colorWhite);
+                    goImageResource(view, R.color.colorWhite);
                 prepareQuiz();
             }
         });
@@ -110,8 +110,9 @@ public class ObserverOne extends NeikopzGame {
 
             public void onAnimationEnd(Animation animation) {
                 for (int i = 0; i < 9; i++)
-                    if (coreArray[i]) goImageResou(goChildGroup(groupY).get(i), R.color.colorWhite);
-                    else goImageResou(goChildGroup(groupY).get(i), R.color.colorBlackLight);
+                    if (coreArray[i])
+                        goImageResource(goChildGroup(groupY).get(i), R.color.colorWhite);
+                    else goImageResource(goChildGroup(groupY).get(i), R.color.colorBlackLight);
                 goStartAnimation(scaleTwo, goChildGroup(groupY));
             }
         });

@@ -56,6 +56,7 @@ public class ManagerServer {
 
     // When Start Game and Logout
     public void uploadLocalToServer(String userID) {
+        if (!ManagerNetwork.getInstance().isConnectedToInternet()) return;
         if (!userID.isEmpty()) {
             System.out.println("uploadLocalToServer");
             List<HighScore> scores = ManagerUserData.getInstance().getScoreByUserId(userID);
@@ -65,32 +66,23 @@ public class ManagerServer {
     }
 
     public void uploadScores(List<HighScore> scores) {
-        System.out.println("uploadScores this player to server");
         if (scores.isEmpty()) return;
-        runAsyncTask(new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    for (HighScore score : scores) {
-                        mServiceTable.update(score).get();
-                    }
-                } catch (ExecutionException | InterruptedException ignored) {
-                }
-                return null;
-            }
-        });
+        System.out.println("uploadScores to server - " + scores.get(0).getUserName());
+        for (HighScore score : scores) uploadSingleScore(score);
     }
 
     // When End Game
     public void uploadSingleScore(HighScore score) {
-        System.out.println("uploadScores");
+        System.out.println("Begin uploadScore - " + score);
         if (score == null) return;
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
                     mServiceTable.update(score).get();
+                    System.out.println("Done uploadScore: " + score);
                 } catch (ExecutionException | InterruptedException ignored) {
+                    System.out.println("Fail uploadScore: " + score);
                 }
                 return null;
             }
@@ -98,7 +90,7 @@ public class ManagerServer {
     }
 
     // After Upload
-    public void downloadServerToLocal() {
+    private void downloadServerToLocal() {
         System.out.println("downloadServerToLocal");
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
@@ -143,7 +135,7 @@ public class ManagerServer {
         for (HighScore score : scores) {
             ManagerPreference.getInstance().putLevel(score.getType(), score.getPosition(), score.getLevel());
             ManagerPreference.getInstance().putExpCurrent(score.getType(), score.getPosition(), score.getExpCurrent());
-            ManagerPreference.getInstance().putScore(score.getType(), score.getPosition(), score.getHighscore());
+            ManagerPreference.getInstance().putScore(score.getType(), score.getPosition(), score.getScore());
         }
     }
 
@@ -161,7 +153,7 @@ public class ManagerServer {
                         score.setPosition(k);
                         score.setLevel(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
                         score.setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], k));
-                        score.setHighscore(ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], k));
+                        score.setScore(ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], k));
                         try {
                             mServiceTable.insert(score).get();
                             System.out.println("insert score: " + score.getUserName() + Gogo.GAME_LIST[i] + k);

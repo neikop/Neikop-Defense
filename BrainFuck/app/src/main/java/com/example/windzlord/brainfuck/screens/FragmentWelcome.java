@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.managers.Gogo;
+import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
 
 import org.greenrobot.eventbus.EventBus;
@@ -55,9 +57,9 @@ public class FragmentWelcome extends Fragment {
     }
 
     private void getContent() {
-//        MediaPlayer.create(getContext(), R.raw.welcome).start();
+        if (ManagerPreference.getInstance().getMusic())
+            Gogo.goSound(getActivity(), Gogo.SOUND_WELCOME, false);
         progressBarWelcome.setMax(3000);
-        startSound("sounds/welcome.mp3", false);
         progressBarWelcome.setMax(2800);
         progressBarWelcome.setProgress(0);
         new CountDownTimer(3200, 1) {
@@ -73,19 +75,5 @@ public class FragmentWelcome extends Fragment {
                 EventBus.getDefault().post(new FragmentChanger(new FragmentMain(), false));
             }
         }.start();
-    }
-
-    public void startSound(String filename, boolean loop) {
-        AssetFileDescriptor afd = null;
-        try {
-            afd = getActivity().getAssets().openFd(filename);
-            MediaPlayer player = new MediaPlayer();
-            player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            player.prepare();
-            player.setLooping(loop);
-            player.start();
-        } catch (IOException e) {
-        }
-
     }
 }

@@ -1,5 +1,10 @@
 package com.example.windzlord.brainfuck.managers;
 
+import android.app.Activity;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,6 +27,24 @@ public class Gogo {
     public final static String OBSERVATION = "Observation";
 
     public final static String[] GAME_LIST = {MEMORY, CALCULATION, CONCENTRATION, OBSERVATION};
+
+    public final static String SOUND_CORRECT = "sounds/true_sound.wav";
+    public final static String SOUND_WRONG = "sounds/wrong_sound.mp3";
+    public final static String SOUND_PING = "sounds/ping_sound.wav";
+    public final static String SOUND_WELCOME = "sounds/welcome.mp3";
+
+    public static void goSound(Activity activity, String filename, boolean loop) {
+        try {
+            AssetFileDescriptor file = activity.getAssets().openFd(filename);
+            MediaPlayer player = new MediaPlayer();
+            player.setDataSource(file.getFileDescriptor(), file.getStartOffset(), file.getLength());
+            player.prepare();
+            player.setLooping(loop);
+            player.start();
+        } catch (NullPointerException | IOException ex) {
+            System.out.println("goSound " + ex);
+        }
+    }
 
     public static String goFormatString(int integer) {
         if (integer < 1000) return "" + integer;

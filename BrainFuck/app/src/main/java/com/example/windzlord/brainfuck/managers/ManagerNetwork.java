@@ -18,7 +18,9 @@ public class ManagerNetwork {
 
     public boolean isConnectedToInternet() {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return (networkInfo != null && networkInfo.isConnected());
+        boolean isConnectedToInternet = networkInfo != null && networkInfo.isConnected();
+        System.out.println("INTERNET " + (isConnectedToInternet ? "OK" : "DOWN"));
+        return isConnectedToInternet;
     }
 
     private static ManagerNetwork instance;

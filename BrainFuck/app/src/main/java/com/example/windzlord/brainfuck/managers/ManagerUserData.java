@@ -50,7 +50,6 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
     public List<HighScore> getListScore() {
-        System.out.println("getListScore");
         ArrayList<HighScore> scores = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS,
                 null, null, null, null, null, null);
@@ -60,7 +59,6 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
     public List<HighScore> getScoreByUserId(String userId) {
-        System.out.println("getScoreByUserId ID = " + userId);
         ArrayList<HighScore> scores = new ArrayList<>();
         String WHERE = String.format("%s LIKE '%s'", COLUMN_USER_ID, userId);
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS, WHERE,
@@ -71,7 +69,6 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
     public int getExperience(String userId) {
-        System.out.println("getExperience on Ranking ID = " + userId);
         int sum = 0;
         List<HighScore> scores = getScoreByUserId(userId);
         for (HighScore score : scores)
@@ -129,7 +126,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
     private int updateScore(HighScore score) {
         System.out.println("updateScore " + score);
         return updateScore(score.getUserId(), score.getType(), score.getPosition(),
-                score.getLevel(), score.getExpCurrent(), score.getHighscore());
+                score.getLevel(), score.getExpCurrent(), score.getScore());
     }
 
     public void insertScore(HighScore score) {
@@ -142,7 +139,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         values.put(COLUMN_POSITION, score.getPosition());
         values.put(COLUMN_LEVEL, score.getLevel());
         values.put(COLUMN_EXP_CURRENT, score.getExpCurrent());
-        values.put(COLUMN_HIGH_SCORE, score.getHighscore());
+        values.put(COLUMN_HIGH_SCORE, score.getScore());
         sqLiteDatabase.insert(TABLE_NAME, null, values);
     }
 
