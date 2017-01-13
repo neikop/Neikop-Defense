@@ -134,17 +134,17 @@ public class CalcuTwo extends NeikopzGame {
     private void goClickTop(boolean completed) {
         if (!clickable) return;
         if (sound)
-            if (completed) MediaPlayer.create(getContext(), R.raw.true_sound).start();
-            else MediaPlayer.create(getContext(), R.raw.wrong_sound).start();
+//            if (completed) MediaPlayer.create(getContext(), R.raw.true_sound).start();
+//            else MediaPlayer.create(getContext(), R.raw.wrong_sound).start();
         textViewTop.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
 
     private void goClickBottom(boolean completed) {
         if (!clickable) return;
-        if (sound)
-            if (completed) MediaPlayer.create(getContext(), R.raw.true_sound).start();
-            else MediaPlayer.create(getContext(), R.raw.wrong_sound).start();
+//        if (sound)
+//            if (completed) MediaPlayer.create(getContext(), R.raw.true_sound).start();
+//            else MediaPlayer.create(getContext(), R.raw.wrong_sound).start();
         textViewBottom.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
