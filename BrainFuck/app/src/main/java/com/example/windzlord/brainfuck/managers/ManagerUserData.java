@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -13,6 +14,8 @@ import java.util.List;
 
 
 public class ManagerUserData extends SQLiteAssetHelper {
+
+    private final String TAG = this.getClass().getSimpleName();
 
     private final static int DB_VERSION = 1;
     private final static String DB_NAME = "database.db";
@@ -81,7 +84,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
     public HighScore getScoreByInfo(String userId, String type, int position) {
-        System.out.println("End game: getScoreByInfo " + userId + " " + type + " " + position);
+        Log.d(TAG, "End game: getScoreByInfo " + userId + " " + type + " " + position);
         ArrayList<HighScore> scores = new ArrayList<>();
         String WHERE = String.format("%s LIKE '%s' AND %s LIKE '%s' AND %s = %s",
                 COLUMN_USER_ID, userId, COLUMN_TYPE, type, COLUMN_POSITION, position);
@@ -117,20 +120,20 @@ public class ManagerUserData extends SQLiteAssetHelper {
 
 
     void updateDatabase(List<HighScore> scores) {
-        System.out.println("updateDatabase");
+        Log.d(TAG, "updateDatabase");
         for (HighScore score : scores)
             if (updateScore(score) == 0)
                 insertScore(score);
     }
 
     private int updateScore(HighScore score) {
-        System.out.println("updateScore " + score);
+        Log.d(TAG, "updateScore " + score);
         return updateScore(score.getUserId(), score.getType(), score.getPosition(),
                 score.getLevel(), score.getExpCurrent(), score.getScore());
     }
 
     public void insertScore(HighScore score) {
-        System.out.println("insertScore " + score);
+        Log.d(TAG, "insertScore " + score);
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, score.getId());
         values.put(COLUMN_USER_ID, score.getUserId());

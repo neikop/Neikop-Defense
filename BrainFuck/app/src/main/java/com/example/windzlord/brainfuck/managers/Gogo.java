@@ -3,6 +3,7 @@ package com.example.windzlord.brainfuck.managers;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,9 +18,11 @@ import java.util.Random;
 
 public class Gogo {
 
+    private static final String TAG = "Gogo";
+
     public static final int NUMBER_QUIZ = 5;
     public static final int TIME = 5000;
-    public static final boolean ACTIVE_NOTIFY = false;
+    public static final boolean GAME_LOOPER_SYNC = true;
 
     public final static String MEMORY = "Memory";
     public final static String CALCULATION = "Calculation";
@@ -41,8 +44,8 @@ public class Gogo {
             player.prepare();
             player.setLooping(loop);
             player.start();
-        } catch (NullPointerException | IOException ex) {
-            System.out.println("goSound " + ex);
+        } catch (NullPointerException | IOException musicException) {
+            Log.d(TAG, "goSound " + musicException);
         }
     }
 

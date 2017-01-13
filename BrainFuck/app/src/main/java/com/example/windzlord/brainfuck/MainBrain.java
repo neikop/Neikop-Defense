@@ -40,7 +40,7 @@ public class MainBrain extends Application {
         String userID = ManagerPreference.getInstance().getUserID();
         ManagerServer.getInstance().uploadLocalToServer(userID);
 
-        goLoopSync(!Gogo.ACTIVE_NOTIFY);
+        goLoopSync(Gogo.GAME_LOOPER_SYNC);
     }
 
     private void goLoopSync(boolean loop) {

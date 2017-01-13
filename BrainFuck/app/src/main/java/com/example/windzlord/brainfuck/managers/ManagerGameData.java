@@ -1,6 +1,5 @@
 package com.example.windzlord.brainfuck.managers;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -56,7 +55,6 @@ public class ManagerGameData extends SQLiteAssetHelper {
         return new Calculation(id, name, results, levels);
     }
 
-    @SuppressLint("StaticFieldLeak")
     private static ManagerGameData instance;
 
     public static ManagerGameData getInstance() {

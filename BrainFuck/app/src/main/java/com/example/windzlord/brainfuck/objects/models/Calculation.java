@@ -5,6 +5,7 @@ package com.example.windzlord.brainfuck.objects.models;
  */
 
 public class Calculation {
+
     private int id;
     private String calculation;
     private int results;
