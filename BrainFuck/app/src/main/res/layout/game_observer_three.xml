@@ -52,8 +52,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="410dp"
-        android:layout_marginTop="120dp">
+        android:layout_height="400dp"
+        android:layout_marginTop="125dp">
 
         <GridLayout
             android:id="@+id/layout_game"
@@ -195,113 +195,6 @@
         </GridLayout>
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_answer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:id="@+id/layout_a"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp">
-
-            <at.markushi.ui.CircleButton
-                android:id="@+id/button_a"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/custom_oval_background_outline"
-                app:cb_color="#99FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView_answer_a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/colorGameDark"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_b"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp">
-
-            <at.markushi.ui.CircleButton
-                android:id="@+id/button_b"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/custom_oval_background_outline"
-                app:cb_color="#99FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView_answer_b"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/colorGameDark"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_c"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp">
-
-            <at.markushi.ui.CircleButton
-                android:id="@+id/button_c"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/custom_oval_background_outline"
-                app:cb_color="#99FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView_answer_c"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/colorGameDark"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_d"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp">
-
-            <at.markushi.ui.CircleButton
-                android:id="@+id/button_d"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/custom_oval_background_outline"
-                app:cb_color="#99FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView_answer_d"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/colorGameDark"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/layout_welcome"
@@ -454,5 +347,112 @@
             app:cb_color="@color/colorCyanLight" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:id="@+id/layout_a"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_a"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_oval_background_outline"
+                app:cb_color="#99FFFFFF" />
+
+            <TextView
+                android:id="@+id/textView_answer_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorGameDark"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_b"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_b"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_oval_background_outline"
+                app:cb_color="#99FFFFFF" />
+
+            <TextView
+                android:id="@+id/textView_answer_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorGameDark"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_c"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_c"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_oval_background_outline"
+                app:cb_color="#99FFFFFF" />
+
+            <TextView
+                android:id="@+id/textView_answer_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorGameDark"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_d"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/button_d"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_oval_background_outline"
+                app:cb_color="#99FFFFFF" />
+
+            <TextView
+                android:id="@+id/textView_answer_d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorGameDark"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

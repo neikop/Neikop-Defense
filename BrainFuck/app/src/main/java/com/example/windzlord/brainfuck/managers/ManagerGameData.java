@@ -2,7 +2,6 @@ package com.example.windzlord.brainfuck.managers;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.example.windzlord.brainfuck.objects.models.Calculator;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -33,21 +32,24 @@ public class ManagerGameData extends SQLiteAssetHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    public Calculator getRandomCalculation(int levels) {
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.query(QUOTE_TABLE_NAME_2,
-                QUOTE_COLUMNS,
-                QUOTE_COLUMN_LEVELS + "=?",
-                new String[]{String.valueOf(levels)},
-                null,
-                null,
-                "RANDOM()",
-                "1");
-        if (cursor.moveToNext()) return createCalculation(cursor);
-        else return null;
+    public Calculator getCalculatorOne() {
+        Cursor cursor = getReadableDatabase().query(
+                QUOTE_TABLE_NAME_1, QUOTE_COLUMNS,
+                null, null, null, null,
+                "RANDOM()", "1");
+        return cursor.moveToNext() ? createCalculator(cursor) : null;
     }
 
-    private Calculator createCalculation(Cursor cursor) {
+    public Calculator[] getCalculatorTwo() {
+        Cursor cursor = getReadableDatabase().query(
+                QUOTE_TABLE_NAME_2, QUOTE_COLUMNS,
+                null, null, null, null,
+                "RANDOM()", "2");
+        return new Calculator[]{cursor.moveToNext() ? createCalculator(cursor) : null,
+                cursor.moveToNext() ? createCalculator(cursor) : null};
+    }
+
+    private Calculator createCalculator(Cursor cursor) {
         int id = cursor.getInt(cursor.getColumnIndex(QUOTE_COLUMN_ID));
         String name = cursor.getString(cursor.getColumnIndex(QUOTE_COLUMN_CALCULATION));
         int results = cursor.getInt(cursor.getColumnIndex(QUOTE_COLUMN_RESULTS));

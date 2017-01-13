@@ -72,8 +72,6 @@ public class ConcenOne extends GameDaddy {
 
     @Override
     protected void goPrepare() {
-        answerYes.setBackgroundResource(bgrYesNormal);
-        answerNo.setBackgroundResource(bgrNoNormal);
         prepareQuiz();
     }
 
@@ -81,6 +79,8 @@ public class ConcenOne extends GameDaddy {
     protected void prepareQuiz() {
         new CountDownTimerAdapter(500) {
             public void onFinish() {
+                answerYes.setBackgroundResource(bgrYesNormal);
+                answerNo.setBackgroundResource(bgrNoNormal);
                 goShow();
             }
         }.start();
@@ -99,14 +99,13 @@ public class ConcenOne extends GameDaddy {
 
             public void onAnimationEnd(Animation animation) {
                 goVisibility(View.INVISIBLE, layoutLeftHint, layoutRightHint);
-                textViewRightCard.setText("");
-                textViewLeftCard.setText("");
+
+                showQuiz();
                 goStartAnimation(scaleTwo, layoutRightCard, layoutLeftCard);
             }
         });
         scaleTwo.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
-                showQuiz();
                 onShowing = false;
                 clickable = true;
                 counter = new CountDownTimer(TIME, 1) {
@@ -127,10 +126,13 @@ public class ConcenOne extends GameDaddy {
                 gameStatusLayout.setGoingProgress(going);
             }
         });
+        ScaleAnimation scaleOneDebug = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
+        scaleOneDebug.setDuration(250);
         if (layoutLeftHint.getVisibility() == View.VISIBLE)
-            layoutLeftHint.startAnimation(scaleOne);
+            layoutLeftHint.startAnimation(scaleOneDebug);
         if (layoutRightHint.getVisibility() == View.VISIBLE)
-            layoutRightHint.startAnimation(scaleOne);
+            layoutRightHint.startAnimation(scaleOneDebug);
+
         goStartAnimation(scaleOne, layoutRightCard, layoutLeftCard);
         if (going >= QUIZ) goEndGame(ManagerBrain.CONCENTRATION, 1);
 
@@ -141,8 +143,13 @@ public class ConcenOne extends GameDaddy {
         String quiz = getRandom();
         boolean left = new Random().nextBoolean();
         boolean answer = false;
+
+        ScaleAnimation scaleTwo = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
+        scaleTwo.setDuration(250);
+
         if (left) {
             layoutLeftHint.setVisibility(View.VISIBLE);
+            layoutLeftHint.startAnimation(scaleTwo);
             textViewLeftCard.setText(quiz);
             textViewRightCard.setText("");
             for (int i = 0; i < quiz.length(); i++)
@@ -152,6 +159,7 @@ public class ConcenOne extends GameDaddy {
                 }
         } else {
             layoutRightHint.setVisibility(View.VISIBLE);
+            layoutRightHint.startAnimation(scaleTwo);
             textViewRightCard.setText(quiz);
             textViewLeftCard.setText("");
             for (int i = 0; i < quiz.length(); i++)

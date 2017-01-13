@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorCyanLight"
+    android:background="@color/colorGame"
     tools:context="com.example.windzlord.brainfuck.screens.games.calculation.CalcuTwo">
 
     <com.example.windzlord.brainfuck.layout.GameStatusLayout
@@ -51,15 +51,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="310dp"
-        android:layout_marginTop="170dp">
+        android:layout_height="400dp"
+        android:layout_marginTop="125dp">
 
         <LinearLayout
             android:id="@+id/layout_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="80dp"
             android:orientation="vertical">
 
             <TextView
@@ -76,7 +75,7 @@
                 android:id="@+id/textView_game_bottom"
                 android:layout_width="250dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/custom_corner_background_6_outline"
                 android:paddingTop="7dp"
                 android:textAlignment="center"

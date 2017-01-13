@@ -52,8 +52,6 @@ public class CalcuTwo extends GameDaddy {
 
     @Override
     protected void goPrepare() {
-        textViewTop.setBackgroundResource(bgrNormal);
-        textViewBottom.setBackgroundResource(bgrNormal);
         prepareQuiz();
     }
 
@@ -61,6 +59,8 @@ public class CalcuTwo extends GameDaddy {
     protected void prepareQuiz() {
         new CountDownTimerAdapter(500) {
             public void onFinish() {
+                textViewTop.setBackgroundResource(bgrNormal);
+                textViewBottom.setBackgroundResource(bgrNormal);
                 goShow();
             }
         }.start();
@@ -78,7 +78,7 @@ public class CalcuTwo extends GameDaddy {
             }
 
             public void onAnimationEnd(Animation animation) {
-                random();
+                showQuiz();
                 goStartAnimation(scaleTwo, textViewTop, textViewBottom);
             }
         });
@@ -110,23 +110,13 @@ public class CalcuTwo extends GameDaddy {
 
     @Override
     protected void showQuiz() {
-        random();
-    }
+        Calculator[] core = ManagerGameData.getInstance().getCalculatorTwo();
+        textViewTop.setText(core[0].getCalculator());
+        textViewBottom.setText(core[1].getCalculator());
 
-    private void random() {
-        Calculator calcuOne = ManagerGameData.getInstance().getRandomCalculation(2);
-        Calculator calcuTwo = ManagerGameData.getInstance().getRandomCalculation(2);
-        setCalculation(calcuOne, calcuTwo);
-    }
-
-    private void setCalculation(Calculator calcuOne, Calculator calcuTwo) {
-        textViewTop.setText(calcuOne.getCalculator());
-        textViewBottom.setText(calcuTwo.getCalculator());
-        resultCalTop = calcuOne.getResult();
-        resultCalBottom = calcuTwo.getResult();
-
-        textViewTop.setOnClickListener(view -> goClickTop(resultCalTop > resultCalBottom));
-        textViewBottom.setOnClickListener(view -> goClickBottom(resultCalTop < resultCalBottom));
+        boolean soloTop = core[0].getResult() > core[1].getResult();
+        textViewTop.setOnClickListener(view -> goClickTop(soloTop));
+        textViewBottom.setOnClickListener(view -> goClickBottom(!soloTop));
     }
 
     private void goClickTop(boolean completed) {

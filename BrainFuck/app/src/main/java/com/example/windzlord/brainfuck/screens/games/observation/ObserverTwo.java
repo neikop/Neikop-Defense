@@ -106,9 +106,7 @@ public class ObserverTwo extends GameDaddy {
             }
 
             public void onAnimationEnd(Animation animation) {
-                coreArray = getCoreArray(imageResources.length);
-                for (int i = 0; i < 8; i++)
-                    ((ImageView) layoutGame.getChildAt(i)).setImageResource(imageResources[coreArray[i]]);
+                showQuiz();
                 for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleTwo);
             }
         });
@@ -129,7 +127,9 @@ public class ObserverTwo extends GameDaddy {
                         goNext(false);
                     }
                 }.start();
-                showQuiz();
+                going++;
+                gameStatusLayout.setGoingCount(going);
+                gameStatusLayout.setGoingProgress(going);
             }
         });
         if (going >= QUIZ) goEndGame(ManagerBrain.OBSERVATION, 2);
@@ -138,9 +138,10 @@ public class ObserverTwo extends GameDaddy {
 
     @Override
     protected void showQuiz() {
-        going++;
-        gameStatusLayout.setGoingCount(going);
-        gameStatusLayout.setGoingProgress(going);
+        coreArray = getCoreArray(imageResources.length);
+        for (int i = 0; i < 8; i++)
+            ((ImageView) layoutGame.getChildAt(i)).setImageResource(imageResources[coreArray[i]]);
+
         for (int i = 0; i < 8; i++) {
             int one = i;
             layoutGame.getChildAt(one).setOnClickListener(v -> {

@@ -99,7 +99,6 @@ public class ObserverThree extends GameDaddy {
         buttons = new CircleButton[]{buttonA, buttonB, buttonC, buttonD};
         layouts = new ViewGroup[]{layoutA, layoutB, layoutC, layoutD};
         layoutAnswer.setVisibility(View.INVISIBLE);
-
     }
 
     @Override
@@ -120,8 +119,8 @@ public class ObserverThree extends GameDaddy {
         scaleOne.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
                 for (View view : goChildGroup(layoutGame)) {
-                    ((ImageView) view).setImageResource(srcHided);
                     view.setVisibility(View.VISIBLE);
+                    ((ImageView) view).setImageResource(srcHided);
                 }
                 for (View view : goChildGroup(layoutGame))
                     view.startAnimation(scaleTwo);
@@ -159,18 +158,7 @@ public class ObserverThree extends GameDaddy {
                 layoutAnswer.setVisibility(View.VISIBLE);
                 for (ViewGroup group : layouts) group.startAnimation(scaleTwo);
 
-                coreArray = getCoreArray();
-                answer = countTrue(coreArray);
-                coreArrayAnswer = getAnswerArray(answer);
-
-                answerA.setText("" + coreArrayAnswer[0]);
-                answerB.setText("" + coreArrayAnswer[1]);
-                answerC.setText("" + coreArrayAnswer[2]);
-                answerD.setText("" + coreArrayAnswer[3]);
-
-                for (int i = 0; i < 16; i++)
-                    ((ImageView) layoutGame.getChildAt(i)).setImageResource(coreArray[i] ?
-                            srcMarked : srcNormal);
+                showQuiz();
                 for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleTwo);
             }
         });
@@ -191,7 +179,9 @@ public class ObserverThree extends GameDaddy {
                         goNext(4);
                     }
                 }.start();
-                showQuiz();
+                going++;
+                gameStatusLayout.setGoingCount(going);
+                gameStatusLayout.setGoingProgress(going);
             }
         });
         if (going >= QUIZ) goEndGame(ManagerBrain.OBSERVATION, 3);
@@ -200,16 +190,25 @@ public class ObserverThree extends GameDaddy {
 
     @Override
     protected void showQuiz() {
-        going++;
-        gameStatusLayout.setGoingCount(going);
-        gameStatusLayout.setGoingProgress(going);
+        coreArray = getCoreArray();
+        answer = countTrue(coreArray);
+
+        coreArrayAnswer = getAnswerArray(answer);
+        answerA.setText("" + coreArrayAnswer[0]);
+        answerB.setText("" + coreArrayAnswer[1]);
+        answerC.setText("" + coreArrayAnswer[2]);
+        answerD.setText("" + coreArrayAnswer[3]);
+
+        for (int i = 0; i < 16; i++)
+            ((ImageView) layoutGame.getChildAt(i)).setImageResource(
+                    coreArray[i] ? srcMarked : srcNormal);
     }
 
     private void goNext(int clicked) {
         if (!clickable) return;
         clickable = false;
         boolean completed = answer == coreArrayAnswer[clicked];
-        if (clicked < 4) buttons[clicked].setBackgroundResource(bgrWrong);
+        if (clicked < 4) buttons[clicked].setBackgroundResource(bgrWrong); // When Time Out
         buttons[coreArrayAnswer[4]].setBackgroundResource(bgrCorrect);
         new CountDownTimerAdapter(1000) {
             public void onFinish() {

@@ -16,10 +16,6 @@ public class Calculator {
         this.result = result;
     }
 
-    public Calculator() {
-
-    }
-
     public int getId() {
         return id;
     }

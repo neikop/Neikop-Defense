@@ -63,15 +63,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="410dp"
-        android:layout_marginTop="120dp">
+        android:layout_height="400dp"
+        android:layout_marginTop="125dp">
 
         <GridLayout
             android:id="@+id/layout_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:columnCount="1">
+            android:layout_centerInParent="true">
 
         </GridLayout>
 
