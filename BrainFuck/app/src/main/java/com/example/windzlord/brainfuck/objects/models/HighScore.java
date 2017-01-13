@@ -114,6 +114,6 @@ public class HighScore {
 
     @Override
     public String toString() {
-        return String.format("%s %s %s = %s", userName, type, position, score);
+        return String.format("%s %s %s = %s %s", userName, type, position, expCurrent, score);
     }
 }

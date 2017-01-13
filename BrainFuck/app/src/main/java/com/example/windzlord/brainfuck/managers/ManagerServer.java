@@ -92,9 +92,9 @@ public class ManagerServer {
             protected Void doInBackground(Void... params) {
                 try {
                     mServiceTable.update(score).get();
-                    Log.d(TAG, "Done uploadScore: " + score);
+                    Log.d(TAG, "Begin uploadScore - Done uploadScore: " + score);
                 } catch (ExecutionException | InterruptedException ignored) {
-                    Log.d(TAG, "Fail uploadScore: " + score);
+                    Log.d(TAG, "Begin uploadScore - Fail uploadScore: " + score);
                 }
                 return null;
             }
@@ -115,6 +115,7 @@ public class ManagerServer {
                     Log.d(TAG, "Scores on local before: "
                             + ManagerUserData.getInstance().getListScore().size());
                     ManagerUserData.getInstance().updateDatabase(scores);
+                    updateDataReference(ManagerPreference.getInstance().getUserID());
                     Log.d(TAG, "Scores on local after: "
                             + ManagerUserData.getInstance().getListScore().size());
                 } catch (ExecutionException | InterruptedException | MobileServiceException serverException) {
