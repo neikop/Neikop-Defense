@@ -50,12 +50,11 @@ public class MainBrain extends Application {
         new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d(TAG, (31500 - l) / 1000 + "");
+                Log.d(TAG, (30900 - l) / 1000 + 1 + "");
             }
 
             @Override
             public void onFinish() {
-                Log.d(TAG, "30");
                 String userID = ManagerPreference.getInstance().getUserID();
                 ManagerServer.getInstance().uploadLocalToServer(userID);
                 if (loop) goLoopSync(loop);

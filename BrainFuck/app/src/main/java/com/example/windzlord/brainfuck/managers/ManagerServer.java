@@ -73,7 +73,6 @@ public class ManagerServer {
 
     public void uploadSingleScore(HighScore score) {
         Log.d(TAG, "Begin uploadScore - " + score);
-        if (score == null) return;
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -107,7 +106,7 @@ public class ManagerServer {
                 } catch (ExecutionException | InterruptedException | MobileServiceException serverException) {
                     if (!Gogo.GAME_LOOPER_SYNC)
                         EventBus.getDefault().post(new MessageManager("Warning", "Server down"));
-                    System.out.println(TAG + " " + serverException);
+                    Log.d(TAG, "Server Down! " + serverException.toString());
                 }
                 return null;
             }

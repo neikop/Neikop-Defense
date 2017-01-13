@@ -84,7 +84,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
     public HighScore getScoreByInfo(String userId, String type, int position) {
-        Log.d(TAG, "End game: getScoreByInfo " + userId + " " + type + " " + position);
+        Log.d(TAG, "End game: getScoreByInfo " + type + " " + position);
         ArrayList<HighScore> scores = new ArrayList<>();
         String WHERE = String.format("%s LIKE '%s' AND %s LIKE '%s' AND %s = %s",
                 COLUMN_USER_ID, userId, COLUMN_TYPE, type, COLUMN_POSITION, position);
