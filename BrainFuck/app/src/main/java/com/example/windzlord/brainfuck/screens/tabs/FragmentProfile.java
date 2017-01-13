@@ -17,7 +17,9 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
+import com.example.windzlord.brainfuck.objects.MessageManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.greenrobot.eventbus.EventBus;
@@ -114,12 +116,16 @@ public class FragmentProfile extends Fragment {
         textViewScore.setText("Neuron " + score);
     }
 
-    private int scoreCalcu = 0;
-    private int scoreConcen = 0;
-    private int scoreMemo = 0;
-    private int scoreObser = 0;
+    private int scoreCalcu;
+    private int scoreConcen;
+    private int scoreMemo;
+    private int scoreObser;
 
     public void getProgressbar() {
+        scoreCalcu = 0;
+        scoreConcen = 0;
+        scoreMemo = 0;
+        scoreObser = 0;
         for (String game : Gogo.GAME_LIST)
             for (int i = 1; i <= 3; i++) {
                 scoreCalcu += game.equals(Gogo.CALCULATION) ?
@@ -154,8 +160,7 @@ public class FragmentProfile extends Fragment {
     }
 
     private void addListener() {
-        buttonSetting.setOnClickListener(view -> {
-            EventBus.getDefault().post(new FragmentChanger(new FragmentSetting(), true));
-        });
+        buttonSetting.setOnClickListener(view ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentSetting(), true)));
     }
 }

@@ -7,13 +7,11 @@
     tools:context=".screens.tabs.FragmentFeedback">
 
     <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
+        android:id="@+id/button_feedback_facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp" />
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/textView_feedback"

@@ -16,9 +16,6 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
-import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
-import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
@@ -40,11 +37,10 @@ import butterknife.ButterKnife;
  */
 public class FragmentFeedback extends Fragment {
 
-
     private final String TAG = this.getClass().getSimpleName();
 
-    @BindView(R.id.login_button)
-    LoginButton loginButton;
+    @BindView(R.id.button_feedback_facebook)
+    LoginButton buttonFacebook;
 
     public FragmentFeedback() {
         // Required empty public constructor
@@ -55,7 +51,6 @@ public class FragmentFeedback extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FacebookSdk.sdkInitialize(getContext());
         View view = inflater.inflate(R.layout.tab_fragment_feedback, container, false);
         settingThingsUp(view);
 
@@ -64,16 +59,17 @@ public class FragmentFeedback extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
+
         settingFacebook();
     }
 
 
     public void settingFacebook() {
         AppEventsLogger.activateApp(getContext());
-        loginButton.setReadPermissions(Arrays.asList(
+        buttonFacebook.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
 
-        loginButton.registerCallback(
+        buttonFacebook.registerCallback(
                 ((MainActivity) getActivity()).getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
                     @Override

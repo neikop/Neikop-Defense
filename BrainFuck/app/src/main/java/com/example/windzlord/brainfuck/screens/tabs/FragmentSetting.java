@@ -1,18 +1,38 @@
 package com.example.windzlord.brainfuck.screens.tabs;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.managers.ManagerFile;
+import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.ManagerServer;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
@@ -20,19 +40,27 @@ import butterknife.ButterKnife;
  */
 public class FragmentSetting extends Fragment {
 
-    @BindView(R.id.ic_sound_effect)
-    ImageView ic_sound_effect;
-    @BindView(R.id.ic_sound_background)
-    ImageView ic_sound_background;
-    @BindView(R.id.ic_login)
-    ImageView ic_login;
-    @BindView(R.id.btn_sound_background)
-    Button btn_sound_background;
-    @BindView(R.id.btn_sound_effect)
-    Button btn_sound_effect;
+    private final String TAG = this.getClass().getSimpleName();
 
-    Boolean sound_effect = true;
-    Boolean sound_background = true;
+    @BindView(R.id.button_setting_facebook)
+    LoginButton buttonFacebook;
+
+    @BindView(R.id.button_setting_back)
+    Button buttonBack;
+
+    @BindView(R.id.button_sound)
+    Button buttonSound;
+
+    @BindView(R.id.imageView_sound)
+    ImageView imageViewSound;
+
+    @BindView(R.id.button_music)
+    Button buttonMusic;
+
+    @BindView(R.id.imageView_music)
+    ImageView imageViewMusic;
+
+
     public FragmentSetting() {
         // Required empty public constructor
     }
@@ -42,38 +70,123 @@ public class FragmentSetting extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.tab_fragment_setting, container, false);
-        ButterKnife.bind(this,v);
-        addListener();
-        return v;
-    }
-    public void addListener(){
+        View view = inflater.inflate(R.layout.tab_fragment_setting, container, false);
+        settingThingsUp(view);
 
-        btn_sound_effect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(sound_effect){
-                    ic_sound_effect.setImageResource(R.drawable.icon_music);
-                    btn_sound_effect.setText("SOUND EFFECT ON");
-                    sound_effect =false;
-                }else{
-                    sound_effect =true;
-                    ic_sound_effect.setImageResource(R.drawable.icon_music_on);
-                    btn_sound_effect.setText("SOUND EFFECT OFF");
-                }
+        return view;
+    }
+
+    private void settingThingsUp(View view) {
+        ButterKnife.bind(this, view);
+
+        getInfo();
+        settingFacebook();
+    }
+
+    private void getInfo() {
+        buttonSound.setText(ManagerPreference.getInstance().getSound() ?
+                "STOP SOUND" : "PLAY SOUND");
+        imageViewSound.setImageResource(ManagerPreference.getInstance().getSound() ?
+                R.drawable.icon_sound_on : R.drawable.icon_sound_off);
+        buttonMusic.setText(ManagerPreference.getInstance().getMusic() ?
+                "STOP MUSIC" : "PLAY MUSIC");
+        imageViewMusic.setImageResource(ManagerPreference.getInstance().getSound() ?
+                R.drawable.icon_music_on : R.drawable.icon_music_off);
+    }
+
+    @OnClick(R.id.button_setting_back)
+    public void onBackPressed() {
+        getActivity().onBackPressed();
+    }
+
+    @OnClick(R.id.button_sound)
+    public void onButtonSoundPressed() {
+        boolean active = ManagerPreference.getInstance().getSound();
+        if (active) {
+            imageViewSound.setImageResource(R.drawable.icon_sound_off);
+            buttonSound.setText("PLAY SOUND");
+        } else {
+            imageViewSound.setImageResource(R.drawable.icon_sound_on);
+            buttonSound.setText("STOP SOUND");
+        }
+        ManagerPreference.getInstance().putSound(!active);
+    }
+
+    @OnClick(R.id.button_music)
+    public void onButtonMusicPressed() {
+        boolean active = ManagerPreference.getInstance().getMusic();
+        if (active) {
+            imageViewMusic.setImageResource(R.drawable.icon_music_off);
+            buttonMusic.setText("PLAY MUSIC");
+        } else {
+            imageViewMusic.setImageResource(R.drawable.icon_music_on);
+            buttonMusic.setText("STOP MUSIC");
+        }
+        ManagerPreference.getInstance().putMusic(!active);
+    }
+
+    public void settingFacebook() {
+        AppEventsLogger.activateApp(getContext());
+        buttonFacebook.setReadPermissions(Arrays.asList(
+                "public_profile", "email", "user_birthday", "user_friends"));
+
+        buttonFacebook.registerCallback(
+                ((MainActivity) getActivity()).getCallbackManager(),
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d(TAG, "onSuccess");
+                        new ProfileTracker() {
+                            @Override
+                            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                                if (currentProfile != null) {
+                                    ManagerPreference.getInstance().putUserID(currentProfile.getId());
+                                    ManagerPreference.getInstance().putUserName("N'" + currentProfile.getName() + "'");
+
+                                    ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
+                                    //load Image
+                                    String url = currentProfile.getProfilePictureUri(300, 300).toString();
+                                    new DownloadImage().execute(url);
+                                } else {
+                                    ManagerServer.getInstance().uploadLocalToServer(
+                                            ManagerPreference.getInstance().getUserID());
+                                    ManagerPreference.getInstance().putUserID("");
+                                    ManagerPreference.getInstance().putUserName("N'Guest'");
+                                }
+                            }
+                        }.startTracking();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d(TAG, "onError");
+                    }
+                });
+    }
+
+    private class DownloadImage extends AsyncTask<Object, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(Object... object) {
+            String sURL = (String) object[0];
+            try {
+                InputStream in = (InputStream) new URL(sURL).getContent();
+                Bitmap bitmap = BitmapFactory.decodeStream(in);
+                in.close();
+                return bitmap;
+            } catch (Exception e) {
+                return null;
             }
-        });
-        btn_sound_background.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(sound_background){
-                    ic_sound_background.setImageResource(R.drawable.icon_sound);
-                    sound_background =false;
-                }else{
-                    ic_sound_background.setImageResource(R.drawable.icon_sound_on);
-                    sound_background =true;
-                }
-            }
-        });
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            ManagerFile.getInstance().createImage(result, ManagerPreference.getInstance().getUserID());
+        }
     }
 }

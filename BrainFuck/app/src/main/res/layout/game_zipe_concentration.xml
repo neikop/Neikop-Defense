@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.example.windzlord.brainfuck.layout.GameLayout
+                <com.example.windzlord.brainfuck.layout.GameCoverLayout
                     android:id="@+id/game_concen_one"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                     app:src="@drawable/ic_cover_game_concen_1"
                     app:unlocked="true" />
 
-                <com.example.windzlord.brainfuck.layout.GameLayout
+                <com.example.windzlord.brainfuck.layout.GameCoverLayout
                     android:id="@+id/game_concen_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                     app:name="@string/game_concen_two"
                     app:unlocked="true" />
 
-                <com.example.windzlord.brainfuck.layout.GameLayout
+                <com.example.windzlord.brainfuck.layout.GameCoverLayout
                     android:id="@+id/game_concen_three"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -129,7 +129,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
     private int updateScore(HighScore score) {
         System.out.println("updateScore " + score);
         return updateScore(score.getUserId(), score.getType(), score.getPosition(),
-                score.getLevel(), score.getExpCurrent(), score.getScore());
+                score.getLevel(), score.getExpCurrent(), score.getHighscore());
     }
 
     public void insertScore(HighScore score) {
@@ -142,7 +142,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         values.put(COLUMN_POSITION, score.getPosition());
         values.put(COLUMN_LEVEL, score.getLevel());
         values.put(COLUMN_EXP_CURRENT, score.getExpCurrent());
-        values.put(COLUMN_HIGH_SCORE, score.getScore());
+        values.put(COLUMN_HIGH_SCORE, score.getHighscore());
         sqLiteDatabase.insert(TABLE_NAME, null, values);
     }
 

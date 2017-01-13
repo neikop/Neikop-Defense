@@ -11,11 +11,9 @@ public abstract class CountDownTimerAdapter extends CountDownTimer {
      * @param millisInFuture    The number of millis in the future from the call
      *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
      *                          is called.
-     * @param countDownInterval The interval along the way to receive
-     *                          {@link #onTick(long)} callbacks.
      */
-    public CountDownTimerAdapter(long millisInFuture, long countDownInterval) {
-        super(millisInFuture, countDownInterval);
+    public CountDownTimerAdapter(long millisInFuture) {
+        super(millisInFuture, millisInFuture);
     }
 
     @Override

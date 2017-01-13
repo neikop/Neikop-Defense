@@ -93,7 +93,7 @@ public class MemoryThree extends NeikopzGame {
     protected void prepareQuiz() {
         matched = 0;
         for (int i = 0; i < size; i++) isChosen[i] = false;
-        new CountDownTimerAdapter(500, 1) {
+        new CountDownTimerAdapter(500) {
             public void onFinish() {
                 goShow();
             }
@@ -170,7 +170,7 @@ public class MemoryThree extends NeikopzGame {
                         layoutGame.getChildAt(one).setOnClickListener(null);
                         layoutGame.getChildAt(two).setOnClickListener(null);
                         int zoo = two;
-                        new CountDownTimerAdapter(500, 1) {
+                        new CountDownTimerAdapter(500) {
                             public void onFinish() {
                                 clickable = true;
                                 layoutGame.getChildAt(one).setVisibility(View.INVISIBLE);
@@ -180,7 +180,7 @@ public class MemoryThree extends NeikopzGame {
                         if (matched == 10) {
                             goNext(true);
                         }
-                    } else new CountDownTimerAdapter(500, 1) {
+                    } else new CountDownTimerAdapter(500) {
                         public void onFinish() {
                             clickable = true;
                             for (int e = 0; e < size; e++) {
@@ -207,7 +207,7 @@ public class MemoryThree extends NeikopzGame {
 
     @Override
     protected void nextQuiz(boolean completed) {
-        new CountDownTimerAdapter(1000, 1) {
+        new CountDownTimerAdapter(1000) {
             public void onFinish() {
                 int bonus = completed ? gameStatusLayout.getTimeCount() : 0;
                 score += bonus;

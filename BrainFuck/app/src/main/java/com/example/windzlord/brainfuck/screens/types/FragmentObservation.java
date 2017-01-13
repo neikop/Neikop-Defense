@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.layout.GameLayout;
+import com.example.windzlord.brainfuck.layout.GameCoverLayout;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
@@ -29,13 +29,13 @@ import butterknife.OnClick;
 public class FragmentObservation extends Fragment {
 
     @BindView(R.id.game_obser_one)
-    GameLayout gameObserOne;
+    GameCoverLayout gameObserOne;
 
     @BindView(R.id.game_obser_two)
-    GameLayout gameObserTwo;
+    GameCoverLayout gameObserTwo;
 
     @BindView(R.id.game_obser_three)
-    GameLayout gameObserThree;
+    GameCoverLayout gameObserThree;
 
 
     public FragmentObservation() {
@@ -56,7 +56,7 @@ public class FragmentObservation extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
 
-        new CountDownTimerAdapter(10, 1) {
+        new CountDownTimerAdapter(10) {
             public void onFinish() {
                 getInfo();
             }
@@ -64,8 +64,7 @@ public class FragmentObservation extends Fragment {
     }
 
     private void getInfo() {
-        GameLayout[] games = {gameObserOne, gameObserTwo, gameObserThree};
-
+        GameCoverLayout[] games = {gameObserOne, gameObserTwo, gameObserThree};
         for (int i = 0; i < games.length; i++) {
             games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.OBSERVATION, i + 1));
             games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.OBSERVATION, i + 1));
@@ -73,7 +72,6 @@ public class FragmentObservation extends Fragment {
             games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.OBSERVATION, i + 1));
             games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.OBSERVATION, i + 1));
         }
-
     }
 
     @OnClick(R.id.button_back)

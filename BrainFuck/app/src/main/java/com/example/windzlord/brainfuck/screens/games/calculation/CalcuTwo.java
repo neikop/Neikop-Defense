@@ -38,7 +38,6 @@ public class CalcuTwo extends NeikopzGame {
 
     private int resultCalTop = 0;
     private int resultCalBottom = 0;
-    private boolean sound = false;
 
     public CalcuTwo() {
         // Required empty public constructor
@@ -61,7 +60,7 @@ public class CalcuTwo extends NeikopzGame {
 
     @Override
     protected void prepareQuiz() {
-        new CountDownTimerAdapter(500, 1) {
+        new CountDownTimerAdapter(500) {
             public void onFinish() {
                 goShow();
             }
@@ -131,20 +130,16 @@ public class CalcuTwo extends NeikopzGame {
         textViewBottom.setOnClickListener(view -> goClickBottom(resultCalTop < resultCalBottom));
     }
 
+
     private void goClickTop(boolean completed) {
         if (!clickable) return;
-        if (sound)
-//            if (completed) MediaPlayer.create(getContext(), R.raw.true_sound).start();
-//            else MediaPlayer.create(getContext(), R.raw.wrong_sound).start();
         textViewTop.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
 
+
     private void goClickBottom(boolean completed) {
         if (!clickable) return;
-//        if (sound)
-//            if (completed) MediaPlayer.create(getContext(), R.raw.true_sound).start();
-//            else MediaPlayer.create(getContext(), R.raw.wrong_sound).start();
         textViewBottom.setBackgroundResource(bgrChosen);
         goNext(completed);
     }
@@ -158,7 +153,7 @@ public class CalcuTwo extends NeikopzGame {
     @Override
     protected void onButtonResume() {
         super.onButtonResume();
-        new CountDownTimerAdapter(450, 1) {
+        new CountDownTimerAdapter(450) {
             public void onFinish() {
                 clickable = true;
             }

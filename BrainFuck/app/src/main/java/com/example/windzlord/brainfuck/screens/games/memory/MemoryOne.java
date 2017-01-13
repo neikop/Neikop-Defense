@@ -72,7 +72,7 @@ public class MemoryOne extends NeikopzGame {
     @Override
     protected void prepareQuiz() {
         for (int i = 0; i < size; i++) isChosen[i] = false;
-        new CountDownTimerAdapter(500, 1) {
+        new CountDownTimerAdapter(500) {
             public void onFinish() {
                 goShow();
             }
@@ -104,7 +104,7 @@ public class MemoryOne extends NeikopzGame {
         scaleTwo.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
                 if (views.isEmpty()) {
-                    new CountDownTimerAdapter(1000, 1) {
+                    new CountDownTimerAdapter(1000) {
                         public void onFinish() {
                             goShow2();
                         }

@@ -81,7 +81,7 @@ public class ObserverTwo extends NeikopzGame {
     protected void prepareQuiz() {
         matched = 0;
         for (int i = 0; i < 8; i++) isChosen[i] = false;
-        new CountDownTimerAdapter(500, 1) {
+        new CountDownTimerAdapter(500) {
             public void onFinish() {
                 goShow();
             }
@@ -158,7 +158,7 @@ public class ObserverTwo extends NeikopzGame {
                         layoutGame.getChildAt(one).setOnClickListener(null);
                         layoutGame.getChildAt(two).setOnClickListener(null);
                         int zoo = two;
-                        new CountDownTimerAdapter(300, 1) {
+                        new CountDownTimerAdapter(300) {
                             public void onFinish() {
                                 layoutGame.getChildAt(one).setVisibility(View.INVISIBLE);
                                 layoutGame.getChildAt(zoo).setVisibility(View.INVISIBLE);
@@ -167,7 +167,7 @@ public class ObserverTwo extends NeikopzGame {
                         if (matched == 2) {
                             goNext(true);
                         }
-                    } else new CountDownTimerAdapter(300, 1) {
+                    } else new CountDownTimerAdapter(300) {
                         public void onFinish() {
                             for (int e = 0; e < 8; e++) {
                                 isChosen[e] = false;

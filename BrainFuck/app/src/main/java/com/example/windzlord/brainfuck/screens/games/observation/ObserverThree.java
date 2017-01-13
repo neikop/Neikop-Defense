@@ -135,7 +135,7 @@ public class ObserverThree extends NeikopzGame {
 
     @Override
     protected void prepareQuiz() {
-        new CountDownTimerAdapter(500, 1) {
+        new CountDownTimerAdapter(500) {
             public void onFinish() {
                 goShow();
             }
@@ -209,7 +209,7 @@ public class ObserverThree extends NeikopzGame {
         boolean completed = core == coreArrayAnswer[clicked];
         if (clicked < 4) buttons[clicked].setBackgroundResource(bgrWrong);
         buttons[coreArrayAnswer[4]].setBackgroundResource(bgrCorrect);
-        new CountDownTimerAdapter(1000, 1) {
+        new CountDownTimerAdapter(1000) {
             public void onFinish() {
                 ScaleAnimation scale = new ScaleAnimation(1, 0, 1, 0, 1, 0.5f, 1, 0.5f);
                 scale.setDuration(250);
@@ -236,7 +236,7 @@ public class ObserverThree extends NeikopzGame {
     @Override
     protected void onButtonResume() {
         super.onButtonResume();
-        new CountDownTimerAdapter(450, 1) {
+        new CountDownTimerAdapter(450) {
             public void onFinish() {
                 layoutAnswer.setVisibility(View.VISIBLE);
                 AlphaAnimation goFadeShow = new AlphaAnimation(0, 1);

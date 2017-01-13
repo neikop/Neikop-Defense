@@ -1,7 +1,5 @@
 package com.example.windzlord.brainfuck.managers;
 
-import com.example.windzlord.brainfuck.objects.models.HighScore;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,6 +14,7 @@ public class Gogo {
 
     public static final int NUMBER_QUIZ = 5;
     public static final int TIME = 5000;
+    public static final boolean ACTIVE_NOTIFY = false;
 
     public final static String MEMORY = "Memory";
     public final static String CALCULATION = "Calculation";
@@ -118,4 +117,6 @@ public class Gogo {
         Collections.shuffle(ret);
         return ret;
     }
+
+
 }
