@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.layout.GameLayout;
+import com.example.windzlord.brainfuck.layout.GameCoverLayout;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
@@ -29,13 +29,13 @@ import butterknife.OnClick;
 public class FragmentCalculation extends Fragment {
 
     @BindView(R.id.game_calcu_one)
-    GameLayout gameCalcuOne;
+    GameCoverLayout gameCalcuOne;
 
     @BindView(R.id.game_calcu_two)
-    GameLayout gameCalcuTwo;
+    GameCoverLayout gameCalcuTwo;
 
     @BindView(R.id.game_calcu_three)
-    GameLayout gameCalcuThree;
+    GameCoverLayout gameCalcuThree;
 
 
     public FragmentCalculation() {
@@ -47,9 +47,7 @@ public class FragmentCalculation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.game_zipe_calculation, container, false);
-
         settingThingsUp(view);
 
         return view;
@@ -58,7 +56,7 @@ public class FragmentCalculation extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
 
-        new CountDownTimerAdapter(10, 1) {
+        new CountDownTimerAdapter(10) {
             public void onFinish() {
                 getInfo();
             }
@@ -66,8 +64,7 @@ public class FragmentCalculation extends Fragment {
     }
 
     private void getInfo() {
-        GameLayout[] games = {gameCalcuOne, gameCalcuTwo, gameCalcuThree};
-
+        GameCoverLayout[] games = {gameCalcuOne, gameCalcuTwo, gameCalcuThree};
         for (int i = 0; i < games.length; i++) {
             games[i].setScore(ManagerPreference.getInstance().getScore(Gogo.CALCULATION, i + 1));
             games[i].setLevel(ManagerPreference.getInstance().getLevel(Gogo.CALCULATION, i + 1));
@@ -75,8 +72,6 @@ public class FragmentCalculation extends Fragment {
             games[i].setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.CALCULATION, i + 1));
             games[i].setUnlocked(ManagerPreference.getInstance().isUnlocked(Gogo.CALCULATION, i + 1));
         }
-
-
     }
 
     @OnClick(R.id.button_back)

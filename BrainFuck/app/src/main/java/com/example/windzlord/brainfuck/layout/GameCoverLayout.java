@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by WindzLord on 12/27/2016.
  */
 
-public class GameLayout extends FrameLayout {
+public class GameCoverLayout extends FrameLayout {
 
     @BindView(R.id.imageView_game)
     ImageView imageViewGame;
@@ -58,36 +58,36 @@ public class GameLayout extends FrameLayout {
     private int expNextLvl;
     private int score;
 
-    public GameLayout(Context context) {
+    public GameCoverLayout(Context context) {
         super(context);
         initFromContext(context, null);
     }
 
-    public GameLayout(Context context, AttributeSet attrs) {
+    public GameCoverLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         initFromContext(context, attrs);
     }
 
-    public GameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public GameCoverLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initFromContext(context, attrs);
     }
 
     private void initFromContext(Context context, AttributeSet attrs) {
-        View view = inflate(context, R.layout.custom_game_layout, this);
+        View view = inflate(context, R.layout.custom_game_layout_cover, this);
         ButterKnife.bind(this, view);
-        getValues(context.obtainStyledAttributes(attrs, R.styleable.GameLayout));
+        getValues(context.obtainStyledAttributes(attrs, R.styleable.GameCoverLayout));
     }
 
     private void getValues(TypedArray typedArray) {
-        name = typedArray.getString(R.styleable.GameLayout_name);
-        image = typedArray.getDrawable(R.styleable.GameLayout_src);
+        name = typedArray.getString(R.styleable.GameCoverLayout_name);
+        image = typedArray.getDrawable(R.styleable.GameCoverLayout_src);
         if (image == null) image = getResources().getDrawable(R.drawable.ic_launcher_ok);
-        level = typedArray.getInteger(R.styleable.GameLayout_level, 1);
-        expCurrent = typedArray.getInteger(R.styleable.GameLayout_exp_current, 0);
-        expNextLvl = typedArray.getInteger(R.styleable.GameLayout_exp_nextlvl, 300);
-        score = typedArray.getInteger(R.styleable.GameLayout_score, 0);
-        unlocked = typedArray.getBoolean(R.styleable.GameLayout_unlocked, false);
+        level = typedArray.getInteger(R.styleable.GameCoverLayout_level, 1);
+        expCurrent = typedArray.getInteger(R.styleable.GameCoverLayout_exp_current, 0);
+        expNextLvl = typedArray.getInteger(R.styleable.GameCoverLayout_exp_nextlvl, 300);
+        score = typedArray.getInteger(R.styleable.GameCoverLayout_score, 0);
+        unlocked = typedArray.getBoolean(R.styleable.GameCoverLayout_unlocked, false);
         typedArray.recycle();
         updateValues();
     }

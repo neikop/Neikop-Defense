@@ -78,7 +78,7 @@ public class ObserverOne extends NeikopzGame {
                 prepareQuiz();
             }
         });
-        new CountDownTimerAdapter(200, 1) {
+        new CountDownTimerAdapter(200) {
             public void onFinish() {
                 groupX.startAnimation(setX);
                 groupZ.startAnimation(setY);
@@ -88,7 +88,7 @@ public class ObserverOne extends NeikopzGame {
 
     @Override
     protected void prepareQuiz() {
-        new CountDownTimerAdapter(500, 1) {
+        new CountDownTimerAdapter(500) {
             public void onFinish() {
                 goShow();
             }

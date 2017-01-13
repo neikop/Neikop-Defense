@@ -77,7 +77,7 @@ public class ConcenOne extends NeikopzGame {
 
     @Override
     protected void prepareQuiz() {
-        new CountDownTimerAdapter(500, 1) {
+        new CountDownTimerAdapter(500) {
             public void onFinish() {
                 goShow();
             }
@@ -184,7 +184,7 @@ public class ConcenOne extends NeikopzGame {
     @Override
     protected void onButtonResume() {
         super.onButtonResume();
-        new CountDownTimerAdapter(450, 1) {
+        new CountDownTimerAdapter(450) {
             public void onFinish() {
                 clickable = true;
             }

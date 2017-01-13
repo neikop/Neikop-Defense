@@ -11,6 +11,9 @@ public class ManagerPreference {
 
     private static final String KEY = "BrainFuck";
 
+    private static final String SOUND = "Sound";
+    private static final String MUSIC = "Music";
+
     private static final String SCORE = "Score";
     private static final String LEVEL = "Level";
     private static final String EXP_CURRENT = "ExpCurr";
@@ -31,6 +34,22 @@ public class ManagerPreference {
 
     public static void init(Context context) {
         instance = new ManagerPreference(context);
+    }
+
+    public void putSound(boolean active) {
+        sharedPreferences.edit().putBoolean(SOUND, active).apply();
+    }
+
+    public boolean getSound() {
+        return sharedPreferences.getBoolean(SOUND, true);
+    }
+
+    public void putMusic(boolean active) {
+        sharedPreferences.edit().putBoolean(MUSIC, active).apply();
+    }
+
+    public boolean getMusic() {
+        return sharedPreferences.getBoolean(MUSIC, true);
     }
 
     public void putScore(String type, int index, int score) {

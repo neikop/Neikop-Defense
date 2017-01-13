@@ -10,11 +10,15 @@ import android.os.Build;
 import android.widget.Toast;
 
 import com.example.windzlord.brainfuck.MainActivity;
+import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
+import com.example.windzlord.brainfuck.objects.MessageManager;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.okhttp.OkHttpClient;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.net.MalformedURLException;
 import java.util.List;
@@ -97,22 +101,25 @@ public class ManagerServer {
     }
 
     // After Upload
-    private void downloadServerToLocal() {
+    public void downloadServerToLocal() {
         System.out.println("downloadServerToLocal");
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
                     List<HighScore> scores = getListScoreServer();
+                    if (Gogo.ACTIVE_NOTIFY)
+                        EventBus.getDefault().post(new MessageManager("", "Server good"));
                     System.out.println("Scores on server: " + scores.size());
                     System.out.println("Scores on local before: "
                             + ManagerUserData.getInstance().getListScore().size());
                     ManagerUserData.getInstance().updateDatabase(scores);
                     System.out.println("Scores on local after: "
                             + ManagerUserData.getInstance().getListScore().size());
-                } catch (ExecutionException | InterruptedException | MobileServiceException ignored) {
-                    System.out.println(TAG + " " + ignored);
-                    System.out.println("Server down cmnr :v");
+                } catch (ExecutionException | InterruptedException | MobileServiceException serverDown) {
+                    if (Gogo.ACTIVE_NOTIFY)
+                        EventBus.getDefault().post(new MessageManager("Warning", "Server down"));
+                    System.out.println(TAG + " " + serverDown);
                 }
                 return null;
             }

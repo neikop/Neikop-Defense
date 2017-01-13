@@ -2,12 +2,15 @@ package com.example.windzlord.brainfuck;
 
 import android.app.Application;
 
+import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
+import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
 import com.example.windzlord.brainfuck.managers.ManagerNetwork;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
+import com.facebook.FacebookSdk;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -31,6 +34,7 @@ public class MainBrain extends Application {
         ManagerServer.init(this);
         ManagerUserData.init(this);
         ManagerFile.init(this);
+        FacebookSdk.sdkInitialize(this);
         initImageLoader();
 
         String userID = ManagerPreference.getInstance().getUserID();
@@ -38,6 +42,18 @@ public class MainBrain extends Application {
         if (ManagerNetwork.getInstance().isConnectedToInternet())
             ManagerServer.getInstance().uploadLocalToServer(userID);
 
+        if (!Gogo.ACTIVE_NOTIFY) goLoopUpdate();
+    }
+
+    private void goLoopUpdate() {
+        new CountDownTimerAdapter(20000) {
+            @Override
+            public void onFinish() {
+                if (ManagerNetwork.getInstance().isConnectedToInternet())
+                    ManagerServer.getInstance().downloadServerToLocal();
+                goLoopUpdate();
+            }
+        }.start();
     }
 
     private void initImageLoader() {
