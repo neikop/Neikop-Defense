@@ -1,8 +1,9 @@
 package com.example.windzlord.brainfuck;
 
 import android.app.Application;
+import android.os.CountDownTimer;
+import android.util.Log;
 
-import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.Gogo;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
@@ -20,6 +21,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
  */
 
 public class MainBrain extends Application {
+
+    private final String TAG = this.getClass().getSimpleName();
 
     @Override
     public void onCreate() {
@@ -44,9 +47,15 @@ public class MainBrain extends Application {
     }
 
     private void goLoopSync(boolean loop) {
-        new CountDownTimerAdapter(30000) {
+        new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long l) {
+                Log.d(TAG, (31500 - l) / 1000 + "");
+            }
+
             @Override
             public void onFinish() {
+                Log.d(TAG, "30");
                 String userID = ManagerPreference.getInstance().getUserID();
                 ManagerServer.getInstance().uploadLocalToServer(userID);
                 if (loop) goLoopSync(loop);
