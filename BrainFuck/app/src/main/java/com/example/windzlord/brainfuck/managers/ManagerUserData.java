@@ -18,16 +18,16 @@ public class ManagerUserData extends SQLiteAssetHelper {
     private final String TAG = this.getClass().getSimpleName();
 
     private final static int DB_VERSION = 1;
-    private final static String DB_NAME = "database.db";
-    private static final String TABLE_NAME = "Highscore";
-    private static final String COLUMN_ID = "id";
-    private static final String COLUMN_USER_ID = "userId";
-    private static final String COLUMN_TYPE = "type";
-    private static final String COLUMN_POSITION = "position";
-    private static final String COLUMN_LEVEL = "level";
-    private static final String COLUMN_EXP_CURRENT = "expCurrent";
-    private static final String COLUMN_HIGH_SCORE = "highscore";
-    private static final String COLUMN_USER_NAME = "userName";
+    private final static String DB_NAME = "UserData.db";
+    private static final String TABLE_NAME = "TableHighScore";
+    private static final String COLUMN_ID = "ID";
+    private static final String COLUMN_USER_ID = "User_ID";
+    private static final String COLUMN_USER_NAME = "User_Name";
+    private static final String COLUMN_TYPE = "Type";
+    private static final String COLUMN_POSITION = "Position";
+    private static final String COLUMN_LEVEL = "Level";
+    private static final String COLUMN_EXP_CURRENT = "Exp";
+    private static final String COLUMN_HIGH_SCORE = "Score";
     private static final String[] COLUMNS = new String[]{
             COLUMN_ID,
             COLUMN_USER_ID,
@@ -75,7 +75,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         int sum = 0;
         List<HighScore> scores = getScoreByUserId(userId);
         for (HighScore score : scores)
-            sum += (score.getLevel() * (score.getLevel() - 1) / 2) * 300 + score.getExpCurrent();
+            sum += (score.getLevel() * (score.getLevel() - 1) / 2) * 300 + score.getExp();
         return sum;
     }
 
@@ -129,7 +129,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
     private int updateScore(HighScore score) {
         Log.d(TAG, "updateScore " + score);
         return updateScore(score.getUserId(), score.getType(), score.getPosition(),
-                score.getLevel(), score.getExpCurrent(), score.getScore());
+                score.getLevel(), score.getExp(), score.getScore());
     }
 
     public void insertScore(HighScore score) {
@@ -141,7 +141,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         values.put(COLUMN_TYPE, score.getType());
         values.put(COLUMN_POSITION, score.getPosition());
         values.put(COLUMN_LEVEL, score.getLevel());
-        values.put(COLUMN_EXP_CURRENT, score.getExpCurrent());
+        values.put(COLUMN_EXP_CURRENT, score.getExp());
         values.put(COLUMN_HIGH_SCORE, score.getScore());
         sqLiteDatabase.insert(TABLE_NAME, null, values);
     }

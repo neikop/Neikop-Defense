@@ -75,13 +75,11 @@ public class ManagerServer {
                 for (HighScore score : scores) {
                     try {
                         mServiceTable.update(score).get();
-                        Log.d(TAG, "Begin uploadScore - Done uploadScore: " + score);
+                        Log.d(TAG, "Done uploadScore: " + score);
                     } catch (ExecutionException | InterruptedException ignored) {
-                        Log.d(TAG, "Begin uploadScore - Fail uploadScore: " + score);
+                        Log.d(TAG, "Fail uploadScore: " + score);
                     }
                 }
-
-
                 return null;
             }
         });
@@ -151,7 +149,7 @@ public class ManagerServer {
         List<HighScore> scores = ManagerUserData.getInstance().getScoreByUserId(userID);
         for (HighScore score : scores) {
             ManagerPreference.getInstance().putLevel(score.getType(), score.getPosition(), score.getLevel());
-            ManagerPreference.getInstance().putExpCurrent(score.getType(), score.getPosition(), score.getExpCurrent());
+            ManagerPreference.getInstance().putExpCurrent(score.getType(), score.getPosition(), score.getExp());
             ManagerPreference.getInstance().putScore(score.getType(), score.getPosition(), score.getScore());
         }
     }
@@ -169,7 +167,7 @@ public class ManagerServer {
                         score.setUserName(ManagerPreference.getInstance().getUserName());
                         score.setPosition(k);
                         score.setLevel(ManagerPreference.getInstance().getLevel(Gogo.GAME_LIST[i], k));
-                        score.setExpCurrent(ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], k));
+                        score.setExp(ManagerPreference.getInstance().getExpCurrent(Gogo.GAME_LIST[i], k));
                         score.setScore(ManagerPreference.getInstance().getScore(Gogo.GAME_LIST[i], k));
                         try {
                             mServiceTable.insert(score).get();

@@ -1,5 +1,6 @@
 package com.example.windzlord.brainfuck.objects.models;
 
+import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -11,25 +12,25 @@ public class HighScore {
     @SerializedName("id")
     private String id;
 
-    @SerializedName("userId")
+    @SerializedName("User_ID")
     private String userId;
 
-    @SerializedName("type")
-    private String type;
-
-    @SerializedName("userName")
+    @SerializedName("User_Name")
     private String userName;
 
-    @SerializedName("position")
+    @SerializedName("Type")
+    private String type;
+
+    @SerializedName("Position")
     private int position;
 
-    @SerializedName("level")
+    @SerializedName("Level")
     private int level;
 
-    @SerializedName("expCurrent")
-    private int expCurrent;
+    @SerializedName("Exp")
+    private int exp;
 
-    @SerializedName("highscore")
+    @SerializedName("Score")
     private int score;
 
 
@@ -37,14 +38,14 @@ public class HighScore {
     }
 
     public HighScore(String id, String userId, String userName,
-                     String type, int position, int level, int expCurrent, int score) {
+                     String type, int position, int level, int exp, int score) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;
         this.type = type;
         this.position = position;
         this.level = level;
-        this.expCurrent = expCurrent;
+        this.exp = exp;
         this.score = score;
     }
 
@@ -96,16 +97,16 @@ public class HighScore {
         return level;
     }
 
-    public int getExpCurrent() {
-        return expCurrent;
+    public int getExp() {
+        return exp;
     }
 
     public int getScore() {
         return score;
     }
 
-    public void setExpCurrent(int expCurrent) {
-        this.expCurrent = expCurrent;
+    public void setExp(int exp) {
+        this.exp = exp;
     }
 
     public void setScore(int score) {
@@ -114,6 +115,6 @@ public class HighScore {
 
     @Override
     public String toString() {
-        return String.format("%s %s %s = %s %s", userName, type, position, expCurrent, score);
+        return String.format("%s %s %s = %s %s", userName, type, position, exp, score);
     }
 }

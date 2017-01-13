@@ -73,7 +73,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/game_iz_resouce_0z" />
+                android:src="@drawable/game_iz_resource_0z" />
 
             <ImageView
                 android:layout_width="75dp"
@@ -85,7 +85,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/game_iz_resouce_0z" />
+                android:src="@drawable/game_iz_resource_0z" />
 
             <ImageView
                 android:layout_width="75dp"
@@ -97,7 +97,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/game_iz_resouce_0z" />
+                android:src="@drawable/game_iz_resource_0z" />
 
             <ImageView
                 android:layout_width="75dp"
@@ -109,7 +109,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/game_iz_resouce_0z" />
+                android:src="@drawable/game_iz_resource_0z" />
 
             <ImageView
                 android:layout_width="75dp"
@@ -121,7 +121,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/game_iz_resouce_0z" />
+                android:src="@drawable/game_iz_resource_0z" />
 
             <ImageView
                 android:layout_width="75dp"
@@ -133,7 +133,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/game_iz_resouce_0z" />
+                android:src="@drawable/game_iz_resource_0z" />
 
             <ImageView
                 android:layout_width="75dp"
@@ -145,7 +145,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/game_iz_resouce_0z" />
+                android:src="@drawable/game_iz_resource_0z" />
 
             <ImageView
                 android:layout_width="75dp"
@@ -157,7 +157,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/game_iz_resouce_0z" />
+                android:src="@drawable/game_iz_resource_0z" />
 
         </GridLayout>
 

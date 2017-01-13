@@ -26,16 +26,16 @@ import java.util.List;
  */
 public class MemoryThree extends NeikopzGame {
 
-    private int srcHided = R.drawable.game_iz_resouce_0x;
+    private int srcHided = R.drawable.game_iz_resource_0x;
     private int bgrNormal = R.drawable.custom_corner_background_5_outline;
     private int bgrChosen = R.drawable.custom_corner_background_5_outline_chosen;
 
     @DrawableRes
-    int imageResources[] = {R.drawable.game_iz_resouce_13, R.drawable.game_iz_resouce_23,
-            R.drawable.game_iz_resouce_17, R.drawable.game_iz_resouce_22,
-            R.drawable.game_iz_resouce_21, R.drawable.game_iz_resouce_24,
-            R.drawable.game_iz_resouce_18, R.drawable.game_iz_resouce_16,
-            R.drawable.game_iz_resouce_20, R.drawable.game_iz_resouce_25};
+    int imageResources[] = {R.drawable.game_iz_resource_13, R.drawable.game_iz_resource_23,
+            R.drawable.game_iz_resource_17, R.drawable.game_iz_resource_22,
+            R.drawable.game_iz_resource_21, R.drawable.game_iz_resource_24,
+            R.drawable.game_iz_resource_18, R.drawable.game_iz_resource_16,
+            R.drawable.game_iz_resource_20, R.drawable.game_iz_resource_25};
 
     private int size = 20;
     private boolean[] isChosen = new boolean[size];

@@ -25,7 +25,7 @@ public class Gogo {
     public static final boolean GAME_LOOPER_SYNC = true;
 
     public final static String MEMORY = "Memory";
-    public final static String CALCULATION = "Calculation";
+    public final static String CALCULATION = "Calculator";
     public final static String CONCENTRATION = "Concentration";
     public final static String OBSERVATION = "Observation";
 

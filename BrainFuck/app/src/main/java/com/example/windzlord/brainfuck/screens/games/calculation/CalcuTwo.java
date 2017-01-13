@@ -1,7 +1,6 @@
 package com.example.windzlord.brainfuck.screens.games.calculation;
 
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,7 @@ import com.example.windzlord.brainfuck.adapters.AnimationAdapter;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.ManagerGameData;
 import com.example.windzlord.brainfuck.managers.Gogo;
-import com.example.windzlord.brainfuck.objects.models.Calculation;
+import com.example.windzlord.brainfuck.objects.models.Calculator;
 import com.example.windzlord.brainfuck.screens.games.NeikopzGame;
 
 import butterknife.BindView;
@@ -115,16 +114,16 @@ public class CalcuTwo extends NeikopzGame {
     }
 
     private void random() {
-        Calculation calcuOne = ManagerGameData.getInstance().getRandomCalculation(2);
-        Calculation calcuTwo = ManagerGameData.getInstance().getRandomCalculation(2);
+        Calculator calcuOne = ManagerGameData.getInstance().getRandomCalculation(2);
+        Calculator calcuTwo = ManagerGameData.getInstance().getRandomCalculation(2);
         setCalculation(calcuOne, calcuTwo);
     }
 
-    private void setCalculation(Calculation calcuOne, Calculation calcuTwo) {
-        textViewTop.setText(calcuOne.getCalculation());
-        textViewBottom.setText(calcuTwo.getCalculation());
-        resultCalTop = calcuOne.getResults();
-        resultCalBottom = calcuTwo.getResults();
+    private void setCalculation(Calculator calcuOne, Calculator calcuTwo) {
+        textViewTop.setText(calcuOne.getCalculator());
+        textViewBottom.setText(calcuTwo.getCalculator());
+        resultCalTop = calcuOne.getResult();
+        resultCalBottom = calcuTwo.getResult();
 
         textViewTop.setOnClickListener(view -> goClickTop(resultCalTop > resultCalBottom));
         textViewBottom.setOnClickListener(view -> goClickBottom(resultCalTop < resultCalBottom));
