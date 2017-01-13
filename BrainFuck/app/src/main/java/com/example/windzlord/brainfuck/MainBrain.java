@@ -55,7 +55,6 @@ public class MainBrain extends Application {
 
             @Override
             public void onFinish() {
-                Log.d(TAG, "30");
                 String userID = ManagerPreference.getInstance().getUserID();
                 ManagerServer.getInstance().uploadLocalToServer(userID);
                 if (loop) goLoopSync(loop);
