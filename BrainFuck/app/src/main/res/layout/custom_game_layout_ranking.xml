@@ -5,9 +5,10 @@
     tools:context=".layout.GameRankingLayout">
 
     <LinearLayout
+        android:id="@+id/layout_background_ranking"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#ccaaee">
+        android:background="#CCAAEE">
 
         <RelativeLayout
             android:layout_width="50dp"
