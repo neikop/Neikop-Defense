@@ -88,6 +88,7 @@
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
                     app:name="@string/game_calcu_three"
+                    app:src="@drawable/ic_cover_game_calcu_3"
                     app:unlocked="true" />
             </LinearLayout>
         </ScrollView>

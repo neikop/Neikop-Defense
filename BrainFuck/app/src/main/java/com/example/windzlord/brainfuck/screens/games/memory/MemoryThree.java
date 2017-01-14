@@ -43,6 +43,7 @@ public class MemoryThree extends GameDaddy {
     private boolean[] isChosen = new boolean[size];
     private List<Integer> coreArray;
     private int matched;
+    private int END_GAME;
 
     public MemoryThree() {
         // Required empty public constructor
@@ -57,9 +58,10 @@ public class MemoryThree extends GameDaddy {
     }
 
     protected void startGame() {
-        RATE = 24;
+        RATE = 12;
         TIME = TIME * RATE;
         QUIZ = 1;
+        END_GAME = 10;
         gameStatusLayout.updateValues(100, TIME, TIME, 0, QUIZ, 0);
         going = score = 0;
 
@@ -79,7 +81,8 @@ public class MemoryThree extends GameDaddy {
                     view.setBackgroundResource(bgrNormal);
                 }
                 for (View view : goChildGroup(layoutGame))
-                    view.startAnimation(scaleTwo);
+                    if (view.getVisibility() == View.VISIBLE)
+                        view.startAnimation(scaleTwo);
             }
         });
         scaleTwo.setAnimationListener(new AnimationAdapter() {
@@ -87,7 +90,14 @@ public class MemoryThree extends GameDaddy {
                 prepareQuiz();
             }
         });
-        for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleOne);
+
+        for (View view : goChildGroup(layoutGame))
+            if (view.getVisibility() == View.VISIBLE) {
+                for (View v : goChildGroup(layoutGame))
+                    if (v.getVisibility() == View.VISIBLE) v.startAnimation(scaleOne);
+                return;
+            }
+        prepareQuiz();
     }
 
     @Override
@@ -113,9 +123,7 @@ public class MemoryThree extends GameDaddy {
             }
 
             public void onAnimationEnd(Animation animation) {
-                coreArray = getCoreArray();
-                for (int i = 0; i < size; i++)
-                    ((ImageView) layoutGame.getChildAt(i)).setImageResource(srcHided);
+                showQuiz();
                 for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleTwo);
             }
         });
@@ -136,7 +144,9 @@ public class MemoryThree extends GameDaddy {
                         goNext(false);
                     }
                 }.start();
-                showQuiz();
+                going++;
+                gameStatusLayout.setGoingCount(going);
+                gameStatusLayout.setGoingProgress(going);
             }
         });
         if (going >= QUIZ) goEndGame(ManagerBrain.MEMORY, 3);
@@ -145,64 +155,54 @@ public class MemoryThree extends GameDaddy {
 
     @Override
     protected void showQuiz() {
-        going++;
-        gameStatusLayout.setGoingCount(going);
-        gameStatusLayout.setGoingProgress(going);
+        coreArray = getCoreArray();
+        for (int i = 0; i < size; i++)
+            ((ImageView) layoutGame.getChildAt(i)).setImageResource(srcHided);
         for (int i = 0; i < size; i++) {
-            int one = i;
-            layoutGame.getChildAt(one).setOnClickListener(v -> {
+            int x = i;
+            layoutGame.getChildAt(x).setOnClickListener(v -> {
                 if (!clickable) return;
-                flip(one, isChosen[one]);
-                isChosen[one] ^= 1 + 1 == 2;
+                flip(x, isChosen[x]);
+                isChosen[x] ^= 1 + 1 == 2;
+                if (!isChosen[x]) return;
 
                 boolean someoneWasChosen = true;
                 for (boolean e : isChosen) someoneWasChosen ^= e;
                 if (someoneWasChosen) {
                     boolean match = false;
-                    int two = -1;
-                    for (two = 0; two < size; two++) {
-                        if (two == one) continue;
-                        if (isChosen[two]) match = coreArray.get(one) == coreArray.get(two);
+                    int y = -1;
+                    for (y = 0; y < size; y++) {
+                        if (y == x) continue;
+                        if (isChosen[y]) match = coreArray.get(x) == coreArray.get(y);
                         if (match) break;
                     }
                     clickable = false;
                     if (match) {
                         matched++;
-                        layoutGame.getChildAt(one).setOnClickListener(null);
-                        layoutGame.getChildAt(two).setOnClickListener(null);
-                        int zoo = two;
+                        layoutGame.getChildAt(x).setOnClickListener(null);
+                        layoutGame.getChildAt(y).setOnClickListener(null);
+                        int z = y;
                         new CountDownTimerAdapter(500) {
                             public void onFinish() {
                                 clickable = true;
-                                layoutGame.getChildAt(one).setVisibility(View.INVISIBLE);
-                                layoutGame.getChildAt(zoo).setVisibility(View.INVISIBLE);
+                                layoutGame.getChildAt(x).setVisibility(View.INVISIBLE);
+                                layoutGame.getChildAt(z).setVisibility(View.INVISIBLE);
                             }
                         }.start();
-                        if (matched == 10) {
+                        if (matched == END_GAME) {
                             goNext(true);
                         }
                     } else new CountDownTimerAdapter(500) {
                         public void onFinish() {
                             clickable = true;
-                            for (int e = 0; e < size; e++) {
-                                isChosen[e] = false;
-                                flip(e, true);
+                            for (int z = 0; z < size; z++) {
+                                isChosen[z] = false;
+                                flip(z, true);
                             }
                         }
                     }.start();
                 }
             });
-        }
-    }
-
-    private void flip(int position, boolean goHide) {
-        if (goHide) {
-            layoutGame.getChildAt(position).setBackgroundResource(bgrNormal);
-            ((ImageView) layoutGame.getChildAt(position)).setImageResource(srcHided);
-        } else {
-            layoutGame.getChildAt(position).setBackgroundResource(bgrChosen);
-            ((ImageView) layoutGame.getChildAt(position)).setImageResource(
-                    imageResources[coreArray.get(position)]);
         }
     }
 
@@ -227,6 +227,17 @@ public class MemoryThree extends GameDaddy {
                 goPrepare();
             }
         }.start();
+    }
+
+    private void flip(int position, boolean goHide) {
+        if (goHide) {
+            layoutGame.getChildAt(position).setBackgroundResource(bgrNormal);
+            ((ImageView) layoutGame.getChildAt(position)).setImageResource(srcHided);
+        } else {
+            layoutGame.getChildAt(position).setBackgroundResource(bgrChosen);
+            ((ImageView) layoutGame.getChildAt(position)).setImageResource(
+                    imageResources[coreArray.get(position)]);
+        }
     }
 
     private List<Integer> getCoreArray() {

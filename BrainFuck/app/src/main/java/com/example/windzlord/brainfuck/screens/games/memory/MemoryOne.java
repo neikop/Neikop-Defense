@@ -102,7 +102,7 @@ public class MemoryOne extends GameDaddy {
         });
         scaleTwo.setAnimationListener(new AnimationAdapter() {
             public void onAnimationEnd(Animation animation) {
-                new CountDownTimerAdapter(1500) {
+                new CountDownTimerAdapter(1000) {
                     public void onFinish() {
                         for (View view : goChildGroup(layoutGame)) view.startAnimation(scaleThree);
                     }

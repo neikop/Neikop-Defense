@@ -129,8 +129,7 @@
                         app:rcIconPadding="0dp"
                         app:rcIconSize="40dp"
                         app:rcIconSrc="@drawable/ic_z_calculator"
-                        app:rcMax="1500"
-
+                        app:rcMax="2000"
                         app:rcProgressColor="@color/custom_progress_red_progress"
                         app:rcRadius="5dp" />
 
@@ -198,7 +197,7 @@
                         app:rcIconPadding="5dp"
                         app:rcIconSize="40dp"
                         app:rcIconSrc="@drawable/ic_z_memory"
-                        app:rcMax="1500"
+                        app:rcMax="2000"
                         app:rcProgressColor="@color/custom_progress_orange_header"
                         app:rcRadius="5dp" />
 

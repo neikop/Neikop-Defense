@@ -107,6 +107,7 @@ public abstract class GameDaddy extends Fragment {
     protected boolean clickable = false;
     protected int going;
     protected int score;
+
     protected int RATE = 1;
     protected int TIME = ManagerBrain.TIME * RATE;
     protected int QUIZ = ManagerBrain.QUIZ;

@@ -5,7 +5,7 @@
     <string name="welcome">WELCOME</string>
     <string name="game_calcu_one">Calculator King</string>
     <string name="game_calcu_two">High or low</string>
-    <string name="game_calcu_three">Sequential calculator </string>
+    <string name="game_calcu_three">Move the card </string>
     <string name="game_concen_one">Brain shift</string>
     <string name="game_concen_two">Color and meaning</string>
     <string name="game_concen_three">Track color</string>
@@ -28,4 +28,5 @@
     <string name="facebook_app_id">397853117225646</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hided_card">+</string>
 </resources>
