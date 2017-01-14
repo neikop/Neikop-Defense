@@ -98,7 +98,7 @@ public class FragmentProfile extends Fragment {
         textViewUser.setText(userName.substring(2, userName.length() - 1));
 
         String userID = ManagerPreference.getInstance().getUserID();
-        if (!userID.equals("")) {
+        if (!userID.isEmpty()) {
             File file = ManagerFile.getInstance().loadImage(userID);
             ImageLoader.getInstance().displayImage(Uri.fromFile(file).toString(), imageViewUser);
         } else imageViewUser.setImageResource(R.drawable.z_character_guest);

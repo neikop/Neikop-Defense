@@ -8,10 +8,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameRankingLayout;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
@@ -34,6 +34,14 @@ public class FragmentRanking extends Fragment {
     @BindView(R.id.scrollView)
     ScrollView scrollView;
 
+    @BindView(R.id.frameLayout_ranking_god)
+    View layoutRankingGod;
+
+    @BindView(R.id.frameLayout_ranking_player)
+    View layoutRankingPlayer;
+
+    private List<HighScore> players;
+
     public FragmentRanking() {
         // Required empty public constructor
     }
@@ -52,12 +60,13 @@ public class FragmentRanking extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
 
+        changeVisibility();
         getPlayerRanking();
         addListeners();
     }
 
     private void getPlayerRanking() {
-        List<HighScore> players = ManagerUserData.getInstance().getListPlayer();
+        players = ManagerUserData.getInstance().getListPlayer();
         for (HighScore player : players)
             player.setScore(ManagerUserData.getInstance().getExperience(player.getUserId()));
 
@@ -75,15 +84,38 @@ public class FragmentRanking extends Fragment {
     }
 
     private void addListeners() {
+        layoutRankingGod.setOnClickListener((ignored) -> System.out.println("Click cmm a`?"));
+
         for (int i = 0; i < layoutPlayerRanking.getChildCount(); i++) {
-            layoutPlayerRanking.getChildAt(i).setOnClickListener((v) -> {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frameLayout_ranking_player,
-                        new FragmentRankingPlayer());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            });
+            int x = i;
+            ((GameRankingLayout) layoutPlayerRanking.getChildAt(i)) // DO NOT DELETE
+                    .setOnClickListener((v) -> {
+                        if (layoutRankingGod.getVisibility() == View.VISIBLE) {
+                            layoutRankingGod.setVisibility(View.INVISIBLE);
+                            layoutRankingPlayer.setVisibility(View.INVISIBLE);
+                        } else {
+                            FragmentRankingPlayer player = new FragmentRankingPlayer();
+                            player.setUserID(players.get(x).getUserId());
+                            getChildFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.frameLayout_ranking_player, player)
+                                    .commit();
+                            new CountDownTimerAdapter(100) {
+                                @Override
+                                public void onFinish() {
+                                    layoutRankingGod.setVisibility(View.VISIBLE);
+                                    layoutRankingPlayer.setVisibility(View.VISIBLE);
+                                }
+                            }.start();
+                        }
+                    });
         }
+    }
+
+    private void changeVisibility() {
+        if (layoutRankingGod.getVisibility() == View.VISIBLE)
+            layoutRankingGod.setVisibility(View.INVISIBLE);
+        else layoutRankingGod.setVisibility(View.VISIBLE);
     }
 
 }

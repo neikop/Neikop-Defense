@@ -37,6 +37,9 @@ public class GameRankingLayout extends FrameLayout {
     @BindView(R.id.layout_background_ranking)
     View viewBackground;
 
+    @BindView(R.id.layout_background_listener)
+    View viewListener;
+
     private int number;
     private Drawable image;
     private int bgrColor;
@@ -110,5 +113,10 @@ public class GameRankingLayout extends FrameLayout {
     public void setScore(int score) {
         this.score = score;
         updateValues();
+    }
+
+    @Override
+    public void setOnClickListener(OnClickListener listener) {
+        viewListener.setOnClickListener(listener);
     }
 }

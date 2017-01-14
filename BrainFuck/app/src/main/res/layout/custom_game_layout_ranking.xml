@@ -86,4 +86,9 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/layout_background_listener"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+
 </FrameLayout>

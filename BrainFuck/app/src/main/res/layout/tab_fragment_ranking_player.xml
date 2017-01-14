@@ -3,26 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#33000000"
+    android:background="#66000000"
     tools:context=".screens.tabs.FragmentRankingPlayer">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="100dp">
+        android:layout_margin="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/custom_corner_background_0_2"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:background="@drawable/custom_corner_background_7_outline_chosen">
+                android:layout_height="100dp"
+                android:background="@drawable/custom_corner_background_0_1">
 
                 <RelativeLayout
                     android:id="@+id/layout_avatar"
@@ -57,8 +55,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="20dp"
                         android:scrollbars="none">
 
                         <TextView
@@ -68,7 +66,7 @@
                             android:text="Guest"
                             android:textAlignment="textEnd"
                             android:textColor="@color/colorWhite"
-                            android:textSize="28sp" />
+                            android:textSize="22sp" />
                     </HorizontalScrollView>
 
                     <TextView
@@ -81,7 +79,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="casual"
                         android:text="Neuron: 0"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                 </RelativeLayout>
@@ -95,10 +93,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_margin="10dp"
                     android:background="@drawable/custom_corner_background_3_gray"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:padding="10dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -108,7 +106,7 @@
 
                         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
                             android:id="@+id/progressbar_calculation"
-                            android:layout_width="220dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             app:rcBackgroundColor="@color/colorDark"
                             app:rcIconBackgroundColor="@color/custom_progress_red_header"
@@ -142,7 +140,7 @@
 
                         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
                             android:id="@+id/progressbar_concen"
-                            android:layout_width="220dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             app:rcBackgroundColor="@color/colorDark"
                             app:rcIconBackgroundColor="@color/custom_progress_green_progress"
@@ -176,7 +174,7 @@
 
                         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
                             android:id="@+id/progressbar_memory"
-                            android:layout_width="220dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             app:rcBackgroundColor="@color/colorDark"
                             app:rcIconBackgroundColor="@color/custom_progress_orange_progress"
@@ -209,7 +207,7 @@
 
                         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
                             android:id="@+id/progressbar_observation"
-                            android:layout_width="220dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             app:rcBackgroundColor="@color/colorDark"
                             app:rcIconBackgroundColor="@color/custom_progress_blue_progress"
