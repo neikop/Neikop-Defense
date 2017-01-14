@@ -44,6 +44,18 @@ public class FragmentProfile extends Fragment {
     @BindView(R.id.progressbar_obser)
     IconRoundCornerProgressBar barObser;
 
+    @BindView(R.id.textView_calcu_score)
+    TextView textViewCalcu;
+
+    @BindView(R.id.textView_concen_score)
+    TextView textViewConcen;
+
+    @BindView(R.id.textView_memory_score)
+    TextView textViewMemory;
+
+    @BindView(R.id.textView_observer_score)
+    TextView textViewObser;
+
     @BindView(R.id.imageView_user_avatar)
     ImageView imageViewUser;
 
@@ -52,18 +64,6 @@ public class FragmentProfile extends Fragment {
 
     @BindView(R.id.textView_high_score)
     TextView textViewScore;
-
-    @BindView(R.id.textView_calcu_score)
-    TextView textViewCalcu;
-
-    @BindView(R.id.textView_concen_score)
-    TextView textViewConcen;
-
-    @BindView(R.id.textView_observer_score)
-    TextView textViewObserver;
-
-    @BindView(R.id.textView_memory_score)
-    TextView textViewMemory;
 
     @BindView(R.id.button_setting)
     ImageView buttonSetting;
@@ -138,7 +138,7 @@ public class FragmentProfile extends Fragment {
             }
         textViewCalcu.setText(scoreCalcu + "");
         textViewConcen.setText(scoreConcen + "");
-        textViewObserver.setText(scoreObser + "");
+        textViewObser.setText(scoreObser + "");
         textViewMemory.setText(scoreMemo + "");
 
         float f = 500;
