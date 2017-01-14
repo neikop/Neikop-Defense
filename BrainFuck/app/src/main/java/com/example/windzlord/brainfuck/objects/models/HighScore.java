@@ -18,6 +18,9 @@ public class HighScore {
     @SerializedName("User_Name")
     private String userName;
 
+    @SerializedName("User_Image")
+    private String userImage;
+
     @SerializedName("Type")
     private String type;
 
@@ -37,11 +40,12 @@ public class HighScore {
     public HighScore() {
     }
 
-    public HighScore(String id, String userId, String userName,
+    public HighScore(String id, String userId, String userName, String userImage,
                      String type, int position, int level, int exp, int score) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;
+        this.userImage = userImage;
         this.type = type;
         this.position = position;
         this.level = level;
@@ -111,6 +115,14 @@ public class HighScore {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     @Override

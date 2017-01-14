@@ -160,14 +160,14 @@ public class FragmentSetting extends Fragment {
     }
 
     private void login(Profile profile) {
-        Log.d(TAG, "LOGIN");
         String userID = profile.getId(), userName = profile.getName();
         ManagerPreference.getInstance().putUserID(userID);
         ManagerPreference.getInstance().putUserName("N'" + userName + "'");
-
+        String url = profile.getProfilePictureUri(300, 300).toString();
+        ManagerPreference.getInstance().putUserImage(url);
+        Log.d(TAG, "LOGIN :" + url);
         ManagerServer.getInstance().checkExistedUser(userID);
         //load Image
-        String url = profile.getProfilePictureUri(300, 300).toString();
         new FragmentSetting.DownloadImage().execute(url);
     }
 

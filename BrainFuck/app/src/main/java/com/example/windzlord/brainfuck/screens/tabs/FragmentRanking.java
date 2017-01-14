@@ -72,6 +72,7 @@ public class FragmentRanking extends Fragment {
 
         Collections.sort(players, (o, s) -> s.getScore() == o.getScore() ?
                 s.getUserName().compareTo(o.getUserName()) : s.getScore() - o.getScore());
+
         for (int i = 0; i < (players.size() <= 10 ? players.size() : 10); i++) {
             boolean chosen = ManagerPreference.getInstance().getUserID()
                     .equals(players.get(i).getUserId());

@@ -24,6 +24,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
     private static final String COLUMN_ID = "ID";
     private static final String COLUMN_USER_ID = "User_ID";
     private static final String COLUMN_USER_NAME = "User_Name";
+    private static final String COLUMN_USER_IMAGE = "User_Image";
     private static final String COLUMN_TYPE = "Type";
     private static final String COLUMN_POSITION = "Position";
     private static final String COLUMN_LEVEL = "Level";
@@ -33,6 +34,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
             COLUMN_ID,
             COLUMN_USER_ID,
             COLUMN_USER_NAME,
+            COLUMN_USER_IMAGE,
             COLUMN_TYPE,
             COLUMN_POSITION,
             COLUMN_LEVEL,
@@ -101,12 +103,13 @@ public class ManagerUserData extends SQLiteAssetHelper {
         String id = cursor.getString(cursor.getColumnIndex(COLUMN_ID));
         String userId = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID));
         String userName = cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME));
+        String userImage = cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMAGE));
         String type = cursor.getString(cursor.getColumnIndex(COLUMN_TYPE));
         int position = cursor.getInt(cursor.getColumnIndex(COLUMN_POSITION));
         int level = cursor.getInt(cursor.getColumnIndex(COLUMN_LEVEL));
         int exp = cursor.getInt(cursor.getColumnIndex(COLUMN_EXP_CURRENT));
         int score = cursor.getInt(cursor.getColumnIndex(COLUMN_HIGH_SCORE));
-        return new HighScore(id, userId, userName, type, position, level, exp, score);
+        return new HighScore(id, userId, userName, userImage,type, position, level, exp, score);
     }
 
     public void updateDatabaseFromPreference() {
@@ -152,6 +155,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         values.put(COLUMN_ID, score.getId());
         values.put(COLUMN_USER_ID, score.getUserId());
         values.put(COLUMN_USER_NAME, score.getUserName());
+        values.put(COLUMN_USER_IMAGE, score.getUserImage());
         values.put(COLUMN_TYPE, score.getType());
         values.put(COLUMN_POSITION, score.getPosition());
         values.put(COLUMN_LEVEL, score.getLevel());
