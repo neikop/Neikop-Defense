@@ -168,7 +168,7 @@ public class FragmentSetting extends Fragment {
         ManagerServer.getInstance().checkExistedUser(userID);
         //load Image
         String url = profile.getProfilePictureUri(300, 300).toString();
-        new DownloadImage().execute(url);
+        new FragmentSetting.DownloadImage().execute(url);
     }
 
     private void logout() {

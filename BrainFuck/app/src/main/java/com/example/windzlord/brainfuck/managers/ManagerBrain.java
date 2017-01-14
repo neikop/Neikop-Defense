@@ -32,7 +32,7 @@ public class ManagerBrain {
     public final static String[] GAME_LIST = {MEMORY, CALCULATION, CONCENTRATION, OBSERVATION};
 
     public final static String SOUND_CORRECT = "sounds/true_sound.wav";
-    public final static String SOUND_WRONG = "sounds/wrong_sound.mp3";
+    public final static String SOUND_WRONG = "sounds/wrong_sound.wav";
     public final static String SOUND_PING = "sounds/ping_sound.wav";
     public final static String SOUND_WELCOME = "sounds/welcome.mp3";
 

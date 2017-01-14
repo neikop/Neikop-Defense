@@ -2,6 +2,7 @@ package com.example.windzlord.brainfuck.layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -33,9 +34,12 @@ public class GameRankingLayout extends FrameLayout {
     @BindView(R.id.imageView_avatar)
     ImageView imageViewAvatar;
 
+    @BindView(R.id.layout_background_ranking)
+    View viewBackground;
+
     private int number;
     private Drawable image;
-    private Drawable background;
+    private int bgrColor;
     private String name;
     private int score;
 
@@ -69,9 +73,8 @@ public class GameRankingLayout extends FrameLayout {
         score = typedArray.getInt(R.styleable.GameRankingLayout_score_ranking, 0);
         image = typedArray.getDrawable(R.styleable.GameRankingLayout_src_ranking);
         if (image == null) image = getResources().getDrawable(R.drawable.z_character_guest);
-        background = typedArray.getDrawable(R.styleable.GameRankingLayout_bgr_ranking);
-        if (background == null) background = getResources().getDrawable(
-                R.drawable.custom_oval_background_outline_profile);
+        bgrColor = typedArray.getInt(R.styleable.GameRankingLayout_bgr_ranking,
+                Color.parseColor("#CCAAEE"));
         typedArray.recycle();
         updateValues();
     }
@@ -79,7 +82,7 @@ public class GameRankingLayout extends FrameLayout {
     private void updateValues() {
         textViewNumber.setText(number + "");
         imageViewAvatar.setImageDrawable(image);
-        imageViewAvatar.setBackgroundDrawable(background);
+        viewBackground.setBackgroundColor(bgrColor);
         textViewName.setText(name);
         textViewScore.setText("Neuron " + score);
     }
@@ -94,8 +97,8 @@ public class GameRankingLayout extends FrameLayout {
         updateValues();
     }
 
-    public void setImageBackground(Drawable background) {
-        this.background = background;
+    public void setBgrColor(int bgrColor) {
+        this.bgrColor = bgrColor;
         updateValues();
     }
 
