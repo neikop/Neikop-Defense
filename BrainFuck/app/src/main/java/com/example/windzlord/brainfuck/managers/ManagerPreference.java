@@ -19,6 +19,7 @@ public class ManagerPreference {
     private static final String EXP_CURRENT = "ExpCurr";
     private static final String USER_ID = "UserID";
     private static final String USER_NAME = "UserName";
+    private static final String USER_IMAGE = "UserImage";
 
     private SharedPreferences sharedPreferences;
 
@@ -90,6 +91,14 @@ public class ManagerPreference {
 
     public String getUserID() {
         return sharedPreferences.getString(USER_ID, "");
+    }
+
+    public void putUserImage(String userImage) {
+        sharedPreferences.edit().putString(USER_IMAGE, userImage).apply();
+    }
+
+    public String getUserImage() {
+        return sharedPreferences.getString(USER_IMAGE, "");
     }
 
     public void putUserName(String userName) {

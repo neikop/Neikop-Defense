@@ -164,6 +164,7 @@ public class ManagerServer {
                         score.setUserId(userID);
                         score.setType(ManagerBrain.GAME_LIST[i]);
                         score.setUserName(ManagerPreference.getInstance().getUserName());
+                        score.setUserImage(ManagerPreference.getInstance().getUserImage());
                         score.setPosition(k);
                         score.setLevel(ManagerPreference.getInstance().getLevel(ManagerBrain.GAME_LIST[i], k));
                         score.setExp(ManagerPreference.getInstance().getExpCurrent(ManagerBrain.GAME_LIST[i], k));
