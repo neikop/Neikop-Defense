@@ -1,7 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="3dp"
     tools:context=".layout.GameRankingLayout">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_marginLeft="10dp">
 
             <TextView
-                android:id="@+id/textView_number"
+                android:id="@+id/textView_number_ranking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -37,7 +38,7 @@
                 android:src="@color/colorLight" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView_avatar"
+                android:id="@+id/imageView_avatar_ranking"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_oval_background_outline_profile"
@@ -63,7 +64,7 @@
                 android:scrollbars="none">
 
                 <TextView
-                    android:id="@+id/textView_name"
+                    android:id="@+id/textView_name_ranking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Guest"
@@ -73,12 +74,13 @@
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/textView_score"
+                android:id="@+id/textView_score_ranking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:fontFamily="casual"
                 android:text="Neuron: 0"
+                android:textColor="#696969"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -91,4 +93,4 @@
         android:layout_width="match_parent"
         android:layout_height="80dp" />
 
-</FrameLayout>
+</android.support.v7.widget.CardView>

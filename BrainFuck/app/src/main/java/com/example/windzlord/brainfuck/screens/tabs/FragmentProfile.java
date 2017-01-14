@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
  */
 public class FragmentProfile extends Fragment {
 
-    @BindView(R.id.progressbar_calculation)
+    @BindView(R.id.progressbar_calcu)
     IconRoundCornerProgressBar barCalcu;
 
     @BindView(R.id.progressbar_concen)
@@ -41,7 +41,7 @@ public class FragmentProfile extends Fragment {
     @BindView(R.id.progressbar_memory)
     IconRoundCornerProgressBar barMemory;
 
-    @BindView(R.id.progressbar_observation)
+    @BindView(R.id.progressbar_obser)
     IconRoundCornerProgressBar barObser;
 
     @BindView(R.id.imageView_user_avatar)
@@ -114,12 +114,17 @@ public class FragmentProfile extends Fragment {
         textViewScore.setText("Neuron " + neuron);
     }
 
-    private int scoreCalcu = 0;
-    private int scoreConcen = 0;
-    private int scoreMemo = 0;
-    private int scoreObser = 0;
+    private int scoreCalcu;
+    private int scoreConcen;
+    private int scoreMemo;
+    private int scoreObser;
 
     public void getProgressbar() {
+        scoreCalcu = 0;
+        scoreConcen = 0;
+        scoreMemo = 0;
+        scoreObser = 0;
+
         for (String game : ManagerBrain.GAME_LIST)
             for (int i = 1; i <= 3; i++) {
                 scoreCalcu += game.equals(ManagerBrain.CALCULATION) ?

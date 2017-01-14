@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.windzlord.brainfuck.screens.tabs.FragmentAnalyst;
+import com.example.windzlord.brainfuck.screens.tabs.FragmentWelcomeTab;
 import com.example.windzlord.brainfuck.screens.tabs.FragmentPractice;
 import com.example.windzlord.brainfuck.screens.tabs.FragmentProfile;
 import com.example.windzlord.brainfuck.screens.tabs.FragmentRanking;
@@ -26,7 +26,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new FragmentAnalyst();
+                return new FragmentWelcomeTab();
             case 1:
                 return new FragmentPractice();
             case 2:

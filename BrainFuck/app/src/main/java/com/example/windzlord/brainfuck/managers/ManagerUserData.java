@@ -11,6 +11,7 @@ import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -52,6 +53,16 @@ public class ManagerUserData extends SQLiteAssetHelper {
                 null, null, COLUMN_USER_ID, null, null, null);
         while (cursor.moveToNext()) players.add(createScore(cursor));
 
+        return players;
+    }
+
+    public List<HighScore> getListPlayerSorted() {
+        List<HighScore> players = getListPlayer();
+        for (HighScore player : players)
+            player.setScore(ManagerUserData.getInstance().getExperience(player.getUserId()));
+
+        Collections.sort(players, (o, s) -> s.getScore() == o.getScore() ?
+                s.getUserName().compareTo(o.getUserName()) : s.getScore() - o.getScore());
         return players;
     }
 
@@ -109,7 +120,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         int level = cursor.getInt(cursor.getColumnIndex(COLUMN_LEVEL));
         int exp = cursor.getInt(cursor.getColumnIndex(COLUMN_EXP_CURRENT));
         int score = cursor.getInt(cursor.getColumnIndex(COLUMN_HIGH_SCORE));
-        return new HighScore(id, userId, userName, userImage,type, position, level, exp, score);
+        return new HighScore(id, userId, userName, userImage, type, position, level, exp, score);
     }
 
     public void updateDatabaseFromPreference() {

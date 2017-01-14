@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryMain"
-    tools:context=".screens.tabs.FragmentAnalyst">
+    tools:context=".screens.tabs.FragmentWelcomeTab">
 
     <TextView
         android:id="@+id/textView_feedback"

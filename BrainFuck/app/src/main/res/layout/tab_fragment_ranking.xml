@@ -23,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="110dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="60dp"
+        android:visibility="invisible">
 
         <LinearLayout
             android:id="@+id/layout_player_ranking"
@@ -35,76 +36,82 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="1"
+                app:number_ranking="1"
                 app:src_ranking="@drawable/ic_ranking_diamond" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="2"
+                app:number_ranking="2"
                 app:src_ranking="@drawable/ic_ranking_premium" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="3"
+                app:number_ranking="3"
                 app:src_ranking="@drawable/ic_ranking_gold" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="4"
+                app:number_ranking="4"
                 app:src_ranking="@drawable/ic_ranking_silver" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="5"
+                app:number_ranking="5"
                 app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="6"
+                app:number_ranking="6"
                 app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="7"
+                app:number_ranking="7"
                 app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="8"
+                app:number_ranking="8"
                 app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                app:number="9"
+                app:number_ranking="9"
                 app:src_ranking="@drawable/ic_ranking_bronze" />
 
             <com.example.windzlord.brainfuck.layout.GameRankingLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
-                app:number="10"
+                app:number_ranking="10"
                 app:src_ranking="@drawable/ic_ranking_bronze" />
 
         </LinearLayout>
 
     </ScrollView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="110dp"
+        android:layout_marginTop="60dp" />
 
     <View
         android:id="@+id/frameLayout_ranking_god"

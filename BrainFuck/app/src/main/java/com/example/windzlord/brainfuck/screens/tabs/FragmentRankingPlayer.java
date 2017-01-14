@@ -2,12 +2,9 @@ package com.example.windzlord.brainfuck.screens.tabs;
 
 
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +14,10 @@ import android.widget.TextView;
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.ManagerBrain;
-import com.example.windzlord.brainfuck.managers.ManagerFile;
-import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,7 +28,7 @@ import butterknife.ButterKnife;
  */
 public class FragmentRankingPlayer extends Fragment {
 
-    @BindView(R.id.progressbar_calculation)
+    @BindView(R.id.progressbar_calcu)
     IconRoundCornerProgressBar barCalcu;
 
     @BindView(R.id.progressbar_concen)
@@ -43,7 +37,7 @@ public class FragmentRankingPlayer extends Fragment {
     @BindView(R.id.progressbar_memory)
     IconRoundCornerProgressBar barMemory;
 
-    @BindView(R.id.progressbar_observation)
+    @BindView(R.id.progressbar_obser)
     IconRoundCornerProgressBar barObser;
 
     @BindView(R.id.imageView_user_avatar)
@@ -95,7 +89,6 @@ public class FragmentRankingPlayer extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
 
-        System.out.println(userID);
         setupUI();
         getProgressbar();
     }
@@ -112,18 +105,24 @@ public class FragmentRankingPlayer extends Fragment {
         ImageLoader.getInstance().displayImage(player.getUserImage(), imageViewUser);
     }
 
-    private int scoreCalcu = 0;
-    private int scoreConcen = 0;
-    private int scoreMemo = 0;
-    private int scoreObser = 0;
+    private int scoreCalcu;
+    private int scoreConcen;
+    private int scoreMemo;
+    private int scoreObser;
 
     public void getProgressbar() {
+        scoreCalcu = 0;
+        scoreConcen = 0;
+        scoreMemo = 0;
+        scoreObser = 0;
+
         for (HighScore score : scores) {
             scoreCalcu += score.getType().equals(ManagerBrain.CALCULATION) ? score.getScore() : 0;
             scoreConcen += score.getType().equals(ManagerBrain.CONCENTRATION) ? score.getScore() : 0;
             scoreMemo += score.getType().equals(ManagerBrain.MEMORY) ? score.getScore() : 0;
             scoreObser += score.getType().equals(ManagerBrain.OBSERVATION) ? score.getScore() : 0;
         }
+
         textViewCalcu.setText(scoreCalcu + "");
         textViewConcen.setText(scoreConcen + "");
         textViewObserver.setText(scoreObser + "");

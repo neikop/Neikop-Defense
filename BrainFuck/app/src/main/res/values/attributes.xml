@@ -22,7 +22,7 @@
 
     <declare-styleable name="GameRankingLayout">
         <attr name="name_ranking" format="string" />
-        <attr name="number" format="integer" />
+        <attr name="number_ranking" format="integer" />
         <attr name="score_ranking" format="integer" />
         <attr name="bgr_ranking" format="integer" />
         <attr name="src_ranking" format="integer" />

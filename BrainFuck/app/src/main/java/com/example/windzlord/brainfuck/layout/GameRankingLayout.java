@@ -22,16 +22,16 @@ import butterknife.ButterKnife;
 
 public class GameRankingLayout extends FrameLayout {
 
-    @BindView(R.id.textView_number)
+    @BindView(R.id.textView_number_ranking)
     TextView textViewNumber;
 
-    @BindView(R.id.textView_name)
+    @BindView(R.id.textView_name_ranking)
     TextView textViewName;
 
-    @BindView(R.id.textView_score)
+    @BindView(R.id.textView_score_ranking)
     TextView textViewScore;
 
-    @BindView(R.id.imageView_avatar)
+    @BindView(R.id.imageView_avatar_ranking)
     ImageView imageViewAvatar;
 
     @BindView(R.id.layout_background_ranking)
@@ -70,7 +70,7 @@ public class GameRankingLayout extends FrameLayout {
     }
 
     private void getValues(TypedArray typedArray) {
-        number = typedArray.getInt(R.styleable.GameRankingLayout_number, -1);
+        number = typedArray.getInt(R.styleable.GameRankingLayout_number_ranking, -1);
         name = typedArray.getString(R.styleable.GameRankingLayout_name_ranking);
         if (name == null) name = "Unknown";
         score = typedArray.getInt(R.styleable.GameRankingLayout_score_ranking, 0);

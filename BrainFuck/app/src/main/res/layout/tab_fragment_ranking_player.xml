@@ -105,7 +105,7 @@
                         android:orientation="horizontal">
 
                         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
-                            android:id="@+id/progressbar_calculation"
+                            android:id="@+id/progressbar_calcu"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             app:rcBackgroundColor="@color/colorDark"
@@ -206,7 +206,7 @@
                         android:orientation="horizontal">
 
                         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
-                            android:id="@+id/progressbar_observation"
+                            android:id="@+id/progressbar_obser"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             app:rcBackgroundColor="@color/colorDark"

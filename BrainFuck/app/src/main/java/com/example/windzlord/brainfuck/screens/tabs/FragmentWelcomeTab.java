@@ -14,11 +14,11 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentAnalyst extends Fragment {
+public class FragmentWelcomeTab extends Fragment {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    public FragmentAnalyst() {
+    public FragmentWelcomeTab() {
         // Required empty public constructor
     }
 
@@ -27,7 +27,7 @@ public class FragmentAnalyst extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.tab_fragment_feedback, container, false);
+        View view = inflater.inflate(R.layout.tab_fragment_welcome, container, false);
         settingThingsUp(view);
 
         return view;
