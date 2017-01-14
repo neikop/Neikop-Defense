@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/demo_background_game_5"
+    android:background="@drawable/demo_background_game_17"
     tools:context="com.example.windzlord.brainfuck.screens.games.concentration.ConcenThree">
 
     <TextView

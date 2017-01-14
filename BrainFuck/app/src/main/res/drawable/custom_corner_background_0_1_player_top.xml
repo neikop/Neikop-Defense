@@ -8,6 +8,9 @@
         android:width="3dp"
         android:color="@color/colorOrangeLight" />
 
-    <corners android:radius="5dp" />
+    <corners
+
+        android:topLeftRadius="5dp"
+        android:topRightRadius="5dp"/>
 
 </shape>

@@ -14,13 +14,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/custom_corner_background_0_2"
+            android:background="@drawable/custom_corner_background_0_1_player_bottom"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/custom_corner_background_0_1">
+                android:background="@drawable/custom_corner_background_0_1_player_top">
 
                 <RelativeLayout
                     android:id="@+id/layout_avatar"

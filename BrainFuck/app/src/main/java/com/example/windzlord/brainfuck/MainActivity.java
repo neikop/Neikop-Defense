@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     R.anim.nothing, R.anim.go_left_out);
         } else if (name.equals(FragmentSetting.class.getSimpleName())) {
             fragmentTransaction.setCustomAnimations(R.anim.go_fade_in, R.anim.nothing,
-                    R.anim.nothing, R.anim.go_right_out);
+                    R.anim.nothing, R.anim.go_left_out);
         } else {
             fragmentTransaction.setCustomAnimations(R.anim.zoom_in, R.anim.nothing,
                     R.anim.nothing, R.anim.zoom_out);

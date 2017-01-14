@@ -4,14 +4,12 @@ package com.example.windzlord.brainfuck.screens.tabs;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 import com.example.windzlord.brainfuck.R;
-import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.layout.GameRankingLayout;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
@@ -84,7 +82,7 @@ public class FragmentRanking extends Fragment {
     }
 
     private void addListeners() {
-        layoutRankingGod.setOnClickListener((ignored) -> System.out.println("Click cmm a`?"));
+        layoutRankingGod.setOnClickListener((ignored) -> System.out.println("CLICKED NULL"));
 
         for (int i = 0; i < layoutPlayerRanking.getChildCount(); i++) {
             int x = i;
@@ -93,22 +91,17 @@ public class FragmentRanking extends Fragment {
                         if (layoutRankingGod.getVisibility() == View.VISIBLE) {
                             getChildFragmentManager().popBackStack();
                             layoutRankingGod.setVisibility(View.INVISIBLE);
-                            layoutRankingPlayer.setVisibility(View.INVISIBLE);
                         } else {
                             FragmentRankingPlayer player = new FragmentRankingPlayer();
                             player.setUserID(players.get(x).getUserId());
                             getChildFragmentManager()
                                     .beginTransaction()
+                                    .setCustomAnimations(R.anim.go_fade_in_300, R.anim.nothing)
                                     .replace(R.id.frameLayout_ranking_player, player)
                                     .addToBackStack(null)
                                     .commit();
-                            new CountDownTimerAdapter(100) {
-                                @Override
-                                public void onFinish() {
-                                    layoutRankingGod.setVisibility(View.VISIBLE);
-                                    layoutRankingPlayer.setVisibility(View.VISIBLE);
-                                }
-                            }.start();
+                            layoutRankingGod.setVisibility(View.VISIBLE);
+
                         }
                     });
         }
@@ -118,7 +111,5 @@ public class FragmentRanking extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         getChildFragmentManager().popBackStack();
-        layoutRankingGod.setVisibility(View.INVISIBLE);
-        layoutRankingPlayer.setVisibility(View.INVISIBLE);
     }
 }
