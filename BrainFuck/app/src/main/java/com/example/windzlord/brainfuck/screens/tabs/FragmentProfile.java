@@ -103,27 +103,23 @@ public class FragmentProfile extends Fragment {
             ImageLoader.getInstance().displayImage(Uri.fromFile(file).toString(), imageViewUser);
         } else imageViewUser.setImageResource(R.drawable.z_character_guest);
 
-        int score = 0;
+        int neuron = 0;
         for (String game : ManagerBrain.GAME_LIST) {
             for (int i = 1; i < 4; i++) {
                 int level = ManagerPreference.getInstance().getLevel(game, i);
                 int exp = ManagerPreference.getInstance().getExpCurrent(game, i);
-                score += (level * (level - 1) / 2) * 300 + exp;
+                neuron += (level * (level - 1) / 2) * 300 + exp;
             }
         }
-        textViewScore.setText("Neuron " + score);
+        textViewScore.setText("Neuron " + neuron);
     }
 
-    private int scoreCalcu;
-    private int scoreConcen;
-    private int scoreMemo;
-    private int scoreObser;
+    private int scoreCalcu = 0;
+    private int scoreConcen = 0;
+    private int scoreMemo = 0;
+    private int scoreObser = 0;
 
     public void getProgressbar() {
-        scoreCalcu = 0;
-        scoreConcen = 0;
-        scoreMemo = 0;
-        scoreObser = 0;
         for (String game : ManagerBrain.GAME_LIST)
             for (int i = 1; i <= 3; i++) {
                 scoreCalcu += game.equals(ManagerBrain.CALCULATION) ?

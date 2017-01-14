@@ -105,50 +105,31 @@ public class FragmentRankingPlayer extends Fragment {
         textViewUser.setTypeface(font);
         String userName = player.getUserName();
         textViewUser.setText(userName.substring(2, userName.length() - 1));
-
-        if (!userID.isEmpty()) {
-            File file = ManagerFile.getInstance().loadImage(userID);
-            ImageLoader.getInstance().displayImage(Uri.fromFile(file).toString(), imageViewUser);
-        } else imageViewUser.setImageResource(R.drawable.z_character_guest);
-
-        int score = 0;
-        for (String game : ManagerBrain.GAME_LIST) {
-            for (int i = 1; i < 4; i++) {
-                int level = ManagerPreference.getInstance().getLevel(game, i);
-                int exp = ManagerPreference.getInstance().getExpCurrent(game, i);
-                score += (level * (level - 1) / 2) * 300 + exp;
-            }
-        }
-        textViewScore.setText("Neuron " + score);
+        int neuron = 0;
+        for (HighScore score : scores)
+            neuron += (score.getLevel() * score.getLevel() - 1) / 2 * 300 + score.getExp();
+        textViewScore.setText("Neuron " + neuron);
+        ImageLoader.getInstance().displayImage(player.getUserImage(), imageViewUser);
     }
 
-    private int scoreCalcu;
-    private int scoreConcen;
-    private int scoreMemo;
-    private int scoreObser;
+    private int scoreCalcu = 0;
+    private int scoreConcen = 0;
+    private int scoreMemo = 0;
+    private int scoreObser = 0;
 
     public void getProgressbar() {
-        scoreCalcu = 0;
-        scoreConcen = 0;
-        scoreMemo = 0;
-        scoreObser = 0;
-        for (String game : ManagerBrain.GAME_LIST)
-            for (int i = 1; i <= 3; i++) {
-                scoreCalcu += game.equals(ManagerBrain.CALCULATION) ?
-                        ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreConcen += game.equals(ManagerBrain.CONCENTRATION) ?
-                        ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreMemo += game.equals(ManagerBrain.MEMORY) ?
-                        ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreObser += game.equals(ManagerBrain.OBSERVATION) ?
-                        ManagerPreference.getInstance().getScore(game, i) : 0;
-            }
+        for (HighScore score : scores) {
+            scoreCalcu += score.getType().equals(ManagerBrain.CALCULATION) ? score.getScore() : 0;
+            scoreConcen += score.getType().equals(ManagerBrain.CONCENTRATION) ? score.getScore() : 0;
+            scoreMemo += score.getType().equals(ManagerBrain.MEMORY) ? score.getScore() : 0;
+            scoreObser += score.getType().equals(ManagerBrain.OBSERVATION) ? score.getScore() : 0;
+        }
         textViewCalcu.setText(scoreCalcu + "");
         textViewConcen.setText(scoreConcen + "");
         textViewObserver.setText(scoreObser + "");
         textViewMemory.setText(scoreMemo + "");
 
-        float f = 200;
+        float f = 300;
         new CountDownTimer((long) f, 1) {
             @Override
             public void onTick(long l) {

@@ -60,7 +60,6 @@ public class FragmentRanking extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
 
-        changeVisibility();
         getPlayerRanking();
         addListeners();
     }
@@ -92,6 +91,7 @@ public class FragmentRanking extends Fragment {
             ((GameRankingLayout) layoutPlayerRanking.getChildAt(i)) // DO NOT DELETE
                     .setOnClickListener((v) -> {
                         if (layoutRankingGod.getVisibility() == View.VISIBLE) {
+                            getChildFragmentManager().popBackStack();
                             layoutRankingGod.setVisibility(View.INVISIBLE);
                             layoutRankingPlayer.setVisibility(View.INVISIBLE);
                         } else {
@@ -100,6 +100,7 @@ public class FragmentRanking extends Fragment {
                             getChildFragmentManager()
                                     .beginTransaction()
                                     .replace(R.id.frameLayout_ranking_player, player)
+                                    .addToBackStack(null)
                                     .commit();
                             new CountDownTimerAdapter(100) {
                                 @Override
@@ -113,10 +114,11 @@ public class FragmentRanking extends Fragment {
         }
     }
 
-    private void changeVisibility() {
-        if (layoutRankingGod.getVisibility() == View.VISIBLE)
-            layoutRankingGod.setVisibility(View.INVISIBLE);
-        else layoutRankingGod.setVisibility(View.VISIBLE);
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getChildFragmentManager().popBackStack();
+        layoutRankingGod.setVisibility(View.INVISIBLE);
+        layoutRankingPlayer.setVisibility(View.INVISIBLE);
     }
-
 }
