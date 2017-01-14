@@ -392,33 +392,34 @@ public abstract class GameDaddy extends Fragment {
         updateInfo(name, index);
     }
 
-    protected void updateInfo(String name, int index) {
-        goEndAnimation(score > ManagerPreference.getInstance().getScore(name, index));
+    protected void updateInfo(String name, int position) {
+        goEndAnimation(score > ManagerPreference.getInstance().getScore(name, position));
 
-        int level = ManagerPreference.getInstance().getLevel(name, index);
-        int expNext = ManagerPreference.getInstance().getExpNext(name, index);
-        int expCurrent = ManagerPreference.getInstance().getExpCurrent(name, index);
+        int level = ManagerPreference.getInstance().getLevel(name, position);
+        int expNext = ManagerPreference.getInstance().getExpNext(name, position);
+        int expCurrent = ManagerPreference.getInstance().getExpCurrent(name, position);
         String userID = ManagerPreference.getInstance().getUserID();
 
         expCurrent += score;
-        if (expCurrent >= expNext) {
-            expCurrent = expCurrent - expNext;
-            level++;
-        }
+        boolean levelUp = expCurrent >= expNext;
+        expCurrent = expCurrent - (levelUp ? expNext : 0);
+        level += levelUp ? 1 : 0;
 
-        ManagerPreference.getInstance().putLevel(name, index, level);
-        ManagerPreference.getInstance().putExpCurrent(name, index, expCurrent);
-        ManagerPreference.getInstance().putScore(name, index,
-                Math.max(score, ManagerPreference.getInstance().getScore(name, index)));
+        // Update Preference
+        ManagerPreference.getInstance().putLevel(name, position, level);
+        ManagerPreference.getInstance().putExpCurrent(name, position, expCurrent);
+        ManagerPreference.getInstance().putScore(name, position,
+                Math.max(score, ManagerPreference.getInstance().getScore(name, position)));
 
+        // Update Database local
         ManagerUserData.getInstance().updateScore(
-                userID, name, index, level, expCurrent,
-                ManagerPreference.getInstance().getScore(name, index));
+                userID, name, position, level, expCurrent,
+                ManagerPreference.getInstance().getScore(name, position));
 
+        // Upload to server
         if (ManagerNetwork.getInstance().isConnectedToInternet())
-            if (!ManagerPreference.getInstance().getUserID().isEmpty())
-                ManagerServer.getInstance().uploadSingleScore(
-                        ManagerUserData.getInstance().getScoreByInfo(userID, name, index));
+            if (!userID.isEmpty()) ManagerServer.getInstance().uploadSingleScore(
+                    ManagerUserData.getInstance().getScoreByInfo(userID, name, position));
     }
 
     protected void goEndAnimation(boolean getHigh) {
@@ -475,9 +476,7 @@ public abstract class GameDaddy extends Fragment {
 
     protected List<View> goChildGroup(ViewGroup group) {
         List<View> ret = new ArrayList<>();
-        for (int i = 0; i < group.getChildCount(); i++) {
-            ret.add(group.getChildAt(i));
-        }
+        for (int i = 0; i < group.getChildCount(); i++) ret.add(group.getChildAt(i));
         return ret;
     }
 

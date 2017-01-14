@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
@@ -139,20 +140,9 @@ public class FragmentSetting extends Fragment {
                         new ProfileTracker() {
                             @Override
                             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                                if (currentProfile != null) {
-                                    ManagerPreference.getInstance().putUserID(currentProfile.getId());
-                                    ManagerPreference.getInstance().putUserName("N'" + currentProfile.getName() + "'");
-
-                                    ManagerServer.getInstance().checkExistedUser(currentProfile.getId());
-                                    //load Image
-                                    String url = currentProfile.getProfilePictureUri(300, 300).toString();
-                                    new DownloadImage().execute(url);
-                                } else {
-                                    ManagerServer.getInstance().uploadLocalToServer(
-                                            ManagerPreference.getInstance().getUserID());
-                                    ManagerPreference.getInstance().putUserID("");
-                                    ManagerPreference.getInstance().putUserName("N'Guest'");
-                                }
+                                if (currentProfile != null)
+                                    login(currentProfile);
+                                else logout();
                             }
                         }.startTracking();
                     }
@@ -167,6 +157,31 @@ public class FragmentSetting extends Fragment {
                         Log.d(TAG, "onError");
                     }
                 });
+    }
+
+    private void login(Profile profile) {
+        Log.d(TAG, "LOGIN");
+        String userID = profile.getId(), userName = profile.getName();
+        ManagerPreference.getInstance().putUserID(userID);
+        ManagerPreference.getInstance().putUserName("N'" + userName + "'");
+
+        ManagerServer.getInstance().checkExistedUser(userID);
+        //load Image
+        String url = profile.getProfilePictureUri(300, 300).toString();
+        new DownloadImage().execute(url);
+    }
+
+    private void logout() {
+        Log.d(TAG, "LOGOUT");
+        ManagerServer.getInstance().uploadLocalToServer(
+                ManagerPreference.getInstance().getUserID());
+        new CountDownTimerAdapter(500) {
+            @Override
+            public void onFinish() {
+                ManagerPreference.getInstance().putUserID("");
+                ManagerPreference.getInstance().putUserName("N'Guest'");
+            }
+        }.start();
     }
 
     private class DownloadImage extends AsyncTask<Object, Void, Bitmap> {

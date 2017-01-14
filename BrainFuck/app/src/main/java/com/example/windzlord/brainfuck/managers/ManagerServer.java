@@ -57,17 +57,17 @@ public class ManagerServer {
 
     public void uploadLocalToServer(String userID) {
         if (!ManagerNetwork.getInstance().isConnectedToInternet()) return;
-        if (!userID.isEmpty()) {
+        if (userID.isEmpty()) downloadServerToLocal();
+        else {
             Log.d(TAG, "uploadLocalToServer");
-            List<HighScore> scores = ManagerUserData.getInstance().getScoreByUserId(userID);
-            uploadScores(scores);
+            ManagerUserData.getInstance().updateDatabaseFromPreference();
+            uploadScores(ManagerUserData.getInstance().getScoreByUserId(userID));
         }
-        downloadServerToLocal();
     }
 
     public void uploadScores(List<HighScore> scores) {
         if (scores.isEmpty()) return;
-        Log.d(TAG, "Begin uploadScores  " + scores.get(0).getUserName());
+        Log.d(TAG, "Begin upload " + scores.get(0).getUserName());
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -79,23 +79,7 @@ public class ManagerServer {
                         Log.d(TAG, "Fail uploadScore: " + score);
                     }
                 }
-                return null;
-            }
-        });
-    }
-
-    // When end game
-    public void uploadSingleScore(HighScore score) {
-        Log.d(TAG, "Begin uploadScore - " + score);
-        runAsyncTask(new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    mServiceTable.update(score).get();
-                    Log.d(TAG, "Begin uploadScore - Done uploadScore: " + score);
-                } catch (ExecutionException | InterruptedException ignored) {
-                    Log.d(TAG, "Begin uploadScore - Fail uploadScore: " + score);
-                }
+                downloadServerToLocal();
                 return null;
             }
         });
@@ -115,7 +99,6 @@ public class ManagerServer {
                     Log.d(TAG, "Scores on local before: "
                             + ManagerUserData.getInstance().getListScore().size());
                     ManagerUserData.getInstance().updateDatabase(scores);
-                    updateDataReference(ManagerPreference.getInstance().getUserID());
                     Log.d(TAG, "Scores on local after: "
                             + ManagerUserData.getInstance().getListScore().size());
                 } catch (ExecutionException | InterruptedException | MobileServiceException serverException) {
@@ -130,20 +113,37 @@ public class ManagerServer {
 
     private List<HighScore> getListScoreServer()
             throws ExecutionException, InterruptedException, MobileServiceException {
-        Log.d(TAG, "getListScoreServer");
         return mServiceTable.execute().get();
+    }
+
+    // When END GAME
+    public void uploadSingleScore(HighScore score) {
+        Log.d(TAG, "END GAME - Begin upload " + score);
+        runAsyncTask(new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    mServiceTable.update(score).get();
+                    Log.d(TAG, "END GAME - Done uploadScore: " + score);
+                } catch (ExecutionException | InterruptedException ignored) {
+                    Log.d(TAG, "END GAME - Fail uploadScore: " + score);
+                }
+                return null;
+            }
+        });
     }
 
     // When Login
     public void checkExistedUser(String userID) {
         Log.d(TAG, "checkExistedUser " + userID);
         if (ManagerUserData.getInstance().isExistedUser(userID))
-            updateDataReference(userID);
-        else createNewUser(userID);
+            updatePreferenceWhenLogin(userID);
+        else createNewUserWhenLogin(userID);
     }
 
-    private void updateDataReference(String userID) {
-        Log.d(TAG, "updateDataReference " + userID);
+    // When Login
+    private void updatePreferenceWhenLogin(String userID) {
+        Log.d(TAG, "updatePreferenceWhenLogin " + userID);
         List<HighScore> scores = ManagerUserData.getInstance().getScoreByUserId(userID);
         for (HighScore score : scores) {
             ManagerPreference.getInstance().putLevel(score.getType(), score.getPosition(), score.getLevel());
@@ -152,8 +152,9 @@ public class ManagerServer {
         }
     }
 
-    private void createNewUser(String userID) {
-        Log.d(TAG, "createNewUser");
+    // When Login
+    private void createNewUserWhenLogin(String userID) {
+        Log.d(TAG, "createNewUserWhenLogin");
         runAsyncTask(new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -169,13 +170,13 @@ public class ManagerServer {
                         score.setScore(ManagerPreference.getInstance().getScore(ManagerBrain.GAME_LIST[i], k));
                         try {
                             mServiceTable.insert(score).get();
-                            Log.d(TAG, "insert score: " + score.getUserName() + ManagerBrain.GAME_LIST[i] + k);
+                            Log.d(TAG, "insertScore to SERVER " + score.getUserName() + ManagerBrain.GAME_LIST[i] + k);
                         } catch (InterruptedException | ExecutionException ignored) {
                         }
                     }
                 }
                 downloadServerToLocal();
-                updateDataReference(userID);
+                updatePreferenceWhenLogin(userID);
                 return null;
             }
         });

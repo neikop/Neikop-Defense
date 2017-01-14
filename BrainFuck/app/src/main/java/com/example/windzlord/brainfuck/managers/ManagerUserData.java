@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.windzlord.brainfuck.MainBrain;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -61,9 +62,9 @@ public class ManagerUserData extends SQLiteAssetHelper {
         return scores;
     }
 
-    public List<HighScore> getScoreByUserId(String userId) {
+    public List<HighScore> getScoreByUserId(String userID) {
         ArrayList<HighScore> scores = new ArrayList<>();
-        String WHERE = String.format("%s LIKE '%s'", COLUMN_USER_ID, userId);
+        String WHERE = String.format("%s LIKE '%s'", COLUMN_USER_ID, userID);
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS, WHERE,
                 null, null, null, null, null);
         while (cursor.moveToNext()) scores.add(createScore(cursor));
@@ -71,16 +72,16 @@ public class ManagerUserData extends SQLiteAssetHelper {
         return scores;
     }
 
-    public int getExperience(String userId) {
+    public int getExperience(String userID) {
         int sum = 0;
-        List<HighScore> scores = getScoreByUserId(userId);
+        List<HighScore> scores = getScoreByUserId(userID);
         for (HighScore score : scores)
             sum += (score.getLevel() * (score.getLevel() - 1) / 2) * 300 + score.getExp();
         return sum;
     }
 
-    public boolean isExistedUser(String userId) {
-        return !getScoreByUserId(userId).isEmpty();
+    public boolean isExistedUser(String userID) {
+        return !getScoreByUserId(userID).isEmpty();
     }
 
     public HighScore getScoreByInfo(String userId, String type, int position) {
@@ -108,18 +109,21 @@ public class ManagerUserData extends SQLiteAssetHelper {
         return new HighScore(id, userId, userName, type, position, level, exp, score);
     }
 
-    public int updateScore(String userId, String type, int position, int level, int exp, int score) {
-        ContentValues values = new ContentValues();
-
-        values.put(COLUMN_LEVEL, level);
-        values.put(COLUMN_EXP_CURRENT, exp);
-        values.put(COLUMN_HIGH_SCORE, score);
-        String WHERE = String.format("%s LIKE '%s' AND %s LIKE '%s' AND %s = %s",
-                COLUMN_USER_ID, userId, COLUMN_TYPE, type, COLUMN_POSITION, position);
-        return sqLiteDatabase.update(TABLE_NAME, values, WHERE, null);
+    public void updateDatabaseFromPreference() {
+        Log.d(TAG, "updateDatabaseFromPreference");
+        String userID = ManagerPreference.getInstance().getUserID();
+        for (int i = 0; i < ManagerBrain.GAME_LIST.length; i++) {
+            for (int position = 1; position < 4; position++) {
+                String type = ManagerBrain.GAME_LIST[i];
+                int level = ManagerPreference.getInstance().getLevel(type, position);
+                int exp = ManagerPreference.getInstance().getExpCurrent(type, position);
+                int score = ManagerPreference.getInstance().getScore(type, position);
+                updateScore(userID, type, position, level, exp, score);
+            }
+        }
     }
 
-    void updateDatabase(List<HighScore> scores) {
+    public void updateDatabase(List<HighScore> scores) {
         Log.d(TAG, "updateDatabase");
         for (HighScore score : scores)
             if (updateScore(score) == 0)
@@ -127,13 +131,23 @@ public class ManagerUserData extends SQLiteAssetHelper {
     }
 
     private int updateScore(HighScore score) {
-        Log.d(TAG, "updateScore " + score);
+        Log.d(TAG, "updateScore to LOCAL " + score);
         return updateScore(score.getUserId(), score.getType(), score.getPosition(),
                 score.getLevel(), score.getExp(), score.getScore());
     }
 
+    public int updateScore(String userID, String type, int position, int level, int exp, int score) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_LEVEL, level);
+        values.put(COLUMN_EXP_CURRENT, exp);
+        values.put(COLUMN_HIGH_SCORE, score);
+        String WHERE = String.format("%s LIKE '%s' AND %s LIKE '%s' AND %s = %s",
+                COLUMN_USER_ID, userID, COLUMN_TYPE, type, COLUMN_POSITION, position);
+        return sqLiteDatabase.update(TABLE_NAME, values, WHERE, null);
+    }
+
     public void insertScore(HighScore score) {
-        Log.d(TAG, "insertScore " + score);
+        Log.d(TAG, "insertScore to LOCAL " + score);
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, score.getId());
         values.put(COLUMN_USER_ID, score.getUserId());
