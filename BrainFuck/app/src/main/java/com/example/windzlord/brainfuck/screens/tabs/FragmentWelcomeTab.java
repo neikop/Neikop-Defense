@@ -1,6 +1,7 @@
 package com.example.windzlord.brainfuck.screens.tabs;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,9 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -22,29 +26,16 @@ import butterknife.ButterKnife;
  */
 public class FragmentWelcomeTab extends Fragment {
 
-    @BindView(R.id.progressbar_calcu)
-    IconRoundCornerProgressBar barCalcu;
-
-    @BindView(R.id.progressbar_concen)
-    IconRoundCornerProgressBar barConcen;
-
-    @BindView(R.id.progressbar_memory)
-    IconRoundCornerProgressBar barMemory;
-
-    @BindView(R.id.progressbar_obser)
-    IconRoundCornerProgressBar barObser;
-
-    @BindView(R.id.textView_calcu_score)
-    TextView textViewCalcu;
-
-    @BindView(R.id.textView_concen_score)
-    TextView textViewConcen;
-
-    @BindView(R.id.textView_memory_score)
-    TextView textViewMemory;
-
-    @BindView(R.id.textView_obser_score)
-    TextView textViewObser;
+    @BindView(R.id.piechart)
+    PieChart mPieChart;
+    @BindView(R.id.piechart_calcul)
+    PieChart pieChart_Calcu;
+    @BindView(R.id.piechart_concen)
+    PieChart pieChart_Concen;
+    @BindView(R.id.piechart_obser)
+    PieChart pieChart_obser;
+    @BindView(R.id.piechart_memory)
+    PieChart pieChart_memory;
 
     public FragmentWelcomeTab() {
         // Required empty public constructor
@@ -63,45 +54,27 @@ public class FragmentWelcomeTab extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
-
-        getProgressbar();
+        setPieChart();
     }
 
-    private int scoreCalcu, scoreConcen, scoreMemory, scoreObser;
+    private void setPieChart() {
+//    PieChart mPieChart = (PieChart) findViewById(R.id.piechart);
+        pieChart_Calcu.addPieSlice(new PieModel("Small_PieChart", 1, Color.parseColor("#ffff4444")));
+        pieChart_Concen.addPieSlice(new PieModel("Small_Concen", 1, Color.parseColor("#ff99cc00")));
+        pieChart_obser.addPieSlice(new PieModel("Small_Obser", 1, Color.parseColor("#ffff8800")));
+        pieChart_memory.addPieSlice(new PieModel("Small_Memory", 1, Color.parseColor("#ff0099cc")));
 
-    public void getProgressbar() {
-        scoreCalcu = scoreConcen = scoreMemory = scoreObser = 0;
-        for (String game : ManagerBrain.GAME_LIST)
-            for (int i = 1; i <= 3; i++) {
-                scoreCalcu += game.equals(ManagerBrain.CALCULATION) ?
-                        ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreConcen += game.equals(ManagerBrain.CONCENTRATION) ?
-                        ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreMemory += game.equals(ManagerBrain.MEMORY) ?
-                        ManagerPreference.getInstance().getScore(game, i) : 0;
-                scoreObser += game.equals(ManagerBrain.OBSERVATION) ?
-                        ManagerPreference.getInstance().getScore(game, i) : 0;
-            }
+        mPieChart.addPieSlice(new PieModel("Calculation", 15, Color.parseColor("#ffff4444")));
+        mPieChart.addPieSlice(new PieModel("Concen", 25, Color.parseColor("#ff99cc00")));
+        mPieChart.addPieSlice(new PieModel("Obser", 35, Color.parseColor("#ffff8800")));
+        mPieChart.addPieSlice(new PieModel("Memory", 9, Color.parseColor("#ff0099cc")));
 
-        textViewCalcu.setText(scoreCalcu + "");
-        textViewConcen.setText(scoreConcen + "");
-        textViewObser.setText(scoreObser + "");
-        textViewMemory.setText(scoreMemory + "");
-
-        float f = 500;
-        new CountDownTimer((long) f, 1) {
-            @Override
-            public void onTick(long l) {
-                barCalcu.setProgress((f - l) / f * scoreCalcu * 10);
-                barConcen.setProgress((f - l) / f * scoreConcen * 10);
-                barMemory.setProgress((f - l) / f * scoreMemory * 10);
-                barObser.setProgress((f - l) / f * scoreObser * 10);
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        }.start();
+        pieChart_memory.startAnimation();
+        pieChart_Concen.startAnimation();
+        pieChart_obser.startAnimation();
+        pieChart_Calcu.startAnimation();
+        mPieChart.startAnimation();
     }
+
+
 }
