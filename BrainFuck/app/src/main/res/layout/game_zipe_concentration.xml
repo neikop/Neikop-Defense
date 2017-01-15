@@ -76,7 +76,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:name="@string/game_concen_two"
+                    app:name=""
                     app:unlocked="true" />
 
                 <com.example.windzlord.brainfuck.layout.GameCoverLayout
@@ -86,7 +86,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="5dp"
-                    app:name="@string/game_concen_three"
+                    app:name=""
                     app:unlocked="true" />
 
             </LinearLayout>

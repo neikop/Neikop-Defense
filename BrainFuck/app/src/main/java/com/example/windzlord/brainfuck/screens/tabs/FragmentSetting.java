@@ -16,9 +16,11 @@ import android.widget.ImageView;
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
+import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
+import com.example.windzlord.brainfuck.objects.MessageManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
@@ -26,6 +28,8 @@ import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -126,6 +130,32 @@ public class FragmentSetting extends Fragment {
         ManagerPreference.getInstance().putMusic(!active);
     }
 
+    @OnClick(R.id.button_tester)
+    public void onButtonTester() {
+        if (ManagerPreference.getInstance().getUserID().isEmpty()) {
+            ManagerPreference.getInstance().clear();
+            ManagerPreference.getInstance().putLevel(ManagerBrain.CALCULATION, 1, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.CALCULATION, 2, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.CALCULATION, 3, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.CONCENTRATION, 1, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.CONCENTRATION, 2, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.CONCENTRATION, 3, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.MEMORY, 1, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.MEMORY, 2, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.MEMORY, 3, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.OBSERVATION, 1, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.OBSERVATION, 2, 2);
+            ManagerPreference.getInstance().putLevel(ManagerBrain.OBSERVATION, 3, 2);
+            try {
+                getFragmentManager().popBackStack();
+            } catch (Exception ignored) {
+            }
+            EventBus.getDefault().post(new MessageManager("", "All game have unlocked."));
+        } else {
+            EventBus.getDefault().post(new MessageManager("", "Please logout first."));
+        }
+    }
+
     public void settingFacebook() {
         AppEventsLogger.activateApp(getContext());
         buttonFacebook.setReadPermissions(Arrays.asList(
@@ -167,7 +197,10 @@ public class FragmentSetting extends Fragment {
         ManagerPreference.getInstance().putUserImage(url);
         Log.d(TAG, "LOGIN");
         ManagerServer.getInstance().checkExistedUser(userID);
-        getFragmentManager().popBackStack();
+        try {
+            getFragmentManager().popBackStack();
+        } catch (Exception ignored) {
+        }
         //load Image
         new FragmentSetting.DownloadImage().execute(url);
     }

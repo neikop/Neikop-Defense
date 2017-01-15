@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentWelcomeTab extends Fragment {
+public class FragmentWelcome extends Fragment {
 
     @BindView(R.id.pieChart_daddy)
     PieChart pieChartDaddy;
@@ -78,7 +78,7 @@ public class FragmentWelcomeTab extends Fragment {
 
     private final int TIME = 600;
 
-    public FragmentWelcomeTab() {
+    public FragmentWelcome() {
         // Required empty public constructor
     }
 
