@@ -165,8 +165,9 @@ public class FragmentSetting extends Fragment {
         ManagerPreference.getInstance().putUserName("N'" + userName + "'");
         String url = profile.getProfilePictureUri(300, 300).toString();
         ManagerPreference.getInstance().putUserImage(url);
-        Log.d(TAG, "LOGIN :" + url);
+        Log.d(TAG, "LOGIN");
         ManagerServer.getInstance().checkExistedUser(userID);
+        getFragmentManager().popBackStack();
         //load Image
         new FragmentSetting.DownloadImage().execute(url);
     }
@@ -175,11 +176,10 @@ public class FragmentSetting extends Fragment {
         Log.d(TAG, "LOGOUT");
         ManagerServer.getInstance().uploadLocalToServer(
                 ManagerPreference.getInstance().getUserID());
-        new CountDownTimerAdapter(500) {
+        new CountDownTimerAdapter(200) {
             @Override
             public void onFinish() {
-                ManagerPreference.getInstance().putUserID("");
-                ManagerPreference.getInstance().putUserName("N'Guest'");
+                ManagerPreference.getInstance().clear();
             }
         }.start();
     }

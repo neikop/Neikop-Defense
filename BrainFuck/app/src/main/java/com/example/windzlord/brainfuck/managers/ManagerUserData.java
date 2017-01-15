@@ -47,7 +47,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         sqLiteDatabase = getWritableDatabase();
     }
 
-    public List<HighScore> getListPlayer() {
+    private List<HighScore> getListPlayer() {
         ArrayList<HighScore> players = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, COLUMNS,
                 null, null, COLUMN_USER_ID, null, null, null);
@@ -85,7 +85,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         return scores;
     }
 
-    public int getExperience(String userID) {
+    private int getExperience(String userID) {
         int sum = 0;
         List<HighScore> scores = getScoreByUserId(userID);
         for (HighScore score : scores)
@@ -162,7 +162,7 @@ public class ManagerUserData extends SQLiteAssetHelper {
         return sqLiteDatabase.update(TABLE_NAME, values, WHERE, null);
     }
 
-    public void insertScore(HighScore score) {
+    private void insertScore(HighScore score) {
         Log.d(TAG, "insertScore to LOCAL " + score);
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, score.getId());

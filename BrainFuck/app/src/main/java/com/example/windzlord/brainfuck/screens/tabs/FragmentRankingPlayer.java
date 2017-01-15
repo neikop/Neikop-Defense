@@ -100,7 +100,7 @@ public class FragmentRankingPlayer extends Fragment {
         textViewUser.setText(userName.substring(2, userName.length() - 1));
         int neuron = 0;
         for (HighScore score : scores)
-            neuron += (score.getLevel() * score.getLevel() - 1) / 2 * 300 + score.getExp();
+            neuron += ((score.getLevel() * (score.getLevel() - 1)) / 2 * 300 + score.getExp());
         textViewScore.setText("Neuron " + neuron);
         ImageLoader.getInstance().displayImage(player.getUserImage(), imageViewUser);
     }
