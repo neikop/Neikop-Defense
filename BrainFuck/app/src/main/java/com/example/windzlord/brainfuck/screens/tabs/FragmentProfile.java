@@ -17,7 +17,13 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
+import com.example.windzlord.brainfuck.objects.models.HighScore;
+import com.example.windzlord.brainfuck.screens.types.FragmentCalculation;
+import com.example.windzlord.brainfuck.screens.types.FragmentConcentration;
+import com.example.windzlord.brainfuck.screens.types.FragmentMemory;
+import com.example.windzlord.brainfuck.screens.types.FragmentObservation;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.greenrobot.eventbus.EventBus;
@@ -153,7 +159,27 @@ public class FragmentProfile extends Fragment {
     }
 
     private void addListener() {
+        for (HighScore score: ManagerUserData.getInstance().getListScore()) System.out.println(score);
+
         buttonSetting.setOnClickListener(view ->
                 EventBus.getDefault().post(new FragmentChanger(new FragmentSetting(), true)));
+
+        barCalcu.setOnIconClickListener(() ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentCalculation(), true)));
+        barConcen.setOnIconClickListener(() ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentConcentration(), true)));
+        barMemory.setOnIconClickListener(() ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentMemory(), true)));
+        barObser.setOnIconClickListener(() ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentObservation(), true)));
+
+        barCalcu.setOnClickListener((v) ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentCalculation(), true)));
+        barConcen.setOnClickListener((v) ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentConcentration(), true)));
+        barMemory.setOnClickListener((v) ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentMemory(), true)));
+        barObser.setOnClickListener((v) ->
+                EventBus.getDefault().post(new FragmentChanger(new FragmentObservation(), true)));
     }
 }

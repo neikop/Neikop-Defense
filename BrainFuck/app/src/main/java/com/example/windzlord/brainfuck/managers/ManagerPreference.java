@@ -110,7 +110,13 @@ public class ManagerPreference {
     }
 
     public void clear() {
+        boolean sound = getSound();
+        boolean music = getMusic();
         sharedPreferences.edit().clear().apply();
+        putUserID("");
+        putUserName("N'Guest'");
+        putSound(sound);
+        putMusic(music);
     }
 
 }

@@ -69,6 +69,8 @@ public class FragmentRanking extends Fragment {
         players = ManagerUserData.getInstance().getListPlayerSorted();
         layoutRankingGod.setOnClickListener((ignored) -> System.out.println("CLICKED NULL"));
 
+        recyclerView.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.INVISIBLE);
         if (recyclerView.getVisibility() == View.VISIBLE) getRecycler(view);
         if (scrollView.getVisibility() == View.VISIBLE) getPlayerRanking();
     }
