@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="Title"
+            android:textAlignment="center"
             android:textColor="#001122"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -30,12 +31,13 @@
             android:layout_below="@id/textView_message_title"
             android:layout_centerHorizontal="true"
             android:text="content"
+            android:textAlignment="center"
             android:textColor="@color/colorYellow"
             android:textSize="25dp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="110dp" />
 
 </LinearLayout>
