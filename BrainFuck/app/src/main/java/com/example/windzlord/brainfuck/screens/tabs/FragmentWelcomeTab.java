@@ -76,7 +76,7 @@ public class FragmentWelcomeTab extends Fragment {
     @BindView(R.id.button_obser_welcome)
     CircleButton buttonObserWelcome;
 
-    private final int TIME = 1000;
+    private final int TIME = 600;
 
     public FragmentWelcomeTab() {
         // Required empty public constructor
@@ -97,7 +97,7 @@ public class FragmentWelcomeTab extends Fragment {
         ButterKnife.bind(this, view);
 
         getChart();
-        addListener();
+        getListener();
     }
 
     private void getChart() {
@@ -138,7 +138,7 @@ public class FragmentWelcomeTab extends Fragment {
         pieChartObser.addPieSlice(new PieModel("Small_Obser", 1, Color.parseColor("#ff33b5e5")));
     }
 
-    private void addListener() {
+    private void getListener() {
         pieChartCalcu.setAnimationTime(TIME);
         pieChartCalcu.startAnimation();
         pieChartConcen.setAnimationTime(TIME);
@@ -155,8 +155,8 @@ public class FragmentWelcomeTab extends Fragment {
             public void onFinish() {
                 ScaleAnimation scale = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
                 ScaleAnimation scaleDaddy = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
-                scale.setDuration(TIME - TIME / 2);
-                scaleDaddy.setDuration(TIME - TIME / 2);
+                scale.setDuration(TIME / 2);
+                scaleDaddy.setDuration(TIME / 2);
 
                 buttonCalcuWelcome.setVisibility(View.VISIBLE);
                 buttonCalcuWelcome.startAnimation(scale);
