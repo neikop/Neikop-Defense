@@ -129,10 +129,11 @@ public class ManagerUserData extends SQLiteAssetHelper {
         for (int i = 0; i < ManagerBrain.GAME_LIST.length; i++) {
             for (int position = 1; position < 4; position++) {
                 String type = ManagerBrain.GAME_LIST[i];
+                String userImage = ManagerPreference.getInstance().getUserImage();
                 int level = ManagerPreference.getInstance().getLevel(type, position);
                 int exp = ManagerPreference.getInstance().getExpCurrent(type, position);
                 int score = ManagerPreference.getInstance().getScore(type, position);
-                updateScore(userID, type, position, level, exp, score);
+                updateScore(userID, userImage, type, position, level, exp, score);
             }
         }
     }
@@ -146,12 +147,13 @@ public class ManagerUserData extends SQLiteAssetHelper {
 
     private int updateScore(HighScore score) {
         Log.d(TAG, "updateScore to LOCAL " + score);
-        return updateScore(score.getUserId(), score.getType(), score.getPosition(),
+        return updateScore(score.getUserId(), score.getUserImage(), score.getType(), score.getPosition(),
                 score.getLevel(), score.getExp(), score.getScore());
     }
 
-    public int updateScore(String userID, String type, int position, int level, int exp, int score) {
+    public int updateScore(String userID, String userImage, String type, int position, int level, int exp, int score) {
         ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_IMAGE, userImage);
         values.put(COLUMN_LEVEL, level);
         values.put(COLUMN_EXP_CURRENT, exp);
         values.put(COLUMN_HIGH_SCORE, score);

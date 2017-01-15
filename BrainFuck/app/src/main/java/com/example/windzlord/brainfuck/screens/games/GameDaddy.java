@@ -399,6 +399,7 @@ public abstract class GameDaddy extends Fragment {
         int expNext = ManagerPreference.getInstance().getExpNext(name, position);
         int expCurrent = ManagerPreference.getInstance().getExpCurrent(name, position);
         String userID = ManagerPreference.getInstance().getUserID();
+        String userImage = ManagerPreference.getInstance().getUserImage();
 
         expCurrent += score;
         boolean levelUp = expCurrent >= expNext;
@@ -413,7 +414,7 @@ public abstract class GameDaddy extends Fragment {
 
         // Update Database local
         ManagerUserData.getInstance().updateScore(
-                userID, name, position, level, expCurrent,
+                userID, userImage, name, position, level, expCurrent,
                 ManagerPreference.getInstance().getScore(name, position));
 
         // Upload to server
