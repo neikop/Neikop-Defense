@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.windzlord.brainfuck.MainBrain;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 

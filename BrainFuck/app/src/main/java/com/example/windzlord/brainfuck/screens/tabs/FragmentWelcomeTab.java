@@ -3,21 +3,29 @@ package com.example.windzlord.brainfuck.screens.tabs;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
-import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
 import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
+import com.example.windzlord.brainfuck.objects.FragmentChanger;
+import com.example.windzlord.brainfuck.objects.TabLayoutChanger;
+import com.example.windzlord.brainfuck.screens.types.FragmentCalculation;
+import com.example.windzlord.brainfuck.screens.types.FragmentConcentration;
+import com.example.windzlord.brainfuck.screens.types.FragmentMemory;
+import com.example.windzlord.brainfuck.screens.types.FragmentObservation;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
+import org.greenrobot.eventbus.EventBus;
 
+import at.markushi.ui.CircleButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -26,16 +34,49 @@ import butterknife.ButterKnife;
  */
 public class FragmentWelcomeTab extends Fragment {
 
-    @BindView(R.id.piechart)
-    PieChart mPieChart;
-    @BindView(R.id.piechart_calcul)
-    PieChart pieChart_Calcu;
-    @BindView(R.id.piechart_concen)
-    PieChart pieChart_Concen;
-    @BindView(R.id.piechart_obser)
-    PieChart pieChart_obser;
-    @BindView(R.id.piechart_memory)
-    PieChart pieChart_memory;
+    @BindView(R.id.pieChart_daddy)
+    PieChart pieChartDaddy;
+
+    @BindView(R.id.pieChart_calcu)
+    PieChart pieChartCalcu;
+
+    @BindView(R.id.pieChart_concen)
+    PieChart pieChartConcen;
+
+    @BindView(R.id.pieChart_memory)
+    PieChart pieChartMemory;
+
+    @BindView(R.id.pieChart_obser)
+    PieChart pieChartObser;
+
+    @BindView(R.id.textView_calcu_welcome)
+    TextView textViewCalcu;
+
+    @BindView(R.id.textView_concen_welcome)
+    TextView textViewConcen;
+
+    @BindView(R.id.textView_memory_welcome)
+    TextView textViewMemory;
+
+    @BindView(R.id.textView_obser_welcome)
+    TextView textViewObser;
+
+    @BindView(R.id.button_daddy_welcome)
+    CircleButton buttonDaddyWelcome;
+
+    @BindView(R.id.button_calcu_welcome)
+    CircleButton buttonCalcuWelcome;
+
+    @BindView(R.id.button_concen_welcome)
+    CircleButton buttonConcenWelcome;
+
+    @BindView(R.id.button_memory_welcome)
+    CircleButton buttonMemoryWelcome;
+
+    @BindView(R.id.button_obser_welcome)
+    CircleButton buttonObserWelcome;
+
+    private final int TIME = 1000;
 
     public FragmentWelcomeTab() {
         // Required empty public constructor
@@ -54,27 +95,97 @@ public class FragmentWelcomeTab extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
-        setPieChart();
+
+        getChart();
+        addListener();
     }
 
-    private void setPieChart() {
-//    PieChart mPieChart = (PieChart) findViewById(R.id.piechart);
-        pieChart_Calcu.addPieSlice(new PieModel("Small_PieChart", 1, Color.parseColor("#ffff4444")));
-        pieChart_Concen.addPieSlice(new PieModel("Small_Concen", 1, Color.parseColor("#ff99cc00")));
-        pieChart_obser.addPieSlice(new PieModel("Small_Obser", 1, Color.parseColor("#ffff8800")));
-        pieChart_memory.addPieSlice(new PieModel("Small_Memory", 1, Color.parseColor("#ff0099cc")));
+    private void getChart() {
+        int neuronCalcu = 0;
+        int neuronConcen = 0;
+        int neuronMemory = 0;
+        int neuronObser = 0;
 
-        mPieChart.addPieSlice(new PieModel("Calculation", 15, Color.parseColor("#ffff4444")));
-        mPieChart.addPieSlice(new PieModel("Concen", 25, Color.parseColor("#ff99cc00")));
-        mPieChart.addPieSlice(new PieModel("Obser", 35, Color.parseColor("#ffff8800")));
-        mPieChart.addPieSlice(new PieModel("Memory", 9, Color.parseColor("#ff0099cc")));
+        for (String game : ManagerBrain.GAME_LIST)
+            for (int i = 1; i < 4; i++) {
+                int level = ManagerPreference.getInstance().getLevel(game, i);
+                int exp = ManagerPreference.getInstance().getExpCurrent(game, i);
+                if (game.equals(ManagerBrain.CALCULATION))
+                    neuronCalcu += (level * (level - 1) / 2) * 300 + exp;
+                if (game.equals(ManagerBrain.CONCENTRATION))
+                    neuronConcen += (level * (level - 1) / 2) * 300 + exp;
+                if (game.equals(ManagerBrain.MEMORY))
+                    neuronMemory += (level * (level - 1) / 2) * 300 + exp;
+                if (game.equals(ManagerBrain.OBSERVATION))
+                    neuronObser += (level * (level - 1) / 2) * 300 + exp;
+            }
 
-        pieChart_memory.startAnimation();
-        pieChart_Concen.startAnimation();
-        pieChart_obser.startAnimation();
-        pieChart_Calcu.startAnimation();
-        mPieChart.startAnimation();
+        textViewCalcu.setText(neuronCalcu + "");
+        textViewConcen.setText(neuronConcen + "");
+        textViewMemory.setText(neuronMemory + "");
+        textViewObser.setText(neuronObser + "");
+
+        if (neuronCalcu + neuronConcen + neuronMemory + neuronObser == 0)
+            neuronCalcu = neuronConcen = neuronMemory = neuronObser = 1;
+        pieChartDaddy.addPieSlice(new PieModel("Calcu", neuronCalcu, Color.parseColor("#ffff4444")));
+        pieChartDaddy.addPieSlice(new PieModel("Concen", neuronConcen, Color.parseColor("#ff99cc00")));
+        pieChartDaddy.addPieSlice(new PieModel("Memory", neuronMemory, Color.parseColor("#ffffbb33")));
+        pieChartDaddy.addPieSlice(new PieModel("Obser", neuronObser, Color.parseColor("#ff33b5e5")));
+
+        pieChartCalcu.addPieSlice(new PieModel("Small_Calcu", 1, Color.parseColor("#ffff4444")));
+        pieChartConcen.addPieSlice(new PieModel("Small_Concen", 1, Color.parseColor("#ff99cc00")));
+        pieChartMemory.addPieSlice(new PieModel("Small_Memory", 1, Color.parseColor("#ffffbb33")));
+        pieChartObser.addPieSlice(new PieModel("Small_Obser", 1, Color.parseColor("#ff33b5e5")));
     }
 
+    private void addListener() {
+        pieChartCalcu.setAnimationTime(TIME);
+        pieChartCalcu.startAnimation();
+        pieChartConcen.setAnimationTime(TIME);
+        pieChartConcen.startAnimation();
+        pieChartMemory.setAnimationTime(TIME);
+        pieChartMemory.startAnimation();
+        pieChartObser.setAnimationTime(TIME);
+        pieChartObser.startAnimation();
+        pieChartDaddy.setAnimationTime(TIME);
+        pieChartDaddy.startAnimation();
+
+        new CountDownTimerAdapter(TIME / 2) {
+            @Override
+            public void onFinish() {
+                ScaleAnimation scale = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
+                ScaleAnimation scaleDaddy = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
+                scale.setDuration(TIME - TIME / 2);
+                scaleDaddy.setDuration(TIME - TIME / 2);
+
+                buttonCalcuWelcome.setVisibility(View.VISIBLE);
+                buttonCalcuWelcome.startAnimation(scale);
+                buttonConcenWelcome.setVisibility(View.VISIBLE);
+                buttonConcenWelcome.startAnimation(scale);
+                buttonMemoryWelcome.setVisibility(View.VISIBLE);
+                buttonMemoryWelcome.startAnimation(scale);
+                buttonObserWelcome.setVisibility(View.VISIBLE);
+                buttonObserWelcome.startAnimation(scale);
+                buttonDaddyWelcome.setVisibility(View.VISIBLE);
+                buttonDaddyWelcome.startAnimation(scaleDaddy);
+            }
+        }.start();
+
+        new CountDownTimerAdapter(TIME) {
+            @Override
+            public void onFinish() {
+                buttonCalcuWelcome.setOnClickListener((v) -> EventBus.getDefault().post(
+                        new FragmentChanger(new FragmentCalculation(), true)));
+                buttonConcenWelcome.setOnClickListener((v) -> EventBus.getDefault().post(
+                        new FragmentChanger(new FragmentConcentration(), true)));
+                buttonMemoryWelcome.setOnClickListener((v) -> EventBus.getDefault().post(
+                        new FragmentChanger(new FragmentMemory(), true)));
+                buttonObserWelcome.setOnClickListener((v) -> EventBus.getDefault().post(
+                        new FragmentChanger(new FragmentObservation(), true)));
+                buttonDaddyWelcome.setOnClickListener((v) -> EventBus.getDefault().post(
+                        new TabLayoutChanger(1)));
+            }
+        }.start();
+    }
 
 }

@@ -13,7 +13,11 @@ import android.view.animation.TranslateAnimation;
 
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.PagerAdapter;
-import com.facebook.login.LoginManager;
+import com.example.windzlord.brainfuck.objects.TabLayoutChanger;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.EventBusException;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +33,8 @@ public class FragmentMain extends Fragment {
     @BindView(R.id.pager_layout)
     ViewPager myViewPager;
 
+    private View view;
+
     public FragmentMain() {
         // Required empty public constructor
     }
@@ -37,7 +43,7 @@ public class FragmentMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout1 for this fragment
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        view = inflater.inflate(R.layout.fragment_main, container, false);
         settingThingsUp(view);
 
         return view;
@@ -45,10 +51,12 @@ public class FragmentMain extends Fragment {
 
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
-        goTabLayout(view);
+        EventBus.getDefault().register(this);
+
+        goTabLayout();
     }
 
-    private void goTabLayout(View view) {
+    private void goTabLayout() {
 
         myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.tab_view_profile));
         myTabLayout.addTab(myTabLayout.newTab().setCustomView(R.layout.tab_view_practice));
@@ -149,6 +157,17 @@ public class FragmentMain extends Fragment {
                 view.findViewById(R.id.indicator_feedback2).clearAnimation();
                 break;
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void goPractice(TabLayoutChanger tab) {
+        goTabSelected(view, tab.getPostion());
     }
 
 }

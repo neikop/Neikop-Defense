@@ -109,13 +109,13 @@ public class FragmentProfile extends Fragment {
         } else imageViewUser.setImageResource(R.drawable.z_character_guest);
 
         int neuron = 0;
-        for (String game : ManagerBrain.GAME_LIST) {
+        for (String game : ManagerBrain.GAME_LIST)
             for (int i = 1; i < 4; i++) {
                 int level = ManagerPreference.getInstance().getLevel(game, i);
                 int exp = ManagerPreference.getInstance().getExpCurrent(game, i);
                 neuron += (level * (level - 1) / 2) * 300 + exp;
             }
-        }
+
         textViewScore.setText("Neuron " + neuron);
         getProgressbar();
     }
@@ -159,8 +159,6 @@ public class FragmentProfile extends Fragment {
     }
 
     private void addListener() {
-        for (HighScore score: ManagerUserData.getInstance().getListScore()) System.out.println(score);
-
         buttonSetting.setOnClickListener(view ->
                 EventBus.getDefault().post(new FragmentChanger(new FragmentSetting(), true)));
 

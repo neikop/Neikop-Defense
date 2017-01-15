@@ -21,12 +21,13 @@
     <string name="profile">PROFILE</string>
     <string name="setting">SETTING</string>
     <string name="ranking">RANKING</string>
-    <string name="memory">Memory</string>
-    <string name="concentration">Concentration</string>
     <string name="calculation">Calculation</string>
+    <string name="concentration">Concentration</string>
+    <string name="memory">Memory</string>
     <string name="observation">Observation</string>
     <string name="facebook_app_id">397853117225646</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hided_card">+</string>
+    <string name="quote">Ready to begin?\nTrain now and\nfeeling Lac Troi</string>
 </resources>
