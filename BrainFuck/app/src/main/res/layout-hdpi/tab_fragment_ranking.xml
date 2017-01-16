@@ -1,0 +1,134 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryMain"
+    tools:context=".screens.tabs.FragmentRanking">
+
+    <TextView
+        android:id="@+id/textView_feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/ranking"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="110dp"
+        android:layout_marginTop="60dp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/layout_player_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="1"
+                app:src_ranking="@drawable/ic_ranking_diamond" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="2"
+                app:src_ranking="@drawable/ic_ranking_premium" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="3"
+                app:src_ranking="@drawable/ic_ranking_gold" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="4"
+                app:src_ranking="@drawable/ic_ranking_silver" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="5"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="6"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="7"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="8"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="9"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
+
+            <com.example.windzlord.brainfuck.layout.GameRankingLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:number_ranking="10"
+                app:src_ranking="@drawable/ic_ranking_bronze" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="110dp"
+        android:visibility="invisible"
+        android:layout_marginTop="60dp" />
+
+    <View
+        android:id="@+id/frameLayout_ranking_god"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="160dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="110dp"
+        android:visibility="invisible" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout_ranking_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="110dp"
+        android:layout_marginTop="60dp" />
+
+</RelativeLayout>
