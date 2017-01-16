@@ -17,9 +17,7 @@ import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
-import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.example.windzlord.brainfuck.objects.FragmentChanger;
-import com.example.windzlord.brainfuck.objects.models.HighScore;
 import com.example.windzlord.brainfuck.screens.types.FragmentCalculation;
 import com.example.windzlord.brainfuck.screens.types.FragmentConcentration;
 import com.example.windzlord.brainfuck.screens.types.FragmentMemory;
@@ -115,8 +113,8 @@ public class FragmentProfile extends Fragment {
                 int exp = ManagerPreference.getInstance().getExpCurrent(game, i);
                 neuron += (level * (level - 1) / 2) * 300 + exp;
             }
-
         textViewScore.setText("Neuron " + neuron);
+
         getProgressbar();
     }
 
@@ -135,7 +133,6 @@ public class FragmentProfile extends Fragment {
                 scoreObser += game.equals(ManagerBrain.OBSERVATION) ?
                         ManagerPreference.getInstance().getScore(game, i) : 0;
             }
-
         textViewCalcu.setText(scoreCalcu + "");
         textViewConcen.setText(scoreConcen + "");
         textViewObser.setText(scoreObser + "");
@@ -159,7 +156,7 @@ public class FragmentProfile extends Fragment {
     }
 
     private void addListener() {
-        buttonSetting.setOnClickListener(view ->
+        buttonSetting.setOnClickListener((v) ->
                 EventBus.getDefault().post(new FragmentChanger(new FragmentSetting(), true)));
 
         barCalcu.setOnIconClickListener(() ->

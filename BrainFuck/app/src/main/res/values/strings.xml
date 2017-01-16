@@ -7,8 +7,8 @@
     <string name="game_calcu_two">Higher and win</string>
     <string name="game_calcu_three">Move the card </string>
     <string name="game_concen_one">Brain shift</string>
-    <string name="game_concen_two">SORRY\nTHIS GAME IS\nON DEVELOPMENT</string>
-    <string name="game_concen_three">SORRY\nTHIS GAME IS\nON DEVELOPMENT</string>
+    <string name="game_concen_two">SORRY\nTHIS GAME IS ON\nDEVELOPMENT</string>
+    <string name="game_concen_three">SORRY\nTHIS GAME IS ON\nDEVELOPMENT</string>
     <string name="game_memory_one">Flip the card</string>
     <string name="game_memory_two">Memorize order</string>
     <string name="game_memory_three">Flip and remember</string>

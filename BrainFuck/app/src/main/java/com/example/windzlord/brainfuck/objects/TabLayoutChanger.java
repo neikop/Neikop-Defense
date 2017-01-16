@@ -6,13 +6,13 @@ package com.example.windzlord.brainfuck.objects;
 
 public class TabLayoutChanger {
 
-    int postion;
+    private int position;
 
-    public TabLayoutChanger(int postion) {
-        this.postion = postion;
+    public TabLayoutChanger(int position) {
+        this.position = position;
     }
 
-    public int getPostion() {
-        return postion;
+    public int getPosition() {
+        return position;
     }
 }

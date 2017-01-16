@@ -110,11 +110,6 @@ public class GameStatusLayout extends FrameLayout {
         return Integer.parseInt("" + textViewTime.getText());
     }
 
-    public void setTimeMax(int timeMax) {
-        this.timeMax = timeMax;
-        updateValues();
-    }
-
     public void setTimeProgress(int timeProgress) {
         this.timeProgress = timeProgress;
         updateValues();
@@ -127,11 +122,6 @@ public class GameStatusLayout extends FrameLayout {
 
     public void setGoingProgress(int goingProgress) {
         this.goingProgress = goingProgress;
-        updateValues();
-    }
-
-    public void setGoingMax(int goingMax) {
-        this.goingMax = goingMax;
         updateValues();
     }
 }

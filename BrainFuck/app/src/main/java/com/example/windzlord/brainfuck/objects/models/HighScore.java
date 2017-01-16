@@ -1,6 +1,5 @@
 package com.example.windzlord.brainfuck.objects.models;
 
-import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -35,7 +34,6 @@ public class HighScore {
 
     @SerializedName("Score")
     private int score;
-
 
     public HighScore() {
     }

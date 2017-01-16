@@ -1,9 +1,5 @@
 package com.example.windzlord.brainfuck.managers;
 
-/**
- * Created by WindyKiss on 1/4/2017.
- */
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -22,6 +18,10 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by WindyKiss on 1/4/2017.
+ */
 
 public class ManagerServer {
 

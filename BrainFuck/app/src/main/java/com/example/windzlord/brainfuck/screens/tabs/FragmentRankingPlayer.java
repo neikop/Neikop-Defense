@@ -61,12 +61,10 @@ public class FragmentRankingPlayer extends Fragment {
     @BindView(R.id.textView_memory_score)
     TextView textViewMemory;
 
-    private String userID;
     private List<HighScore> scores;
     private HighScore player;
 
     public void setUserID(String userID) {
-        this.userID = userID;
         scores = ManagerUserData.getInstance().getScoreByUserId(userID);
         player = scores.get(0);
     }
@@ -90,7 +88,6 @@ public class FragmentRankingPlayer extends Fragment {
         ButterKnife.bind(this, view);
 
         setupUI();
-        getProgressbar();
     }
 
     public void setupUI() {
@@ -103,30 +100,24 @@ public class FragmentRankingPlayer extends Fragment {
             neuron += ((score.getLevel() * (score.getLevel() - 1)) / 2 * 300 + score.getExp());
         textViewScore.setText("Neuron " + neuron);
         ImageLoader.getInstance().displayImage(player.getUserImage(), imageViewUser);
+
+        getProgressbar();
     }
 
-    private int scoreCalcu;
-    private int scoreConcen;
-    private int scoreMemo;
-    private int scoreObser;
+    private int scoreCalcu, scoreConcen, scoreMemory, scoreObser;
 
     public void getProgressbar() {
-        scoreCalcu = 0;
-        scoreConcen = 0;
-        scoreMemo = 0;
-        scoreObser = 0;
-
+        scoreCalcu = scoreConcen = scoreMemory = scoreObser = 0;
         for (HighScore score : scores) {
             scoreCalcu += score.getType().equals(ManagerBrain.CALCULATION) ? score.getScore() : 0;
             scoreConcen += score.getType().equals(ManagerBrain.CONCENTRATION) ? score.getScore() : 0;
-            scoreMemo += score.getType().equals(ManagerBrain.MEMORY) ? score.getScore() : 0;
+            scoreMemory += score.getType().equals(ManagerBrain.MEMORY) ? score.getScore() : 0;
             scoreObser += score.getType().equals(ManagerBrain.OBSERVATION) ? score.getScore() : 0;
         }
-
         textViewCalcu.setText(scoreCalcu + "");
         textViewConcen.setText(scoreConcen + "");
         textViewObserver.setText(scoreObser + "");
-        textViewMemory.setText(scoreMemo + "");
+        textViewMemory.setText(scoreMemory + "");
 
         float f = 300;
         new CountDownTimer((long) f, 1) {
@@ -134,7 +125,7 @@ public class FragmentRankingPlayer extends Fragment {
             public void onTick(long l) {
                 barCalcu.setProgress((f - l) / f * scoreCalcu * 10);
                 barConcen.setProgress((f - l) / f * scoreConcen * 10);
-                barMemory.setProgress((f - l) / f * scoreMemo * 10);
+                barMemory.setProgress((f - l) / f * scoreMemory * 10);
                 barObser.setProgress((f - l) / f * scoreObser * 10);
             }
 

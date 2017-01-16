@@ -8,11 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.windzlord.brainfuck.R;
+import com.example.windzlord.brainfuck.screens.games.GameDaddy;
+
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConcenTwo extends Fragment {
+public class ConcenTwo extends GameDaddy {
 
 
     public ConcenTwo() {
@@ -24,7 +27,30 @@ public class ConcenTwo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.game_concen_two, container, false);
+        View view = inflater.inflate(R.layout.game_concen_two, container, false);
+        ButterKnife.bind(this, view);
+        addListeners();
+        canPause = true;
+        return view;
     }
 
+    @Override
+    protected void goPrepare() {
+
+    }
+
+    @Override
+    protected void prepareQuiz() {
+
+    }
+
+    @Override
+    protected void goShow() {
+
+    }
+
+    @Override
+    protected void showQuiz() {
+
+    }
 }

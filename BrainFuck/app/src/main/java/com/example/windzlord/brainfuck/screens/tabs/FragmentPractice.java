@@ -81,22 +81,17 @@ public class FragmentPractice extends Fragment {
         scaleOne.setDuration(500);
         scaleOne.setFillAfter(true);
         scaleOne.setAnimationListener(new AnimationAdapter() {
-            @Override
             public void onAnimationEnd(Animation animation) {
                 startAnimation(view, scaleTwo);
             }
         });
-
         scaleTwo.setDuration(500);
         scaleTwo.setFillAfter(true);
         scaleTwo.setAnimationListener(new AnimationAdapter() {
-
-            @Override
             public void onAnimationEnd(Animation animation) {
                 startAnimation(view, scaleOne);
             }
         });
-
         startAnimation(view, scaleOne);
     }
 

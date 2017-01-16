@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import com.example.windzlord.brainfuck.MainActivity;
 import com.example.windzlord.brainfuck.R;
 import com.example.windzlord.brainfuck.adapters.CountDownTimerAdapter;
-import com.example.windzlord.brainfuck.managers.ManagerBrain;
 import com.example.windzlord.brainfuck.managers.ManagerFile;
 import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerServer;
@@ -84,11 +83,11 @@ public class FragmentSetting extends Fragment {
     private void settingThingsUp(View view) {
         ButterKnife.bind(this, view);
 
-        getInfo();
-        settingFacebook();
+        getSetting();
+        getFacebook();
     }
 
-    private void getInfo() {
+    private void getSetting() {
         buttonSound.setText(ManagerPreference.getInstance().getSound() ?
                 "STOP SOUND" : "PLAY SOUND");
         imageViewSound.setImageResource(ManagerPreference.getInstance().getSound() ?
@@ -101,7 +100,10 @@ public class FragmentSetting extends Fragment {
 
     @OnClick(R.id.button_setting_back)
     public void onBackPressed() {
-        getActivity().onBackPressed();
+        try {
+            getFragmentManager().popBackStack();
+        } catch (Exception ignored) {
+        }
     }
 
     @OnClick(R.id.button_sound)
@@ -134,29 +136,14 @@ public class FragmentSetting extends Fragment {
     public void onButtonTester() {
         if (ManagerPreference.getInstance().getUserID().isEmpty()) {
             ManagerPreference.getInstance().clear();
-            ManagerPreference.getInstance().putLevel(ManagerBrain.CALCULATION, 1, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.CALCULATION, 2, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.CALCULATION, 3, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.CONCENTRATION, 1, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.CONCENTRATION, 2, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.CONCENTRATION, 3, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.MEMORY, 1, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.MEMORY, 2, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.MEMORY, 3, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.OBSERVATION, 1, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.OBSERVATION, 2, 2);
-            ManagerPreference.getInstance().putLevel(ManagerBrain.OBSERVATION, 3, 2);
-            try {
-                getFragmentManager().popBackStack();
-            } catch (Exception ignored) {
-            }
-            EventBus.getDefault().post(new MessageManager("", "All game have unlocked."));
+            ManagerPreference.getInstance().goTest();
+            EventBus.getDefault().post(new MessageManager("DONE", "All game\nhave unlocked".toUpperCase()));
         } else {
-            EventBus.getDefault().post(new MessageManager("", "Please logout first."));
+            EventBus.getDefault().post(new MessageManager("", "Please logout".toUpperCase()));
         }
     }
 
-    public void settingFacebook() {
+    public void getFacebook() {
         AppEventsLogger.activateApp(getContext());
         buttonFacebook.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
@@ -197,12 +184,9 @@ public class FragmentSetting extends Fragment {
         ManagerPreference.getInstance().putUserImage(url);
         Log.d(TAG, "LOGIN");
         ManagerServer.getInstance().checkExistedUser(userID);
-        try {
-            getFragmentManager().popBackStack();
-        } catch (Exception ignored) {
-        }
         //load Image
         new FragmentSetting.DownloadImage().execute(url);
+        onBackPressed();
     }
 
     private void logout() {
@@ -227,7 +211,7 @@ public class FragmentSetting extends Fragment {
                 Bitmap bitmap = BitmapFactory.decodeStream(in);
                 in.close();
                 return bitmap;
-            } catch (Exception e) {
+            } catch (Exception ex) {
                 return null;
             }
         }

@@ -19,8 +19,6 @@ import com.example.windzlord.brainfuck.managers.ManagerPreference;
 import com.example.windzlord.brainfuck.managers.ManagerUserData;
 import com.example.windzlord.brainfuck.objects.models.HighScore;
 
-import org.greenrobot.eventbus.Subscribe;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -71,11 +69,11 @@ public class FragmentRanking extends Fragment {
 
         recyclerView.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.INVISIBLE);
-        if (recyclerView.getVisibility() == View.VISIBLE) getRecycler(view);
+        if (recyclerView.getVisibility() == View.VISIBLE) getRecycler();
         if (scrollView.getVisibility() == View.VISIBLE) getPlayerRanking();
     }
 
-    private void getRecycler(View view) {
+    private void getRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(
                 getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(new RankingPlayerAdapter(getContext(), players));
@@ -122,24 +120,23 @@ public class FragmentRanking extends Fragment {
     private void addListeners() {
         for (int i = 0; i < layoutPlayerRanking.getChildCount(); i++) {
             int x = i;
-            ((GameRankingLayout) layoutPlayerRanking.getChildAt(i)) // DO NOT DELETE
-                    .setOnClickListener((v) -> {
-                        if (layoutRankingGod.getVisibility() == View.VISIBLE) {
-                            getChildFragmentManager().popBackStack();
-                            layoutRankingGod.setVisibility(View.INVISIBLE);
-                        } else {
-                            FragmentRankingPlayer player = new FragmentRankingPlayer();
-                            player.setUserID(players.get(x).getUserId());
-                            getChildFragmentManager()
-                                    .beginTransaction()
-                                    .setCustomAnimations(R.anim.go_fade_in_300, R.anim.nothing)
-                                    .replace(R.id.frameLayout_ranking_player, player)
-                                    .addToBackStack(null)
-                                    .commit();
-                            layoutRankingGod.setVisibility(View.VISIBLE);
+            ((GameRankingLayout) layoutPlayerRanking.getChildAt(i)).addListener((v) -> {
+                if (layoutRankingGod.getVisibility() == View.VISIBLE) {
+                    getChildFragmentManager().popBackStack();
+                    layoutRankingGod.setVisibility(View.INVISIBLE);
+                } else {
+                    FragmentRankingPlayer player = new FragmentRankingPlayer();
+                    player.setUserID(players.get(x).getUserId());
+                    getChildFragmentManager()
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.go_fade_in_300, R.anim.nothing)
+                            .replace(R.id.frameLayout_ranking_player, player)
+                            .addToBackStack(null)
+                            .commit();
+                    layoutRankingGod.setVisibility(View.VISIBLE);
 
-                        }
-                    });
+                }
+            });
         }
     }
 

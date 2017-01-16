@@ -16,7 +16,6 @@ import com.example.windzlord.brainfuck.adapters.PagerAdapter;
 import com.example.windzlord.brainfuck.objects.TabLayoutChanger;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.EventBusException;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
@@ -166,8 +165,8 @@ public class FragmentMain extends Fragment {
     }
 
     @Subscribe
-    public void goPractice(TabLayoutChanger tab) {
-        goTabSelected(view, tab.getPostion());
+    public void goTabChange(TabLayoutChanger tab) {
+        goTabSelected(view, tab.getPosition());
     }
 
 }

@@ -97,15 +97,12 @@ public class FragmentWelcome extends Fragment {
         ButterKnife.bind(this, view);
 
         getChart();
+        getAnimation();
         getListener();
     }
 
     private void getChart() {
-        int neuronCalcu = 0;
-        int neuronConcen = 0;
-        int neuronMemory = 0;
-        int neuronObser = 0;
-
+        int neuronCalcu = 0, neuronConcen = 0, neuronMemory = 0, neuronObser = 0;
         for (String game : ManagerBrain.GAME_LIST)
             for (int i = 1; i < 4; i++) {
                 int level = ManagerPreference.getInstance().getLevel(game, i);
@@ -119,7 +116,6 @@ public class FragmentWelcome extends Fragment {
                 if (game.equals(ManagerBrain.OBSERVATION))
                     neuronObser += (level * (level - 1) / 2) * 300 + exp;
             }
-
         textViewCalcu.setText(neuronCalcu + "");
         textViewConcen.setText(neuronConcen + "");
         textViewMemory.setText(neuronMemory + "");
@@ -138,39 +134,34 @@ public class FragmentWelcome extends Fragment {
         pieChartObser.addPieSlice(new PieModel("Small_Obser", 1, Color.parseColor("#ff33b5e5")));
     }
 
-    private void getListener() {
-        pieChartCalcu.setAnimationTime(TIME);
-        pieChartCalcu.startAnimation();
-        pieChartConcen.setAnimationTime(TIME);
-        pieChartConcen.startAnimation();
-        pieChartMemory.setAnimationTime(TIME);
-        pieChartMemory.startAnimation();
-        pieChartObser.setAnimationTime(TIME);
-        pieChartObser.startAnimation();
-        pieChartDaddy.setAnimationTime(TIME);
-        pieChartDaddy.startAnimation();
+    private void getAnimation() {
+        PieChart[] charts = new PieChart[]{
+                pieChartDaddy, pieChartCalcu, pieChartConcen, pieChartMemory, pieChartObser};
+        for (PieChart pie : charts) {
+            pie.setAnimationTime(TIME);
+            pie.startAnimation();
+        }
 
+        CircleButton[] buttons = new CircleButton[]{
+                buttonCalcuWelcome, buttonConcenWelcome, buttonMemoryWelcome, buttonObserWelcome};
         new CountDownTimerAdapter(TIME / 2) {
             @Override
             public void onFinish() {
                 ScaleAnimation scale = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
-                ScaleAnimation scaleDaddy = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
                 scale.setDuration(TIME / 2);
+                for (CircleButton button : buttons) {
+                    button.setVisibility(View.VISIBLE);
+                    button.startAnimation(scale);
+                }
+                ScaleAnimation scaleDaddy = new ScaleAnimation(0, 1, 0, 1, 1, 0.5f, 1, 0.5f);
                 scaleDaddy.setDuration(TIME / 2);
-
-                buttonCalcuWelcome.setVisibility(View.VISIBLE);
-                buttonCalcuWelcome.startAnimation(scale);
-                buttonConcenWelcome.setVisibility(View.VISIBLE);
-                buttonConcenWelcome.startAnimation(scale);
-                buttonMemoryWelcome.setVisibility(View.VISIBLE);
-                buttonMemoryWelcome.startAnimation(scale);
-                buttonObserWelcome.setVisibility(View.VISIBLE);
-                buttonObserWelcome.startAnimation(scale);
                 buttonDaddyWelcome.setVisibility(View.VISIBLE);
                 buttonDaddyWelcome.startAnimation(scaleDaddy);
             }
         }.start();
+    }
 
+    private void getListener() {
         new CountDownTimerAdapter(TIME) {
             @Override
             public void onFinish() {

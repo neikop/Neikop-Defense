@@ -119,4 +119,10 @@ public class ManagerPreference {
         putMusic(music);
     }
 
+    public void goTest() {
+        for (String game : ManagerBrain.GAME_LIST)
+            for (int i = 1; i <= 3; i++)
+                putLevel(game, i, 2);
+    }
+
 }

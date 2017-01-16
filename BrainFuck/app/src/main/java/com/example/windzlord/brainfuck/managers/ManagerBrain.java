@@ -6,11 +6,6 @@ import android.media.MediaPlayer;
 import android.util.Log;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by WindzLord on 12/27/2016.
@@ -56,6 +51,5 @@ public class ManagerBrain {
         ret += z < 10 ? "00" + z : z < 100 ? "0" + z : "" + z;
         return ret;
     }
-
 
 }

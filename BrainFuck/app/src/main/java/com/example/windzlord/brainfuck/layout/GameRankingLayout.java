@@ -115,8 +115,7 @@ public class GameRankingLayout extends FrameLayout {
         updateValues();
     }
 
-    @Override
-    public void setOnClickListener(OnClickListener listener) {
+    public void addListener(OnClickListener listener) {
         viewListener.setOnClickListener(listener);
     }
 }

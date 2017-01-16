@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Created by WindyKiss on 1/4/2017.
+ */
 
 public class ManagerUserData extends SQLiteAssetHelper {
 
