@@ -1,13 +1,12 @@
 class Cursor {
-    constructor(x, y, configs) {
-        this.sprite = Dakra.game.add.sprite(
-            x * 40,
-            y * 40,
-            'cursor-red'
-        );
-        this.x = x;
-        this.y = y;
-        this.configs = configs;
+    constructor(map) {
+        this.sprite = Dakra.game.add.sprite(0, 0, 'cursors');
+        this.sprite.anchor.setTo(0.5, 0.5);
+        this.x = 0;
+        this.y = 0;
+
+        this.map = map;
+        this.updatePosition();
     }
 
     update() {
@@ -40,6 +39,12 @@ class Cursor {
         } else this.countRight = 0;
     }
 
+    moveTo(x, y) {
+        this.x = x;
+        this.y = y;
+        this.updatePosition();
+    }
+
     moveUp() {
         if (this.y == 0) return;
         this.y = this.y - 1;
@@ -47,7 +52,7 @@ class Cursor {
     }
 
     moveDown() {
-        if (this.y == Dakra.configs.screenHeight / 40 - 1) return;
+        if (this.y == this.map.height - 1) return;
         this.y = this.y + 1;
         this.updatePosition();
     }
@@ -59,15 +64,16 @@ class Cursor {
     }
 
     moveRight() {
-        if (this.x == Dakra.configs.screenWidth / 40 - 1) return;
+        if (this.x == this.map.width - 1) return;
         this.x = this.x + 1;
         this.updatePosition();
     }
 
     updatePosition() {
-        this.sprite.position.y = this.y * 40;
-        this.sprite.position.x = this.x * 40;
-        if (Dakra.arrayMap[this.x][this.y] == 0) this.sprite.frameName = 'cursor-green';
-        else this.sprite.frameName = 'cursor-red';
+        this.sprite.position.y = (this.y + 0.5) * 40;
+        this.sprite.position.x = (this.x + 0.5) * 40;
+        if (this.map.arrayMap[this.x][this.y] == 0)
+            this.sprite.frameName = 'cursor-green.png';
+        else this.sprite.frameName = 'cursor-red.png';
     }
 }
