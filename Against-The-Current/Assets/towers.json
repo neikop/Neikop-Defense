@@ -1,44 +1,76 @@
 {"frames": {
 
-"tower-1.png":
+"tower-1-error.png":
 {
-	"frame": {"x":116,"y":2,"w":36,"h":37},
+	"frame": {"x":41,"y":78,"w":37,"h":36},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":37},
-	"sourceSize": {"w":36,"h":37}
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":36},
+	"sourceSize": {"w":37,"h":36}
+},
+"tower-1.png":
+{
+	"frame": {"x":80,"y":40,"w":37,"h":36},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":36},
+	"sourceSize": {"w":37,"h":36}
+},
+"tower-2-error.png":
+{
+	"frame": {"x":41,"y":40,"w":37,"h":36},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":36},
+	"sourceSize": {"w":37,"h":36}
 },
 "tower-2.png":
 {
-	"frame": {"x":78,"y":2,"w":36,"h":37},
+	"frame": {"x":80,"y":2,"w":37,"h":36},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":37},
-	"sourceSize": {"w":36,"h":37}
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":36},
+	"sourceSize": {"w":37,"h":36}
+},
+"tower-3-error.png":
+{
+	"frame": {"x":41,"y":2,"w":37,"h":36},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":36},
+	"sourceSize": {"w":37,"h":36}
 },
 "tower-3.png":
 {
-	"frame": {"x":40,"y":2,"w":36,"h":37},
+	"frame": {"x":2,"y":78,"w":37,"h":36},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":37},
-	"sourceSize": {"w":36,"h":37}
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":36},
+	"sourceSize": {"w":37,"h":36}
+},
+"tower-4-error.png":
+{
+	"frame": {"x":2,"y":40,"w":37,"h":36},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":36},
+	"sourceSize": {"w":37,"h":36}
 },
 "tower-4.png":
 {
-	"frame": {"x":2,"y":2,"w":36,"h":37},
+	"frame": {"x":2,"y":2,"w":37,"h":36},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":37},
-	"sourceSize": {"w":36,"h":37}
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":36},
+	"sourceSize": {"w":37,"h":36}
 }},
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker ",
 	"version": "1.0",
 	"image": "towers.png",
 	"format": "RGBA8888",
-	"size": {"w":154,"h":41},
+	"size": {"w":119,"h":116},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:4a242419bc8b66c92a718691ae5ec7aa:1/1$"
+	"smartupdate": "$TexturePacker:SmartUpdate:214bf29ff6921a8fdd58679f65ec29e7:1/1$"
 }
 }

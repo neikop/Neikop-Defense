@@ -1,10 +1,13 @@
 class TowerA {
     constructor() {
         this.map = Dakra.map;
+        this.frameMain = 'tower-1.png';
+        this.frameError = 'tower-1-error.png';
 
         this.sprite = Dakra.towerGroup.create(
             (this.map.width + 1.5) * Dakra.configs.UNIT,
-            100 + 0 * Dakra.configs.UNIT, 'towers', 'tower-1.png');
+            100 + 0 * (Dakra.configs.UNIT + 20), 'towers', this.frameMain);
+
         this.sprite.anchor.setTo(0.5, 0.5);
 
         this.sprite.inputEnabled = true;
@@ -13,6 +16,7 @@ class TowerA {
 
         this.onDrag = false;
         this.onFire = false;
+
         this.RANGE = 5;
         this.SHOT_DELAY = 200;
         this.BULLET_SPEED = 1200;
@@ -44,8 +48,10 @@ class TowerA {
             } else {
                 this.sprite.position.x = this.oldPositionX;
                 this.sprite.position.y = this.oldPositionY;
-                this.sprite.frameName = 'tower-1.png';
+                this.sprite.frameName = this.frameMain;
             }
+
+            if (this.placeHolder !== undefined) this.placeHolder.sprite.kill();
         }
     }
 
@@ -83,7 +89,6 @@ class TowerA {
                     this.target.sprite.position.x, this.target.sprite.position.y
                 );
                 this.sprite.rotation = targetAngle;
-                this.sprite.angle += 90;
             }
             if (this.checkTargetInRange(this.target))
                 this.goBullet();
@@ -94,9 +99,18 @@ class TowerA {
 
             var x = Math.floor(this.sprite.position.x / Dakra.configs.UNIT);
             var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
-            if (this.map.arrayMap[x][y] == 0)
-                this.sprite.frameName = 'tower-1.png';
-            else this.sprite.frameName = 'tower-1-error.png';
+            if (this.map.arrayMap[x][y] == 0) {
+                this.sprite.frameName = this.frameMain;
+
+                if (this.placeHolder !== undefined)
+                    this.placeHolder.sprite.kill();
+                this.placeHolder = new placeHolderA(x, y);
+            } else {
+                this.sprite.frameName = this.frameError;
+
+                if (this.placeHolder !== undefined)
+                    this.placeHolder.sprite.kill();
+            }
         }
     }
 }

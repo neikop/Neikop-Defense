@@ -1,19 +1,29 @@
 class TowerD {
     constructor() {
         this.map = Dakra.map;
+        this.frameMain = 'tower-4.png';
+        this.frameError = 'tower-4-error.png';
 
-        this.sprite = Dakra.game.add.sprite(60 + this.map.width * 40, 250, 'towers', 'tower-4.png');
+        this.sprite = Dakra.towerGroup.create(
+            (this.map.width + 1.5) * Dakra.configs.UNIT,
+            100 + 3 * (Dakra.configs.UNIT + 20), 'towers', this.frameMain);
+
         this.sprite.anchor.setTo(0.5, 0.5);
-        this.sprite.inputEnabled = true;
-        this.onDrag = false;
-        this.onGone = false;
 
+        this.sprite.inputEnabled = true;
         this.sprite.events.onInputDown.add(this.onInputDown, this);
         this.sprite.events.onInputUp.add(this.onInputUp, this);
+
+        this.onDrag = false;
+        this.onFire = false;
+
+        this.RANGE = 5;
+        this.SHOT_DELAY = 200;
+        this.BULLET_SPEED = 1200;
     }
 
     onInputDown() {
-        if (this.onGone) {
+        if (this.onFire) {
 
         } else {
             this.onDrag = true;
@@ -23,37 +33,73 @@ class TowerD {
     }
 
     onInputUp() {
-        if (this.onGone) {
+        if (this.onFire) {
 
         } else {
             this.onDrag = false;
-            var x = Math.floor(this.sprite.position.x / 40);
-            var y = Math.floor(this.sprite.position.y / 40);
+            var x = Math.floor(this.sprite.position.x / Dakra.configs.UNIT);
+            var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
             if (this.map.arrayMap[x][y] == 0) {
-                this.sprite.position.x = (x + 0.5) * 40;
-                this.sprite.position.y = (y + 0.5) * 40;
-                this.onGone = true;
+                this.sprite.position.x = (x + 0.5) * Dakra.configs.UNIT;
+                this.sprite.position.y = (y + 0.5) * Dakra.configs.UNIT;
+                this.onFire = true;
                 this.map.arrayMap[x][y] = 1;
                 Dakra.towers.push(new TowerD(this.map));
             } else {
                 this.sprite.position.x = this.oldPositionX;
                 this.sprite.position.y = this.oldPositionY;
-                this.sprite.frameName = 'tower-4.png';
+                this.sprite.frameName = this.frameMain;
+            }
+        }
+    }
+
+    goBullet() {
+        if (this.lastBulletShotAt === undefined) this.lastBulletShotAt = 0;
+        if (Dakra.game.time.now - this.lastBulletShotAt < this.SHOT_DELAY) return;
+        this.lastBulletShotAt = Dakra.game.time.now;
+        new BulletA(this);
+    }
+
+    checkTargetInRange(target) {
+        if (target === undefined) return false;
+        if (!target.sprite.alive) return false;
+        var x = this.sprite.position.x - target.sprite.position.x;
+        var y = this.sprite.position.y - target.sprite.position.y;
+        var distance = Math.sqrt(x * x + y * y);
+        return distance <= this.RANGE * Dakra.configs.UNIT;
+    }
+
+    goNextTarget() {
+        for (var i = 0; i < Dakra.enemies.length; i++) {
+            var targetOnCheck = Dakra.enemies[i];
+            if (this.checkTargetInRange(targetOnCheck)) {
+                this.target = targetOnCheck;
+                return;
             }
         }
     }
 
     update() {
-        if (this.onGone) {
+        if (this.onFire) {
+            if (this.target !== undefined) {
+                var targetAngle = Dakra.game.math.angleBetween(
+                    this.sprite.position.x, this.sprite.position.y,
+                    this.target.sprite.position.x, this.target.sprite.position.y
+                );
+                this.sprite.rotation = targetAngle;
+            }
+            if (this.checkTargetInRange(this.target))
+                this.goBullet();
+            else this.goNextTarget();
 
         } else if (this.onDrag) {
             this.sprite.position.copyFrom(Dakra.game.input.mousePointer);
 
-            var x = Math.floor(this.sprite.position.x / 40);
-            var y = Math.floor(this.sprite.position.y / 40);
+            var x = Math.floor(this.sprite.position.x / Dakra.configs.UNIT);
+            var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
             if (this.map.arrayMap[x][y] == 0)
-                this.sprite.frameName = 'tower-4.png';
-            else this.sprite.frameName = 'tower.png';
+                this.sprite.frameName = this.frameMain;
+            else this.sprite.frameName = this.frameError;
         }
     }
 }

@@ -27,6 +27,7 @@ var preload = function() {
     Dakra.game.load.atlasJSONHash('maps', 'Assets/maps.png', 'Assets/maps.json');
     Dakra.game.load.atlasJSONHash('cursors', 'Assets/cursors.png', 'Assets/cursors.json');
     Dakra.game.load.atlasJSONHash('towers', 'Assets/towers.png', 'Assets/towers.json');
+    Dakra.game.load.atlasJSONHash('holders', 'Assets/holders.png', 'Assets/holders.json');
     Dakra.game.load.atlasJSONHash('bullets', 'Assets/bullets.png', 'Assets/bullets.json');
 }
 
@@ -37,6 +38,7 @@ var create = function() {
     Dakra.map = new MapA();
 
     Dakra.enemyGroup = Dakra.game.add.physicsGroup();
+    Dakra.towerHolderGroup = Dakra.game.add.physicsGroup();
     Dakra.towerGroup = Dakra.game.add.physicsGroup();
     Dakra.towerBulletGroup = Dakra.game.add.physicsGroup();
 

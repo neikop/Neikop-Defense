@@ -11,7 +11,7 @@ class EnemyA {
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.health = 100;
 
-        this.movementSpeed = 50; // MAX = 300
+        this.movementSpeed = 100; // MAX = 300
     }
 
     update() {
