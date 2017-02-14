@@ -29,6 +29,7 @@ var preload = function() {
     Dakra.game.load.atlasJSONHash('towers', 'Assets/towers.png', 'Assets/towers.json');
     Dakra.game.load.atlasJSONHash('holders', 'Assets/holders.png', 'Assets/holders.json');
     Dakra.game.load.atlasJSONHash('bullets', 'Assets/bullets.png', 'Assets/bullets.json');
+    Dakra.game.load.atlasJSONHash('chars', 'Assets/chars.png', 'Assets/chars.json');
 }
 
 // initialize the game
@@ -53,7 +54,6 @@ var create = function() {
     Dakra.enemies = [];
     Dakra.lastEnemyRespawnAt = 0;
     Dakra.countDead = 0;
-
 }
 
 // update game state each frame
@@ -67,9 +67,14 @@ var update = function() {
         if (enemy.sprite.alive) enemy.update();
     });
 
-    if (Dakra.game.time.now - Dakra.lastEnemyRespawnAt >= 3000) {
+    if (Dakra.game.time.now - Dakra.lastEnemyRespawnAt >= 1000) {
         Dakra.lastEnemyRespawnAt = Dakra.game.time.now;
-        Dakra.enemies.push(new EnemyA());
+        var x = Math.random() * 5;
+
+        Dakra.enemies.push(x < 1 ? new EnemyA() :
+            x < 2 ? new EnemyB() :
+            x < 3 ? new EnemyC() :
+            x < 4 ? new EnemyD() : new EnemyE);
     }
 
     Dakra.game.physics.arcade.overlap(Dakra.towerBulletGroup, Dakra.enemyGroup, onBulletHitActor);

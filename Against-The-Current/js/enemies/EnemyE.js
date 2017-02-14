@@ -1,4 +1,4 @@
-class EnemyA {
+class EnemyE {
     constructor() {
         this.map = Dakra.map;
         this.currPos = 0;
@@ -17,13 +17,13 @@ class EnemyA {
 
     setupAnimation() {
         this.sprite.animations.add('godown', Phaser.Animation
-            .generateFrameNames('char-1-godown-', 1, 3, '.png', 1), 15, true);
+            .generateFrameNames('char-5-godown-', 1, 3, '.png', 1), 15, true);
         this.sprite.animations.add('goleft', Phaser.Animation
-            .generateFrameNames('char-1-goleft-', 1, 3, '.png', 1), 15, true);
+            .generateFrameNames('char-5-goleft-', 1, 3, '.png', 1), 15, true);
         this.sprite.animations.add('goright', Phaser.Animation
-            .generateFrameNames('char-1-goright-', 1, 3, '.png', 1), 15, true);
+            .generateFrameNames('char-5-goright-', 1, 3, '.png', 1), 15, true);
         this.sprite.animations.add('goup', Phaser.Animation
-            .generateFrameNames('char-1-goup-', 1, 3, '.png', 1), 15, true);
+            .generateFrameNames('char-5-goup-', 1, 3, '.png', 1), 15, true);
     }
 
     update() {
