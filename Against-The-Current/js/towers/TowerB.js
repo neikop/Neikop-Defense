@@ -18,7 +18,7 @@ class TowerB {
         this.onFire = false;
 
         this.RANGE = 5;
-        this.SHOT_DELAY = 200;
+        this.SHOT_DELAY = 300;
         this.BULLET_SPEED = 1200;
     }
 

@@ -1,11 +1,13 @@
 class EnemyB {
     constructor() {
-        this.map = Dakra.map;
+        this.arrayPoint = Dakra.map.arrayPoint[
+            Math.floor(Math.random() * Dakra.map.arrayPoint.length)
+        ];
         this.currPos = 0;
         this.nextPos = 1;
         this.sprite = Dakra.enemyGroup.create(
-            (this.map.arrayPoint[this.currPos].x + 0.5) * Dakra.configs.UNIT,
-            (this.map.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT,
+            (this.arrayPoint[this.currPos].x + 0.5) * Dakra.configs.UNIT,
+            (this.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT,
             'chars'
         );
         this.sprite.anchor.setTo(0.5, 0.5);
@@ -27,14 +29,12 @@ class EnemyB {
     }
 
     update() {
-        if (this.nextPos == this.map.arrayPoint.length) {
+        if (this.nextPos == this.arrayPoint.length) {
             this.sprite.body.velocity.x = 0;
             this.sprite.body.velocity.y = 0;
-            this.sprite.position.x = (this.map.arrayPoint[this.currPos].x + 0.5) * Dakra.configs.UNIT;
-            this.sprite.position.y = (this.map.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT;
+            this.sprite.position.x = (this.arrayPoint[this.currPos].x + 0.5) * Dakra.configs.UNIT;
+            this.sprite.position.y = (this.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT;
 
-            Dakra.countDead++;
-            Dakra.enemies.shift();
             this.sprite.kill();
         } else this.checkDirection();
     }
@@ -45,8 +45,8 @@ class EnemyB {
             this.sprite.position.y
         );
         var nextPosition = new Phaser.Point(
-            (this.map.arrayPoint[this.nextPos].x + 0.5) * Dakra.configs.UNIT,
-            (this.map.arrayPoint[this.nextPos].y + 0.5) * Dakra.configs.UNIT
+            (this.arrayPoint[this.nextPos].x + 0.5) * Dakra.configs.UNIT,
+            (this.arrayPoint[this.nextPos].y + 0.5) * Dakra.configs.UNIT
         );
 
         if (this.checkApproach(nextPosition.x, currPosition.x) &
@@ -62,8 +62,8 @@ class EnemyB {
             if (nextPosition.x > currPosition.x) this.goRight();
             if (nextPosition.x < currPosition.x) this.goLeft();
         } else {
-            this.sprite.position.x = (this.map.arrayPoint[this.currPos].x + 0.5) * Dakra.configs.UNIT;
-            this.sprite.position.y = (this.map.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT;
+            this.sprite.position.x = (this.arrayPoint[this.currPos].x + 0.5) * Dakra.configs.UNIT;
+            this.sprite.position.y = (this.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT;
         }
     }
 

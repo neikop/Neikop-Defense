@@ -1,29 +1,27 @@
-class MapA {
-    constructor() { // 11 x 15
+class MapB {
+    constructor() { // 9 x 12
         this.arrayMap = [
-            [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-            [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-            [2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 0, 0],
-            [1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 1, 0],
-            [0, 0, 1, 0, 1, 0, 2, 0, 0, 2, 1, 0, 2, 0, 1],
-            [0, 0, 2, 2, 2, 2, 2, 1, 0, 2, 0, 0, 2, 0, 0],
-            [0, 0, 2, 0, 0, 0, 0, 0, 1, 2, 0, 0, 2, 0, 0],
-            [1, 0, 2, 0, 0, 1, 0, 0, 0, 2, 0, 1, 2, 0, 0],
-            [0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 2, 1, 0],
-            [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 1],
-            [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0]
+            [0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+            [2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 0],
+            [0, 0, 0, 0, 2, 0, 0, 2, 1, 0, 2, 0],
+            [1, 0, 0, 1, 2, 0, 1, 2, 0, 0, 2, 1],
+            [0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
+            [0, 2, 0, 0, 2, 0, 0, 2, 1, 0, 0, 0],
+            [0, 2, 1, 0, 2, 1, 0, 2, 0, 0, 0, 1],
+            [1, 2, 0, 0, 2, 2, 2, 2, 0, 1, 0, 0],
+            [0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0]
         ];
         this.arrayPoint = [];
         this.arrayPoint.push([
-            new Phaser.Point(2, 0),
-            new Phaser.Point(2, 6),
-            new Phaser.Point(5, 6),
-            new Phaser.Point(5, 2),
-            new Phaser.Point(8, 2),
-            new Phaser.Point(8, 9),
-            new Phaser.Point(2, 9),
-            new Phaser.Point(2, 12),
-            new Phaser.Point(10, 12)
+            new Phaser.Point(1, 0),
+            new Phaser.Point(1, 4),
+            new Phaser.Point(7, 4),
+            new Phaser.Point(7, 7),
+            new Phaser.Point(1, 7),
+            new Phaser.Point(1, 10),
+            new Phaser.Point(4, 10),
+            new Phaser.Point(4, 1),
+            new Phaser.Point(8, 1),
         ]);
 
         this.width = this.arrayMap.length;

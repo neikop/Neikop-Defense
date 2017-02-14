@@ -1,14 +1,18 @@
 var Dakra = {};
 Dakra.configs = {
-    screenWidth: 440,
-    screenHeight: 600,
+    map: 2,
     UNIT: 40
 };
 
+Dakra.configs.screenSize =
+    Dakra.configs.map == 1 ? new Phaser.Point(11, 15) :
+    Dakra.configs.map == 2 ? new Phaser.Point(9, 12) :
+    Dakra.configs.map == 3 ? new Phaser.Point(11, 12) : 0;
+
 window.onload = function() {
     Dakra.game = new Phaser.Game(
-        Dakra.configs.screenWidth + 3 * Dakra.configs.UNIT,
-        Dakra.configs.screenHeight,
+        (Dakra.configs.screenSize.x + 3) * Dakra.configs.UNIT,
+        (Dakra.configs.screenSize.y + 0) * Dakra.configs.UNIT,
         Phaser.AUTO, '', {
             preload: preload,
             create: create,
@@ -36,7 +40,11 @@ var preload = function() {
 var create = function() {
     Dakra.game.physics.startSystem(Phaser.Physics.ARCADE);
     Dakra.game.stage.backgroundColor = "#4488AA";
-    Dakra.map = new MapA();
+
+    Dakra.map =
+        Dakra.configs.map == 1 ? new MapA() :
+        Dakra.configs.map == 2 ? new MapB() :
+        Dakra.configs.map == 3 ? new MapC() : 0;
 
     Dakra.enemyGroup = Dakra.game.add.physicsGroup();
     Dakra.towerHolderGroup = Dakra.game.add.physicsGroup();
@@ -53,7 +61,6 @@ var create = function() {
 
     Dakra.enemies = [];
     Dakra.lastEnemyRespawnAt = 0;
-    Dakra.countDead = 0;
 }
 
 // update game state each frame
@@ -67,10 +74,9 @@ var update = function() {
         if (enemy.sprite.alive) enemy.update();
     });
 
-    if (Dakra.game.time.now - Dakra.lastEnemyRespawnAt >= 1000) {
+    if (Dakra.game.time.now - Dakra.lastEnemyRespawnAt >= 2000) {
         Dakra.lastEnemyRespawnAt = Dakra.game.time.now;
         var x = Math.random() * 5;
-
         Dakra.enemies.push(x < 1 ? new EnemyA() :
             x < 2 ? new EnemyB() :
             x < 3 ? new EnemyC() :
@@ -93,6 +99,5 @@ function goCursor(active) {
 
 // before camera render (mostly for debug)
 var render = function() {
-    Dakra.game.debug.text('Alive: ' + Dakra.enemies.length, 464, 400);
-    Dakra.game.debug.text('Dead: ' + Dakra.countDead, 465, 440);
+
 }
