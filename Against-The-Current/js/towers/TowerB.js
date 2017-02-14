@@ -1,6 +1,8 @@
-class TowerA {
-    constructor(map) {
-        this.sprite = Dakra.game.add.sprite(60 + map.width * 40, 100, 'towers', 'tower-1.png');
+class TowerB {
+    constructor() {
+        this.map = Dakra.map;
+
+        this.sprite = Dakra.game.add.sprite(60 + this.map.width * 40, 150, 'towers', 'tower-2.png');
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.inputEnabled = true;
         this.onDrag = false;
@@ -8,8 +10,6 @@ class TowerA {
 
         this.sprite.events.onInputDown.add(this.onInputDown, this);
         this.sprite.events.onInputUp.add(this.onInputUp, this);
-
-        this.map = map;
     }
 
     onInputDown() {
@@ -34,11 +34,11 @@ class TowerA {
                 this.sprite.position.y = (y + 0.5) * 40;
                 this.onGone = true;
                 this.map.arrayMap[x][y] = 1;
-                Dakra.towers.push(new TowerA(this.map));
+                Dakra.towers.push(new TowerB(this.map));
             } else {
                 this.sprite.position.x = this.oldPositionX;
                 this.sprite.position.y = this.oldPositionY;
-                this.sprite.frameName = 'tower-1.png';
+                this.sprite.frameName = 'tower-2.png';
             }
         }
     }
@@ -52,7 +52,7 @@ class TowerA {
             var x = Math.floor(this.sprite.position.x / 40);
             var y = Math.floor(this.sprite.position.y / 40);
             if (this.map.arrayMap[x][y] == 0)
-                this.sprite.frameName = 'tower-1.png';
+                this.sprite.frameName = 'tower-2.png';
             else this.sprite.frameName = 'tower.png';
         }
     }
