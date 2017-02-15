@@ -1,9 +1,14 @@
 class BulletA {
-    constructor(tower) {
+    constructor() {
         this.sprite = Dakra.towerBulletGroupA.create(0, 0, 'bullets', 'beam-1.png');
         this.sprite.father = this;
         this.sprite.anchor.setTo(0.5, 0.5);
-        this.sprite.checkWorldBound = true;
+    }
+
+    revive(tower) {
+        this.sprite.revive();
+
+        this.sprite.checkWorldBounds = true;
         this.sprite.outOfBoundsKill = true;
 
         this.sprite.reset(tower.sprite.position.x, tower.sprite.position.y);

@@ -29,6 +29,8 @@ class TowerC {
         this.BULLET_SPEED = 800;
 
         this.LEVEL = 1;
+        this.BUILDING_PRICE = 300;
+        this.UPGRADE_PRICE = 150;
     }
 
     goUpgradeTo2() {
@@ -36,6 +38,9 @@ class TowerC {
         this.RANGE = 4;
         this.DAMAGE = 70;
         this.SLOW = 0;
+
+        Dakra.MONEY = Dakra.MONEY - this.UPGRADE_PRICE;
+        this.UPGRADE_PRICE = 200;
     }
 
     goUpgradeTo3() {
@@ -43,19 +48,21 @@ class TowerC {
         this.RANGE = 5;
         this.DAMAGE = 100;
         this.SLOW = 0;
+
+        Dakra.MONEY = Dakra.MONEY - this.UPGRADE_PRICE;
     }
 
     onInputDown() {
         if (this.onFire) {
             if (Dakra.background === undefined) {
+                Dakra.background = Dakra.backGroup.create(0, 0, 'background-hided');
+                Dakra.background.inputEnabled = true;
+                Dakra.background.events.onInputDown.add(this.onInputDownBackground, this);
+
                 this.upgradeHolder = Dakra.towerHolderGroup
                     .create(this.sprite.position.x, this.sprite.position.y, 'holders',
                         'tower-' + this.TYPE + '-upgrade-' + this.LEVEL + '.png');
                 this.upgradeHolder.anchor.setTo(0.5, 0.5);
-
-                Dakra.background = Dakra.backGroup.create(0, 0, 'background-hided');
-                Dakra.background.inputEnabled = true;
-                Dakra.background.events.onInputDown.add(this.onInputDownBackground, this);
 
                 if (this.buttonDestroy === undefined) {
                     this.buttonDestroy = Dakra.game.add.button(
@@ -106,6 +113,7 @@ class TowerC {
 
     onInputDownUpgrade() {
         this.onInputDownBackground();
+        if (Dakra.MONEY < this.UPGRADE_PRICE) return;
         if (this.LEVEL == 1) this.goUpgradeTo2();
         else if (this.LEVEL == 2) this.goUpgradeTo3();
     }
@@ -117,7 +125,9 @@ class TowerC {
             this.onDrag = false;
             var x = Math.floor(this.sprite.position.x / Dakra.configs.UNIT);
             var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
-            if (this.map.arrayMap[x][y] == 0) {
+            if (this.map.arrayMap[x][y] == 0 & Dakra.MONEY >= this.BUILDING_PRICE) {
+                Dakra.MONEY = Dakra.MONEY - this.BUILDING_PRICE;
+
                 this.sprite.position.x = (x + 0.5) * Dakra.configs.UNIT;
                 this.sprite.position.y = (y + 0.5) * Dakra.configs.UNIT;
                 this.onFire = true;
@@ -144,10 +154,10 @@ class TowerC {
         if (this.lastBulletShotAt === undefined) this.lastBulletShotAt = 0;
         if (Dakra.game.time.now - this.lastBulletShotAt < this.SHOT_DELAY) return;
         this.lastBulletShotAt = Dakra.game.time.now;
-        if (this.TYPE == 1) new BulletA(this);
-        if (this.TYPE == 2) new BulletB(this);
-        if (this.TYPE == 3) new BulletC(this);
-        if (this.TYPE == 4) new BulletD(this);
+        if (this.TYPE == 1) Dakra.towerBulletGroupA.getFirstDead().father.revive(this);
+        if (this.TYPE == 2) Dakra.towerBulletGroupB.getFirstDead().father.revive(this);
+        if (this.TYPE == 3) Dakra.towerBulletGroupC.getFirstDead().father.revive(this);
+        if (this.TYPE == 4) Dakra.towerBulletGroupD.getFirstDead().father.revive(this);
     }
 
     checkTargetInRange(target) {

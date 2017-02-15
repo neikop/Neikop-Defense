@@ -15,14 +15,28 @@ class EnemyA {
         this.setupAnimation();
 
         this.armor = 0;
+        this.COIN = 50 + 10 * Math.floor(Dakra.enemyGroup.length / 10);
+        this.sprite.health = 1000 + 100 * Math.floor(Dakra.enemyGroup.length / 10);
+        this.movementSpeed = 50; // MAX = 300
+    }
+
+    revive() {
+        this.sprite.revive();
+
+        this.currPos = 0;
+        this.nextPos = 1;
+        this.sprite.position.x = (this.arrayPoint[this.currPos].x + 0.5) * Dakra.configs.UNIT;
+        this.sprite.position.y = (this.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT;
+
+        this.armor = 0;
         this.sprite.health = 1000;
         this.movementSpeed = 50; // MAX = 300
     }
 
     beShot(bullet) {
         this.sprite.damage(bullet.damage * 100 / (100 + this.armor * bullet.armorPen));
+        if (!this.sprite.alive) Dakra.MONEY = Dakra.MONEY + this.COIN;
         this.beSlowed(bullet.slow);
-        console.log(this.sprite.health);
     }
 
     beSlowed(damage) {
@@ -48,6 +62,7 @@ class EnemyA {
             this.sprite.position.x = (this.arrayPoint[this.currPos].x + 0.5) * Dakra.configs.UNIT;
             this.sprite.position.y = (this.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT;
 
+            Dakra.LIFE--;
             this.sprite.kill();
         } else this.checkDirection();
     }

@@ -1,6 +1,6 @@
 var Dakra = {};
 Dakra.configs = {
-    map: 2,
+    map: 3,
     UNIT: 40
 };
 
@@ -44,11 +44,13 @@ var preload = function() {
 var create = function() {
     Dakra.game.physics.startSystem(Phaser.Physics.ARCADE);
     Dakra.game.stage.backgroundColor = "#4488AA";
-
+    Dakra.game.add.sprite(0, 0, 'background-hided');
     Dakra.map =
         Dakra.configs.map == 1 ? new MapA() :
         Dakra.configs.map == 2 ? new MapB() :
         Dakra.configs.map == 3 ? new MapC() : 0;
+    Dakra.MONEY = 500;
+    Dakra.LIFE = 10;
 
     Dakra.enemyGroup = Dakra.game.add.physicsGroup();
     Dakra.towerHolderGroup = Dakra.game.add.group();
@@ -59,6 +61,13 @@ var create = function() {
     Dakra.towerBulletGroupC = Dakra.game.add.physicsGroup();
     Dakra.towerBulletGroupD = Dakra.game.add.physicsGroup();
 
+    createTowers();
+    createEnemies();
+    createBulletPool();
+    this.timeRespawnEnemy = 2000;
+}
+
+var createTowers = function() {
     Dakra.towers = [];
     for (var i = 0; i < 2; i++) {
         Dakra.towers.push(new TowerA());
@@ -66,9 +75,37 @@ var create = function() {
         Dakra.towers.push(new TowerC());
         Dakra.towers.push(new TowerD());
     }
+}
 
+var createEnemies = function() {
     Dakra.enemies = [];
-    this.timeRespawnEnemy = 2000;
+}
+
+var createBulletPool = function() {
+    Dakra.bulletsA = [];
+    for (var i = 0; i < 100; i++) {
+        var bullet = new BulletA();
+        Dakra.bulletsA.push(bullet);
+        bullet.sprite.kill();
+    }
+    Dakra.bulletsB = [];
+    for (var i = 0; i < 100; i++) {
+        var bullet = new BulletB();
+        Dakra.bulletsA.push(bullet);
+        bullet.sprite.kill();
+    }
+    Dakra.bulletsC = [];
+    for (var i = 0; i < 100; i++) {
+        var bullet = new BulletC();
+        Dakra.bulletsA.push(bullet);
+        bullet.sprite.kill();
+    }
+    Dakra.bulletsD = [];
+    for (var i = 0; i < 100; i++) {
+        var bullet = new BulletD();
+        Dakra.bulletsA.push(bullet);
+        bullet.sprite.kill();
+    }
 }
 
 // update game state each frame
@@ -86,7 +123,8 @@ var update = function() {
     if (Dakra.game.time.now - this.lastEnemyRespawnAt >= this.timeRespawnEnemy) {
         this.lastEnemyRespawnAt = Dakra.game.time.now;
         var x = Math.random() * 5;
-        Dakra.enemies.push(x < 1 ? new EnemyA() :
+        Dakra.enemies.push(
+            x < 1 ? new EnemyA() :
             x < 2 ? new EnemyB() :
             x < 3 ? new EnemyC() :
             x < 4 ? new EnemyD() : new EnemyE);
@@ -100,7 +138,6 @@ var update = function() {
 
 var onBulletHitActor = function(bulletSprite, enemySprite) {
     enemySprite.father.beShot(bulletSprite.father);
-    Dakra.towerBulletGroupB.remove(bulletSprite);
     bulletSprite.kill();
 }
 
@@ -112,12 +149,14 @@ function goCursor(active) {
 
 // before camera render (mostly for debug)
 var render = function() {
-    Dakra.game.debug.text('E = ' + Dakra.enemyGroup.length,
+    Dakra.game.debug.text('M = ' + Dakra.MONEY,
         (Dakra.map.width + 0.5) * Dakra.configs.UNIT, 320);
-    // Dakra.game.debug.text('B = ' + Dakra.towerBulletGroup.length,
-    //     (Dakra.map.width + 0.5) * Dakra.configs.UNIT, 360);
-    Dakra.game.debug.text('G = ' + Dakra.backGroup.length,
+    if (Dakra.LIFE > 0) Dakra.game.debug.text('L = ' + Dakra.LIFE,
+        (Dakra.map.width + 0.5) * Dakra.configs.UNIT, 360);
+    else Dakra.game.debug.text('Game Over',
+        (Dakra.map.width + 0.5) * Dakra.configs.UNIT, 360);
+    Dakra.game.debug.text('E = ' + Dakra.enemyGroup.length,
         (Dakra.map.width + 0.5) * Dakra.configs.UNIT, 400);
-    Dakra.game.debug.text('T = ' + (Dakra.towerGroup.length - 8),
+    Dakra.game.debug.text('G = ' + Dakra.backGroup.length,
         (Dakra.map.width + 0.5) * Dakra.configs.UNIT, 440);
 }
