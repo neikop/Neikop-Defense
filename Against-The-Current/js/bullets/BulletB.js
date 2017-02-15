@@ -1,6 +1,6 @@
-class BulletA {
+class BulletB {
     constructor(tower) {
-        this.sprite = Dakra.towerBulletGroupA.create(0, 0, 'bullets', 'beam-1.png');
+        this.sprite = Dakra.towerBulletGroupB.create(0, 0, 'bullets', 'beam-2.png');
         this.sprite.father = this;
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.checkWorldBound = true;

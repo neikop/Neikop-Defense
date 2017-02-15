@@ -10,11 +10,24 @@ class EnemyA {
             (this.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT,
             'chars'
         );
+        this.sprite.father = this;
         this.sprite.anchor.setTo(0.5, 0.5);
         this.setupAnimation();
 
-        this.sprite.health = 100;
-        this.movementSpeed = 100; // MAX = 300
+        this.armor = 0;
+        this.sprite.health = 1000;
+        this.movementSpeed = 50; // MAX = 300
+    }
+
+    beShot(bullet) {
+        this.sprite.damage(bullet.damage * 100 / (100 + this.armor * bullet.armorPen));
+        this.beSlowed(bullet.slow);
+        console.log(this.sprite.health);
+    }
+
+    beSlowed(damage) {
+        this.movementSpeed = this.movementSpeed - damage;
+        if (this.movementSpeed < 20) this.movementSpeed = 20;
     }
 
     setupAnimation() {
@@ -92,7 +105,6 @@ class EnemyA {
     }
 
     checkApproach(x, y) {
-        var z = Math.abs(x - y);
-        return z < 0.000001;
+        return Math.abs(x - y) < 1;
     }
 }
