@@ -80,6 +80,36 @@ class Tower {
         }
     }
 
+    onInputUp() {
+        if (this.onFire) {
+
+        } else {
+            this.onDrag = false;
+            var x = Math.floor(this.sprite.position.x / Dakra.configs.UNIT);
+            var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
+            if (Dakra.MAP.arrayMap[y][x] == Dakra.configs.PLACE &
+                Dakra.MONEY >= this.BUILDING_PRICE) {
+                Dakra.MONEY = Dakra.MONEY - this.BUILDING_PRICE;
+
+                this.sprite.position.x = (x + 0.5) * Dakra.configs.UNIT;
+                this.sprite.position.y = (y + 0.5) * Dakra.configs.UNIT;
+                this.onFire = true;
+                Dakra.MAP.arrayMap[y][x] = 0;
+                Dakra.towers.push(
+                    this.TYPE == 1 ? new TowerA() :
+                    this.TYPE == 2 ? new TowerB() :
+                    this.TYPE == 3 ? new TowerC() :
+                    this.TYPE == 4 ? new TowerD() : 0
+                );
+            } else {
+                this.sprite.reset(this.oldPositionX, this.oldPositionY);
+                this.sprite.frameName = this.frameMain;
+            }
+
+            if (this.placeHolder !== undefined) this.placeHolder.kill();
+        }
+    }
+
     onInputDownBackground() {
         Dakra.background.kill();
         this.upgradeHolder.kill();
@@ -93,7 +123,7 @@ class Tower {
         this.sprite.kill();
         var x = Math.floor(this.sprite.position.x / Dakra.configs.UNIT);
         var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
-        Dakra.MAP.arrayMap[x][y] = 0;
+        Dakra.MAP.arrayMap[y][x] = Dakra.configs.PLACE;
     }
 
     onInputDownUpgrade() {
@@ -101,59 +131,6 @@ class Tower {
         if (Dakra.MONEY < this.UPGRADE_PRICE) return;
         if (this.LEVEL == 1) this.goUpgradeTo2();
         else if (this.LEVEL == 2) this.goUpgradeTo3();
-    }
-
-    onInputUp() {
-        if (this.onFire) {
-
-        } else {
-            this.onDrag = false;
-            var x = Math.floor(this.sprite.position.x / Dakra.configs.UNIT);
-            var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
-            if (Dakra.MAP.arrayMap[x][y] == 0 & Dakra.MONEY >= this.BUILDING_PRICE) {
-                Dakra.MONEY = Dakra.MONEY - this.BUILDING_PRICE;
-
-                this.sprite.position.x = (x + 0.5) * Dakra.configs.UNIT;
-                this.sprite.position.y = (y + 0.5) * Dakra.configs.UNIT;
-                this.onFire = true;
-                Dakra.MAP.arrayMap[x][y] = 1;
-                Dakra.towers.push(this);
-            } else {
-                this.sprite.reset(this.oldPositionX, this.oldPositionY);
-                this.sprite.frameName = this.frameMain;
-            }
-
-            if (this.placeHolder !== undefined) this.placeHolder.kill();
-        }
-    }
-
-    goBullet() {
-        if (this.lastBulletShotAt === undefined) this.lastBulletShotAt = 0;
-        if (Dakra.game.time.now - this.lastBulletShotAt < this.SHOT_DELAY) return;
-        this.lastBulletShotAt = Dakra.game.time.now;
-        if (this.TYPE == 1) Dakra.towerBulletGroupA.getFirstDead().father.revive(this);
-        if (this.TYPE == 2) Dakra.towerBulletGroupB.getFirstDead().father.revive(this);
-        if (this.TYPE == 3) Dakra.towerBulletGroupC.getFirstDead().father.revive(this);
-        if (this.TYPE == 4) Dakra.towerBulletGroupD.getFirstDead().father.revive(this);
-    }
-
-    checkTargetInRange(target) {
-        if (target === undefined) return false;
-        if (!target.sprite.alive) return false;
-        var x = this.sprite.position.x - target.sprite.position.x;
-        var y = this.sprite.position.y - target.sprite.position.y;
-        var distance = Math.sqrt(x * x + y * y);
-        return distance <= this.RANGE * Dakra.configs.UNIT;
-    }
-
-    goNextTarget() {
-        for (var i = 0; i < Dakra.enemies.length; i++) {
-            var targetOnCheck = Dakra.enemies[i];
-            if (this.checkTargetInRange(targetOnCheck)) {
-                this.target = targetOnCheck;
-                return;
-            }
-        }
     }
 
     update() {
@@ -174,7 +151,7 @@ class Tower {
 
             var x = Math.floor(this.sprite.position.x / Dakra.configs.UNIT);
             var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
-            if (Dakra.MAP.arrayMap[x][y] == 0) {
+            if (Dakra.MAP.arrayMap[y][x] == Dakra.configs.PLACE) {
                 this.sprite.frameName = this.frameMain;
 
                 this.placeHolder.reset(x * 40 + 20, y * 40 + 20);
@@ -183,5 +160,34 @@ class Tower {
                 if (this.placeHolder !== undefined) this.placeHolder.kill();
             }
         }
+    }
+
+    goBullet() {
+        if (this.lastBulletShotAt === undefined) this.lastBulletShotAt = 0;
+        if (Dakra.game.time.now - this.lastBulletShotAt < this.SHOT_DELAY) return;
+        this.lastBulletShotAt = Dakra.game.time.now;
+        if (this.TYPE == 1) Dakra.towerBulletGroupA.getFirstDead().father.revive(this);
+        if (this.TYPE == 2) Dakra.towerBulletGroupB.getFirstDead().father.revive(this);
+        if (this.TYPE == 3) Dakra.towerBulletGroupC.getFirstDead().father.revive(this);
+        if (this.TYPE == 4) Dakra.towerBulletGroupD.getFirstDead().father.revive(this);
+    }
+
+    goNextTarget() {
+        for (var i = 0; i < Dakra.enemies.length; i++) {
+            var targetOnCheck = Dakra.enemies[i];
+            if (this.checkTargetInRange(targetOnCheck)) {
+                this.target = targetOnCheck;
+                return;
+            }
+        }
+    }
+
+    checkTargetInRange(target) {
+        if (target === undefined) return false;
+        if (!target.sprite.alive) return false;
+        var x = this.sprite.position.x - target.sprite.position.x;
+        var y = this.sprite.position.y - target.sprite.position.y;
+        var distance = Math.sqrt(x * x + y * y);
+        return distance <= this.RANGE * Dakra.configs.UNIT;
     }
 }

@@ -11,7 +11,7 @@ class Enemy {
             'chars'
         );
         this.sprite.father = this;
-        this.sprite.anchor.setTo(0.5, 0.5);
+        this.sprite.anchor.setTo(0.5, 0.7);
         this.setupAnimation(numType);
 
         this.COIN = coin + 10 * Math.floor(Dakra.enemyGroup.length / 10);

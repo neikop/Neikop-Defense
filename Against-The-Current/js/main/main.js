@@ -1,13 +1,11 @@
 var Dakra = {};
 Dakra.configs = {
-    MAP: 3,
-    UNIT: 40
+    MAP: 1,
+    UNIT: 40,
+    PLACE: 51
 };
 
-Dakra.configs.screenSize =
-    Dakra.configs.MAP == 1 ? new Phaser.Point(11, 15) :
-    Dakra.configs.MAP == 2 ? new Phaser.Point(9, 12) :
-    Dakra.configs.MAP == 3 ? new Phaser.Point(11, 12) : 0;
+Dakra.configs.screenSize = new Phaser.Point(16, 16);
 
 window.onload = function() {
     Dakra.game = new Phaser.Game(
@@ -43,13 +41,13 @@ var preload = function() {
 // initialize the game
 var create = function() {
     Dakra.game.physics.startSystem(Phaser.Physics.ARCADE);
-    Dakra.game.stage.backgroundColor = "#4488AA";
+    Dakra.game.stage.backgroundColor = "#164AE3";
     Dakra.game.add.sprite(0, 0, 'background-hided');
     Dakra.MAP =
         Dakra.configs.MAP == 1 ? new MapA() :
         Dakra.configs.MAP == 2 ? new MapB() :
         Dakra.configs.MAP == 3 ? new MapC() : 0;
-    Dakra.MONEY = 500;
+    Dakra.MONEY = 650;
     Dakra.LIFE = 10;
     Dakra.KILL = 0;
 
