@@ -102,6 +102,12 @@ class Enemy {
         this.sprite.animations.play('goleft');
     }
 
+    stop() {
+        this.sprite.body.velocity.x = 0;
+        this.sprite.body.velocity.y = 0;
+        this.sprite.animations.stop();
+    }
+
     checkApproach(x, y) {
         return Math.abs(x - y) < 1;
     }

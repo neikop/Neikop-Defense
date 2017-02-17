@@ -10,7 +10,7 @@ class Tower {
 
         // this.MAP = Dakra.MAP;
         this.sprite = Dakra.towerGroup.create(
-            (Dakra.MAP.width + 1.5) * Dakra.configs.UNIT,
+            (Dakra.MAP.width + 1.0) * Dakra.configs.UNIT,
             this.TYPE * (Dakra.configs.UNIT + 20), 'towers', this.frameMain);
 
         this.sprite.anchor.setTo(0.5, 0.5);
@@ -153,7 +153,6 @@ class Tower {
             var y = Math.floor(this.sprite.position.y / Dakra.configs.UNIT);
             if (Dakra.MAP.arrayMap[y][x] == Dakra.configs.PLACE) {
                 this.sprite.frameName = this.frameMain;
-
                 this.placeHolder.reset(x * 40 + 20, y * 40 + 20);
             } else {
                 this.sprite.frameName = this.frameError;
@@ -166,10 +165,7 @@ class Tower {
         if (this.lastBulletShotAt === undefined) this.lastBulletShotAt = 0;
         if (Dakra.game.time.now - this.lastBulletShotAt < this.SHOT_DELAY) return;
         this.lastBulletShotAt = Dakra.game.time.now;
-        if (this.TYPE == 1) Dakra.towerBulletGroupA.getFirstDead().father.revive(this);
-        if (this.TYPE == 2) Dakra.towerBulletGroupB.getFirstDead().father.revive(this);
-        if (this.TYPE == 3) Dakra.towerBulletGroupC.getFirstDead().father.revive(this);
-        if (this.TYPE == 4) Dakra.towerBulletGroupD.getFirstDead().father.revive(this);
+        Dakra.towerBulletGroup.getFirstDead().father.revive(this);
     }
 
     goNextTarget() {
@@ -189,5 +185,12 @@ class Tower {
         var y = this.sprite.position.y - target.sprite.position.y;
         var distance = Math.sqrt(x * x + y * y);
         return distance <= this.RANGE * Dakra.configs.UNIT;
+    }
+
+    stop() {
+        this.placeHolder.kill();
+        this.upgradeHolder.kill();
+        this.buttonDestroy.kill();
+        this.buttonUpgrade.kill();
     }
 }

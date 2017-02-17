@@ -20,7 +20,7 @@ window.onload = function() {
 }
 
 // preparations before game starts
-var preload = function() {
+function preload() {
     Dakra.game.scale.pageAlignHorizontally = true;
     Dakra.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
@@ -35,39 +35,82 @@ var preload = function() {
 
     Dakra.game.load.image('button-destroy', 'Assets/resource/button/destroy.png');
     Dakra.game.load.image('button-upgrade', 'Assets/resource/button/upgrade.png');
+
+    Dakra.game.load.image('button-play', 'Assets/resource/button/play.png');
+    Dakra.game.load.image('button-stop', 'Assets/resource/button/stop.png');
+    Dakra.game.load.image('button-restart', 'Assets/resource/button/restart.png');
+    Dakra.game.load.image('button-next', 'Assets/resource/button/next.png');
     Dakra.game.load.image('background-hided', 'Assets/background-hided.png');
 }
 
 // initialize the game
-var create = function() {
+function create() {
+
     Dakra.game.physics.startSystem(Phaser.Physics.ARCADE);
     Dakra.game.stage.backgroundColor = "#164AE3";
     Dakra.game.add.sprite(0, 0, 'background-hided');
-    Dakra.MAP =
-        Dakra.configs.MAP == 1 ? new MapA() :
-        Dakra.configs.MAP == 2 ? new MapB() :
-        Dakra.configs.MAP == 3 ? new MapC() : 0;
-    Dakra.MONEY = 650;
-    Dakra.LIFE = 10;
-    Dakra.KILL = 0;
 
+    Dakra.mapGroup = Dakra.game.add.group();
     Dakra.enemyGroup = Dakra.game.add.physicsGroup();
     Dakra.towerHolderGroup = Dakra.game.add.group();
     Dakra.towerGroup = Dakra.game.add.physicsGroup();
-    Dakra.backGroup = Dakra.game.add.group();
-    Dakra.towerBulletGroupA = Dakra.game.add.physicsGroup();
-    Dakra.towerBulletGroupB = Dakra.game.add.physicsGroup();
-    Dakra.towerBulletGroupC = Dakra.game.add.physicsGroup();
-    Dakra.towerBulletGroupD = Dakra.game.add.physicsGroup();
-
-    createTowers();
-    createEnemies();
-    createBullets();
     createBackground();
+    createBullets();
+    Dakra.STAGE = 3;
+
+    createMap();
+    createButtons();
+
     this.timeRespawnEnemy = 2000;
 }
 
-var createTowers = function() {
+function createBackground() {
+    Dakra.backGroup = Dakra.game.add.group();
+
+    Dakra.background = Dakra.backGroup.create(0, 0, 'background-hided');
+    Dakra.background.inputEnabled = true;
+    Dakra.background.kill();
+}
+
+function createBullets() {
+    Dakra.towerBulletGroup = Dakra.game.add.physicsGroup();
+    for (var i = 0; i < 100; i++) new Bullet();
+}
+
+function createButtons() {
+    Dakra.game.add.button(Dakra.MAP.width * Dakra.configs.UNIT, 500, 'button-stop', onStopClick, this);
+    Dakra.game.add.button(Dakra.MAP.width * Dakra.configs.UNIT + 54, 500, 'button-restart', onRestartClick, this);
+    Dakra.game.add.button(Dakra.MAP.width * Dakra.configs.UNIT + 2, 555, 'button-next', onNextClick, this);
+}
+
+function onStopClick() {
+    Dakra.LIFE = 0;
+}
+
+function onRestartClick() {
+    createMap();
+}
+
+function onNextClick() {
+    Dakra.STAGE++;
+    createMap();
+}
+
+function createMap() {
+    var map = (Dakra.STAGE - 1) % 3 + 1;
+    Dakra.MAP = map == 1 ? new MapA() :
+        map == 2 ? new MapB() :
+        map == 3 ? new MapC() : 0;
+    Dakra.MONEY = 650;
+    Dakra.LIFE = 5;
+    Dakra.KILL = 0;
+    createTowers();
+    createEnemies();
+}
+
+function createTowers() {
+    clearGroup(Dakra.towerGroup);
+    clearGroup(Dakra.towerHolderGroup);
     Dakra.towers = [];
     for (var i = 0; i < 2; i++) {
         Dakra.towers.push(new TowerA());
@@ -77,28 +120,24 @@ var createTowers = function() {
     }
 }
 
-var createEnemies = function() {
+function createEnemies() {
+    clearGroup(Dakra.enemyGroup);
     Dakra.enemies = [];
 }
 
-var createBullets = function() {
-    for (var i = 0; i < 100; i++) {
-        new BulletA();
-        new BulletB();
-        new BulletC();
-        new BulletD();
-    }
-}
-
-var createBackground = function() {
-    Dakra.background = Dakra.backGroup.create(0, 0, 'background-hided');
-    Dakra.background.inputEnabled = true;
-    Dakra.background.kill();
-}
-
 // update game state each frame
-var update = function() {
+function update() {
     goCursor(false);
+
+    if (Dakra.LIFE <= 0) {
+        Dakra.towers.forEach(function(tower) {
+            tower.stop();
+        });
+        Dakra.enemies.forEach(function(enemy) {
+            enemy.stop();
+        });
+        return;
+    }
 
     Dakra.towers.forEach(function(tower) {
         if (tower.sprite.alive) tower.update();
@@ -115,16 +154,14 @@ var update = function() {
             x < 1 ? new EnemyA() :
             x < 2 ? new EnemyB() :
             x < 3 ? new EnemyC() :
-            x < 4 ? new EnemyD() : new EnemyE);
+            x < 4 ? new EnemyD() :
+            x < 5 ? new EnemyE() : 0);
     }
 
-    Dakra.game.physics.arcade.overlap(Dakra.towerBulletGroupA, Dakra.enemyGroup, onBulletHitActor);
-    Dakra.game.physics.arcade.overlap(Dakra.towerBulletGroupB, Dakra.enemyGroup, onBulletHitActor);
-    Dakra.game.physics.arcade.overlap(Dakra.towerBulletGroupC, Dakra.enemyGroup, onBulletHitActor);
-    Dakra.game.physics.arcade.overlap(Dakra.towerBulletGroupD, Dakra.enemyGroup, onBulletHitActor);
+    Dakra.game.physics.arcade.overlap(Dakra.towerBulletGroup, Dakra.enemyGroup, onBulletHitActor);
 }
 
-var onBulletHitActor = function(bulletSprite, enemySprite) {
+function onBulletHitActor(bulletSprite, enemySprite) {
     enemySprite.father.beShot(bulletSprite.father);
     bulletSprite.kill();
 }
@@ -135,16 +172,25 @@ function goCursor(active) {
         else Dakra.cursor = new Cursor(Dakra.MAP);
 }
 
+function clearGroup(group) {
+    while (group.length > 0) {
+        group.remove(group.getFirstDead());
+        group.remove(group.getFirstAlive());
+    }
+}
+
 // before camera render (mostly for debug)
-var render = function() {
-    Dakra.game.debug.text('M = ' + Dakra.MONEY,
-        (Dakra.MAP.width + 0.5) * Dakra.configs.UNIT, 320);
+function render() {
+    Dakra.game.debug.text('G = ' + Dakra.MONEY,
+        Dakra.MAP.width * Dakra.configs.UNIT, 300);
     if (Dakra.LIFE > 0) Dakra.game.debug.text('L = ' + Dakra.LIFE,
-        (Dakra.MAP.width + 0.5) * Dakra.configs.UNIT, 360);
+        Dakra.MAP.width * Dakra.configs.UNIT, 340);
     else Dakra.game.debug.text('Game Over',
-        (Dakra.MAP.width + 0.5) * Dakra.configs.UNIT, 360);
+        Dakra.MAP.width * Dakra.configs.UNIT, 340);
     Dakra.game.debug.text('E = ' + Dakra.enemyGroup.length,
-        (Dakra.MAP.width + 0.5) * Dakra.configs.UNIT, 400);
+        Dakra.MAP.width * Dakra.configs.UNIT, 380);
     Dakra.game.debug.text('K = ' + Dakra.KILL,
-        (Dakra.MAP.width + 0.5) * Dakra.configs.UNIT, 440);
+        Dakra.MAP.width * Dakra.configs.UNIT, 420);
+    Dakra.game.debug.text('S = ' + ((Dakra.STAGE - 1) % 3 + 1),
+        Dakra.MAP.width * Dakra.configs.UNIT, 460);
 }
