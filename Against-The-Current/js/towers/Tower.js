@@ -71,7 +71,8 @@ class Tower {
             this.upgradeHolder.frameName = 'tower-' + this.TYPE + '-upgrade-' + this.LEVEL + '.png';
 
             this.buttonDestroy.reset(this.sprite.position.x - 11, this.sprite.position.y + 32);
-            this.buttonUpgrade.reset(this.sprite.position.x + 11, this.sprite.position.y + 32);
+            if (this.LEVEL < 3)
+                this.buttonUpgrade.reset(this.sprite.position.x + 11, this.sprite.position.y + 32);
 
         } else {
             this.onDrag = true;

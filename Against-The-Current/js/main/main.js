@@ -9,7 +9,7 @@ Dakra.configs.screenSize = new Phaser.Point(16, 16);
 
 window.onload = function() {
     Dakra.game = new Phaser.Game(
-        (Dakra.configs.screenSize.x + 3) * Dakra.configs.UNIT,
+        (Dakra.configs.screenSize.x + 9) * Dakra.configs.UNIT,
         (Dakra.configs.screenSize.y + 0) * Dakra.configs.UNIT,
         Phaser.AUTO, '', {
             preload: preload,
@@ -56,7 +56,7 @@ function create() {
     Dakra.towerGroup = Dakra.game.add.physicsGroup();
     createBackground();
     createBullets();
-    Dakra.STAGE = 3;
+    Dakra.STAGE = 1;
 
     createMap();
     createButtons();
@@ -70,6 +70,8 @@ function createBackground() {
     Dakra.background = Dakra.backGroup.create(0, 0, 'background-hided');
     Dakra.background.inputEnabled = true;
     Dakra.background.kill();
+
+    Dakra.enemyInfo = new EnemyInfo();
 }
 
 function createBullets() {
@@ -147,6 +149,7 @@ function update() {
     Dakra.enemies.forEach(function(enemy) {
         if (enemy.sprite.alive) enemy.update();
     });
+    if (Dakra.enemyInfo.sprite.alive) Dakra.enemyInfo.update();
 
     if (this.lastEnemyRespawnAt === undefined) this.lastEnemyRespawnAt = 0;
     if (Dakra.game.time.now - this.lastEnemyRespawnAt >= this.timeRespawnEnemy) {
@@ -183,16 +186,41 @@ function clearGroup(group) {
 
 // before camera render (mostly for debug)
 function render() {
-    Dakra.game.debug.text('G = ' + Dakra.MONEY,
+    Dakra.game.debug.text('GOLD = ' + Dakra.MONEY,
         Dakra.MAP.width * Dakra.configs.UNIT, 300);
-    if (Dakra.LIFE > 0) Dakra.game.debug.text('L = ' + Dakra.LIFE,
+    if (Dakra.LIFE > 0) Dakra.game.debug.text('LIFE = ' + Dakra.LIFE,
         Dakra.MAP.width * Dakra.configs.UNIT, 340);
     else Dakra.game.debug.text('Game Over',
         Dakra.MAP.width * Dakra.configs.UNIT, 340);
-    Dakra.game.debug.text('E = ' + Dakra.enemyGroup.length,
+    Dakra.game.debug.text('ENEMY = ' + Dakra.enemyGroup.length,
         Dakra.MAP.width * Dakra.configs.UNIT, 380);
-    Dakra.game.debug.text('K = ' + Dakra.KILL,
+    Dakra.game.debug.text('KILL = ' + Dakra.KILL,
         Dakra.MAP.width * Dakra.configs.UNIT, 420);
-    Dakra.game.debug.text('S = ' + ((Dakra.STAGE - 1) % 3 + 1),
+    Dakra.game.debug.text('STAGE = ' + ((Dakra.STAGE - 1) % 3 + 1),
         Dakra.MAP.width * Dakra.configs.UNIT, 460);
+
+    Dakra.game.debug.text('Price = 200',
+        (Dakra.MAP.width + 3) * Dakra.configs.UNIT,
+        1 * (Dakra.configs.UNIT + 20) - 10);
+    Dakra.game.debug.text('Normal tower',
+        (Dakra.MAP.width + 3) * Dakra.configs.UNIT,
+        1 * (Dakra.configs.UNIT + 20) + 10);
+    Dakra.game.debug.text('Price = 150',
+        (Dakra.MAP.width + 3) * Dakra.configs.UNIT,
+        2 * (Dakra.configs.UNIT + 20) - 10);
+    Dakra.game.debug.text('Slow tower',
+        (Dakra.MAP.width + 3) * Dakra.configs.UNIT,
+        2 * (Dakra.configs.UNIT + 20) + 10);
+    Dakra.game.debug.text('Price = 300',
+        (Dakra.MAP.width + 3) * Dakra.configs.UNIT,
+        3 * (Dakra.configs.UNIT + 20) - 10);
+    Dakra.game.debug.text('Armor Penetration',
+        (Dakra.MAP.width + 3) * Dakra.configs.UNIT,
+        3 * (Dakra.configs.UNIT + 20) + 10);
+    Dakra.game.debug.text('Price = 400',
+        (Dakra.MAP.width + 3) * Dakra.configs.UNIT,
+        4 * (Dakra.configs.UNIT + 20) - 10);
+    Dakra.game.debug.text('High DPS - slow speed',
+        (Dakra.MAP.width + 3) * Dakra.configs.UNIT,
+        4 * (Dakra.configs.UNIT + 20) + 10);
 }

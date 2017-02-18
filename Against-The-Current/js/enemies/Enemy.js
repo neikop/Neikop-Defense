@@ -10,15 +10,22 @@ class Enemy {
             (this.arrayPoint[this.currPos].y + 0.5) * Dakra.configs.UNIT,
             'chars'
         );
+        this.mainFrame = 'char-' + numType + '-godown-2.png';
+        this.TYPE = numType;
         this.sprite.father = this;
         this.sprite.anchor.setTo(0.5, 0.7);
-        // this.sprite.body.setCircle(10);
+        this.sprite.inputEnabled = true;
+        this.sprite.events.onInputDown.add(this.onInputDown, this);
         this.setupAnimation(numType);
 
         this.COIN = coin + 10 * Math.floor(Dakra.enemyGroup.length / 10);
         this.armor = armor;
         this.sprite.health = health + 100 * Math.floor(Dakra.enemyGroup.length / 10);
         this.movementSpeed = speed; // MAX = 300
+    }
+
+    onInputDown() {
+        Dakra.enemyInfo.revive(this);
     }
 
     beShot(bullet) {

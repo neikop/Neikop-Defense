@@ -15,9 +15,9 @@ class Map {
             }
         }
 
-        for (var i = 0; i < this.arrayMap.length; i++)
-            for (var j = 0; j < 3; j++)
-                this.arrayMap[i].push(0);
+        // for (var i = 0; i < this.arrayMap.length; i++)
+        //     for (var j = 0; j < 3; j++)
+        //         this.arrayMap[i].push(0);
     }
 
     clearMap() {
