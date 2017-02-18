@@ -8,7 +8,6 @@ class Tower {
         this.frameUpgrade2 = 'tower-' + this.TYPE + '-upgrade-2.png';
         this.frameUpgrade3 = 'tower-' + this.TYPE + '-upgrade-3.png';
 
-        // this.MAP = Dakra.MAP;
         this.sprite = Dakra.towerGroup.create(
             (Dakra.MAP.width + 1.0) * Dakra.configs.UNIT,
             this.TYPE * (Dakra.configs.UNIT + 20), 'towers', this.frameMain);

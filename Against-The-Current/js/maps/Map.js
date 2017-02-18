@@ -1,7 +1,8 @@
 class Map {
-    constructor(arrayMap, arrayPoint) {
+    constructor(arrayMap, arrayPoint, arrayPointFly) {
         this.arrayMap = arrayMap;
         this.arrayPoint = arrayPoint;
+        this.arrayPointFly = arrayPointFly;
 
         this.width = this.arrayMap.length;
         this.height = this.arrayMap[0].length;
@@ -14,10 +15,6 @@ class Map {
                     'maps', '' + z + '.png');
             }
         }
-
-        // for (var i = 0; i < this.arrayMap.length; i++)
-        //     for (var j = 0; j < 3; j++)
-        //         this.arrayMap[i].push(0);
     }
 
     clearMap() {

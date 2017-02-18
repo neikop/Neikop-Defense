@@ -29,6 +29,11 @@ class MapB extends Map {
           new Phaser.Point(12, 12),
           new Phaser.Point(12, 1)
         ]);
-        super(arrayMap, arrayPoint);
+        var arrayPointFly = [];
+        arrayPointFly.push([
+            new Phaser.Point(12, 15),
+            new Phaser.Point(12, 1)
+        ]);
+        super(arrayMap, arrayPoint, arrayPointFly);
     }
 }

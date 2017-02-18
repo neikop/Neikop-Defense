@@ -54,6 +54,7 @@ function create() {
     Dakra.enemyGroup = Dakra.game.add.physicsGroup();
     Dakra.towerHolderGroup = Dakra.game.add.group();
     Dakra.towerGroup = Dakra.game.add.physicsGroup();
+    Dakra.bulletBounceGroup = Dakra.game.add.physicsGroup();
     createBackground();
     createBullets();
     Dakra.STAGE = 1;
@@ -163,13 +164,38 @@ function update() {
             x < 3 ? new EnemyC() :
             x < 4 ? new EnemyD() :
             x < 5 ? new EnemyE() : 0);
+        Dakra.enemies.push(new EnemyFly());
     }
 
     Dakra.game.physics.arcade.overlap(Dakra.towerBulletGroup, Dakra.enemyGroup, onBulletHitActor);
 }
 
 function onBulletHitActor(bulletSprite, enemySprite) {
-    enemySprite.father.beShot(bulletSprite.father);
+    if (bulletSprite.father.tower.TYPE == 4 & bulletSprite.father.tower.LEVEL >= 2) {
+        Dakra.enemies.forEach(function(enemy) {
+            var x = bulletSprite.position.x - enemy.sprite.position.x;
+            var y = bulletSprite.position.y - enemy.sprite.position.y;
+            var distance = Math.sqrt(x * x + y * y);
+            if (distance < 100) enemy.beShot(bulletSprite.father);
+        });
+    } else if (bulletSprite.father.tower.TYPE == 3 & bulletSprite.father.tower.LEVEL >= 2) {
+        var min = 1000;
+        var index = 0;
+        var target;
+        for (var i = 0; i < Dakra.enemies.length; i++) {
+            if (enemySprite.position == Dakra.enemies[i].sprite.position) continue;
+            var x = bulletSprite.position.x - Dakra.enemies[i].sprite.position.x;
+            var y = bulletSprite.position.y - Dakra.enemies[i].sprite.position.y;
+            var distance = Math.sqrt(x * x + y * y);
+            if (distance < min) {
+                min = distance;
+                target = Dakra.enemies[i];
+            }
+        }
+        new BulletBounce(enemySprite.father, target, bulletSprite.father.tower);
+        enemySprite.father.beShot(bulletSprite.father);
+    } else enemySprite.father.beShot(bulletSprite.father);
+
     bulletSprite.kill();
 }
 

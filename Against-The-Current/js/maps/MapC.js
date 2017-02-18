@@ -50,6 +50,11 @@ class MapC extends Map {
             new Phaser.Point(4, 5),
             new Phaser.Point(4, 1)
         ]);
-        super(arrayMap, arrayPoint);
+        var arrayPointFly = [];
+        arrayPointFly.push([
+            new Phaser.Point(11, 15),
+            new Phaser.Point(11, 1)
+        ]);
+        super(arrayMap, arrayPoint, arrayPointFly);
     }
 }

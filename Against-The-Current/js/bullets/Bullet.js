@@ -9,6 +9,7 @@ class Bullet {
     }
 
     revive(tower) {
+        this.tower = tower;
         this.sprite.reset(tower.sprite.position.x, tower.sprite.position.y);
         this.sprite.frameName = 'beam-' + tower.TYPE + '.png';
         this.sprite.rotation = tower.sprite.rotation;
