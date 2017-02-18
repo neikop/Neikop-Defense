@@ -87,6 +87,7 @@ function createButtons() {
 
 function onStopClick() {
     Dakra.LIFE = 0;
+    Dakra.enemyInfo.stop();
 }
 
 function onRestartClick() {
@@ -108,6 +109,7 @@ function createMap() {
     if (map == 3) Dakra.MONEY = 1000;
     Dakra.LIFE = 5;
     Dakra.KILL = 0;
+    Dakra.enemyInfo.stop();
     createTowers();
     createEnemies();
 }

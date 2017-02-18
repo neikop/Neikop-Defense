@@ -14,11 +14,14 @@ class EnemyInfo {
         this.sprite.animations.add('enemy5', Phaser.Animation
             .generateFrameNames('char-5-godown-', 1, 3, '.png', 1), 10, true);
 
-
         this.text = Dakra.game.add.text(800, 375, '', {
             font: '18px Courier',
             fill: 'white'
         });
+        this.stop();
+    }
+
+    stop() {
         this.text.kill();
         this.sprite.kill();
     }
