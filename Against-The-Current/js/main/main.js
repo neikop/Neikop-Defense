@@ -101,7 +101,9 @@ function createMap() {
     Dakra.MAP = map == 1 ? new MapA() :
         map == 2 ? new MapB() :
         map == 3 ? new MapC() : 0;
-    Dakra.MONEY = 650;
+    if (map == 1) Dakra.MONEY = 650;
+    if (map == 2) Dakra.MONEY = 800;
+    if (map == 3) Dakra.MONEY = 1000;
     Dakra.LIFE = 5;
     Dakra.KILL = 0;
     createTowers();

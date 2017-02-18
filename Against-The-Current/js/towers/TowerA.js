@@ -6,7 +6,7 @@ class TowerA extends Tower {
     goUpgradeTo1() {
         this.ARMOR_PEN = 1;
         this.DAMAGE = 100;
-        this.SHOT_DELAY = 800;
+        this.SHOT_DELAY = 300;
         this.SLOW = 0;
 
         this.BUILDING_PRICE = 200;

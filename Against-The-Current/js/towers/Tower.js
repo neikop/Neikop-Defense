@@ -20,7 +20,7 @@ class Tower {
         this.onDrag = false;
         this.onFire = false;
 
-        this.BULLET_SPEED = 800;
+        this.BULLET_SPEED = 1200;
         this.LEVEL = 1;
         this.RANGE = 3;
 

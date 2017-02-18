@@ -6,7 +6,7 @@ class TowerC extends Tower {
     goUpgradeTo1() {
         this.ARMOR_PEN = 0;
         this.DAMAGE = 50;
-        this.SHOT_DELAY = 800;
+        this.SHOT_DELAY = 300;
         this.SLOW = 0;
 
         this.BUILDING_PRICE = 300;
