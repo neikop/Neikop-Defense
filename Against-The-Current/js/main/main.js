@@ -145,7 +145,9 @@ function update() {
         });
         return;
     }
-
+    Dakra.bulletBounceGroup.forEachAlive(function(bullet) {
+        bullet.father.update();
+    })
     Dakra.towers.forEach(function(tower) {
         if (tower.sprite.alive) tower.update();
     });
@@ -178,22 +180,7 @@ function onBulletHitActor(bulletSprite, enemySprite) {
             var distance = Math.sqrt(x * x + y * y);
             if (distance < 100) enemy.beShot(bulletSprite.father);
         });
-    } else if (bulletSprite.father.tower.TYPE == 3 & bulletSprite.father.tower.LEVEL >= 2) {
-        var min = 1000;
-        var index = 0;
-        var target;
-        for (var i = 0; i < Dakra.enemies.length; i++) {
-            if (enemySprite.position == Dakra.enemies[i].sprite.position) continue;
-            var x = bulletSprite.position.x - Dakra.enemies[i].sprite.position.x;
-            var y = bulletSprite.position.y - Dakra.enemies[i].sprite.position.y;
-            var distance = Math.sqrt(x * x + y * y);
-            if (distance < min) {
-                min = distance;
-                target = Dakra.enemies[i];
-            }
-        }
-        new BulletBounce(enemySprite.father, target, bulletSprite.father.tower);
-        enemySprite.father.beShot(bulletSprite.father);
+        new Explosion(enemySprite.position.x, enemySprite.position.y);
     } else enemySprite.father.beShot(bulletSprite.father);
 
     bulletSprite.kill();
