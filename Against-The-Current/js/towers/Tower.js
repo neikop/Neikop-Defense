@@ -165,9 +165,9 @@ class Tower {
         if (this.lastBulletShotAt === undefined) this.lastBulletShotAt = 0;
         if (Dakra.game.time.now - this.lastBulletShotAt < this.SHOT_DELAY) return;
         this.lastBulletShotAt = Dakra.game.time.now;
-        if (this.TYPE == 3 & this.LEVEL >= 2)
-            new BulletBounce(this, this.target, this, 1);
-        else Dakra.towerBulletGroup.getFirstDead().father.revive(this);
+        if (this.TYPE == 3 & this.LEVEL >= 3) {
+            Dakra.bulletBounceGroup.getFirstDead().father.revive(this, this.target, this, 1);
+        } else Dakra.towerBulletGroup.getFirstDead().father.revive(this);
     }
 
     goNextTarget() {

@@ -26,7 +26,7 @@ class TowerC extends Tower {
     goUpgradeTo3() {
         this.LEVEL = 3;
         this.RANGE = 5;
-        this.DAMAGE = 100;
+        this.DAMAGE = 50;
         this.SLOW = 0;
 
         Dakra.MONEY = Dakra.MONEY - this.UPGRADE_PRICE;

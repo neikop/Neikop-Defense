@@ -55,6 +55,7 @@ function create() {
     Dakra.towerHolderGroup = Dakra.game.add.group();
     Dakra.towerGroup = Dakra.game.add.physicsGroup();
     Dakra.bulletBounceGroup = Dakra.game.add.physicsGroup();
+    Dakra.explosionGroup = Dakra.game.add.group();
     createBackground();
     createBullets();
     Dakra.STAGE = 1;
@@ -77,13 +78,18 @@ function createBackground() {
 
 function createBullets() {
     Dakra.towerBulletGroup = Dakra.game.add.physicsGroup();
-    for (var i = 0; i < 100; i++) new Bullet();
+    for (var i = 0; i < 100; i++) {
+        new Bullet();
+        new BulletBounce();
+        new Explosion();
+    }
 }
 
 function createButtons() {
     Dakra.game.add.button(Dakra.MAP.width * Dakra.configs.UNIT, 500, 'button-stop', onStopClick, this);
     Dakra.game.add.button(Dakra.MAP.width * Dakra.configs.UNIT + 54, 500, 'button-restart', onRestartClick, this);
-    Dakra.game.add.button(Dakra.MAP.width * Dakra.configs.UNIT + 2, 555, 'button-next', onNextClick, this);
+    // Dakra.game.add.button(Dakra.MAP.width * Dakra.configs.UNIT + 2, 555, 'button-next', onNextClick, this);
+    Dakra.game.add.text(Dakra.MAP.width * Dakra.configs.UNIT + 2, 555, "UP - DOWN - LEFT - RIGHT");
 }
 
 function onStopClick() {
@@ -110,6 +116,7 @@ function createMap() {
     if (map == 3) Dakra.MONEY = 1000;
     Dakra.LIFE = 5;
     Dakra.KILL = 0;
+    Dakra.cheat = '';
     Dakra.enemyInfo.stop();
     createTowers();
     createEnemies();
@@ -147,7 +154,10 @@ function update() {
     }
     Dakra.bulletBounceGroup.forEachAlive(function(bullet) {
         bullet.father.update();
-    })
+    });
+    Dakra.explosionGroup.forEachAlive(function(explose) {
+        explose.father.update();
+    });
     Dakra.towers.forEach(function(tower) {
         if (tower.sprite.alive) tower.update();
     });
@@ -166,7 +176,46 @@ function update() {
             x < 3 ? new EnemyC() :
             x < 4 ? new EnemyD() :
             x < 5 ? new EnemyE() : 0);
-        Dakra.enemies.push(new EnemyFly());
+        // Dakra.enemies.push(new EnemyFly());
+    }
+    if (this.countUp === undefined) this.countUp = 0;
+    if (this.countDown === undefined) this.countDown = 0;
+    if (this.countLeft === undefined) this.countLeft = 0;
+    if (this.countRight === undefined) this.countRight = 0;
+
+    if (Dakra.game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+        if (this.countUp == 0) {
+            this.countUp++;
+            Dakra.cheat += 'U';
+        }
+    } else this.countUp = 0;
+    if (Dakra.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
+        if (this.countDown == 0) {
+            this.countDown++;
+            Dakra.cheat += 'D';
+        }
+    } else this.countDown = 0;
+    if (Dakra.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+        if (this.countLeft == 0) {
+            this.countLeft++;
+            Dakra.cheat += 'L';
+        }
+    } else this.countLeft = 0;
+    if (Dakra.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+        if (this.countRight == 0) {
+            this.countRight++;
+            Dakra.cheat += 'R';
+        }
+    } else this.countRight = 0;
+    console.log(Dakra.cheat);
+
+    if (Dakra.cheat.length >= 4) {
+        var ok = true;
+        ok &= (Dakra.cheat[Dakra.cheat.length - 1] == 'R');
+        ok &= (Dakra.cheat[Dakra.cheat.length - 2] == 'L');
+        ok &= (Dakra.cheat[Dakra.cheat.length - 3] == 'D');
+        ok &= (Dakra.cheat[Dakra.cheat.length - 4] == 'U');
+        if (ok) onNextClick();
     }
 
     Dakra.game.physics.arcade.overlap(Dakra.towerBulletGroup, Dakra.enemyGroup, onBulletHitActor);
@@ -180,7 +229,7 @@ function onBulletHitActor(bulletSprite, enemySprite) {
             var distance = Math.sqrt(x * x + y * y);
             if (distance < 100) enemy.beShot(bulletSprite.father);
         });
-        new Explosion(enemySprite.position.x, enemySprite.position.y);
+        Dakra.explosionGroup.getFirstDead().father.revive(enemySprite.position.x, enemySprite.position.y);
     } else enemySprite.father.beShot(bulletSprite.father);
 
     bulletSprite.kill();
