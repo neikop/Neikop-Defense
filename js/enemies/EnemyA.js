@@ -1,5 +1,5 @@
 class EnemyA extends Enemy {
     constructor() {
-        super(1, 50, 0, 2000, 50);
+        super(1, 10, 0, 2000, 50);
     }
 }
