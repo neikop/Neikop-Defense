@@ -224,11 +224,13 @@ function update() {
 function onBulletHitActor(bulletSprite, enemySprite) {
     if (bulletSprite.father.tower.TYPE == 4 & bulletSprite.father.tower.LEVEL >= 2) {
         Dakra.enemies.forEach(function(enemy) {
-            var x = bulletSprite.position.x - enemy.sprite.position.x;
-            var y = bulletSprite.position.y - enemy.sprite.position.y;
-            var distance = Math.sqrt(x * x + y * y);
-            if (distance < 100) enemy.beShot(bulletSprite.father);
-        });
+                var x = bulletSprite.position.x - enemy.sprite.position.x;
+                var y = bulletSprite.position.y - enemy.sprite.position.y;
+                var distance = Math.sqrt(x * x + y * y);
+                if (distance < 100) {
+                    if (enemy.sprite.alive) enemy.beShot(bulletSprite.father);
+                });
+        }
         Dakra.explosionGroup.getFirstDead().father.revive(enemySprite.position.x, enemySprite.position.y);
     } else enemySprite.father.beShot(bulletSprite.father);
 

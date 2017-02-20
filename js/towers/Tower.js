@@ -118,6 +118,7 @@ class Tower {
     }
 
     onInputDownDestroy() {
+        Dakra.MONEY += 100;
         this.onInputDownBackground();
         Dakra.towerGroup.remove(this.sprite);
         this.sprite.kill();
