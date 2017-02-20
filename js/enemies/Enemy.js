@@ -18,9 +18,9 @@ class Enemy {
         this.sprite.events.onInputDown.add(this.onInputDown, this);
         this.setupAnimation(numType);
 
-        this.COIN = coin + 10 * Math.floor(Dakra.enemyGroup.length / 10);
-        this.armor = armor;
-        this.sprite.health = health + 100 * Math.floor(Dakra.enemyGroup.length / 10);
+        this.COIN = coin + 0 * Math.floor(Dakra.enemyGroup.length / 10);
+        this.armor = armor + 20 * Math.floor(Dakra.enemyGroup.length / 10);
+        this.sprite.health = health + 200 * Math.floor(Dakra.enemyGroup.length / 10);
         this.movementSpeed = speed; // MAX = 300
     }
 
