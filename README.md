@@ -1,7 +1,7 @@
-# EmptyGame
+# Tower Defense
 
 Usage:
 
 npm install
 
-gulp
+node index
